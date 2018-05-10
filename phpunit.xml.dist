@@ -1,0 +1,31 @@
+<phpunit bootstrap="./vendor/autoload.php">
+  <testsuites>
+    <testsuite name="FastRoute Tests">
+      <directory>./vendor/signpostmarv/daft-router/tests/fast-route/</directory>
+    </testsuite>
+    <testsuite name="DaftRouter">
+      <directory>./vendor/signpostmarv/daft-router/tests/daft-router/</directory>
+    </testsuite>
+    <testsuite name="DaftFramework">
+      <directory>./tests/</directory>
+    </testsuite>
+  </testsuites>
+  <logging>
+    <log
+      type="coverage-html"
+      target="phpunit"
+      logIncompleteSkipped="true"
+    />
+    <log
+      type="coverage-text"
+      target="php://stdout"
+      showUncoveredFiles="true"
+      showOnlySummary="false"
+    />
+  </logging>
+  <filter>
+    <whitelist processUncoveredFilesFromWhitelist="true">
+      <directory suffix=".php">./src/</directory>
+    </whitelist>
+  </filter>
+</phpunit>
