@@ -44,18 +44,9 @@ class Application extends Base
         return $out;
     }
 
-    /**
-    * @return static
-    */
-    public static function CollectApplicationWithCommands(
-        string $name,
-        string $version,
-        Framework $framework
-    ) : self {
-        $application = new static($name, $version);
-        $application->AttachDaftFramework($framework);
-
-        $collector = new StaticMethodCollector(
+    public function GetCommandCollector() : StaticMethodCollector
+    {
+        return new StaticMethodCollector(
             [
                 DaftConsoleSource::class => [
                     'DaftFrameworkConsoleSources' => [
@@ -70,12 +61,21 @@ class Application extends Base
                 Command::class,
             ]
         );
+    }
 
-        $config = ($framework->ObtainConfig()[DaftConsoleSource::class] ?? []);
+    public function CollectCommands(string ...$sources) : void
+    {
+        $framework = $this->GetDaftFramework();
+
+        if ( ! ($framework instanceof Framework)) {
+            throw new BadMethodCallException(
+                'Cannot collect commands without an attached framework instance!'
+            );
+        }
 
         foreach (
-            $collector->Collect(
-                ...array_values(is_array($config) ? $config : [])
+            $this->GetCommandCollector()->Collect(
+                ...$sources
             ) as $implementation
         ) {
             if (is_a($implementation, BaseCommand::class, true)) {
@@ -84,9 +84,25 @@ class Application extends Base
                 */
                 $command = new $implementation($implementation::getDefaultName());
 
-                $application->add($command);
+                $this->add($command);
             }
         }
+    }
+
+    /**
+    * @return static
+    */
+    public static function CollectApplicationWithCommands(
+        string $name,
+        string $version,
+        Framework $framework
+    ) : self {
+        $application = new static($name, $version);
+        $application->AttachDaftFramework($framework);
+
+        $config = ($framework->ObtainConfig()[DaftConsoleSource::class] ?? []);
+
+        $application->CollectCommands(...array_values(is_array($config) ? $config : []));
 
         return $application;
     }
