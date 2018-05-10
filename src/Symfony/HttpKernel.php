@@ -26,6 +26,8 @@ class HttpKernel extends Framework implements HttpKernelInterface
     */
     private $routerSources;
 
+    const ERROR_SOURCE_CONFIG = DaftSource::class . ' config does not specify "%s" correctly.';
+
     public function __construct(string $baseUrl, string $basePath, array $config = [])
     {
         parent::__construct($baseUrl, $basePath, $config);
@@ -70,14 +72,12 @@ class HttpKernel extends Framework implements HttpKernelInterface
             throw new InvalidArgumentException(sprintf('%s config not found!', DaftSource::class));
         } elseif ( ! is_string($sourceConfig['cacheFile'])) {
             throw new InvalidArgumentException(sprintf(
-                '%s config does not specify "%s" correctly.',
-                DaftSource::class,
+                self::ERROR_SOURCE_CONFIG,
                 'cacheFile'
             ));
         } elseif ( ! is_array($sourceConfig['sources'])) {
             throw new InvalidArgumentException(sprintf(
-                '%s config does not specify "%s" correctly.',
-                DaftSource::class,
+                self::ERROR_SOURCE_CONFIG,
                 'sources'
             ));
         } elseif (
