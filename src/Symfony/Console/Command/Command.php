@@ -15,9 +15,4 @@ use Symfony\Component\Console\Output\OutputInterface;
 abstract class Command extends Base
 {
     use AttachDaftFramework;
-
-    public function execute(InputInterface $input, OutputInterface $output) : int
-    {
-        throw new BadMethodCallException('command body not implemented!');
-    }
 }
