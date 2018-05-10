@@ -16,6 +16,7 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 class HttpKernel extends Framework implements HttpKernelInterface
 {
+    const ERROR_SOURCE_CONFIG = DaftSource::class . ' config does not specify "%s" correctly.';
     /**
     * @var string
     */
@@ -25,8 +26,6 @@ class HttpKernel extends Framework implements HttpKernelInterface
     * @var array<int, string>
     */
     private $routerSources;
-
-    const ERROR_SOURCE_CONFIG = DaftSource::class . ' config does not specify "%s" correctly.';
 
     public function __construct(string $baseUrl, string $basePath, array $config = [])
     {
