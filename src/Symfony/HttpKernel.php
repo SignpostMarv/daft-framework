@@ -71,15 +71,19 @@ class HttpKernel extends Framework implements HttpKernelInterface
 
     protected function ValidateConfig(array $config) : array
     {
-        $sourceConfig = $config[DaftSource::class] ?? null;
-
-        if ( ! isset($sourceConfig, $sourceConfig['cacheFile'], $sourceConfig['sources'])) {
+        if (
+            ! isset(
+                $config[DaftSource::class],
+                $config[DaftSource::class]['cacheFile'],
+                $config[DaftSource::class]['sources']
+            )
+        ) {
             throw new InvalidArgumentException(sprintf('%s config not found!', DaftSource::class));
-        } elseif ( ! is_string($sourceConfig['cacheFile'])) {
+        } elseif ( ! is_string($config[DaftSource::class]['cacheFile'])) {
             throw new InvalidArgumentException(sprintf(self::ERROR_SOURCE_CONFIG, 'cacheFile'));
-        } elseif ( ! is_array($sourceConfig['sources'])) {
+        } elseif ( ! is_array($config[DaftSource::class]['sources'])) {
             throw new InvalidArgumentException(sprintf(self::ERROR_SOURCE_CONFIG, 'sources'));
-        } elseif ( ! $this->FileIsUnderBasePath($sourceConfig['cacheFile'], false)) {
+        } elseif ( ! $this->FileIsUnderBasePath($config[DaftSource::class]['cacheFile'], false)) {
             throw new InvalidArgumentException(self::ERROR_ROUTER_CACHE_FILE_PATH);
         }
 
