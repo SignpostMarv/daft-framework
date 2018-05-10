@@ -65,14 +65,6 @@ class Framework
         $this->config = $config;
     }
 
-    /**
-    * @throws InvalidArgumentException if $config contains something not valid
-    */
-    protected function ValidateConfig(array $config) : void
-    {
-
-    }
-
     public function ObtainDatabaseConnection() : EasyDB
     {
         if ( ! ($this->db instanceof EasyDB)) {
@@ -153,5 +145,12 @@ class Framework
                 unset(self::$requestpair[$hash]);
             }
         }
+    }
+
+    /**
+    * @throws InvalidArgumentException if $config contains something not valid
+    */
+    protected function ValidateConfig(array $config) : void
+    {
     }
 }

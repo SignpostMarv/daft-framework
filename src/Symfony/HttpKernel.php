@@ -38,6 +38,31 @@ class HttpKernel extends Framework implements HttpKernelInterface
         ));
     }
 
+    public function handle(
+        Request $request,
+        $type = HttpKernelInterface::MASTER_REQUEST,
+        $catch = true
+    ) : Response {
+        return $this->handleStrict($request, $type, $catch);
+    }
+
+    public function handleStrict(
+        Request $request,
+        int $type = HttpKernelInterface::MASTER_REQUEST,
+        bool $catch = true
+    ) : Response {
+        self::PairWithRequest($this, $request);
+
+        $dispatcher = Compiler::ObtainDispatcher(
+            [
+                'cacheFile' => $this->routerCacheFile,
+            ],
+            ...$this->routerSources
+        );
+
+        return $dispatcher->handle($request, parse_url($this->ObtainBaseUrl(), PHP_URL_PATH));
+    }
+
     protected function ValidateConfig(array $config) : void
     {
         if (
@@ -69,30 +94,5 @@ class HttpKernel extends Framework implements HttpKernelInterface
                 DaftSource::class
             ));
         }
-    }
-
-    public function handle(
-        Request $request,
-        $type = HttpKernelInterface::MASTER_REQUEST,
-        $catch = true
-    ) : Response {
-        return $this->handleStrict($request, $type, $catch);
-    }
-
-    public function handleStrict(
-        Request $request,
-        int $type = HttpKernelInterface::MASTER_REQUEST,
-        bool $catch = true
-    ) : Response {
-        self::PairWithRequest($this, $request);
-
-        $dispatcher = Compiler::ObtainDispatcher(
-            [
-                'cacheFile' => $this->routerCacheFile,
-            ],
-            ...$this->routerSources
-        );
-
-        return $dispatcher->handle($request, parse_url($this->ObtainBaseUrl(), PHP_URL_PATH));
     }
 }
