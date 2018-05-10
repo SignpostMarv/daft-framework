@@ -65,29 +65,30 @@ class HttpKernel extends Framework implements HttpKernelInterface
 
     protected function ValidateConfig(array $config) : void
     {
+        $sourceConfig = $config[DaftSource::class] ?? null;
         if (
             ! isset(
-                $config[DaftSource::class],
-                $config[DaftSource::class]['cacheFile'],
-                $config[DaftSource::class]['sources']
+                $sourceConfig,
+                $sourceConfig['cacheFile'],
+                $sourceConfig['sources']
             )
         ) {
             throw new InvalidArgumentException(sprintf('%s config not found!', DaftSource::class));
-        } elseif ( ! is_string($config[DaftSource::class]['cacheFile'])) {
+        } elseif ( ! is_string($sourceConfig['cacheFile'])) {
             throw new InvalidArgumentException(sprintf(
                 '%s config does not specify "%s" correctly.',
                 DaftSource::class,
                 'cacheFile'
             ));
-        } elseif ( ! is_array($config[DaftSource::class]['sources'])) {
+        } elseif ( ! is_array($sourceConfig['sources'])) {
             throw new InvalidArgumentException(sprintf(
                 '%s config does not specify "%s" correctly.',
                 DaftSource::class,
                 'sources'
             ));
         } elseif (
-            file_exists($config[DaftSource::class]['cacheFile']) &&
-            ! $this->FileIsUnderBasePath($config[DaftSource::class]['cacheFile'])
+            file_exists($sourceConfig['cacheFile']) &&
+            ! $this->FileIsUnderBasePath($sourceConfig['cacheFile'])
         ) {
             throw new InvalidArgumentException(sprintf(
                 '%s config property cacheFile does not exist under the framework base path.',
