@@ -74,7 +74,7 @@ class ApplicationTest extends Base
         $this->assertSame($frameworkArgs[1], $framework->ObtainBasePath());
         $this->assertSame($frameworkArgs[2], $framework->ObtainConfig());
 
-        $application = Application::CollectApplicationsWithCommands($name, $version, $framework);
+        $application = Application::CollectApplicationWithCommands($name, $version, $framework);
 
         $this->assertSame($name, $application->getName());
         $this->assertSame($version, $application->getVersion());

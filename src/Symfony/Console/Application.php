@@ -47,7 +47,7 @@ class Application extends Base
     /**
     * @return static
     */
-    public static function CollectApplicationsWithCommands(
+    public static function CollectApplicationWithCommands(
         string $name,
         string $version,
         Framework $framework
