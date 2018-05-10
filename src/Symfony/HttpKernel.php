@@ -71,15 +71,9 @@ class HttpKernel extends Framework implements HttpKernelInterface
         if ( ! isset($sourceConfig, $sourceConfig['cacheFile'], $sourceConfig['sources'])) {
             throw new InvalidArgumentException(sprintf('%s config not found!', DaftSource::class));
         } elseif ( ! is_string($sourceConfig['cacheFile'])) {
-            throw new InvalidArgumentException(sprintf(
-                self::ERROR_SOURCE_CONFIG,
-                'cacheFile'
-            ));
+            throw new InvalidArgumentException(sprintf(self::ERROR_SOURCE_CONFIG, 'cacheFile'));
         } elseif ( ! is_array($sourceConfig['sources'])) {
-            throw new InvalidArgumentException(sprintf(
-                self::ERROR_SOURCE_CONFIG,
-                'sources'
-            ));
+            throw new InvalidArgumentException(sprintf(self::ERROR_SOURCE_CONFIG, 'sources'));
         } elseif (
             file_exists($sourceConfig['cacheFile']) &&
             ! $this->FileIsUnderBasePath($sourceConfig['cacheFile'])
