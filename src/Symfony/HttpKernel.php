@@ -66,7 +66,7 @@ class HttpKernel extends Framework implements HttpKernelInterface
     protected function ValidateConfig(array $config) : array
     {
         $sourceConfig = $config[DaftSource::class] ?? null;
-        if (! isset($sourceConfig, $sourceConfig['cacheFile'], $sourceConfig['sources'])) {
+        if ( ! isset($sourceConfig, $sourceConfig['cacheFile'], $sourceConfig['sources'])) {
             throw new InvalidArgumentException(sprintf('%s config not found!', DaftSource::class));
         } elseif ( ! is_string($sourceConfig['cacheFile'])) {
             throw new InvalidArgumentException(sprintf(
