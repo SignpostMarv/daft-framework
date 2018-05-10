@@ -79,7 +79,7 @@ class HttpKernel extends Framework implements HttpKernelInterface
             throw new InvalidArgumentException(sprintf(self::ERROR_SOURCE_CONFIG, 'cacheFile'));
         } elseif ( ! is_array($sourceConfig['sources'])) {
             throw new InvalidArgumentException(sprintf(self::ERROR_SOURCE_CONFIG, 'sources'));
-        } elseif (! $this->FileIsUnderBasePath($sourceConfig['cacheFile'], false)) {
+        } elseif ( ! $this->FileIsUnderBasePath($sourceConfig['cacheFile'], false)) {
             throw new InvalidArgumentException(self::ERROR_ROUTER_CACHE_FILE_PATH);
         }
 
