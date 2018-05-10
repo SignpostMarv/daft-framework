@@ -102,10 +102,7 @@ class Framework
     {
         return
             ( ! $requireFileExists && ! file_exists($filename)) ||
-            (
-            is_file($filename) &&
-                0 === mb_strpos($this->basePath, realpath($filename))
-            );
+            (is_file($filename) && 0 === mb_strpos($this->basePath, realpath($filename)));
     }
 
     public static function PairWithRequest(self $framework, Request $request) : void
