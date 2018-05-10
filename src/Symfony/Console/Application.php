@@ -73,11 +73,7 @@ class Application extends Base
             );
         }
 
-        foreach (
-            $this->GetCommandCollector()->Collect(
-                ...$sources
-            ) as $implementation
-        ) {
+        foreach ($this->GetCommandCollector()->Collect(...$sources) as $implementation) {
             if (is_a($implementation, BaseCommand::class, true)) {
                 /**
                 * @var BaseCommand $command
