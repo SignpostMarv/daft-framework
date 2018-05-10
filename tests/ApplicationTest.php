@@ -86,6 +86,19 @@ class ApplicationTest extends Base
             $this->assertContains($expectedComamnd, $commands);
         }
 
+        $constructedApplication = new Application($name, $version);
+
+        $constructedApplication->AttachDaftFramework($framework);
+
+        $constructedApplication->CollectCommands(...$expectedCommandInstances);
+
+        $commands = array_map('get_class', $application->all());
+
+        foreach ($expectedCommandInstances as $expectedComamnd) {
+            $this->assertTrue(class_exists($expectedComamnd));
+            $this->assertContains($expectedComamnd, $commands);
+        }
+
         $failingApplication = new Application($name, $version);
 
         $this->assertSame($name, $application->getName());
@@ -107,7 +120,31 @@ class ApplicationTest extends Base
     }
 
     /**
+    * @dataProvider DataProviderConsoleApplicationConfigFiltered
+    *
+    * @depends testApplicationSetup
+    */
+    public function testCommandCollectionWithoutFramework(
+        string $name,
+        string $version,
+        array $expectedCommandInstances,
+        string $frameworkImplementation,
+        array $frameworkArgs
+    ) : void {
+        $constructedApplication = new Application($name, $version);
+
+        $this->expectException(BadMethodCallException::class);
+        $this->expectExceptionMessage(
+            'Cannot collect commands without an attached framework instance!'
+        );
+
+        $constructedApplication->CollectCommands(...$expectedCommandInstances);
+    }
+
+    /**
     * @dataProvider DataProviderDaftConsoleCommands
+    *
+    * @depends testApplicationSetup
     */
     public function testCommandFrameworkAttachment(Framework $framework, Command $command) : void
     {
