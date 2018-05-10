@@ -55,9 +55,7 @@ class Framework
             $baseUrl .= ':' . $parsed['port'];
         }
 
-        $baseUrl .= str_replace('//', '/', $parsed['path']);
-
-        $this->baseUrl = $baseUrl;
+        $this->baseUrl = $baseUrl . str_replace('//', '/', $parsed['path']);
         $this->basePath = $basePath;
 
         $this->ValidateConfig($config);
