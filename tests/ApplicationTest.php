@@ -9,6 +9,7 @@ namespace SignpostMarv\DaftFramework\Tests;
 use BadMethodCallException;
 use Generator;
 use PHPUnit\Framework\TestCase as Base;
+use ReflectionMethod;
 use SignpostMarv\DaftFramework\Framework;
 use SignpostMarv\DaftFramework\Symfony\Console\Application;
 use SignpostMarv\DaftFramework\Symfony\Console\Command\Command;
@@ -18,6 +19,7 @@ use SignpostMarv\DaftFramework\Tests\fixtures\Console\Command\TestCommand;
 use SignpostMarv\DaftRouter\DaftSource;
 use SignpostMarv\DaftRouter\Tests\Fixtures\Config;
 use Symfony\Component\Console\Command\Command as BaseCommand;
+use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Tester\CommandTester;
 
 class ApplicationTest extends Base
@@ -212,6 +214,44 @@ class ApplicationTest extends Base
         Application $application,
         string $expectedOutput
     ) : void {
+        $command = new FastRouteCacheCommand();
+
+        $ref = new ReflectionMethod($command, 'configure');
+        $ref->setAccessible(true);
+
+        $command->getDefinition()->setDefinition([]);
+
+        $ref->invoke($command);
+
+        $this->assertSame(
+            'Update the cache used by the daft framework router',
+            $command->getDescription()
+        );
+
+        $this->assertSame(
+            [
+                'sources' => [
+                    'name' => 'sources',
+                    'required' => true,
+                    'array' => true,
+                    'default' => [],
+                    'description' => 'class names for sources',
+                ],
+            ],
+            array_map(
+                function (InputArgument $arg) : array {
+                    return [
+                        'name' => $arg->getName(),
+                        'required' => $arg->isRequired(),
+                        'array' => $arg->isArray(),
+                        'default' => $arg->getDefault(),
+                        'description' => $arg->getDescription(),
+                    ];
+                },
+                $command->getDefinition()->getArguments()
+            )
+        );
+
         // ref: https://stackoverflow.com/questions/47183273/test-command-symfony-with-phpunit
 
         $command = $application->find('daft-framework:router:update-cache');
