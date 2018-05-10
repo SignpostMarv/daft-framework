@@ -6,6 +6,8 @@
     xsi:schemaLocation="https://getpsalm.org/schema/config"
 >
     <projectFiles>
+        <file name=".php_cs.dist" />
+        <file name="tests/fixtures/bin/daft-framework" />
         <directory name="src" />
     </projectFiles>
 
