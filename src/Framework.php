@@ -98,8 +98,12 @@ class Framework
         return $this->config;
     }
 
-    public function FileIsUnderBasePath(string $filename) : bool
+    public function FileIsUnderBasePath(string $filename, bool $requireFileExists = true) : bool
     {
+        if ( ! $requireFileExists && ! file_exists($filename)) {
+            return true;
+        }
+
         return
             is_file($filename) &&
             0 === mb_strpos($this->basePath, realpath($filename));
