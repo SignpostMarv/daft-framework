@@ -59,7 +59,18 @@ class Framework
 
         $this->baseUrl = $baseUrl;
         $this->basePath = $basePath;
+
+        $this->ValidateConfig($config);
+
         $this->config = $config;
+    }
+
+    /**
+    * @throws InvalidArgumentException if $config contains something not valid
+    */
+    protected function ValidateConfig(array $config) : void
+    {
+
     }
 
     public function ObtainDatabaseConnection() : EasyDB

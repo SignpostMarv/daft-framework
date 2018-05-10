@@ -30,6 +30,16 @@ class HttpKernel extends Framework implements HttpKernelInterface
     {
         parent::__construct($baseUrl, $basePath, $config);
 
+        $this->routerCacheFile = $config[DaftSource::class]['cacheFile'];
+
+        $this->routerSources = array_values(array_filter(
+            $config[DaftSource::class]['sources'],
+            'is_string'
+        ));
+    }
+
+    protected function ValidateConfig(array $config) : void
+    {
         if (
             ! isset(
                 $config[DaftSource::class],
@@ -59,13 +69,6 @@ class HttpKernel extends Framework implements HttpKernelInterface
                 DaftSource::class
             ));
         }
-
-        $this->routerCacheFile = $config[DaftSource::class]['cacheFile'];
-
-        $this->routerSources = array_values(array_filter(
-            $config[DaftSource::class]['sources'],
-            'is_string'
-        ));
     }
 
     public function handle(
