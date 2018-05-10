@@ -12,8 +12,13 @@ use PHPUnit\Framework\TestCase as Base;
 use SignpostMarv\DaftFramework\Framework;
 use SignpostMarv\DaftFramework\Symfony\Console\Application;
 use SignpostMarv\DaftFramework\Symfony\Console\Command\Command;
+use SignpostMarv\DaftFramework\Symfony\Console\Command\FastRouteCacheCommand;
+use SignpostMarv\DaftFramework\Symfony\Console\DaftConsoleSource;
 use SignpostMarv\DaftFramework\Tests\fixtures\Console\Command\TestCommand;
+use SignpostMarv\DaftRouter\DaftSource;
+use SignpostMarv\DaftRouter\Tests\Fixtures\Config;
 use Symfony\Component\Console\Command\Command as BaseCommand;
+use Symfony\Component\Console\Tester\CommandTester;
 
 class ApplicationTest extends Base
 {
@@ -168,6 +173,65 @@ class ApplicationTest extends Base
         );
 
         $command->AttachDaftFramework($framework);
+    }
+
+    public function DataProviderFastRouteCacheComamnd() : Generator
+    {
+        $expectedOutput = file_get_contents(
+            __DIR__ .
+            '/fixtures/here-is-one-i-made-earlier.fast-route.cache'
+        );
+
+        foreach ($this->DataProviderConsoleApplicationConfigFiltered() as $args) {
+            $frameworkImplementation = $args[3];
+
+            $args[4][2][DaftConsoleSource::class][] = FastRouteCacheCommand::class;
+            $args[4][2][DaftSource::class]['sources'] = [
+                Config::class,
+            ];
+
+            /**
+            * @var Framework $framework
+            */
+            $framework = new $frameworkImplementation(...$args[4]);
+
+            $application = Application::CollectApplicationWithCommands(
+                $args[0],
+                $args[1],
+                $framework
+            );
+
+            yield [$application, $expectedOutput];
+        }
+    }
+
+    /**
+    * @dataProvider DataProviderFastRouteCacheComamnd
+    */
+    public function testFastRouteCacheCommand(
+        Application $application,
+        string $expectedOutput
+    ) : void {
+        // ref: https://stackoverflow.com/questions/47183273/test-command-symfony-with-phpunit
+
+        $command = $application->find('daft-framework:router:update-cache');
+
+        $this->assertInstanceOf(FastRouteCacheCommand::class, $command);
+
+        $commandTester = new CommandTester($command);
+
+        $commandTester->execute(
+            [
+                'sources' => [
+                    Config::class,
+                ],
+            ],
+            [
+                'command' => $command->getName(),
+            ]
+        );
+
+        $this->assertSame($expectedOutput, $commandTester->getDisplay());
     }
 
     protected function DataProviderConsoleApplicationConfig() : Generator

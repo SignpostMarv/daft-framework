@@ -8,10 +8,16 @@ namespace SignpostMarv\DaftFramework\Tests\fixtures;
 
 use SignpostMarv\DaftFramework\Symfony\Console\DaftConsoleSource;
 use SignpostMarv\DaftFramework\Tests\fixtures\Console\Command;
+use SignpostMarv\DaftRouter\DaftSource;
 
 return [
     DaftConsoleSource::class => [
         Command\TestCommand::class,
         Command\DisabledTestCommand::class,
+    ],
+    DaftSource::class => [
+        'sources' => [
+        ],
+        'cacheFile' => realpath(__DIR__ . '/') . 'fast-route.cache',
     ],
 ];
