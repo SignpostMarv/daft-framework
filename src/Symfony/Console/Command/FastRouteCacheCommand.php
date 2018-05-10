@@ -18,17 +18,6 @@ class FastRouteCacheCommand extends Command
     */
     protected static $defaultName = 'daft-framework:router:update-cache';
 
-    protected function configure() : void
-    {
-        $this->setDescription(
-            'Update the cache used by the daft framework router'
-        )->addArgument(
-            'sources',
-            InputArgument::REQUIRED | InputArgument::IS_ARRAY,
-            'class names for sources'
-        );
-    }
-
     public function execute(InputInterface $input, OutputInterface $output) : int
     {
         $cacheFilename = tempnam(sys_get_temp_dir(), static::class);
@@ -48,5 +37,16 @@ class FastRouteCacheCommand extends Command
         unlink($cacheFilename);
 
         return 0;
+    }
+
+    protected function configure() : void
+    {
+        $this->setDescription(
+            'Update the cache used by the daft framework router'
+        )->addArgument(
+            'sources',
+            InputArgument::REQUIRED | InputArgument::IS_ARRAY,
+            'class names for sources'
+        );
     }
 }
