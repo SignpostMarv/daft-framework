@@ -18,7 +18,7 @@ class FastRouteCacheCommand extends Command
     */
     protected static $defaultName = 'daft-framework:router:update-cache';
 
-    public function configure() : void
+    protected function configure() : void
     {
         $this->setDescription(
             'Update the cache used by the daft framework router'
