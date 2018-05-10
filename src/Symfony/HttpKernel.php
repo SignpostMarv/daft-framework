@@ -63,7 +63,7 @@ class HttpKernel extends Framework implements HttpKernelInterface
         return $dispatcher->handle($request, parse_url($this->ObtainBaseUrl(), PHP_URL_PATH));
     }
 
-    protected function ValidateConfig(array $config) : void
+    protected function ValidateConfig(array $config) : array
     {
         $sourceConfig = $config[DaftSource::class] ?? null;
         if (! isset($sourceConfig, $sourceConfig['cacheFile'], $sourceConfig['sources'])) {
@@ -89,5 +89,7 @@ class HttpKernel extends Framework implements HttpKernelInterface
                 DaftSource::class
             ));
         }
+
+        return parent::ValidateConfig($config);
     }
 }
