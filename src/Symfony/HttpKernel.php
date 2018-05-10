@@ -17,6 +17,11 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
 class HttpKernel extends Framework implements HttpKernelInterface
 {
     const ERROR_SOURCE_CONFIG = DaftSource::class . ' config does not specify "%s" correctly.';
+
+    const ERROR_ROUTER_CACHE_FILE_PATH =
+        DaftSource::class .
+        ' config property cacheFile does not exist under the framework base path.';
+
     /**
     * @var string
     */
@@ -77,10 +82,7 @@ class HttpKernel extends Framework implements HttpKernelInterface
             file_exists($sourceConfig['cacheFile']) &&
             ! $this->FileIsUnderBasePath($sourceConfig['cacheFile'])
         ) {
-            throw new InvalidArgumentException(sprintf(
-                '%s config property cacheFile does not exist under the framework base path.',
-                DaftSource::class
-            ));
+            throw new InvalidArgumentException(self::ERROR_ROUTER_CACHE_FILE_PATH);
         }
 
         return parent::ValidateConfig($config);
