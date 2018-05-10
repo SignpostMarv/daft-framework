@@ -36,7 +36,7 @@ class FastRouteCacheCommand extends Command
 
         $cacheFilename .= '.cache';
 
-        $compiler = Compiler::ObtainDispatcher(
+        Compiler::ObtainDispatcher(
             [
                 'cacheFile' => $cacheFilename,
             ],
