@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "655589973135941215228c49818ead96",
+    "content-hash": "e9b46560f64ba5d14d06eeb6e4e11241",
     "packages": [
         {
             "name": "nikic/fast-route",
@@ -161,16 +161,16 @@
         },
         {
             "name": "signpostmarv/daft-interface-collector",
-            "version": "v0.4.1",
+            "version": "v0.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/SignpostMarv/daft-interface-collector.git",
-                "reference": "e0487be4c0bfa237a339937dbaa950ba912820b2"
+                "reference": "ddb6e68e0f3337257d9fec9d5ffd439e14514eef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SignpostMarv/daft-interface-collector/zipball/e0487be4c0bfa237a339937dbaa950ba912820b2",
-                "reference": "e0487be4c0bfa237a339937dbaa950ba912820b2",
+                "url": "https://api.github.com/repos/SignpostMarv/daft-interface-collector/zipball/ddb6e68e0f3337257d9fec9d5ffd439e14514eef",
+                "reference": "ddb6e68e0f3337257d9fec9d5ffd439e14514eef",
                 "shasum": ""
             },
             "require": {
@@ -205,7 +205,7 @@
                 }
             ],
             "description": "interface collector. daft reasons again.",
-            "time": "2018-05-10T04:51:35+00:00"
+            "time": "2018-05-10T19:13:10+00:00"
         },
         {
             "name": "signpostmarv/daft-router",
