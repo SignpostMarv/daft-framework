@@ -7,12 +7,10 @@ declare(strict_types=1);
 namespace SignpostMarv\DaftFramework;
 
 use InvalidArgumentException;
-use SignpostMarv\DaftFramework\Framework;
 use SignpostMarv\DaftRouter\DaftSource;
 use SignpostMarv\DaftRouter\Router\Compiler;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 class HttpHandler extends Framework
 {
