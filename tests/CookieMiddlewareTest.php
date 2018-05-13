@@ -8,12 +8,11 @@ namespace SignpostMarv\DaftFramework\Tests;
 
 use Generator;
 use PHPUnit\Framework\TestCase as Base;
+use SignpostMarv\DaftFramework\Http\CookieMiddleware;
 use SignpostMarv\DaftFramework\HttpHandler;
 use SignpostMarv\DaftRouter\DaftSource;
-use SignpostMarv\DaftFramework\Http\CookieMiddleware;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 
 class CookieMiddlewareTest extends Base
 {
@@ -70,7 +69,7 @@ class CookieMiddlewareTest extends Base
 
         $cookie = current(array_filter(
             $response->headers->getCookies(),
-            function (Cookie $cookie) use($cookieName) : bool {
+            function (Cookie $cookie) use ($cookieName) : bool {
                 return $cookieName === $cookie->getName();
             }
         ));
@@ -101,7 +100,7 @@ class CookieMiddlewareTest extends Base
 
         $cookie = current(array_filter(
             $response->headers->getCookies(),
-            function (Cookie $cookie) use($cookieName) : bool {
+            function (Cookie $cookie) use ($cookieName) : bool {
                 return $cookieName === $cookie->getName();
             }
         ));
