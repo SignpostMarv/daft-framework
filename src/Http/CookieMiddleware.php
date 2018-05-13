@@ -59,27 +59,27 @@ class CookieMiddleware implements DaftMiddleware
         bool $configHttpOnly,
         string $configSameSite
     ) : void {
-                $updateSecure = $cookie->isSecure() !== $configSecure;
-                $updateHttpOnly = $cookie->isHttpOnly() !== $configHttpOnly;
-                $updateSameSite = $cookie->getSameSite() !== $configSameSite;
+        $updateSecure = $cookie->isSecure() !== $configSecure;
+        $updateHttpOnly = $cookie->isHttpOnly() !== $configHttpOnly;
+        $updateSameSite = $cookie->getSameSite() !== $configSameSite;
 
-                if ($updateSecure || $updateHttpOnly || $updateSameSite) {
-                    $response->headers->removeCookie(
-                        $cookie->getName(),
-                        $cookie->getPath(),
-                        $cookie->getDomain()
-                    );
-                    $response->headers->setCookie(new Cookie(
-                        $cookie->getName(),
-                        $cookie->getValue(),
-                        $cookie->getExpiresTime(),
-                        $cookie->getPath(),
-                        $cookie->getDomain(),
-                        $configSecure,
-                        $configHttpOnly,
-                        $cookie->isRaw(),
-                        $configSameSite
-                    ));
-                }
+        if ($updateSecure || $updateHttpOnly || $updateSameSite) {
+            $response->headers->removeCookie(
+                $cookie->getName(),
+                $cookie->getPath(),
+                $cookie->getDomain()
+            );
+            $response->headers->setCookie(new Cookie(
+                $cookie->getName(),
+                $cookie->getValue(),
+                $cookie->getExpiresTime(),
+                $cookie->getPath(),
+                $cookie->getDomain(),
+                $configSecure,
+                $configHttpOnly,
+                $cookie->isRaw(),
+                $configSameSite
+            ));
+        }
     }
 }
