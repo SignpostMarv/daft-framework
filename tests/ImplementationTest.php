@@ -214,7 +214,9 @@ class ImplementationTest extends Base
         $instance = $this->ObtainFrameworkInstance($implementation, ...$implementationArgs);
         $this->ConfigureFrameworkInstance($instance, $postConstructionCalls);
 
-        list($baseUrl, $basePath, $config) = $implementationArgs;
+        list($baseUrl, $basePath, $config) = $this->extractDefaultFrameworkArgs(
+            $implementationArgs
+        );
 
         $this->assertSame($baseUrl, $instance->ObtainBaseUrl());
         $this->assertSame($basePath, $instance->ObtainBasePath());
@@ -381,6 +383,13 @@ class ImplementationTest extends Base
         );
 
         $implementation::ObtainFrameworkForRequest($requestB);
+    }
+
+    protected function extractDefaultFrameworkArgs(array $implementationArgs) : array
+    {
+        list($baseUrl, $basePath, $config) = $implementationArgs;
+
+        return [$baseUrl, $basePath, $config];
     }
 
     protected function PrepareReferenceDisposalTest(
