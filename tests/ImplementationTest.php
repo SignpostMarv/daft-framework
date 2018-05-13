@@ -311,6 +311,8 @@ class ImplementationTest extends Base
     {
         $this->assertTrue(is_a($implementation, Framework::class, true));
 
+        $this->assertFalse(Request::createFromGlobals() === Request::createFromGlobals());
+
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage(
             'No framework instance has been paired with the provided request!'

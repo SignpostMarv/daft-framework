@@ -14,6 +14,7 @@ return [
     DaftConsoleSource::class => [
         Command\TestCommand::class,
         Command\DisabledTestCommand::class,
+        \SignpostMarv\DaftFramework\Symfony\Console\Command\FastRouteCacheCommand::class,
     ],
     DaftSource::class => [
         'sources' => [
