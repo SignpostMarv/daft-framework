@@ -55,15 +55,15 @@ class CookieMiddleware implements DaftMiddleware
         bool $configHttpOnly,
         ? string $configSameSite
     ) : void {
-            foreach ($response->headers->getCookies() as $cookie) {
-                self::PerhapsReconfigureCookie(
-                    $response,
-                    $cookie,
-                    $configSecure,
-                    $configHttpOnly,
-                    $configSameSite
-                );
-            }
+        foreach ($response->headers->getCookies() as $cookie) {
+            self::PerhapsReconfigureCookie(
+                $response,
+                $cookie,
+                $configSecure,
+                $configHttpOnly,
+                $configSameSite
+            );
+        }
     }
 
     public static function PerhapsReconfigureCookie(
