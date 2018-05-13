@@ -34,6 +34,31 @@ class CookieMiddleware implements DaftMiddleware
             $configSameSite = is_string($config['sameSite'] ?? null) ? $config['sameSite'] : null;
 
             foreach ($response->headers->getCookies() as $cookie) {
+                self::PerhapsReconfigureCookie(
+                    $response,
+                    $cookie,
+                    $configSecure,
+                    $configHttpOnly,
+                    $configSameSite
+                );
+            }
+        }
+
+        return $response;
+    }
+
+    public static function DaftRouterRoutePrefixExceptions() : array
+    {
+        return [];
+    }
+
+    public static function PerhapsReconfigureCookie(
+        Response $response,
+        Cookie $cookie,
+        bool $configSecure,
+        bool $configHttpOnly,
+        string $configSameSite
+    ) : void {
                 $updateSecure = $cookie->isSecure() !== $configSecure;
                 $updateHttpOnly = $cookie->isHttpOnly() !== $configHttpOnly;
                 $updateSameSite = $cookie->getSameSite() !== $configSameSite;
@@ -56,14 +81,5 @@ class CookieMiddleware implements DaftMiddleware
                         $configSameSite
                     ));
                 }
-            }
-        }
-
-        return $response;
-    }
-
-    public static function DaftRouterRoutePrefixExceptions() : array
-    {
-        return [];
     }
 }
