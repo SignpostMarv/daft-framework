@@ -214,7 +214,7 @@ class ImplementationTest extends Base
         $instance = $this->ObtainFrameworkInstance($implementation, ...$implementationArgs);
         $this->ConfigureFrameworkInstance($instance, $postConstructionCalls);
 
-        list ($baseUrl, $basePath, $config) = $implementationArgs;
+        list($baseUrl, $basePath, $config) = $implementationArgs;
 
         $this->assertSame($baseUrl, $instance->ObtainBaseUrl());
         $this->assertSame($basePath, $instance->ObtainBasePath());
