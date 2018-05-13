@@ -410,16 +410,12 @@ class ImplementationTest extends Base
 
     protected function ObtainFrameworkInstance(
         string $implementation,
-        string $baseUrl,
-        string $basePath,
-        array $config = []
+        ...$implementationArgs
     ) : Framework {
         return Utilities::ObtainFrameworkInstance(
             $this,
             $implementation,
-            $baseUrl,
-            $basePath,
-            $config
+            ...$implementationArgs
         );
     }
 
