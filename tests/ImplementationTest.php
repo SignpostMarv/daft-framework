@@ -209,12 +209,12 @@ class ImplementationTest extends Base
     public function testEverythingInitialisesFine(
         string $implementation,
         array $postConstructionCalls,
-        string $baseUrl,
-        string $basePath,
-        array $config = []
+        ...$implementationArgs
     ) : void {
-        $instance = $this->ObtainFrameworkInstance($implementation, $baseUrl, $basePath, $config);
+        $instance = $this->ObtainFrameworkInstance($implementation, ...$implementationArgs);
         $this->ConfigureFrameworkInstance($instance, $postConstructionCalls);
+
+        list ($baseUrl, $basePath, $config) = $implementationArgs;
 
         $this->assertSame($baseUrl, $instance->ObtainBaseUrl());
         $this->assertSame($basePath, $instance->ObtainBasePath());
@@ -238,9 +238,7 @@ class ImplementationTest extends Base
         ? string $expectedExceptionMessage,
         ? int $expectedExceptionCode,
         array $postConstructionCalls,
-        string $baseUrl,
-        string $basePath,
-        array $config = []
+        ...$implementationArgs
     ) : void {
         $this->expectException($expectedExceptionClass);
         if (is_string($expectedExceptionMessage)) {
@@ -250,7 +248,7 @@ class ImplementationTest extends Base
             $this->expectExceptionCode($expectedExceptionCode);
         }
 
-        $instance = $this->ObtainFrameworkInstance($implementation, $baseUrl, $basePath, $config);
+        $instance = $this->ObtainFrameworkInstance($implementation, ...$implementationArgs);
         $this->ConfigureFrameworkInstance($instance, $postConstructionCalls);
     }
 
@@ -264,11 +262,9 @@ class ImplementationTest extends Base
     public function testGoodSourcesSansDatabaseConnection(
         string $implementation,
         array $postConstructionCalls,
-        string $baseUrl,
-        string $basePath,
-        array $config = []
+        ...$implementationArgs
     ) : void {
-        $instance = $this->ObtainFrameworkInstance($implementation, $baseUrl, $basePath, $config);
+        $instance = $this->ObtainFrameworkInstance($implementation, ...$implementationArgs);
         $this->ConfigureFrameworkInstance($instance, $postConstructionCalls);
 
         $this->expectException(BadMethodCallException::class);
@@ -287,11 +283,9 @@ class ImplementationTest extends Base
     public function testGoodSourcesWithDatabaseConnection(
         string $implementation,
         array $postConstructionCalls,
-        string $baseUrl,
-        string $basePath,
-        array $config = []
+        ...$implementationArgs
     ) : void {
-        $instance = $this->ObtainFrameworkInstance($implementation, $baseUrl, $basePath, $config);
+        $instance = $this->ObtainFrameworkInstance($implementation, ...$implementationArgs);
         $this->ConfigureFrameworkInstance($instance, $postConstructionCalls);
 
         $this->expectException(BadMethodCallException::class);
@@ -332,18 +326,14 @@ class ImplementationTest extends Base
     public function testDisposeOfFrameworkReferences(
         string $implementation,
         array $postConstructionCalls,
-        string $baseUrl,
-        string $basePath,
-        array $config = []
+        ...$implementationArgs
     ) : void {
         list($instance, $requestA, $requestB) = $this->PrepareReferenceDisposalTest(
             $implementation,
             $postConstructionCalls,
-            $baseUrl,
-            $basePath,
-            $config,
             Request::createFromGlobals(),
-            Request::createFromGlobals()
+            Request::createFromGlobals(),
+            ...$implementationArgs
         );
 
         $implementation::DisposeOfFrameworkReferences($instance);
@@ -367,18 +357,14 @@ class ImplementationTest extends Base
     public function testDisposeOfRequestReferences(
         string $implementation,
         array $postConstructionCalls,
-        string $baseUrl,
-        string $basePath,
-        array $config = []
+        ...$implementationArgs
     ) : void {
         list($instance, $requestA, $requestB) = $this->PrepareReferenceDisposalTest(
             $implementation,
             $postConstructionCalls,
-            $baseUrl,
-            $basePath,
-            $config,
             Request::createFromGlobals(),
-            Request::createFromGlobals()
+            Request::createFromGlobals(),
+            ...$implementationArgs
         );
 
         $implementation::DisposeOfFrameworkReferences($instance);
@@ -400,17 +386,13 @@ class ImplementationTest extends Base
     protected function PrepareReferenceDisposalTest(
         string $implementation,
         array $postConstructionCalls,
-        string $baseUrl,
-        string $basePath,
-        array $config,
         Request $requestA,
-        Request $requestB
+        Request $requestB,
+        ...$implementationArgs
     ) : array {
         $instance = $this->ObtainFrameworkInstance(
             $implementation,
-            $baseUrl,
-            $basePath,
-            $config
+            ...$implementationArgs
         );
         $this->ConfigureFrameworkInstance($instance, $postConstructionCalls);
 

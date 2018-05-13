@@ -16,9 +16,7 @@ class Utilities
     public static function ObtainFrameworkInstance(
         TestCase $testCase,
         string $implementation,
-        string $baseUrl,
-        string $basePath,
-        array $config = []
+        ...$implementationArgs
     ) : Framework {
         $testCase->assertTrue(
             is_a($implementation, Framework::class, true),
@@ -30,15 +28,13 @@ class Utilities
             )
         );
 
-        return new $implementation($baseUrl, $basePath, $config);
+        return new $implementation(...$implementationArgs);
     }
 
     public static function ObtainHttpHandlerInstance(
         TestCase $testCase,
         string $implementation,
-        string $baseUrl,
-        string $basePath,
-        array $config = []
+        ...$implementationArgs
     ) : HttpHandler {
         $testCase->assertTrue(
             is_a($implementation, HttpHandler::class, true),
@@ -56,9 +52,7 @@ class Utilities
         $instance = static::ObtainFrameworkInstance(
             $testCase,
             $implementation,
-            $baseUrl,
-            $basePath,
-            $config
+            ...$implementationArgs
         );
 
         return $instance;
