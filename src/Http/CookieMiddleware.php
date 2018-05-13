@@ -57,7 +57,7 @@ class CookieMiddleware implements DaftMiddleware
         Cookie $cookie,
         bool $configSecure,
         bool $configHttpOnly,
-        string $configSameSite
+        ? string $configSameSite
     ) : void {
         $updateSecure = $cookie->isSecure() !== $configSecure;
         $updateHttpOnly = $cookie->isHttpOnly() !== $configHttpOnly;
