@@ -7,18 +7,18 @@ declare(strict_types=1);
 namespace SignpostMarv\DaftFramework\Tests;
 
 use Generator;
-use SignpostMarv\DaftFramework\Symfony\HttpKernel\HttpKernel;
+use SignpostMarv\DaftFramework\HttpHandler;
 use SignpostMarv\DaftRouter\DaftSource;
 use SignpostMarv\DaftRouter\Tests\ImplementationTest as Base;
 use Symfony\Component\HttpFoundation\Request;
 
-class HttpKernelTest extends Base
+class HttpHandlerTest extends Base
 {
-    public function DataProviderHttpKernelInstances() : Generator
+    public function DataProviderHttpHandlerInstances() : Generator
     {
         yield from [
             [
-                HttpKernel::class,
+                HttpHandler::class,
                 [
                     'ConfigureDatabaseConnection' => [
                         'sqlite::memory:',
@@ -38,9 +38,9 @@ class HttpKernelTest extends Base
         ];
     }
 
-    public function DataProviderHttpKernelHandle() : Generator
+    public function DataProviderHttpHandlerHandle() : Generator
     {
-        foreach ($this->DataProviderHttpKernelInstances() as $args) {
+        foreach ($this->DataProviderHttpHandlerInstances() as $args) {
             list($implementation, $postConstructionCalls, $baseUrl, $basePath, $config) = $args;
 
             foreach ($this->DataProviderVerifyHandlerGood() as $testArgs) {
@@ -78,7 +78,7 @@ class HttpKernelTest extends Base
                     unlink($config[DaftSource::class]['cacheFile']);
                 }
 
-                $instance = Utilities::ObtainHttpKernelInstance(
+                $instance = Utilities::ObtainHttpHandlerInstance(
                     $this,
                     $implementation,
                     $baseUrl,
@@ -103,10 +103,10 @@ class HttpKernelTest extends Base
     }
 
     /**
-    * @dataProvider DataProviderHttpKernelHandle
+    * @dataProvider DataProviderHttpHandlerHandle
     */
-    public function testHandlerGoodOnHttpKernel(
-        HttpKernel $instance,
+    public function testHandlerGoodOnHttpHandler(
+        HttpHandler $instance,
         Request $request,
         int $expectedStatus,
         string $expectedContent

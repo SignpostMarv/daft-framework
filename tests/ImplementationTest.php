@@ -12,7 +12,7 @@ use InvalidArgumentException;
 use ParagonIE\EasyDB\EasyDB;
 use PHPUnit\Framework\TestCase as Base;
 use SignpostMarv\DaftFramework\Framework;
-use SignpostMarv\DaftFramework\Symfony\HttpKernel\HttpKernel;
+use SignpostMarv\DaftFramework\HttpHandler;
 use SignpostMarv\DaftRouter\DaftSource;
 use SignpostMarv\DaftRouter\Tests\Fixtures\Config as DaftRouterFixturesConfig;
 use Symfony\Component\HttpFoundation\Request;
@@ -65,7 +65,7 @@ class ImplementationTest extends Base
                 [],
             ],
             [
-                HttpKernel::class,
+                HttpHandler::class,
                 [
                     'ConfigureDatabaseConnection' => [
                         'sqlite::memory:',
@@ -112,7 +112,7 @@ class ImplementationTest extends Base
                 [],
             ],
             [
-                HttpKernel::class,
+                HttpHandler::class,
                 InvalidArgumentException::class,
                 sprintf(
                     '%s config not found!',
@@ -125,7 +125,7 @@ class ImplementationTest extends Base
                 [],
             ],
             [
-                HttpKernel::class,
+                HttpHandler::class,
                 InvalidArgumentException::class,
                 sprintf(
                     '%s config does not specify "%s" correctly.',
@@ -144,7 +144,7 @@ class ImplementationTest extends Base
                 ],
             ],
             [
-                HttpKernel::class,
+                HttpHandler::class,
                 InvalidArgumentException::class,
                 sprintf(
                     '%s config does not specify "%s" correctly.',
@@ -163,7 +163,7 @@ class ImplementationTest extends Base
                 ],
             ],
             [
-                HttpKernel::class,
+                HttpHandler::class,
                 InvalidArgumentException::class,
                 sprintf(
                     '%s config property cacheFile does not exist under the framework base path.',

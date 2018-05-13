@@ -4,7 +4,7 @@
 */
 declare(strict_types=1);
 
-namespace SignpostMarv\DaftFramework\Symfony\HttpKernel;
+namespace SignpostMarv\DaftFramework;
 
 use InvalidArgumentException;
 use SignpostMarv\DaftFramework\Framework;
@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
-class HttpKernel extends Framework implements HttpKernelInterface
+class HttpHandler extends Framework
 {
     const ERROR_SOURCE_CONFIG = DaftSource::class . ' config does not specify "%s" correctly.';
 
@@ -44,19 +44,8 @@ class HttpKernel extends Framework implements HttpKernelInterface
         ));
     }
 
-    public function handle(
-        Request $request,
-        $type = HttpKernelInterface::MASTER_REQUEST,
-        $catch = true
-    ) : Response {
-        return $this->handleStrict($request, $type, $catch);
-    }
-
-    public function handleStrict(
-        Request $request,
-        int $type = HttpKernelInterface::MASTER_REQUEST,
-        bool $catch = true
-    ) : Response {
+    public function handle(Request $request) : Response
+    {
         self::PairWithRequest($this, $request);
 
         $dispatcher = Compiler::ObtainDispatcher(

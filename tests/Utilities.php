@@ -9,7 +9,7 @@ namespace SignpostMarv\DaftFramework\Tests;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 use SignpostMarv\DaftFramework\Framework;
-use SignpostMarv\DaftFramework\Symfony\HttpKernel\HttpKernel;
+use SignpostMarv\DaftFramework\HttpHandler;
 
 class Utilities
 {
@@ -33,25 +33,25 @@ class Utilities
         return new $implementation($baseUrl, $basePath, $config);
     }
 
-    public static function ObtainHttpKernelInstance(
+    public static function ObtainHttpHandlerInstance(
         TestCase $testCase,
         string $implementation,
         string $baseUrl,
         string $basePath,
         array $config = []
-    ) : HttpKernel {
+    ) : HttpHandler {
         $testCase->assertTrue(
-            is_a($implementation, HttpKernel::class, true),
+            is_a($implementation, HttpHandler::class, true),
             sprintf(
                 'Argument %u passed to %s must be an implementation of %s',
                 1,
                 __METHOD__,
-                HttpKernel::class
+                HttpHandler::class
             )
         );
 
         /**
-        * @var HttpKernel $instance
+        * @var HttpHandler $instance
         */
         $instance = static::ObtainFrameworkInstance(
             $testCase,
