@@ -210,7 +210,7 @@ class ImplementationTest extends Base
         string $implementation,
         array $postConstructionCalls,
         ...$implementationArgs
-    ) : void {
+    ) : Framework {
         $instance = $this->ObtainFrameworkInstance($implementation, ...$implementationArgs);
         $this->ConfigureFrameworkInstance($instance, $postConstructionCalls);
 
@@ -225,6 +225,8 @@ class ImplementationTest extends Base
         if (isset($postConstructionCalls['ConfigureDatabaseConnection'])) {
             $this->assertInstanceOf(EasyDB::class, $instance->ObtainDatabaseConnection());
         }
+
+        return $instance;
     }
 
     /**
