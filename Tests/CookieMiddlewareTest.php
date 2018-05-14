@@ -27,19 +27,20 @@ class CookieMiddlewareTest extends Base
         array $config,
         string $cookieName,
         string $cookieValue,
-        string $secure,
-        string $http,
-        string $sameSite
+        ? string $secure,
+        ? string $http,
+        ? string $sameSite
     ) : void {
         $url = sprintf(
             'cookie-test/%s/%s/%s/%s/%s',
             rawurlencode($cookieName),
             rawurlencode($cookieValue),
-            rawurlencode($secure),
-            rawurlencode($http),
-            rawurlencode($sameSite)
+            rawurlencode($secure ?? '1'),
+            rawurlencode($http ?? '1'),
+            rawurlencode($sameSite ?? 'lax')
         );
 
+        if (is_string($secure) && is_string($http) && is_string($sameSite)) {
         $config[CookieMiddleware::class] = [
             'secure' => '1' !== $secure,
             'httpOnly' => '1' !== $http,
@@ -49,6 +50,7 @@ class CookieMiddlewareTest extends Base
                     : 'lax'
             ),
         ];
+        }
 
         $config[DaftSource::class]['sources'] = [
             fixtures\Routes\CookieTest::class,
@@ -76,9 +78,11 @@ class CookieMiddlewareTest extends Base
 
         $this->assertInstanceOf(Cookie::class, $cookie);
 
+        if (is_string($secure) && is_string($http) && is_string($sameSite)) {
         $this->assertSame('1' === $secure, $cookie->isSecure(), 'Secure must match without middleware');
         $this->assertSame('1' === $http, $cookie->isHttpOnly(), 'HttpOnly must match without middleware');
         $this->assertSame($sameSite, $cookie->getSameSite(), 'SameSite must match without middleware');
+        }
 
         $config[DaftSource::class]['sources'] = [
             fixtures\Routes\CookieTest::class,
@@ -107,18 +111,21 @@ class CookieMiddlewareTest extends Base
 
         $this->assertInstanceOf(Cookie::class, $cookie);
 
+        if (is_string($secure) && is_string($http) && is_string($sameSite)) {
         $this->assertSame($config[CookieMiddleware::class]['secure'], $cookie->isSecure(), 'Secure must match flipped value with middleware');
         $this->assertSame($config[CookieMiddleware::class]['httpOnly'], $cookie->isHttpOnly(), 'HttpOnly must match flipped value with middleware');
         $this->assertSame($config[CookieMiddleware::class]['sameSite'], $cookie->getSameSite(), 'SameSite must match flipped value with middleware');
+        }
     }
 
     public function DataProvderCookeMiddlewareTest() : Generator
     {
         foreach ($this->DataProviderCookieNameValue() as $cookie) {
+                        foreach ($this->DataProviderHttpHandlerInstances() as $handlerArgs) {
+                            yield array_merge($handlerArgs, $cookie, [null, null, null]);
             foreach ($this->DataProviderCookieSecure() as $secure) {
                 foreach ($this->DataProviderCookieHttp() as $http) {
                     foreach ($this->DataProviderCookieSameSite() as $sameSite) {
-                        foreach ($this->DataProviderHttpHandlerInstances() as $handlerArgs) {
                             yield array_merge($handlerArgs, $cookie, [$secure, $http, $sameSite]);
                         }
                     }
