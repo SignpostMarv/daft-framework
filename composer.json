@@ -17,7 +17,7 @@
     "autoload-dev": {
         "psr-4": {
             "FastRoute\\": "./vendor/nikic/fast-route/test/",
-            "SignpostMarv\\DaftFramework\\Tests\\": "./tests/",
+            "SignpostMarv\\DaftFramework\\Tests\\": "./Tests/",
             "SignpostMarv\\DaftRouter\\Tests\\": "./vendor/signpostmarv/daft-router/tests/daft-router/",
             "SignpostMarv\\DaftRouter\\Tests\\FastRoute\\": "./vendor/signpostmarv/daft-router/tests/fast-route/"
         }
