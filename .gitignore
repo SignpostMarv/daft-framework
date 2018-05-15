@@ -2,3 +2,4 @@
 /phpunit/
 .php_cs.cache
 /tests/fixtures/*.cache
+phpunit.clover

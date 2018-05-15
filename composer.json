@@ -28,7 +28,7 @@
     },
     "scripts": {
         "tests": [
-            "phpunit -vvvv",
+            "phpunit -vvvv --coverage-clover=phpunit.clover",
             "phpstan analyse -c ./phpstan.neon .php_cs.dist src tests ./tests/fixtures/bin/daft-framework",
             "psalm",
             "phpcpd src",
