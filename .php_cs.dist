@@ -10,7 +10,7 @@ namespace SignpostMarv\CS;
 
 return ConfigUsedWithPhpstan::createWithPaths(
     __FILE__,
-    (__DIR__ . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR),
-    realpath(__DIR__ . '/Tests/fixtures/bin/daft-framework'),
-    (__DIR__ . DIRECTORY_SEPARATOR . 'Tests' . DIRECTORY_SEPARATOR)
+    __DIR__ . '/src/',
+    __DIR__ . '/Tests/fixtures/bin/daft-framework',
+    __DIR__ . '/Tests/'
 );
