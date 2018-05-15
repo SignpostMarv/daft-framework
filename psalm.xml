@@ -7,7 +7,7 @@
 >
     <projectFiles>
         <file name=".php_cs.dist" />
-        <file name="tests/fixtures/bin/daft-framework" />
+        <file name="Tests/fixtures/bin/daft-framework" />
         <directory name="src" />
     </projectFiles>
 
