@@ -85,6 +85,23 @@ class CookieMiddleware implements DaftMiddleware
         $updateSameSite = $cookie->getSameSite() !== $configSameSite;
 
         if ($updateSecure || $updateHttpOnly || $updateSameSite) {
+            static::ReconfigureCookie(
+                $response,
+                $cookie,
+                $configSecure,
+                $configHttpOnly,
+                $configSameSite
+            );
+        }
+    }
+
+    public static function ReconfigureCookie(
+        Response $response,
+        Cookie $cookie,
+        bool $configSecure,
+        bool $configHttpOnly,
+        ? string $configSameSite
+    ) : void {
             $cookieName = $cookie->getName();
             $cookiePath = $cookie->getPath();
             $cookieDomain = $cookie->getDomain();
@@ -100,6 +117,5 @@ class CookieMiddleware implements DaftMiddleware
                 $cookie->isRaw(),
                 $configSameSite
             ));
-        }
     }
 }
