@@ -47,6 +47,9 @@ class Framework
             throw new InvalidArgumentException('Path should be explicitly set to via realpath!');
         }
 
+        /**
+        * @var array<string, string> $parsed
+        */
         $parsed = parse_url($baseUrl);
 
         $baseUrl = $parsed['scheme'] . '://' . $parsed['host'];

@@ -34,12 +34,14 @@ class HttpHandler extends Framework
     {
         parent::__construct($baseUrl, $basePath, $config);
 
-        $this->routerCacheFile = $config[DaftSource::class]['cacheFile'];
+        $this->routerCacheFile = (string) ((array) $config[DaftSource::class])['cacheFile'];
 
-        $this->routerSources = array_values(array_filter(
-            $config[DaftSource::class]['sources'],
-            'is_string'
-        ));
+        /**
+        * @var string[] $sources
+        */
+        $sources = (array) ((array) $config[DaftSource::class])['sources'];
+
+        $this->routerSources = array_values(array_filter($sources, 'is_string'));
     }
 
     public function handle(Request $request) : Response
@@ -53,24 +55,34 @@ class HttpHandler extends Framework
             ...$this->routerSources
         );
 
-        return $dispatcher->handle($request, parse_url($this->ObtainBaseUrl(), PHP_URL_PATH));
+        return $dispatcher->handle(
+            $request,
+            (string) parse_url($this->ObtainBaseUrl(), PHP_URL_PATH)
+        );
     }
 
     protected function ValidateConfig(array $config) : array
     {
-        if (
-            ! isset(
-                $config[DaftSource::class],
-                $config[DaftSource::class]['cacheFile'],
-                $config[DaftSource::class]['sources']
-            )
-        ) {
+        if ( ! isset($config[DaftSource::class])) {
             throw new InvalidArgumentException(sprintf('%s config not found!', DaftSource::class));
-        } elseif ( ! is_string($config[DaftSource::class]['cacheFile'])) {
+        }
+
+        $subConfig = (array) $config[DaftSource::class];
+
+        if (! isset($subConfig['cacheFile'], $subConfig['sources'])) {
+            throw new InvalidArgumentException(sprintf('%s config not found!', DaftSource::class));
+        } elseif ( ! is_string($subConfig['cacheFile'])) {
             throw new InvalidArgumentException(sprintf(self::ERROR_SOURCE_CONFIG, 'cacheFile'));
-        } elseif ( ! is_array($config[DaftSource::class]['sources'])) {
+        }
+
+        /**
+        * @var string $cacheFilename
+        */
+        $cacheFilename = $subConfig['cacheFile'];
+
+        if ( ! is_array($subConfig['sources'])) {
             throw new InvalidArgumentException(sprintf(self::ERROR_SOURCE_CONFIG, 'sources'));
-        } elseif ( ! $this->FileIsUnderBasePath($config[DaftSource::class]['cacheFile'], false)) {
+        } elseif ( ! $this->FileIsUnderBasePath($cacheFilename, false)) {
             throw new InvalidArgumentException(self::ERROR_ROUTER_CACHE_FILE_PATH);
         }
 

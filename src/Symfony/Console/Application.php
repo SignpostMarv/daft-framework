@@ -73,6 +73,9 @@ class Application extends Base
             );
         }
 
+        /**
+        * @var string $implementation
+        */
         foreach ($this->GetCommandCollector()->Collect(...$sources) as $implementation) {
             if (is_a($implementation, BaseCommand::class, true)) {
                 /**
@@ -96,9 +99,17 @@ class Application extends Base
         $application = new static($name, $version);
         $application->AttachDaftFramework($framework);
 
-        $config = ($framework->ObtainConfig()[DaftConsoleSource::class] ?? []);
+        /**
+        *
+        */
+        $config = (array) ($framework->ObtainConfig()[DaftConsoleSource::class] ?? []);
 
-        $application->CollectCommands(...array_values(is_array($config) ? $config : []));
+        /**
+        * @var string[] $sources
+        */
+        $sources = array_values(array_filter($config, 'is_string'));
+
+        $application->CollectCommands(...$sources);
 
         return $application;
     }

@@ -49,14 +49,10 @@ class HttpHandlerTest extends Base
                     $prefix,
                     $expectedStatus,
                     $expectedContent,
-                    $uri,
-                    $method,
-                    $parameters,
-                    $cookies,
-                    $files,
-                    $server,
-                    $content
+                    $requestArgs
                 ) = $testArgs;
+
+                list($uri) = $requestArgs;
 
                 $parsed = parse_url($uri);
 
@@ -88,13 +84,7 @@ class HttpHandlerTest extends Base
                 Utilities::ConfigureFrameworkInstance($this, $instance, $args[1]);
 
                 $request = Request::create(
-                    $uri,
-                    $method,
-                    $parameters,
-                    $cookies,
-                    $files,
-                    $server,
-                    $content
+                    ...$requestArgs
                 );
 
                 yield [$instance, $request, $expectedStatus, $expectedContent];

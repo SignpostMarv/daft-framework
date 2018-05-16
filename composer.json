@@ -39,8 +39,8 @@
     "require": {
         "php": "^7.1",
         "paragonie/easydb": "^2.6",
-        "signpostmarv/daft-interface-collector": "^0.4.2",
-        "signpostmarv/daft-router": "^0.2.2",
+        "signpostmarv/daft-interface-collector": "^0.4.3",
+        "signpostmarv/daft-router": "^0.2.4",
         "symfony/console": "^4.0",
         "symfony/http-foundation": "^4.0"
     },
