@@ -85,17 +85,20 @@ class CookieMiddleware implements DaftMiddleware
         $updateSameSite = $cookie->getSameSite() !== $configSameSite;
 
         if ($updateSecure || $updateHttpOnly || $updateSameSite) {
+            $cookieName = $cookie->getName();
+            $cookiePath = $cookie->getPath();
+            $cookieDomain = $cookie->getDomain();
             $response->headers->removeCookie(
-                $cookie->getName(),
-                $cookie->getPath(),
-                $cookie->getDomain()
+                $cookieName,
+                $cookiePath,
+                $cookieDomain
             );
             $response->headers->setCookie(new Cookie(
-                $cookie->getName(),
+                $cookieName,
                 $cookie->getValue(),
                 $cookie->getExpiresTime(),
-                $cookie->getPath(),
-                $cookie->getDomain(),
+                $cookiePath,
+                $cookieDomain,
                 $configSecure,
                 $configHttpOnly,
                 $cookie->isRaw(),
