@@ -47,6 +47,14 @@ class Framework
             throw new InvalidArgumentException('Path should be explicitly set to via realpath!');
         }
 
+        $this->baseUrl = static::NormaliseUrl($baseUrl);
+        $this->basePath = $basePath;
+
+        $this->config = $this->ValidateConfig($config);
+    }
+
+    public static function NormaliseUrl(string $baseUrl) : string
+    {
         /**
         * @var array<string, string> $parsed
         */
@@ -58,10 +66,7 @@ class Framework
             $baseUrl .= ':' . $parsed['port'];
         }
 
-        $this->baseUrl = $baseUrl . str_replace('//', '/', $parsed['path']);
-        $this->basePath = $basePath;
-
-        $this->config = $this->ValidateConfig($config);
+        return $baseUrl . str_replace('//', '/', $parsed['path']);
     }
 
     public function ObtainDatabaseConnection() : EasyDB
