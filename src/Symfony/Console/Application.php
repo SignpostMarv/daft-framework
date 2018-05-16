@@ -99,9 +99,6 @@ class Application extends Base
         $application = new static($name, $version);
         $application->AttachDaftFramework($framework);
 
-        /**
-        *
-        */
         $config = (array) ($framework->ObtainConfig()[DaftConsoleSource::class] ?? []);
 
         /**
