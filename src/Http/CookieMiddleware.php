@@ -76,22 +76,16 @@ class CookieMiddleware implements DaftMiddleware
     public static function PerhapsReconfigureCookie(
         Response $response,
         Cookie $cookie,
-        bool $configSecure,
-        bool $configHttpOnly,
-        ? string $configSameSite
+        bool $isSecure,
+        bool $isHttpOnly,
+        ? string $sameSite
     ) : void {
-        $updateSecure = $cookie->isSecure() !== $configSecure;
-        $updateHttpOnly = $cookie->isHttpOnly() !== $configHttpOnly;
-        $updateSameSite = $cookie->getSameSite() !== $configSameSite;
+        $updateSecure = $cookie->isSecure() !== $isSecure;
+        $updateHttpOnly = $cookie->isHttpOnly() !== $isHttpOnly;
+        $updateSameSite = $cookie->getSameSite() !== $sameSite;
 
         if ($updateSecure || $updateHttpOnly || $updateSameSite) {
-            static::ReconfigureCookie(
-                $response,
-                $cookie,
-                $configSecure,
-                $configHttpOnly,
-                $configSameSite
-            );
+            static::ReconfigureCookie($response, $cookie, $isSecure, $isHttpOnly, $sameSite);
         }
     }
 
@@ -102,20 +96,20 @@ class CookieMiddleware implements DaftMiddleware
         bool $configHttpOnly,
         ? string $configSameSite
     ) : void {
-            $cookieName = $cookie->getName();
-            $cookiePath = $cookie->getPath();
-            $cookieDomain = $cookie->getDomain();
-            $response->headers->removeCookie($cookieName, $cookiePath, $cookieDomain);
-            $response->headers->setCookie(new Cookie(
-                $cookieName,
-                $cookie->getValue(),
-                $cookie->getExpiresTime(),
-                $cookiePath,
-                $cookieDomain,
-                $configSecure,
-                $configHttpOnly,
-                $cookie->isRaw(),
-                $configSameSite
-            ));
+        $cookieName = $cookie->getName();
+        $cookiePath = $cookie->getPath();
+        $cookieDomain = $cookie->getDomain();
+        $response->headers->removeCookie($cookieName, $cookiePath, $cookieDomain);
+        $response->headers->setCookie(new Cookie(
+            $cookieName,
+            $cookie->getValue(),
+            $cookie->getExpiresTime(),
+            $cookiePath,
+            $cookieDomain,
+            $configSecure,
+            $configHttpOnly,
+            $cookie->isRaw(),
+            $configSameSite
+        ));
     }
 }
