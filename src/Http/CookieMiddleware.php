@@ -29,20 +29,15 @@ class CookieMiddleware implements DaftMiddleware
 
             $config = (array) $config[self::class];
 
-            $configSecure = (bool) ($config['secure'] ?? null);
-            $configHttpOnly = (bool) ($config['httpOnly'] ?? null);
+            $isSecure = (bool) ($config['secure'] ?? null);
+            $isHttpOnly = (bool) ($config['httpOnly'] ?? null);
 
             /**
-            * @var string|null $configSameSite
+            * @var string|null $sameSite
             */
-            $configSameSite = is_string($config['sameSite'] ?? null) ? $config['sameSite'] : null;
+            $sameSite = is_string($config['sameSite'] ?? null) ? $config['sameSite'] : null;
 
-            self::PerhapsReconfigureResponseCookies(
-                $response,
-                $configSecure,
-                $configHttpOnly,
-                $configSameSite
-            );
+            self::PerhapsReconfigureResponseCookies($response, $isSecure, $isHttpOnly, $sameSite);
         }
 
         return $response;
