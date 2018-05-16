@@ -19,9 +19,7 @@ class CookieMiddleware implements DaftMiddleware
         ? Response $response
     ) : ? Response {
         if ( ! is_null($response)) {
-            $framework = Framework::ObtainFrameworkForRequest($request);
-
-            $config = $framework->ObtainConfig();
+            $config = Framework::ObtainFrameworkForRequest($request)->ObtainConfig();
 
             if ( ! isset($config[self::class])) {
                 return $response;
