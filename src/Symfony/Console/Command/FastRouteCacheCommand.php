@@ -30,12 +30,7 @@ class FastRouteCacheCommand extends Command
         */
         $sources = $input->getArgument('sources');
 
-        Compiler::ObtainDispatcher(
-            [
-                'cacheFile' => $cacheFilename,
-            ],
-            ...$sources
-        );
+        Compiler::ObtainDispatcher(['cacheFile' => $cacheFilename], ...$sources);
 
         $output->write(file_get_contents($cacheFilename));
 
