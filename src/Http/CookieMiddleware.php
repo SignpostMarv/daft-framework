@@ -88,11 +88,7 @@ class CookieMiddleware implements DaftMiddleware
             $cookieName = $cookie->getName();
             $cookiePath = $cookie->getPath();
             $cookieDomain = $cookie->getDomain();
-            $response->headers->removeCookie(
-                $cookieName,
-                $cookiePath,
-                $cookieDomain
-            );
+            $response->headers->removeCookie($cookieName, $cookiePath, $cookieDomain);
             $response->headers->setCookie(new Cookie(
                 $cookieName,
                 $cookie->getValue(),
