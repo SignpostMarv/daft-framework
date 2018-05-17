@@ -70,7 +70,16 @@ class HttpHandler extends Framework
 
         if ( ! is_array($subConfig)) {
             throw new InvalidArgumentException(sprintf('%s config not found!', DaftSource::class));
-        } elseif ( ! isset($subConfig['cacheFile'], $subConfig['sources'])) {
+        }
+
+        $this->ValidateDaftSourceSubConfig($subConfig);
+
+        return parent::ValidateConfig($config);
+    }
+
+    protected function ValidateDaftSourceSubConfig(array $subConfig) : void
+    {
+        if ( ! isset($subConfig['cacheFile'], $subConfig['sources'])) {
             throw new InvalidArgumentException(sprintf('%s config not found!', DaftSource::class));
         } elseif ( ! is_string($subConfig['cacheFile'])) {
             throw new InvalidArgumentException(sprintf(self::ERROR_SOURCE_CONFIG, 'cacheFile'));
@@ -79,7 +88,5 @@ class HttpHandler extends Framework
         } elseif ( ! $this->FileIsUnderBasePath($subConfig['cacheFile'], false)) {
             throw new InvalidArgumentException(self::ERROR_ROUTER_CACHE_FILE_PATH);
         }
-
-        return parent::ValidateConfig($config);
     }
 }
