@@ -75,9 +75,6 @@ class HttpHandler extends Framework
             throw new InvalidArgumentException(sprintf(self::ERROR_SOURCE_CONFIG, 'cacheFile'));
         }
 
-        /**
-        * @var string $cacheFilename
-        */
         $cacheFilename = $subConfig['cacheFile'];
 
         if ( ! is_array($subConfig['sources'])) {
