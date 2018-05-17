@@ -73,13 +73,9 @@ class HttpHandler extends Framework
             throw new InvalidArgumentException(sprintf('%s config not found!', DaftSource::class));
         } elseif ( ! is_string($subConfig['cacheFile'])) {
             throw new InvalidArgumentException(sprintf(self::ERROR_SOURCE_CONFIG, 'cacheFile'));
-        }
-
-        $cacheFilename = $subConfig['cacheFile'];
-
-        if ( ! is_array($subConfig['sources'])) {
+        } elseif ( ! is_array($subConfig['sources'])) {
             throw new InvalidArgumentException(sprintf(self::ERROR_SOURCE_CONFIG, 'sources'));
-        } elseif ( ! $this->FileIsUnderBasePath($cacheFilename, false)) {
+        } elseif ( ! $this->FileIsUnderBasePath($subConfig['cacheFile'], false)) {
             throw new InvalidArgumentException(self::ERROR_ROUTER_CACHE_FILE_PATH);
         }
 
