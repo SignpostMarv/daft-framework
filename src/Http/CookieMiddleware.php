@@ -18,7 +18,7 @@ class CookieMiddleware implements DaftMiddleware
         Request $request,
         ? Response $response
     ) : ? Response {
-            $config = Framework::ObtainFrameworkForRequest($request)->ObtainConfig();
+        $config = Framework::ObtainFrameworkForRequest($request)->ObtainConfig();
         if (isset($response, $config[self::class])) {
             $config = (array) $config[self::class];
 
