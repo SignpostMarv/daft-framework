@@ -63,13 +63,14 @@ class HttpHandler extends Framework
 
     protected function ValidateConfig(array $config) : array
     {
-        if ( ! isset($config[DaftSource::class])) {
+        /**
+        * @var array|null
+        */
+        $subConfig = $config[DaftSource::class] ?? null;
+
+        if ( ! is_array($subConfig)) {
             throw new InvalidArgumentException(sprintf('%s config not found!', DaftSource::class));
-        }
-
-        $subConfig = (array) $config[DaftSource::class];
-
-        if ( ! isset($subConfig['cacheFile'], $subConfig['sources'])) {
+        } elseif ( ! isset($subConfig['cacheFile'], $subConfig['sources'])) {
             throw new InvalidArgumentException(sprintf('%s config not found!', DaftSource::class));
         } elseif ( ! is_string($subConfig['cacheFile'])) {
             throw new InvalidArgumentException(sprintf(self::ERROR_SOURCE_CONFIG, 'cacheFile'));
