@@ -68,7 +68,7 @@ class HttpHandler extends Framework
         */
         $subConfig = $config[DaftSource::class] ?? null;
 
-        if ( ! is_array($subConfig)) {
+        if ( ! is_array($subConfig) || ! isset($subConfig['cacheFile'], $subConfig['sources'])) {
             throw new InvalidArgumentException(sprintf('%s config not found!', DaftSource::class));
         }
 
@@ -79,9 +79,7 @@ class HttpHandler extends Framework
 
     protected function ValidateDaftSourceSubConfig(array $subConfig) : void
     {
-        if ( ! isset($subConfig['cacheFile'], $subConfig['sources'])) {
-            throw new InvalidArgumentException(sprintf('%s config not found!', DaftSource::class));
-        } elseif ( ! is_string($subConfig['cacheFile'])) {
+        if ( ! is_string($subConfig['cacheFile'])) {
             throw new InvalidArgumentException(sprintf(self::ERROR_SOURCE_CONFIG, 'cacheFile'));
         } elseif ( ! is_array($subConfig['sources'])) {
             throw new InvalidArgumentException(sprintf(self::ERROR_SOURCE_CONFIG, 'sources'));
