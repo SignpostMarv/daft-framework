@@ -20,7 +20,7 @@ class FastRouteCacheCommand extends Command
 
     public function execute(InputInterface $input, OutputInterface $output) : int
     {
-        $cacheFilename = static::tempnamCheck(static::tempnam(), $output);
+        $cacheFilename = static::tempnamCheck($output);
 
         if ( ! is_string($cacheFilename)) {
             return 1;

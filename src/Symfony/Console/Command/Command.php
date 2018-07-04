@@ -23,11 +23,9 @@ abstract class Command extends Base
     }
 
     /**
-    * @param string|false $tempnam
-    *
     * @return string|false
     */
-    final protected static function tempnamCheck($tempnam, OutputInterface $output)
+    final protected static function tempnamCheck(OutputInterface $output)
     {
         $tempnam = static::tempnam();
 
