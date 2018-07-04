@@ -39,38 +39,6 @@ class HttpHandlerTest extends Base
         ];
     }
 
-    protected function prepDataProviderVerifyHandlerGoodArgs(
-        string $baseUrl,
-        array $config,
-        array $testArgs
-    ) : array {
-        list($sources, $prefix, $expectedStatus, $expectedContent, $requestArgs) = $testArgs;
-
-        list($uri) = $requestArgs;
-
-        $parsed = parse_url($uri);
-
-        $baseUrl = $parsed['scheme'] . '://' . $parsed['host'];
-
-        if (isset($parsed['port'])) {
-            $baseUrl .= ':' . $parsed['port'];
-        }
-
-        $baseUrl .= '/' . $prefix;
-
-        $config[DaftSource::class]['sources'] = $sources;
-        $config[DaftSource::class]['cacheFile'] = (
-            __DIR__ .
-            '/fixtures/http-kernel.fast-route.cache'
-        );
-
-        if (is_file($config[DaftSource::class]['cacheFile'])) {
-            unlink($config[DaftSource::class]['cacheFile']);
-        }
-
-        return [$baseUrl, $config, $testArgs];
-    }
-
     public function DataProviderHttpHandlerHandle() : Generator
     {
         foreach ($this->DataProviderHttpHandlerInstances() as $args) {
@@ -181,5 +149,37 @@ class HttpHandlerTest extends Base
             $config
         );
         Utilities::ConfigureFrameworkInstance($this, $instance, $args1);
+    }
+
+    protected function prepDataProviderVerifyHandlerGoodArgs(
+        string $baseUrl,
+        array $config,
+        array $testArgs
+    ) : array {
+        list($sources, $prefix, $expectedStatus, $expectedContent, $requestArgs) = $testArgs;
+
+        list($uri) = $requestArgs;
+
+        $parsed = parse_url($uri);
+
+        $baseUrl = $parsed['scheme'] . '://' . $parsed['host'];
+
+        if (isset($parsed['port'])) {
+            $baseUrl .= ':' . $parsed['port'];
+        }
+
+        $baseUrl .= '/' . $prefix;
+
+        $config[DaftSource::class]['sources'] = $sources;
+        $config[DaftSource::class]['cacheFile'] = (
+            __DIR__ .
+            '/fixtures/http-kernel.fast-route.cache'
+        );
+
+        if (is_file($config[DaftSource::class]['cacheFile'])) {
+            unlink($config[DaftSource::class]['cacheFile']);
+        }
+
+        return [$baseUrl, $config, $testArgs];
     }
 }
