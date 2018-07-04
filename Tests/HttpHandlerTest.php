@@ -44,13 +44,7 @@ class HttpHandlerTest extends Base
         array $config,
         array $testArgs
     ) : array {
-        list(
-            $sources,
-            $prefix,
-            $expectedStatus,
-            $expectedContent,
-            $requestArgs
-        ) = $testArgs;
+        list($sources, $prefix, $expectedStatus, $expectedContent, $requestArgs) = $testArgs;
 
         list($uri) = $requestArgs;
 
