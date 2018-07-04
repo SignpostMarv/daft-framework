@@ -333,6 +333,8 @@ class ImplementationTest extends Base
         $instance = $this->ObtainFrameworkInstance($implementation, ...$implementationArgs);
         $this->ConfigureFrameworkInstance($instance, $postConstructionCalls);
 
+        $instance->ObtainDatabaseConnection();
+
         $this->expectException(BadMethodCallException::class);
         $this->expectExceptionMessage('Database Connection already made!');
 
