@@ -15,10 +15,10 @@ use SignpostMarv\DaftFramework\Symfony\Console\Application;
 use SignpostMarv\DaftFramework\Symfony\Console\Command\Command;
 use SignpostMarv\DaftFramework\Symfony\Console\Command\FastRouteCacheCommand;
 use SignpostMarv\DaftFramework\Symfony\Console\DaftConsoleSource;
+use SignpostMarv\DaftFramework\Tests\fixtures\Console\Command\ExecuteCoverageCommand;
 use SignpostMarv\DaftFramework\Tests\fixtures\Console\Command\TestCommand;
 use SignpostMarv\DaftRouter\DaftSource;
 use SignpostMarv\DaftRouter\Tests\Fixtures\Config;
-use SignpostMarv\DaftFramework\Tests\fixtures\Console\Command\ExecuteCoverageCommand;
 use Symfony\Component\Console\Command\Command as BaseCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Tester\CommandTester;
@@ -286,7 +286,6 @@ class ApplicationTest extends Base
     */
     public function testExecuteCoverageCommand(Application $application) : void
     {
-
         $command = $application->find('test:execute-coverage');
 
         static::assertInstanceOf(ExecuteCoverageCommand::class, $command);
