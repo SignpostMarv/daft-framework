@@ -24,10 +24,16 @@ use Symfony\Component\Console\Tester\CommandTester;
 
 class ApplicationTest extends Base
 {
+    const NUM_EXPECTED_ARGS = 6;
+
     final public function DataProviderConsoleApplicationConfigFiltered() : Generator
     {
         foreach ($this->DataProviderConsoleApplicationConfig() as $args) {
-            if (6 === count($args) && is_string($args[0] ?? null) && is_file($args[0])) {
+            if (
+                self::NUM_EXPECTED_ARGS === count($args) &&
+                is_string($args[0] ?? null) &&
+                is_file($args[0])
+            ) {
                 $configFile = array_shift($args);
                 end($args);
                 $args[key($args)][] = (array) include($configFile);

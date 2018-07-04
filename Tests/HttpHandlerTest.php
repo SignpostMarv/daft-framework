@@ -39,12 +39,11 @@ class HttpHandlerTest extends Base
         ];
     }
 
-    public function DataProviderHttpHandlerHandle() : Generator
-    {
-        foreach ($this->DataProviderHttpHandlerInstances() as $args) {
-            list($implementation, $postConstructionCalls, $baseUrl, $basePath, $config) = $args;
-
-            foreach ($this->DataProviderVerifyHandlerGood() as $testArgs) {
+    protected function prepDataProviderVerifyHandlerGoodArgs(
+        string $baseUrl,
+        array $config,
+        array $testArgs
+    ) : array {
                 list(
                     $sources,
                     $prefix,
@@ -74,6 +73,28 @@ class HttpHandlerTest extends Base
                 if (is_file($config[DaftSource::class]['cacheFile'])) {
                     unlink($config[DaftSource::class]['cacheFile']);
                 }
+
+        return [$baseUrl, $config, $testArgs];
+    }
+
+    public function DataProviderHttpHandlerHandle() : Generator
+    {
+        foreach ($this->DataProviderHttpHandlerInstances() as $args) {
+            list($implementation, $postConstructionCalls, $baseUrl, $basePath, $config) = $args;
+
+            foreach ($this->DataProviderVerifyHandlerGood() as $testArgs) {
+                list($baseUrl, $config, $testArgs) = $this->prepDataProviderVerifyHandlerGoodArgs(
+                    $baseUrl,
+                    $config,
+                    $testArgs
+                );
+                list(
+                    $sources,
+                    $prefix,
+                    $expectedStatus,
+                    $expectedContent,
+                    $requestArgs
+                ) = $testArgs;
 
                 $instance = Utilities::ObtainHttpHandlerInstance(
                     $this,
@@ -114,6 +135,11 @@ class HttpHandlerTest extends Base
             list($implementation, $postConstructionCalls, $baseUrl, $basePath, $config) = $args;
 
             foreach ($this->DataProviderVerifyHandlerGood() as $testArgs) {
+                list($baseUrl, $config, $testArgs) = $this->prepDataProviderVerifyHandlerGoodArgs(
+                    $baseUrl,
+                    $config,
+                    $testArgs
+                );
                 list(
                     $sources,
                     $prefix,
@@ -121,28 +147,6 @@ class HttpHandlerTest extends Base
                     $expectedContent,
                     $requestArgs
                 ) = $testArgs;
-
-                list($uri) = $requestArgs;
-
-                $parsed = parse_url($uri);
-
-                $baseUrl = $parsed['scheme'] . '://' . $parsed['host'];
-
-                if (isset($parsed['port'])) {
-                    $baseUrl .= ':' . $parsed['port'];
-                }
-
-                $baseUrl .= '/' . $prefix;
-
-                $config[DaftSource::class]['sources'] = $sources;
-                $config[DaftSource::class]['cacheFile'] = (
-                    __DIR__ .
-                    '/fixtures/http-kernel.fast-route.cache'
-                );
-
-                if (is_file($config[DaftSource::class]['cacheFile'])) {
-                    unlink($config[DaftSource::class]['cacheFile']);
-                }
 
                 foreach (
                     [
