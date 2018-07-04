@@ -44,35 +44,35 @@ class HttpHandlerTest extends Base
         array $config,
         array $testArgs
     ) : array {
-                list(
-                    $sources,
-                    $prefix,
-                    $expectedStatus,
-                    $expectedContent,
-                    $requestArgs
-                ) = $testArgs;
+        list(
+            $sources,
+            $prefix,
+            $expectedStatus,
+            $expectedContent,
+            $requestArgs
+        ) = $testArgs;
 
-                list($uri) = $requestArgs;
+        list($uri) = $requestArgs;
 
-                $parsed = parse_url($uri);
+        $parsed = parse_url($uri);
 
-                $baseUrl = $parsed['scheme'] . '://' . $parsed['host'];
+        $baseUrl = $parsed['scheme'] . '://' . $parsed['host'];
 
-                if (isset($parsed['port'])) {
-                    $baseUrl .= ':' . $parsed['port'];
-                }
+        if (isset($parsed['port'])) {
+            $baseUrl .= ':' . $parsed['port'];
+        }
 
-                $baseUrl .= '/' . $prefix;
+        $baseUrl .= '/' . $prefix;
 
-                $config[DaftSource::class]['sources'] = $sources;
-                $config[DaftSource::class]['cacheFile'] = (
-                    __DIR__ .
-                    '/fixtures/http-kernel.fast-route.cache'
-                );
+        $config[DaftSource::class]['sources'] = $sources;
+        $config[DaftSource::class]['cacheFile'] = (
+            __DIR__ .
+            '/fixtures/http-kernel.fast-route.cache'
+        );
 
-                if (is_file($config[DaftSource::class]['cacheFile'])) {
-                    unlink($config[DaftSource::class]['cacheFile']);
-                }
+        if (is_file($config[DaftSource::class]['cacheFile'])) {
+            unlink($config[DaftSource::class]['cacheFile']);
+        }
 
         return [$baseUrl, $config, $testArgs];
     }
