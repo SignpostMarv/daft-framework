@@ -9,7 +9,6 @@ namespace SignpostMarv\DaftFramework\Tests;
 use BadMethodCallException;
 use Generator;
 use InvalidArgumentException;
-use ParagonIE\EasyDB\EasyDB;
 use PHPUnit\Framework\TestCase as Base;
 use SignpostMarv\DaftFramework\Framework;
 use SignpostMarv\DaftFramework\HttpHandler;
