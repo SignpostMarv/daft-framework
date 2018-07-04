@@ -13,12 +13,15 @@ use SignpostMarv\DaftFramework\HttpHandler;
 
 class Utilities
 {
+    /**
+    * @param mixed ...$implementationArgs
+    */
     public static function ObtainFrameworkInstance(
         TestCase $testCase,
         string $implementation,
         ...$implementationArgs
     ) : Framework {
-        $testCase->assertTrue(
+        $testCase::assertTrue(
             is_a($implementation, Framework::class, true),
             sprintf(
                 'Argument %u passed to %s must be an implementation of %s',
@@ -31,12 +34,15 @@ class Utilities
         return new $implementation(...$implementationArgs);
     }
 
+    /**
+    * @param mixed ...$implementationArgs
+    */
     public static function ObtainHttpHandlerInstance(
         TestCase $testCase,
         string $implementation,
         ...$implementationArgs
     ) : HttpHandler {
-        $testCase->assertTrue(
+        $testCase::assertTrue(
             is_a($implementation, HttpHandler::class, true),
             sprintf(
                 'Argument %u passed to %s must be an implementation of %s',
@@ -67,7 +73,7 @@ class Utilities
             $reflector = new ReflectionClass($instance);
 
             foreach (array_keys($postConstructionCalls) as $method) {
-                $testCase->assertTrue(method_exists($instance, $method), sprintf(
+                $testCase::assertTrue(method_exists($instance, $method), sprintf(
                     'Argument %u passed to %s must contain keys referring to methods on %s',
                     2,
                     __METHOD__,

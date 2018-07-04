@@ -104,8 +104,8 @@ class HttpHandlerTest extends Base
     ) : void {
         $response = $instance->handle($request);
 
-        $this->assertSame($expectedStatus, $response->getStatusCode());
-        $this->assertSame($expectedContent, $response->getContent());
+        static::assertSame($expectedStatus, $response->getStatusCode());
+        static::assertSame($expectedContent, $response->getContent());
     }
 
     public function DataProviderTestDroppedConfigProperty() : Generator

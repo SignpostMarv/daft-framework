@@ -21,6 +21,13 @@ class FastRouteCacheCommand extends Command
     public function execute(InputInterface $input, OutputInterface $output) : int
     {
         $cacheFilename = tempnam(sys_get_temp_dir(), static::class);
+
+        if ( ! is_string($cacheFilename)) {
+            $output->writeln('could not get temporary filename!');
+
+            return 1;
+        }
+
         unlink($cacheFilename);
 
         $cacheFilename .= '.cache';
@@ -32,7 +39,7 @@ class FastRouteCacheCommand extends Command
 
         Compiler::ObtainDispatcher(['cacheFile' => $cacheFilename], ...$sources);
 
-        $output->write(file_get_contents($cacheFilename));
+        $output->write(file_get_contents($cacheFilename) ?: 'false');
 
         unlink($cacheFilename);
 

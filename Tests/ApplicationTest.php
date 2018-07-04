@@ -40,7 +40,7 @@ class ApplicationTest extends Base
     final public function DataProviderDaftConsoleCommands() : Generator
     {
         foreach ($this->DataProviderConsoleApplicationConfigFiltered() as $args) {
-            $this->assertTrue(is_a($args[3], Framework::class, true));
+            static::assertTrue(is_a($args[3], Framework::class, true));
 
             /**
             * @var Framework $framework
@@ -70,27 +70,27 @@ class ApplicationTest extends Base
         string $frameworkImplementation,
         array $frameworkArgs
     ) : void {
-        $this->assertTrue(is_a($frameworkImplementation, Framework::class, true));
+        static::assertTrue(is_a($frameworkImplementation, Framework::class, true));
 
         /**
         * @var Framework $framework
         */
         $framework = new $frameworkImplementation(...$frameworkArgs);
 
-        $this->assertSame($frameworkArgs[0], $framework->ObtainBaseUrl());
-        $this->assertSame($frameworkArgs[1], $framework->ObtainBasePath());
-        $this->assertSame($frameworkArgs[2], $framework->ObtainConfig());
+        static::assertSame($frameworkArgs[0], $framework->ObtainBaseUrl());
+        static::assertSame($frameworkArgs[1], $framework->ObtainBasePath());
+        static::assertSame($frameworkArgs[2], $framework->ObtainConfig());
 
         $application = Application::CollectApplicationWithCommands($name, $version, $framework);
 
-        $this->assertSame($name, $application->getName());
-        $this->assertSame($version, $application->getVersion());
+        static::assertSame($name, $application->getName());
+        static::assertSame($version, $application->getVersion());
 
         $commands = array_map('get_class', $application->all());
 
         foreach ($expectedCommandInstances as $expectedComamnd) {
-            $this->assertTrue(class_exists($expectedComamnd));
-            $this->assertContains($expectedComamnd, $commands);
+            static::assertTrue(class_exists($expectedComamnd));
+            static::assertContains($expectedComamnd, $commands);
         }
 
         $constructedApplication = new Application($name, $version);
@@ -102,14 +102,14 @@ class ApplicationTest extends Base
         $commands = array_map('get_class', $application->all());
 
         foreach ($expectedCommandInstances as $expectedComamnd) {
-            $this->assertTrue(class_exists($expectedComamnd));
-            $this->assertContains($expectedComamnd, $commands);
+            static::assertTrue(class_exists($expectedComamnd));
+            static::assertContains($expectedComamnd, $commands);
         }
 
         $failingApplication = new Application($name, $version);
 
-        $this->assertSame($name, $application->getName());
-        $this->assertSame($version, $application->getVersion());
+        static::assertSame($name, $application->getName());
+        static::assertSame($version, $application->getVersion());
 
         foreach ($expectedCommandInstances as $expectedComamnd) {
             /**
@@ -155,19 +155,19 @@ class ApplicationTest extends Base
     */
     public function testCommandFrameworkAttachment(Framework $framework, Command $command) : void
     {
-        $this->assertFalse($command->CheckIfUsingFrameworkInstance($framework));
+        static::assertFalse($command->CheckIfUsingFrameworkInstance($framework));
 
         $command->AttachDaftFramework($framework);
 
-        $this->assertTrue($command->CheckIfUsingFrameworkInstance($framework));
+        static::assertTrue($command->CheckIfUsingFrameworkInstance($framework));
 
-        $this->assertSame($framework, $command->DetachDaftFramework());
+        static::assertSame($framework, $command->DetachDaftFramework());
 
-        $this->assertFalse($command->CheckIfUsingFrameworkInstance($framework));
+        static::assertFalse($command->CheckIfUsingFrameworkInstance($framework));
 
         $command->AttachDaftFramework($framework);
 
-        $this->assertTrue($command->CheckIfUsingFrameworkInstance($framework));
+        static::assertTrue($command->CheckIfUsingFrameworkInstance($framework));
 
         $this->expectException(BadMethodCallException::class);
         $this->expectExceptionMessage(
@@ -223,12 +223,12 @@ class ApplicationTest extends Base
 
         $ref->invoke($command);
 
-        $this->assertSame(
+        static::assertSame(
             'Update the cache used by the daft framework router',
             $command->getDescription()
         );
 
-        $this->assertSame(
+        static::assertSame(
             [
                 'sources' => [
                     'name' => 'sources',
@@ -256,7 +256,7 @@ class ApplicationTest extends Base
 
         $command = $application->find('daft-framework:router:update-cache');
 
-        $this->assertInstanceOf(FastRouteCacheCommand::class, $command);
+        static::assertInstanceOf(FastRouteCacheCommand::class, $command);
 
         $commandTester = new CommandTester($command);
 
@@ -271,7 +271,7 @@ class ApplicationTest extends Base
             ]
         );
 
-        $this->assertSame($expectedOutput, $commandTester->getDisplay());
+        static::assertSame($expectedOutput, $commandTester->getDisplay());
     }
 
     protected function DataProviderConsoleApplicationConfig() : Generator

@@ -18,6 +18,9 @@ class Application extends Base
 {
     use AttachDaftFramework;
 
+    /**
+    * @return BaseCommand|null
+    */
     public function add(BaseCommand $command)
     {
         return $this->addStrict($command);

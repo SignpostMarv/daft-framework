@@ -108,9 +108,15 @@ class Framework
 
     public function FileIsUnderBasePath(string $filename, bool $requireFileExists = true) : bool
     {
+        $realpath = realpath($filename);
+
         return
             ( ! $requireFileExists && ! file_exists($filename)) ||
-            (is_file($filename) && 0 === mb_strpos(realpath($filename), $this->basePath));
+            (
+                is_file($filename) &&
+                is_string($realpath) &&
+                0 === mb_strpos($realpath, $this->basePath)
+            );
     }
 
     public static function PairWithRequest(self $framework, Request $request) : void

@@ -19,8 +19,11 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ImplementationTest extends Base
 {
-    public function tearDown()
+    public function tearDown() : void
     {
+        /**
+        * @var string $cleanup
+        */
         foreach (
             array_filter(
                 array_filter([
@@ -242,6 +245,7 @@ class ImplementationTest extends Base
 
     /**
     * @param array<string, array<int, mixed>> $postConstructionCalls
+    * @param mixed ...$implementationArgs
     *
     * @dataProvider DataProviderGoodSources
     */
@@ -257,19 +261,16 @@ class ImplementationTest extends Base
             $implementationArgs
         );
 
-        $this->assertSame($baseUrl, $instance->ObtainBaseUrl());
-        $this->assertSame($basePath, $instance->ObtainBasePath());
-        $this->assertSame($config, $instance->ObtainConfig());
-
-        if (isset($postConstructionCalls['ConfigureDatabaseConnection'])) {
-            $this->assertInstanceOf(EasyDB::class, $instance->ObtainDatabaseConnection());
-        }
+        static::assertSame($baseUrl, $instance->ObtainBaseUrl());
+        static::assertSame($basePath, $instance->ObtainBasePath());
+        static::assertSame($config, $instance->ObtainConfig());
 
         return $instance;
     }
 
     /**
     * @param array<string, array<int, mixed>> $postConstructionCalls
+    * @param mixed ...$implementationArgs
     *
     * @dataProvider DataProviderBadSources
     *
@@ -297,6 +298,7 @@ class ImplementationTest extends Base
 
     /**
     * @param array<string, array<int, mixed>> $postConstructionCalls
+    * @param mixed ...$implementationArgs
     *
     * @dataProvider DataProviderGoodSourcesSansDatabaseConnection
     *
@@ -318,6 +320,7 @@ class ImplementationTest extends Base
 
     /**
     * @param array<string, array<int, mixed>> $postConstructionCalls
+    * @param mixed ...$implementationArgs
     *
     * @dataProvider DataProviderGoodSourcesWithDatabaseConnection
     *
@@ -346,9 +349,9 @@ class ImplementationTest extends Base
     */
     public function testUnpairedFrameworksFail(string $implementation) : void
     {
-        $this->assertTrue(is_a($implementation, Framework::class, true));
+        static::assertTrue(is_a($implementation, Framework::class, true));
 
-        $this->assertFalse(Request::createFromGlobals() === Request::createFromGlobals());
+        static::assertFalse(Request::createFromGlobals() === Request::createFromGlobals());
 
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage(
@@ -360,6 +363,7 @@ class ImplementationTest extends Base
 
     /**
     * @param array<string, array<int, mixed>> $postConstructionCalls
+    * @param mixed ...$implementationArgs
     *
     * @dataProvider DataProviderGoodSources
     *
@@ -391,6 +395,7 @@ class ImplementationTest extends Base
 
     /**
     * @param array<string, array<int, mixed>> $postConstructionCalls
+    * @param mixed ...$implementationArgs
     *
     * @dataProvider DataProviderGoodSources
     *
@@ -414,7 +419,7 @@ class ImplementationTest extends Base
         $implementation::DisposeOfRequestReferences($requestA);
         $implementation::PairWithRequest($instance, $requestB);
 
-        $this->assertSame($instance, $implementation::ObtainFrameworkForRequest($requestB));
+        static::assertSame($instance, $implementation::ObtainFrameworkForRequest($requestB));
 
         $implementation::DisposeOfRequestReferences($requestB);
 
@@ -433,6 +438,9 @@ class ImplementationTest extends Base
         return [$baseUrl, $basePath, $config];
     }
 
+    /**
+    * @param mixed ...$implementationArgs
+    */
     protected function PrepareReferenceDisposalTest(
         string $implementation,
         array $postConstructionCalls,
@@ -452,12 +460,15 @@ class ImplementationTest extends Base
         $implementation::PairWithRequest($instance, $requestA);
         $implementation::PairWithRequest($instance, $requestB);
 
-        $this->assertSame($instance, $implementation::ObtainFrameworkForRequest($requestA));
-        $this->assertSame($instance, $implementation::ObtainFrameworkForRequest($requestB));
+        static::assertSame($instance, $implementation::ObtainFrameworkForRequest($requestA));
+        static::assertSame($instance, $implementation::ObtainFrameworkForRequest($requestB));
 
         return [$instance, $requestA, $requestB];
     }
 
+    /**
+    * @param mixed ...$implementationArgs
+    */
     protected function ObtainFrameworkInstance(
         string $implementation,
         ...$implementationArgs

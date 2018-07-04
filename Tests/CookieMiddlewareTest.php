@@ -79,20 +79,20 @@ class CookieMiddlewareTest extends Base
             }
         ));
 
-        $this->assertInstanceOf(Cookie::class, $cookie);
+        static::assertInstanceOf(Cookie::class, $cookie);
 
         if (is_string($secure) && is_string($http) && is_string($sameSite)) {
-            $this->assertSame(
+            static::assertSame(
                 '1' === $secure,
                 $cookie->isSecure(),
                 'Secure must match without middleware'
             );
-            $this->assertSame(
+            static::assertSame(
                 '1' === $http,
                 $cookie->isHttpOnly(),
                 'HttpOnly must match without middleware'
             );
-            $this->assertSame(
+            static::assertSame(
                 $sameSite,
                 $cookie->getSameSite(),
                 'SameSite must match without middleware'
@@ -124,20 +124,20 @@ class CookieMiddlewareTest extends Base
             }
         ));
 
-        $this->assertInstanceOf(Cookie::class, $cookie);
+        static::assertInstanceOf(Cookie::class, $cookie);
 
         if (is_string($secure) && is_string($http) && is_string($sameSite)) {
-            $this->assertSame(
+            static::assertSame(
                 $config[CookieMiddleware::class]['secure'],
                 $cookie->isSecure(),
                 'Secure must match flipped value with middleware'
             );
-            $this->assertSame(
+            static::assertSame(
                 $config[CookieMiddleware::class]['httpOnly'],
                 $cookie->isHttpOnly(),
                 'HttpOnly must match flipped value with middleware'
             );
-            $this->assertSame(
+            static::assertSame(
                 $config[CookieMiddleware::class]['sameSite'],
                 $cookie->getSameSite(),
                 'SameSite must match flipped value with middleware'
