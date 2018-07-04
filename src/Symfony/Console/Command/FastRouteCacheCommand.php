@@ -20,11 +20,9 @@ class FastRouteCacheCommand extends Command
 
     public function execute(InputInterface $input, OutputInterface $output) : int
     {
-        $cacheFilename = tempnam(sys_get_temp_dir(), static::class);
+        $cacheFilename = static::tempnamCheck(static::tempnam(), $output);
 
         if ( ! is_string($cacheFilename)) {
-            $output->writeln('could not get temporary filename!');
-
             return 1;
         }
 

@@ -18,6 +18,7 @@ use SignpostMarv\DaftFramework\Symfony\Console\DaftConsoleSource;
 use SignpostMarv\DaftFramework\Tests\fixtures\Console\Command\TestCommand;
 use SignpostMarv\DaftRouter\DaftSource;
 use SignpostMarv\DaftRouter\Tests\Fixtures\Config;
+use SignpostMarv\DaftFramework\Tests\fixtures\Console\Command\ExecuteCoverageCommand;
 use Symfony\Component\Console\Command\Command as BaseCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Tester\CommandTester;
@@ -278,6 +279,36 @@ class ApplicationTest extends Base
         );
 
         static::assertSame($expectedOutput, $commandTester->getDisplay());
+    }
+
+    /**
+    * @dataProvider DataProviderFastRouteCacheComamnd
+    */
+    public function testExecuteCoverageCommand(Application $application) : void
+    {
+
+        $command = $application->find('test:execute-coverage');
+
+        static::assertInstanceOf(ExecuteCoverageCommand::class, $command);
+
+        $commandTester = new CommandTester($command);
+
+        $result = $commandTester->execute(
+            [
+                'sources' => [
+                    Config::class,
+                ],
+            ],
+            [
+                'command' => $command->getName(),
+            ]
+        );
+
+        static::assertSame(1, $result);
+        static::assertSame(
+            ('could not get temporary filename!' . PHP_EOL),
+            $commandTester->getDisplay()
+        );
     }
 
     protected function DataProviderConsoleApplicationConfig() : Generator
