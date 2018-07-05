@@ -10,10 +10,10 @@ use InvalidArgumentException;
 use SignpostMarv\DaftRouter\DaftSource;
 use SignpostMarv\DaftRouter\Router\Compiler;
 use Symfony\Component\EventDispatcher\EventDispatcher;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
-use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use Symfony\Component\HttpKernel\KernelEvents;
 
 class HttpHandler extends Framework
 {
