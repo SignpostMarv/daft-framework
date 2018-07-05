@@ -9,6 +9,9 @@ namespace SignpostMarv\DaftFramework;
 use InvalidArgumentException;
 use SignpostMarv\DaftRouter\DaftSource;
 use SignpostMarv\DaftRouter\Router\Compiler;
+use Symfony\Component\EventDispatcher\EventDispatcher;
+use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -59,6 +62,15 @@ class HttpHandler extends Framework
             $request,
             (string) parse_url($this->ObtainBaseUrl(), PHP_URL_PATH)
         );
+    }
+
+    public function AttachToEventDispatcher(EventDispatcher $dispatcher) : void
+    {
+        $dispatcher->addListener(KernelEvents::REQUEST, function (GetResponseEvent $e) : void {
+            if ( ! $e->hasResponse()) {
+                $e->setResponse($this->handle($e->getRequest()));
+            }
+        });
     }
 
     protected function ValidateConfig(array $config) : array

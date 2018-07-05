@@ -12,6 +12,11 @@ use SignpostMarv\DaftFramework\HttpHandler;
 use SignpostMarv\DaftRouter\DaftSource;
 use SignpostMarv\DaftRouter\Tests\ImplementationTest as Base;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\EventDispatcher\EventDispatcher;
+use Symfony\Component\HttpKernel\Controller\ArgumentResolver;
+use Symfony\Component\HttpKernel\Controller\ControllerResolver;
+use Symfony\Component\HttpKernel\HttpKernel;
 
 class HttpHandlerTest extends Base
 {
@@ -149,6 +154,35 @@ class HttpHandlerTest extends Base
             $config
         );
         Utilities::ConfigureFrameworkInstance($this, $instance, $args1);
+    }
+
+    /**
+    * @depends testHandlerGoodOnHttpHandler
+    *
+    * @dataProvider DataProviderHttpHandlerHandle
+    */
+    public function testHandlerGoodWithHttpKernel(
+        HttpHandler $instance,
+        Request $request,
+        int $expectedStatus,
+        string $expectedContent
+    ) : void {
+        $dispatcher = new EventDispatcher();
+        $instance->AttachToEventDispatcher($dispatcher);
+
+        $kernel = new HttpKernel(
+            $dispatcher,
+            new ControllerResolver(),
+            new RequestStack(),
+            new ArgumentResolver()
+        );
+
+        $response = $kernel->handle($request);
+
+        $kernel->terminate($request, $response);
+
+        static::assertSame($expectedStatus, $response->getStatusCode());
+        static::assertSame($expectedContent, $response->getContent());
     }
 
     protected function prepDataProviderVerifyHandlerGoodArgs(
