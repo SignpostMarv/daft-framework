@@ -55,15 +55,18 @@ class Framework
 
     public static function NormaliseUrl(string $baseUrl) : string
     {
-        /**
-        * @var array<string, string> $parsed
-        */
-        $parsed = parse_url($baseUrl);
+        $parsed = (array) parse_url($baseUrl);
 
-        $baseUrl = $parsed['scheme'] . '://' . $parsed['host'];
+        if ( ! isset($parsed['scheme'], $parsed['host'], $parsed['path'])) {
+            throw new InvalidArgumentException(
+                'Base URL must have at least a scheme, host & path in order to be normalised!'
+            );
+        }
+
+        $baseUrl = (string) $parsed['scheme'] . '://' . (string) $parsed['host'];
 
         if (isset($parsed['port'])) {
-            $baseUrl .= ':' . $parsed['port'];
+            $baseUrl .= ':' . (string) $parsed['port'];
         }
 
         return $baseUrl . str_replace('//', '/', $parsed['path']);
