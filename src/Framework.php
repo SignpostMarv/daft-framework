@@ -69,7 +69,7 @@ class Framework
             $baseUrl .= ':' . (string) $parsed['port'];
         }
 
-        return $baseUrl . str_replace('//', '/', $parsed['path']);
+        return $baseUrl . str_replace('//', '/', (string) $parsed['path']);
     }
 
     public function ObtainDatabaseConnection() : EasyDB
