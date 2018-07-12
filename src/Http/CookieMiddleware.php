@@ -7,8 +7,8 @@ declare(strict_types=1);
 namespace SignpostMarv\DaftFramework\Http;
 
 use SignpostMarv\DaftFramework\Framework;
-use SignpostMarv\DaftRouter\DaftResponseModifier;
 use SignpostMarv\DaftRouter\DaftRequestInterceptor;
+use SignpostMarv\DaftRouter\DaftResponseModifier;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -32,26 +32,6 @@ class CookieMiddleware implements DaftRequestInterceptor, DaftResponseModifier
         ? Response $response
     ) : ? Response {
         return static::OmNomNom($request, $response);
-    }
-
-    protected static function OmNomNom(Request $request, ? Response $response) : ? Response
-    {
-        $config = Framework::ObtainFrameworkForRequest($request)->ObtainConfig();
-        if (isset($response, $config[self::class])) {
-            $config = (array) $config[self::class];
-
-            /**
-            * @var string|null $sameSite
-            */
-            $sameSite = $config['sameSite'] ?? null;
-            $sameSite = is_string($sameSite) ? $sameSite : null;
-            $isSecure = (bool) ($config['secure'] ?? null);
-            $isHttpOnly = (bool) ($config['httpOnly'] ?? null);
-
-            self::PerhapsReconfigureResponseCookies($response, $isSecure, $isHttpOnly, $sameSite);
-        }
-
-        return $response;
     }
 
     public static function DaftRouterRoutePrefixRequirements() : array
@@ -122,5 +102,25 @@ class CookieMiddleware implements DaftRequestInterceptor, DaftResponseModifier
             $cookie->isRaw(),
             $configSameSite
         ));
+    }
+
+    protected static function OmNomNom(Request $request, ? Response $response) : ? Response
+    {
+        $config = Framework::ObtainFrameworkForRequest($request)->ObtainConfig();
+        if (isset($response, $config[self::class])) {
+            $config = (array) $config[self::class];
+
+            /**
+            * @var string|null $sameSite
+            */
+            $sameSite = $config['sameSite'] ?? null;
+            $sameSite = is_string($sameSite) ? $sameSite : null;
+            $isSecure = (bool) ($config['secure'] ?? null);
+            $isHttpOnly = (bool) ($config['httpOnly'] ?? null);
+
+            self::PerhapsReconfigureResponseCookies($response, $isSecure, $isHttpOnly, $sameSite);
+        }
+
+        return $response;
     }
 }
