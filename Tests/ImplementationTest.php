@@ -432,6 +432,19 @@ class ImplementationTest extends Base
         $implementation::ObtainFrameworkForRequest($requestB);
     }
 
+    /**
+    * @dataProvider DataProviderGoodSources
+    */
+    public function testNormaliseUrlFails(string $implementation) : void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage(
+            'Base URL must have at least a scheme, host & path in order to be normalised!'
+        );
+
+        $implementation::NormaliseUrl('');
+    }
+
     protected function extractDefaultFrameworkArgs(array $implementationArgs) : array
     {
         list($baseUrl, $basePath, $config) = $implementationArgs;
