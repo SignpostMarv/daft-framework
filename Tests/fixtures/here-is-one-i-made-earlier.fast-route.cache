@@ -6,11 +6,18 @@
       '/' => 
       array (
         0 => 'SignpostMarv\\DaftRouter\\Tests\\Fixtures\\NotLoggedIn',
-        1 => 'SignpostMarv\\DaftRouter\\Tests\\Fixtures\\Home',
+        1 => 'SignpostMarv\\DaftRouter\\Tests\\Fixtures\\AppendHeader',
+        2 => 'SignpostMarv\\DaftRouter\\Tests\\Fixtures\\Home',
       ),
       '/login' => 
       array (
         0 => 'SignpostMarv\\DaftRouter\\Tests\\Fixtures\\Login',
+      ),
+      '/admin/login' => 
+      array (
+        0 => 'SignpostMarv\\DaftRouter\\Tests\\Fixtures\\NotLoggedIn',
+        1 => 'SignpostMarv\\DaftRouter\\Tests\\Fixtures\\AppendHeader',
+        2 => 'SignpostMarv\\DaftRouter\\Tests\\Fixtures\\Login',
       ),
     ),
     'POST' => 
@@ -18,6 +25,12 @@
       '/login' => 
       array (
         0 => 'SignpostMarv\\DaftRouter\\Tests\\Fixtures\\Login',
+      ),
+      '/admin/login' => 
+      array (
+        0 => 'SignpostMarv\\DaftRouter\\Tests\\Fixtures\\NotLoggedIn',
+        1 => 'SignpostMarv\\DaftRouter\\Tests\\Fixtures\\AppendHeader',
+        2 => 'SignpostMarv\\DaftRouter\\Tests\\Fixtures\\Login',
       ),
     ),
   ),

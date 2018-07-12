@@ -7,17 +7,35 @@ declare(strict_types=1);
 namespace SignpostMarv\DaftFramework\Http;
 
 use SignpostMarv\DaftFramework\Framework;
-use SignpostMarv\DaftRouter\DaftMiddleware;
+use SignpostMarv\DaftRouter\DaftResponseModifier;
+use SignpostMarv\DaftRouter\DaftRequestInterceptor;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class CookieMiddleware implements DaftMiddleware
+class CookieMiddleware implements DaftRequestInterceptor, DaftResponseModifier
 {
+    public static function DaftRouterMiddlewareModifier(
+        Request $request,
+        Response $response
+    ) : Response {
+        /**
+        * @var Response $response
+        */
+        $response = static::OmNomNom($request, $response);
+
+        return $response;
+    }
+
     public static function DaftRouterMiddlewareHandler(
         Request $request,
         ? Response $response
     ) : ? Response {
+        return static::OmNomNom($request, $response);
+    }
+
+    protected static function OmNomNom(Request $request, ? Response $response) : ? Response
+    {
         $config = Framework::ObtainFrameworkForRequest($request)->ObtainConfig();
         if (isset($response, $config[self::class])) {
             $config = (array) $config[self::class];
@@ -34,6 +52,11 @@ class CookieMiddleware implements DaftMiddleware
         }
 
         return $response;
+    }
+
+    public static function DaftRouterRoutePrefixRequirements() : array
+    {
+        return [];
     }
 
     public static function DaftRouterRoutePrefixExceptions() : array

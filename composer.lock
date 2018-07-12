@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0a7b024427535c2cad8ead84205e32ab",
+    "content-hash": "9194e39addd143bc6eaf2cd63b13cdce",
     "packages": [
         {
             "name": "nikic/fast-route",
@@ -210,16 +210,16 @@
         },
         {
             "name": "signpostmarv/daft-router",
-            "version": "v0.2.7",
+            "version": "v0.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/SignpostMarv/daft-router.git",
-                "reference": "f8dcd779749d2bd96e90692f5806930bd3c68155"
+                "reference": "b28abfc9ec34034c004536a55d45edacc7c80b12"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SignpostMarv/daft-router/zipball/f8dcd779749d2bd96e90692f5806930bd3c68155",
-                "reference": "f8dcd779749d2bd96e90692f5806930bd3c68155",
+                "url": "https://api.github.com/repos/SignpostMarv/daft-router/zipball/b28abfc9ec34034c004536a55d45edacc7c80b12",
+                "reference": "b28abfc9ec34034c004536a55d45edacc7c80b12",
                 "shasum": ""
             },
             "require": {
@@ -230,7 +230,7 @@
                 "symfony/http-foundation": "^4.0"
             },
             "require-dev": {
-                "maglnet/composer-require-checker": "dev-master",
+                "maglnet/composer-require-checker": "^1.0",
                 "phpstan/phpstan": "^0.10.1",
                 "phpstan/phpstan-phpunit": "^0.10.0",
                 "phpstan/phpstan-strict-rules": "^0.10.0",
@@ -239,7 +239,7 @@
                 "roave/security-advisories": "dev-master",
                 "sebastian/phpcpd": "^4.0",
                 "signpostmarv/php-cs-fixer-config": "^0.5.1",
-                "vimeo/psalm": "dev-master"
+                "vimeo/psalm": "^2.0"
             },
             "type": "library",
             "autoload": {
@@ -258,7 +258,7 @@
                 }
             ],
             "description": "Daft Router",
-            "time": "2018-07-03T23:45:25+00:00"
+            "time": "2018-07-12T18:49:43+00:00"
         },
         {
             "name": "symfony/console",
