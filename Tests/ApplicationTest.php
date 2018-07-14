@@ -235,9 +235,7 @@ class ApplicationTest extends Base
             */
             $args42 = (array) ((array) $args[4])[2];
             $args42[DaftConsoleSource::class][] = FastRouteCacheCommand::class;
-            $args42[DaftSource::class]['sources'] = [
-                Config::class,
-            ];
+            $args42[DaftSource::class]['sources'] = [Config::class];
             $args4 = (array) $args[4];
             $args4[2] = $args42;
 

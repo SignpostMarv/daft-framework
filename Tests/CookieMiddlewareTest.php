@@ -58,11 +58,7 @@ class CookieMiddlewareTest extends Base
             $cookieConfig = [
                 'secure' => '1' !== $secure,
                 'httpOnly' => '1' !== $http,
-                'sameSite' => (
-                    ('lax' === $sameSite)
-                        ? 'strict'
-                        : 'lax'
-                ),
+                'sameSite' => (('lax' === $sameSite) ? 'strict' : 'lax'),
             ];
         }
 
@@ -127,10 +123,7 @@ class CookieMiddlewareTest extends Base
         */
         $sourceConfig = (array) $config[DaftSource::class];
 
-        $sourceConfig['sources'] = [
-            fixtures\Routes\CookieTest::class,
-            CookieMiddleware::class,
-        ];
+        $sourceConfig['sources'] = [fixtures\Routes\CookieTest::class, CookieMiddleware::class];
         $sourceConfig['cacheFile'] = (__DIR__ . '/fixtures/cookie-middleware.fast-route.cache');
 
         $config[DaftSource::class] = $sourceConfig;
@@ -217,13 +210,11 @@ class CookieMiddlewareTest extends Base
         yield from [
             [
                 HttpHandler::class,
-                [
-                ],
+                [],
                 'https://example.com/',
                 realpath(__DIR__ . '/fixtures'),
                 [
-                    DaftSource::class => [
-                    ],
+                    DaftSource::class => [],
                 ],
             ],
         ];
@@ -232,10 +223,7 @@ class CookieMiddlewareTest extends Base
     public function DataProviderCookieNameValue() : Generator
     {
         yield from [
-            [
-                'a',
-                'b',
-            ],
+            ['a', 'b'],
         ];
     }
 

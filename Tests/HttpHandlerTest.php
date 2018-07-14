@@ -25,14 +25,7 @@ class HttpHandlerTest extends Base
         yield from [
             [
                 HttpHandler::class,
-                [
-                    'ConfigureDatabaseConnection' => [
-                        'sqlite::memory:',
-                        null,
-                        null,
-                        [],
-                    ],
-                ],
+                ['ConfigureDatabaseConnection' => ['sqlite::memory:', null, null, []],],
                 'https://example.com/',
                 realpath(__DIR__ . '/fixtures'),
                 [
@@ -186,12 +179,7 @@ class HttpHandlerTest extends Base
                     $requestArgs
                 ) = (array) $testArgs;
 
-                foreach (
-                    [
-                        'cacheFile',
-                        'sources',
-                    ] as $omitSubProperty
-                ) {
+                foreach (['cacheFile', 'sources'] as $omitSubProperty) {
                     /**
                     * @var array<string, mixed> $modifiedConfig
                     */
@@ -298,10 +286,7 @@ class HttpHandlerTest extends Base
         $daftSourceConfig = (array) $config[DaftSource::class];
 
         $daftSourceConfig['sources'] = array_filter((array) $sources, 'is_string');
-        $daftSourceConfig['cacheFile'] = (
-            __DIR__ .
-            '/fixtures/http-kernel.fast-route.cache'
-        );
+        $daftSourceConfig['cacheFile'] = __DIR__ . '/fixtures/http-kernel.fast-route.cache';
 
         if (is_file($daftSourceConfig['cacheFile'])) {
             unlink((string) ($daftSourceConfig['cacheFile']));

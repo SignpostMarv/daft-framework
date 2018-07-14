@@ -32,10 +32,12 @@ class ImplementationTest extends Base
         /**
         * @var string[] $strings
         */
-        $strings =
-                array_filter([
-                    realpath(__DIR__ . '/fixtures/http-kernel.fast-route.cache'),
-                ], 'is_string');
+        $strings = array_filter(
+            [
+                realpath(__DIR__ . '/fixtures/http-kernel.fast-route.cache'),
+            ],
+            'is_string'
+        );
 
         /**
         * @var string $cleanup
@@ -496,10 +498,7 @@ class ImplementationTest extends Base
         Request $requestB,
         ...$implementationArgs
     ) : array {
-        $instance = $this->ObtainFrameworkInstance(
-            $implementation,
-            ...$implementationArgs
-        );
+        $instance = $this->ObtainFrameworkInstance($implementation, ...$implementationArgs);
         $this->ConfigureFrameworkInstance($instance, $postConstructionCalls);
 
         $requestA = Request::createFromGlobals();
@@ -517,15 +516,8 @@ class ImplementationTest extends Base
     /**
     * @param mixed ...$implementationArgs
     */
-    protected function ObtainFrameworkInstance(
-        string $implementation,
-        ...$implementationArgs
-    ) : Framework {
-        return Utilities::ObtainFrameworkInstance(
-            $this,
-            $implementation,
-            ...$implementationArgs
-        );
+    protected function ObtainFrameworkInstance(string $implementation, ...$implementationArgs) : Framework {
+        return Utilities::ObtainFrameworkInstance($this, $implementation, ...$implementationArgs);
     }
 
     /**
