@@ -16,6 +16,15 @@ use Symfony\Component\HttpFoundation\Request;
 
 class CookieMiddlewareTest extends Base
 {
+    public function __construct(string $name = '', array $data = [], string $dataName = '')
+    {
+        parent::__construct($name, $data, $dataName);
+
+        $this->backupGlobals = false;
+        $this->backupStaticAttributes = false;
+        $this->runTestInSeparateProcess = false;
+    }
+
     /**
     * @dataProvider DataProvderCookeMiddlewareTest
     */
@@ -40,8 +49,13 @@ class CookieMiddlewareTest extends Base
             rawurlencode($sameSite ?? 'lax')
         );
 
+        /**
+        * @var array<string, bool|string> $cookieConfig
+        */
+        $cookieConfig = [];
+
         if (is_string($secure) && is_string($http) && is_string($sameSite)) {
-            $config[CookieMiddleware::class] = [
+            $cookieConfig = [
                 'secure' => '1' !== $secure,
                 'httpOnly' => '1' !== $http,
                 'sameSite' => (
@@ -52,13 +66,22 @@ class CookieMiddlewareTest extends Base
             ];
         }
 
-        $config[DaftSource::class]['sources'] = [
+        $config[CookieMiddleware::class] = $cookieConfig;
+
+        /**
+        * @var arary<string, string|array<int, string>> $sourceConfig
+        */
+        $sourceConfig = (array) $config[DaftSource::class];
+
+        $sourceConfig['sources'] = [
             fixtures\Routes\CookieTest::class,
         ];
-        $config[DaftSource::class]['cacheFile'] = (
+        $sourceConfig['cacheFile'] = (
             __DIR__ .
             '/fixtures/cookie-test.fast-route.cache'
         );
+
+        $config[DaftSource::class] = $sourceConfig;
 
         $instance = Utilities::ObtainHttpHandlerInstance(
             $this,
@@ -99,11 +122,18 @@ class CookieMiddlewareTest extends Base
             );
         }
 
-        $config[DaftSource::class]['sources'] = [
+        /**
+        * @var arary<string, string|array<int, string>> $sourceConfig
+        */
+        $sourceConfig = (array) $config[DaftSource::class];
+
+        $sourceConfig['sources'] = [
             fixtures\Routes\CookieTest::class,
             CookieMiddleware::class,
         ];
-        $config[DaftSource::class]['cacheFile'] = (__DIR__ . '/fixtures/cookie-middleware.fast-route.cache');
+        $sourceConfig['cacheFile'] = (__DIR__ . '/fixtures/cookie-middleware.fast-route.cache');
+
+        $config[DaftSource::class] = $sourceConfig;
 
         $instance = Utilities::ObtainHttpHandlerInstance(
             $this,
@@ -127,18 +157,23 @@ class CookieMiddlewareTest extends Base
         static::assertInstanceOf(Cookie::class, $cookie);
 
         if (is_string($secure) && is_string($http) && is_string($sameSite)) {
+            /**
+            * @var array<string, string|bool> $cookieConfig
+            */
+            $cookieConfig = $config[CookieMiddleware::class];
+
             static::assertSame(
-                $config[CookieMiddleware::class]['secure'],
+                $cookieConfig['secure'],
                 $cookie->isSecure(),
                 'Secure must match flipped value with middleware'
             );
             static::assertSame(
-                $config[CookieMiddleware::class]['httpOnly'],
+                $cookieConfig['httpOnly'],
                 $cookie->isHttpOnly(),
                 'HttpOnly must match flipped value with middleware'
             );
             static::assertSame(
-                $config[CookieMiddleware::class]['sameSite'],
+                $cookieConfig['sameSite'],
                 $cookie->getSameSite(),
                 'SameSite must match flipped value with middleware'
             );
@@ -147,11 +182,27 @@ class CookieMiddlewareTest extends Base
 
     public function DataProvderCookeMiddlewareTest() : Generator
     {
+        /**
+        * @var array $cookie
+        */
         foreach ($this->DataProviderCookieNameValue() as $cookie) {
+            /**
+            * @var array $handlerArgs
+            */
             foreach ($this->DataProviderHttpHandlerInstances() as $handlerArgs) {
                 yield array_merge($handlerArgs, $cookie, [null, null, null]);
+
+                /**
+                * @var string $secure
+                */
                 foreach ($this->DataProviderCookieSecure() as $secure) {
+                    /**
+                    * @var string $http
+                    */
                     foreach ($this->DataProviderCookieHttp() as $http) {
+                        /**
+                        * @var string $sameSite
+                        */
                         foreach ($this->DataProviderCookieSameSite() as $sameSite) {
                             yield array_merge($handlerArgs, $cookie, [$secure, $http, $sameSite]);
                         }

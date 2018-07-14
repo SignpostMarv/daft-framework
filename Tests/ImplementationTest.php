@@ -18,16 +18,31 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ImplementationTest extends Base
 {
+    public function __construct(string $name = '', array $data = [], string $dataName = '')
+    {
+        parent::__construct($name, $data, $dataName);
+
+        $this->backupGlobals = false;
+        $this->backupStaticAttributes = false;
+        $this->runTestInSeparateProcess = false;
+    }
+
     public function tearDown() : void
     {
+        /**
+        * @var string[] $strings
+        */
+        $strings =
+                array_filter([
+                    realpath(__DIR__ . '/fixtures/http-kernel.fast-route.cache'),
+                ], 'is_string');
+
         /**
         * @var string $cleanup
         */
         foreach (
             array_filter(
-                array_filter([
-                    realpath(__DIR__ . '/fixtures/http-kernel.fast-route.cache'),
-                ], 'is_string'),
+                $strings,
                 'is_file'
             ) as $cleanup
         ) {
@@ -226,6 +241,9 @@ class ImplementationTest extends Base
 
     public function DataProviderGoodSourcesSansDatabaseConnection() : Generator
     {
+        /**
+        * @var mixed[] $args
+        */
         foreach ($this->DataProviderGoodSources() as $args) {
             if ( ! isset($args[1]['ConfigureDatabaseConnection'])) {
                 yield $args;
@@ -235,6 +253,9 @@ class ImplementationTest extends Base
 
     public function DataProviderGoodSourcesWithDatabaseConnection() : Generator
     {
+        /**
+        * @var mixed[] $args
+        */
         foreach ($this->DataProviderGoodSources() as $args) {
             if (isset($args[1]['ConfigureDatabaseConnection'])) {
                 yield $args;
@@ -338,8 +359,20 @@ class ImplementationTest extends Base
         $this->expectException(BadMethodCallException::class);
         $this->expectExceptionMessage('Database Connection already made!');
 
+        /**
+        * @var array<int, string|null|array> $configureArgs
+        * @var string $configureArgs[0]
+        * @var string|null $configureArgs[1]
+        * @var string|null $configureArgs[2]
+        * @var array $configureArgs[3]
+        */
+        $configureArgs = $postConstructionCalls['ConfigureDatabaseConnection'];
+
         $instance->ConfigureDatabaseConnection(
-            ...($postConstructionCalls['ConfigureDatabaseConnection'])
+            $configureArgs[0],
+            $configureArgs[1] ?? null,
+            $configureArgs[2] ?? null,
+            $configureArgs[3] ?? []
         );
     }
 
@@ -453,6 +486,7 @@ class ImplementationTest extends Base
     }
 
     /**
+    * @param array<string, mixed[]> $postConstructionCalls
     * @param mixed ...$implementationArgs
     */
     protected function PrepareReferenceDisposalTest(
@@ -494,6 +528,9 @@ class ImplementationTest extends Base
         );
     }
 
+    /**
+    * @param array<string, mixed[]> $postConstructionCalls
+    */
     protected function ConfigureFrameworkInstance(
         Framework $instance,
         array $postConstructionCalls

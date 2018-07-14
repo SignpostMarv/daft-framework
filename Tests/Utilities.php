@@ -31,7 +31,12 @@ class Utilities
             )
         );
 
-        return new $implementation(...$implementationArgs);
+        /**
+        * @var Framework $out
+        */
+        $out = new $implementation(...$implementationArgs);
+
+        return $out;
     }
 
     /**
@@ -64,6 +69,9 @@ class Utilities
         return $instance;
     }
 
+    /**
+    * @param array<string, mixed[]> $postConstructionCalls
+    */
     public static function ConfigureFrameworkInstance(
         TestCase $testCase,
         Framework $instance,

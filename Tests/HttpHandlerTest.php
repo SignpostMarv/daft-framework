@@ -46,22 +46,69 @@ class HttpHandlerTest extends Base
 
     public function DataProviderHttpHandlerHandle() : Generator
     {
+        /**
+        * @var array $args
+        */
         foreach ($this->DataProviderHttpHandlerInstances() as $args) {
-            list($implementation, $postConstructionCalls, $baseUrl, $basePath, $config) = $args;
+            /**
+            * @var string $implementation
+            */
+            $implementation = $args[0];
 
+            /**
+            * @var array<string, mixed[]> $postConstructionCalls
+            */
+            $postConstructionCalls = $args[1];
+
+            /**
+            * @var string $baseUrl
+            */
+            $baseUrl = $args[2];
+
+            /**
+            * @var string $basePath
+            */
+            $basePath = $args[3];
+
+            /**
+            * @var array<string, mixed[]> $config
+            */
+            $config = $args[4];
+
+            /**
+            * @var array $testArgs
+            */
             foreach ($this->DataProviderVerifyHandlerGood() as $testArgs) {
                 list($baseUrl, $config, $testArgs) = $this->prepDataProviderVerifyHandlerGoodArgs(
                     $baseUrl,
                     $config,
                     $testArgs
                 );
-                list(
-                    $sources,
-                    $prefix,
-                    $expectedStatus,
-                    $expectedContent,
-                    $requestArgs
-                ) = $testArgs;
+
+                $baseUrl = (string) $baseUrl;
+                $config = (array) $config;
+                $testArgs = (array) $testArgs;
+
+                /**
+                * @var string $sources
+                */
+                $sources = $testArgs[0];
+                /**
+                * @var string $prefix
+                */
+                $prefix = $testArgs[1];
+                /**
+                * @var int $expectedStatus
+                */
+                $expectedStatus = $testArgs[2];
+                /**
+                * @var string $expectedContent
+                */
+                $expectedContent = $testArgs[3];
+                /**
+                * @var array $requestArgs
+                */
+                $requestArgs = $testArgs[4];
 
                 $instance = Utilities::ObtainHttpHandlerInstance(
                     $this,
@@ -70,10 +117,28 @@ class HttpHandlerTest extends Base
                     $basePath,
                     $config
                 );
-                Utilities::ConfigureFrameworkInstance($this, $instance, $args[1]);
+                Utilities::ConfigureFrameworkInstance($this, $instance, $postConstructionCalls);
+
+                $uri = (string) $requestArgs[0];
+                $method = (string) ($requestArgs[1] ?? 'GET');
+                $parameters = (array) ($requestArgs[2] ?? []);
+                $cookies = (array) ($requestArgs[3] ?? []);
+                $files = (array) ($requestArgs[4] ?? []);
+                $server = (array) ($requestArgs[5] ?? []);
+
+                /**
+                * @var string|resource|null $content
+                */
+                $content = ($requestArgs[6] ?? null);
 
                 $request = Request::create(
-                    ...$requestArgs
+                    $uri,
+                    $method,
+                    $parameters,
+                    $cookies,
+                    $files,
+                    $server,
+                    $content
                 );
 
                 yield [$instance, $request, $expectedStatus, $expectedContent];
@@ -98,13 +163,19 @@ class HttpHandlerTest extends Base
 
     public function DataProviderTestDroppedConfigProperty() : Generator
     {
+        /**
+        * @var array<int, string|array<string, mixed[]>|array<string, mixed>> $args
+        */
         foreach ($this->DataProviderHttpHandlerInstances() as $args) {
             list($implementation, $postConstructionCalls, $baseUrl, $basePath, $config) = $args;
 
+            /**
+            * @var array<int, mixed> $testArgs
+            */
             foreach ($this->DataProviderVerifyHandlerGood() as $testArgs) {
                 list($baseUrl, $config, $testArgs) = $this->prepDataProviderVerifyHandlerGoodArgs(
-                    $baseUrl,
-                    $config,
+                    (string) $baseUrl,
+                    (array) $config,
                     $testArgs
                 );
                 list(
@@ -113,7 +184,7 @@ class HttpHandlerTest extends Base
                     $expectedStatus,
                     $expectedContent,
                     $requestArgs
-                ) = $testArgs;
+                ) = (array) $testArgs;
 
                 foreach (
                     [
@@ -121,10 +192,23 @@ class HttpHandlerTest extends Base
                         'sources',
                     ] as $omitSubProperty
                 ) {
-                    $modifiedConfig = $config;
+                    /**
+                    * @var array<string, mixed> $modifiedConfig
+                    */
+                    $modifiedConfig = (array) $config;
 
-                    unset($modifiedConfig[DaftSource::class][$omitSubProperty]);
+                    /**
+                    * @var array<string, mixed> $modifiedDaftSourceConfig
+                    */
+                    $modifiedDaftSourceConfig = $modifiedConfig[DaftSource::class];
 
+                    unset($modifiedDaftSourceConfig[$omitSubProperty]);
+
+                    $modifiedConfig[DaftSource::class] = $modifiedDaftSourceConfig;
+
+                    /**
+                    * @var array<string, mixed[]> $args1
+                    */
                     $args1 = $args[1];
 
                     yield [$implementation, $baseUrl, $basePath, $modifiedConfig, $args1];
@@ -134,6 +218,8 @@ class HttpHandlerTest extends Base
     }
 
     /**
+    * @param array<string, mixed[]> $args1
+    *
     * @dataProvider DataProviderTestDroppedConfigProperty
     */
     public function testDroppedConfigProperty(
@@ -192,27 +278,36 @@ class HttpHandlerTest extends Base
     ) : array {
         list($sources, $prefix, $expectedStatus, $expectedContent, $requestArgs) = $testArgs;
 
-        list($uri) = $requestArgs;
+        list($uri) = (array) $requestArgs;
 
-        $parsed = parse_url($uri);
+        $parsed = parse_url((string) $uri);
 
-        $baseUrl = $parsed['scheme'] . '://' . $parsed['host'];
+        $baseUrl = (string) $parsed['scheme'] . '://' . (string) $parsed['host'];
 
         if (isset($parsed['port'])) {
-            $baseUrl .= ':' . $parsed['port'];
+            $baseUrl .= ':' . (string) ((int) $parsed['port']);
         }
 
-        $baseUrl .= '/' . $prefix;
+        $baseUrl .= '/' . (string) $prefix;
 
-        $config[DaftSource::class]['sources'] = $sources;
-        $config[DaftSource::class]['cacheFile'] = (
+        /**
+        * @var array<string, string|array<int, stirng>> $daftSourceConfig
+        * @var array<int, string> $daftSourceConfig['sources']
+        * @var string $daftSourceConfig['cacheFile']
+        */
+        $daftSourceConfig = (array) $config[DaftSource::class];
+
+        $daftSourceConfig['sources'] = array_filter((array) $sources, 'is_string');
+        $daftSourceConfig['cacheFile'] = (
             __DIR__ .
             '/fixtures/http-kernel.fast-route.cache'
         );
 
-        if (is_file($config[DaftSource::class]['cacheFile'])) {
-            unlink($config[DaftSource::class]['cacheFile']);
+        if (is_file($daftSourceConfig['cacheFile'])) {
+            unlink((string) ($daftSourceConfig['cacheFile']));
         }
+
+        $config[DaftSource::class] = $daftSourceConfig;
 
         return [$baseUrl, $config, $testArgs];
     }

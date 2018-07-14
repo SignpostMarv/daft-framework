@@ -19,15 +19,15 @@ class CookieTest implements DaftRoute
         $resp = new Response('');
 
         $cookie = new Cookie(
-            $args['name'],
-            $args['value'],
+            (string) ($args['name'] ?? null),
+            is_string($args['value']) ? $args['value'] : null,
             123,
             '',
             null,
             '1' === $args['secure'],
             '1' === $args['http'],
             false,
-            $args['same-site']
+            is_string($args['same-site']) ? $args['same-site'] : null
         );
 
         $resp->headers->setCookie($cookie);

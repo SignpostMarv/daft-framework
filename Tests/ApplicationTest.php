@@ -27,17 +27,35 @@ class ApplicationTest extends Base
 {
     const NUM_EXPECTED_ARGS = 6;
 
+    public function __construct(string $name = '', array $data = [], string $dataName = '')
+    {
+        parent::__construct($name, $data, $dataName);
+
+        $this->backupGlobals = false;
+        $this->backupStaticAttributes = false;
+        $this->runTestInSeparateProcess = false;
+    }
+
+    /**
+    * @psalm-suppress UnresolvableInclude
+    */
     final public function DataProviderConsoleApplicationConfigFiltered() : Generator
     {
+        /**
+        * @var array<int, mixed> $args
+        */
         foreach ($this->DataProviderConsoleApplicationConfig() as $args) {
             if (
                 self::NUM_EXPECTED_ARGS === count($args) &&
-                is_string($args[0] ?? null) &&
+                is_string($args[0]) &&
                 is_file($args[0])
             ) {
-                $configFile = array_shift($args);
+                $configFile = (string) array_shift($args);
                 end($args);
-                $args[key($args)][] = (array) include($configFile);
+                $key = (int) key($args);
+                $appendTo = (array) $args[$key];
+                $appendTo[] = (array) include($configFile);
+                $args[$key] = $appendTo;
 
                 yield array_values($args);
             }
@@ -46,6 +64,10 @@ class ApplicationTest extends Base
 
     final public function DataProviderDaftConsoleCommands() : Generator
     {
+        /**
+        * @var array<int, mixed> $args
+        * @var string $args[3]
+        */
         foreach ($this->DataProviderConsoleApplicationConfigFiltered() as $args) {
             static::assertTrue(is_a($args[3], Framework::class, true));
 
@@ -54,6 +76,9 @@ class ApplicationTest extends Base
             */
             $framework = new $args[3](...$args[4]);
 
+            /**
+            * @var string|null $maybeCommand
+            */
             foreach (($args[2] ?? []) as $maybeCommand) {
                 if (is_string($maybeCommand) && is_a($maybeCommand, Command::class, true)) {
                     /**
@@ -68,6 +93,8 @@ class ApplicationTest extends Base
     }
 
     /**
+    * @param array<int, string> $expectedCommandInstances
+    *
     * @dataProvider DataProviderConsoleApplicationConfigFiltered
     */
     public function testApplicationSetup(
@@ -134,6 +161,8 @@ class ApplicationTest extends Base
     }
 
     /**
+    * @param array<int, string> $expectedCommandInstances
+    *
     * @dataProvider DataProviderConsoleApplicationConfigFiltered
     *
     * @depends testApplicationSetup
@@ -191,13 +220,28 @@ class ApplicationTest extends Base
             '/fixtures/here-is-one-i-made-earlier.fast-route.cache'
         );
 
+        /**
+        * @var array $args
+        * @var string $args[0]
+        * @var string $args[1]
+        * @var string $args[3]
+        * @var array<int, array<string, mixed>> $args[4]
+        */
         foreach ($this->DataProviderConsoleApplicationConfigFiltered() as $args) {
             $frameworkImplementation = $args[3];
 
-            $args[4][2][DaftConsoleSource::class][] = FastRouteCacheCommand::class;
-            $args[4][2][DaftSource::class]['sources'] = [
+            /**
+            * @var array<string, array> $args42
+            */
+            $args42 = (array) ((array) $args[4])[2];
+            $args42[DaftConsoleSource::class][] = FastRouteCacheCommand::class;
+            $args42[DaftSource::class]['sources'] = [
                 Config::class,
             ];
+            $args4 = (array) $args[4];
+            $args4[2] = $args42;
+
+            $args[4] = $args4;
 
             /**
             * @var Framework $framework

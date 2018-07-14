@@ -9,6 +9,10 @@
         <file name=".php_cs.dist" />
         <file name="Tests/fixtures/bin/daft-framework" />
         <directory name="src" />
+        <directory name="./Tests/" />
+        <ignoreFiles>
+            <directory name="./vendor/phpunit/phpunit/" />
+        </ignoreFiles>
     </projectFiles>
 
     <issueHandlers>
