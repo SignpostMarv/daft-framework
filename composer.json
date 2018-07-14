@@ -40,11 +40,11 @@
     },
     "require": {
         "php": "^7.1",
-        "ext-mbstring": "^7.1",
+        "ext-mbstring": "*",
         "paragonie/easydb": "^2.6",
-        "signpostmarv/daft-interface-collector": "^0.4.5",
-        "signpostmarv/daft-router": "^0.3.0",
-        "symfony/console": "^4.0",
+        "signpostmarv/daft-interface-collector": "^0.4.6",
+        "signpostmarv/daft-router": "^0.3.1",
+        "symfony/console": "^4.1",
         "symfony/event-dispatcher": "^4.1",
         "symfony/http-foundation": "^4.1",
         "symfony/http-kernel": "^4.1"
