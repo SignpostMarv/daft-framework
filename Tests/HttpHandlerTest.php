@@ -25,7 +25,7 @@ class HttpHandlerTest extends Base
         yield from [
             [
                 HttpHandler::class,
-                ['ConfigureDatabaseConnection' => ['sqlite::memory:', null, null, []],],
+                ['ConfigureDatabaseConnection' => ['sqlite::memory:', null, null, []]],
                 'https://example.com/',
                 realpath(__DIR__ . '/fixtures'),
                 [

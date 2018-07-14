@@ -516,7 +516,8 @@ class ImplementationTest extends Base
     /**
     * @param mixed ...$implementationArgs
     */
-    protected function ObtainFrameworkInstance(string $implementation, ...$implementationArgs) : Framework {
+    protected function ObtainFrameworkInstance(string $implementation, ...$implementationArgs) : Framework
+    {
         return Utilities::ObtainFrameworkInstance($this, $implementation, ...$implementationArgs);
     }
 
