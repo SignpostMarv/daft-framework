@@ -3,6 +3,9 @@
     <testsuite name="FastRoute Tests">
       <directory>./vendor/signpostmarv/daft-router/tests/fast-route/</directory>
     </testsuite>
+    <testsuite name="DaftInterfaceCollector">
+      <directory>./vendor/signpostmarv/daft-interface-collector/Tests/</directory>
+    </testsuite>
     <testsuite name="DaftRouter">
       <directory>./vendor/signpostmarv/daft-router/tests/daft-router/</directory>
     </testsuite>
