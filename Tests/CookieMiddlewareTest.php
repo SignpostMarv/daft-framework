@@ -159,9 +159,7 @@ class CookieMiddlewareTest extends Base
                 $cookieConfig['secure'],
                 $cookie->isSecure(),
                 sprintf(
-                'Secure must match flipped value with middleware'
-                    .
-                    ' %s vs %s',
+                    'Secure must match flipped value with middleware %s vs %s',
                     var_export($cookieConfig['secure'], true),
                     var_export($cookie->isSecure(), true)
                 )
@@ -170,9 +168,7 @@ class CookieMiddlewareTest extends Base
                 $cookieConfig['httpOnly'],
                 $cookie->isHttpOnly(),
                 sprintf(
-                'HttpOnly must match flipped value with middleware'
-                    .
-                    ' %s vs %s',
+                    'HttpOnly must match flipped value with middleware %s vs %s',
                     var_export($cookieConfig['httpOnly'], true),
                     var_export($cookie->isHttpOnly(), true)
                 )
@@ -181,9 +177,7 @@ class CookieMiddlewareTest extends Base
                 $cookieConfig['sameSite'],
                 $cookie->getSameSite(),
                 sprintf(
-                'SameSite must match flipped value with middleware'
-                    .
-                    ' %s vs %s',
+                    'SameSite must match flipped value with middleware %s vs %s',
                     var_export($cookieConfig['sameSite'], true),
                     var_export($cookie->getSameSite(), true)
                 )
