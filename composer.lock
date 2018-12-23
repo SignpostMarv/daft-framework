@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8914e09f6cde3763fba0b3c5866bbeaf",
+    "content-hash": "86db955a97bc8cf7aa232336c0acbdcc",
     "packages": [
         {
             "name": "nikic/fast-route",
@@ -209,16 +209,16 @@
         },
         {
             "name": "signpostmarv/daft-router",
-            "version": "v0.3.3",
+            "version": "v0.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/SignpostMarv/daft-router.git",
-                "reference": "b4dbfaa2e9bfeed843f24dc0ab6c36636b294244"
+                "reference": "18984e4d7a6a363e7b63eed425816ed0f7cc2e09"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SignpostMarv/daft-router/zipball/b4dbfaa2e9bfeed843f24dc0ab6c36636b294244",
-                "reference": "b4dbfaa2e9bfeed843f24dc0ab6c36636b294244",
+                "url": "https://api.github.com/repos/SignpostMarv/daft-router/zipball/18984e4d7a6a363e7b63eed425816ed0f7cc2e09",
+                "reference": "18984e4d7a6a363e7b63eed425816ed0f7cc2e09",
                 "shasum": ""
             },
             "require": {
@@ -230,15 +230,15 @@
             },
             "require-dev": {
                 "maglnet/composer-require-checker": "^1.1",
-                "phpstan/phpstan": "^0.10.5",
+                "phpstan/phpstan": "^0.10.6",
                 "phpstan/phpstan-phpunit": "^0.10.0",
                 "phpstan/phpstan-strict-rules": "^0.10.1",
-                "phpunit/phpunit": "^7.4",
+                "phpunit/phpunit": "^7.5",
                 "povils/phpmnd": "^2.0",
                 "roave/security-advisories": "dev-master",
                 "sebastian/phpcpd": "^4.1",
-                "signpostmarv/php-cs-fixer-config": "^0.5.1",
-                "vimeo/psalm": "^2.0"
+                "signpostmarv/php-cs-fixer-config": "^0.6.0",
+                "vimeo/psalm": "^3.0"
             },
             "type": "library",
             "autoload": {
@@ -257,7 +257,7 @@
                 }
             ],
             "description": "Daft Router",
-            "time": "2018-11-10T11:31:18+00:00"
+            "time": "2018-12-23T10:10:24+00:00"
         },
         {
             "name": "symfony/console",
