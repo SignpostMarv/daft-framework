@@ -39,9 +39,6 @@ class HttpHandlerTest extends Base
 
     public function DataProviderHttpHandlerHandle() : Generator
     {
-        /**
-        * @var array
-        */
         foreach ($this->DataProviderHttpHandlerInstances() as $args) {
             /**
             * @var string
@@ -68,9 +65,6 @@ class HttpHandlerTest extends Base
             */
             $config = $args[4];
 
-            /**
-            * @var array
-            */
             foreach ($this->DataProviderVerifyHandlerGood() as $testArgs) {
                 list($baseUrl, $config, $testArgs) = $this->prepDataProviderVerifyHandlerGoodArgs(
                     $baseUrl,
@@ -156,15 +150,9 @@ class HttpHandlerTest extends Base
 
     public function DataProviderTestDroppedConfigProperty() : Generator
     {
-        /**
-        * @var array<int, string|array<string, mixed[]>|array<string, mixed>>
-        */
         foreach ($this->DataProviderHttpHandlerInstances() as $args) {
             list($implementation, $postConstructionCalls, $baseUrl, $basePath, $config) = $args;
 
-            /**
-            * @var array<int, mixed>
-            */
             foreach ($this->DataProviderVerifyHandlerGood() as $testArgs) {
                 list($baseUrl, $config, $testArgs) = $this->prepDataProviderVerifyHandlerGoodArgs(
                     (string) $baseUrl,

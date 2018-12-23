@@ -50,9 +50,6 @@ class CookieMiddleware implements DaftRequestInterceptor, DaftResponseModifier
         bool $configHttpOnly,
         ? string $configSameSite
     ) : void {
-        /**
-        * @var Cookie
-        */
         foreach ($response->headers->getCookies() as $cookie) {
             self::PerhapsReconfigureCookie(
                 $response,

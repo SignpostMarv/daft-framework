@@ -39,9 +39,6 @@ class ImplementationTest extends Base
             'is_string'
         );
 
-        /**
-        * @var string
-        */
         foreach (
             array_filter(
                 $strings,
@@ -243,9 +240,6 @@ class ImplementationTest extends Base
 
     public function DataProviderGoodSourcesSansDatabaseConnection() : Generator
     {
-        /**
-        * @var mixed[]
-        */
         foreach ($this->DataProviderGoodSources() as $args) {
             if ( ! isset($args[1]['ConfigureDatabaseConnection'])) {
                 yield $args;
@@ -255,9 +249,6 @@ class ImplementationTest extends Base
 
     public function DataProviderGoodSourcesWithDatabaseConnection() : Generator
     {
-        /**
-        * @var mixed[]
-        */
         foreach ($this->DataProviderGoodSources() as $args) {
             if (isset($args[1]['ConfigureDatabaseConnection'])) {
                 yield $args;

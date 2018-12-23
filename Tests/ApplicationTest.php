@@ -42,9 +42,6 @@ class ApplicationTest extends Base
     */
     final public function DataProviderConsoleApplicationConfigFiltered() : Generator
     {
-        /**
-        * @var array<int, mixed>
-        */
         foreach ($this->DataProviderConsoleApplicationConfig() as $args) {
             if (
                 self::NUM_EXPECTED_ARGS === count($args) &&
@@ -65,10 +62,6 @@ class ApplicationTest extends Base
 
     final public function DataProviderDaftConsoleCommands() : Generator
     {
-        /**
-        * @var array<int, mixed>
-        * @var string $args[3]
-        */
         foreach ($this->DataProviderConsoleApplicationConfigFiltered() as $args) {
             if ( ! is_a($args[3], Framework::class, true)) {
                 static::assertTrue(is_a($args[3], Framework::class, true));
@@ -79,9 +72,6 @@ class ApplicationTest extends Base
             */
             $framework = new $args[3](...$args[4]);
 
-            /**
-            * @var string|null
-            */
             foreach (($args[2] ?? []) as $maybeCommand) {
                 if (is_string($maybeCommand) && is_a($maybeCommand, Command::class, true)) {
                     /**
@@ -235,13 +225,6 @@ class ApplicationTest extends Base
             '/fixtures/here-is-one-i-made-earlier.fast-route.cache'
         );
 
-        /**
-        * @var array
-        * @var string $args[0]
-        * @var string $args[1]
-        * @var string $args[3]
-        * @var array<int, array<string, mixed>> $args[4]
-        */
         foreach ($this->DataProviderConsoleApplicationConfigFiltered() as $args) {
             $frameworkImplementation = $args[3];
 
