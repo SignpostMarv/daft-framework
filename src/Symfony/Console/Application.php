@@ -77,12 +77,12 @@ class Application extends Base
         }
 
         /**
-        * @var string $implementation
+        * @var string
         */
         foreach ($this->GetCommandCollector()->Collect(...$sources) as $implementation) {
             if (is_a($implementation, BaseCommand::class, true)) {
                 /**
-                * @var BaseCommand $command
+                * @var BaseCommand
                 */
                 $command = new $implementation($implementation::getDefaultName());
 
@@ -105,7 +105,7 @@ class Application extends Base
         $config = (array) ($framework->ObtainConfig()[DaftConsoleSource::class] ?? []);
 
         /**
-        * @var string[] $sources
+        * @var string[]
         */
         $sources = array_values(array_filter($config, 'is_string'));
 

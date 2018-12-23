@@ -43,7 +43,7 @@ class ApplicationTest extends Base
     final public function DataProviderConsoleApplicationConfigFiltered() : Generator
     {
         /**
-        * @var array<int, mixed> $args
+        * @var array<int, mixed>
         */
         foreach ($this->DataProviderConsoleApplicationConfig() as $args) {
             if (
@@ -66,7 +66,7 @@ class ApplicationTest extends Base
     final public function DataProviderDaftConsoleCommands() : Generator
     {
         /**
-        * @var array<int, mixed> $args
+        * @var array<int, mixed>
         * @var string $args[3]
         */
         foreach ($this->DataProviderConsoleApplicationConfigFiltered() as $args) {
@@ -75,17 +75,17 @@ class ApplicationTest extends Base
             }
 
             /**
-            * @var Framework $framework
+            * @var Framework
             */
             $framework = new $args[3](...$args[4]);
 
             /**
-            * @var string|null $maybeCommand
+            * @var string|null
             */
             foreach (($args[2] ?? []) as $maybeCommand) {
                 if (is_string($maybeCommand) && is_a($maybeCommand, Command::class, true)) {
                     /**
-                    * @var Command $command
+                    * @var Command
                     */
                     $command = new $maybeCommand($maybeCommand::getDefaultName());
 
@@ -112,7 +112,7 @@ class ApplicationTest extends Base
         }
 
         /**
-        * @var Framework $framework
+        * @var Framework
         */
         $framework = new $frameworkImplementation(...$frameworkArgs);
 
@@ -162,7 +162,7 @@ class ApplicationTest extends Base
             }
 
             /**
-            * @var BaseCommand $command
+            * @var BaseCommand
             */
             $command = new $expectedComamnd($expectedComamnd::getDefaultName());
 
@@ -236,7 +236,7 @@ class ApplicationTest extends Base
         );
 
         /**
-        * @var array $args
+        * @var array
         * @var string $args[0]
         * @var string $args[1]
         * @var string $args[3]
@@ -256,7 +256,7 @@ class ApplicationTest extends Base
             }
 
             /**
-            * @var array<string, array> $args42
+            * @var array<string, array>
             */
             $args42 = (array) ((array) $args[4])[2];
             $args42[DaftConsoleSource::class][] = FastRouteCacheCommand::class;
@@ -267,7 +267,7 @@ class ApplicationTest extends Base
             $args[4] = $args4;
 
             /**
-            * @var Framework $framework
+            * @var Framework
             */
             $framework = new $frameworkImplementation(...$args[4]);
 

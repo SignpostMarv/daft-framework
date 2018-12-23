@@ -40,7 +40,7 @@ class HttpHandler extends Framework
         $this->routerCacheFile = (string) ((array) $config[DaftSource::class])['cacheFile'];
 
         /**
-        * @var string[] $sources
+        * @var string[]
         */
         $sources = (array) ((array) $config[DaftSource::class])['sources'];
 

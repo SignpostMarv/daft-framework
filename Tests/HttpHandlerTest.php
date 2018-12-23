@@ -40,36 +40,36 @@ class HttpHandlerTest extends Base
     public function DataProviderHttpHandlerHandle() : Generator
     {
         /**
-        * @var array $args
+        * @var array
         */
         foreach ($this->DataProviderHttpHandlerInstances() as $args) {
             /**
-            * @var string $implementation
+            * @var string
             */
             $implementation = $args[0];
 
             /**
-            * @var array<string, mixed[]> $postConstructionCalls
+            * @var array<string, mixed[]>
             */
             $postConstructionCalls = $args[1];
 
             /**
-            * @var string $baseUrl
+            * @var string
             */
             $baseUrl = $args[2];
 
             /**
-            * @var string $basePath
+            * @var string
             */
             $basePath = $args[3];
 
             /**
-            * @var array<string, mixed[]> $config
+            * @var array<string, mixed[]>
             */
             $config = $args[4];
 
             /**
-            * @var array $testArgs
+            * @var array
             */
             foreach ($this->DataProviderVerifyHandlerGood() as $testArgs) {
                 list($baseUrl, $config, $testArgs) = $this->prepDataProviderVerifyHandlerGoodArgs(
@@ -83,23 +83,23 @@ class HttpHandlerTest extends Base
                 $testArgs = (array) $testArgs;
 
                 /**
-                * @var string $sources
+                * @var string
                 */
                 $sources = $testArgs[0];
                 /**
-                * @var string $prefix
+                * @var string
                 */
                 $prefix = $testArgs[1];
                 /**
-                * @var int $expectedStatus
+                * @var int
                 */
                 $expectedStatus = $testArgs[2];
                 /**
-                * @var string $expectedContent
+                * @var string
                 */
                 $expectedContent = $testArgs[3];
                 /**
-                * @var array $requestArgs
+                * @var array
                 */
                 $requestArgs = $testArgs[4];
 
@@ -120,7 +120,7 @@ class HttpHandlerTest extends Base
                 $server = (array) ($requestArgs[5] ?? []);
 
                 /**
-                * @var string|resource|null $content
+                * @var string|resource|null
                 */
                 $content = ($requestArgs[6] ?? null);
 
@@ -157,13 +157,13 @@ class HttpHandlerTest extends Base
     public function DataProviderTestDroppedConfigProperty() : Generator
     {
         /**
-        * @var array<int, string|array<string, mixed[]>|array<string, mixed>> $args
+        * @var array<int, string|array<string, mixed[]>|array<string, mixed>>
         */
         foreach ($this->DataProviderHttpHandlerInstances() as $args) {
             list($implementation, $postConstructionCalls, $baseUrl, $basePath, $config) = $args;
 
             /**
-            * @var array<int, mixed> $testArgs
+            * @var array<int, mixed>
             */
             foreach ($this->DataProviderVerifyHandlerGood() as $testArgs) {
                 list($baseUrl, $config, $testArgs) = $this->prepDataProviderVerifyHandlerGoodArgs(
@@ -181,12 +181,12 @@ class HttpHandlerTest extends Base
 
                 foreach (['cacheFile', 'sources'] as $omitSubProperty) {
                     /**
-                    * @var array<string, mixed> $modifiedConfig
+                    * @var array<string, mixed>
                     */
                     $modifiedConfig = (array) $config;
 
                     /**
-                    * @var array<string, mixed> $modifiedDaftSourceConfig
+                    * @var array<string, mixed>
                     */
                     $modifiedDaftSourceConfig = $modifiedConfig[DaftSource::class];
 
@@ -195,7 +195,7 @@ class HttpHandlerTest extends Base
                     $modifiedConfig[DaftSource::class] = $modifiedDaftSourceConfig;
 
                     /**
-                    * @var array<string, mixed[]> $args1
+                    * @var array<string, mixed[]>
                     */
                     $args1 = $args[1];
 
@@ -279,7 +279,7 @@ class HttpHandlerTest extends Base
         $baseUrl .= '/' . (string) $prefix;
 
         /**
-        * @var array<string, string|array<int, stirng>> $daftSourceConfig
+        * @var array<string, string|array<int, stirng>>
         * @var array<int, string> $daftSourceConfig['sources']
         * @var string $daftSourceConfig['cacheFile']
         */

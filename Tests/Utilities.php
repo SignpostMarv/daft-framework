@@ -34,7 +34,7 @@ class Utilities
         }
 
         /**
-        * @var Framework $out
+        * @var Framework
         */
         $out = new $implementation(...$implementationArgs);
 
@@ -60,7 +60,7 @@ class Utilities
         );
 
         /**
-        * @var HttpHandler $instance
+        * @var HttpHandler
         */
         $instance = static::ObtainFrameworkInstance(
             $testCase,

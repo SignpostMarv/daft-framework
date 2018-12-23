@@ -30,7 +30,7 @@ class ImplementationTest extends Base
     public function tearDown() : void
     {
         /**
-        * @var string[] $strings
+        * @var string[]
         */
         $strings = array_filter(
             [
@@ -40,7 +40,7 @@ class ImplementationTest extends Base
         );
 
         /**
-        * @var string $cleanup
+        * @var string
         */
         foreach (
             array_filter(
@@ -244,7 +244,7 @@ class ImplementationTest extends Base
     public function DataProviderGoodSourcesSansDatabaseConnection() : Generator
     {
         /**
-        * @var mixed[] $args
+        * @var mixed[]
         */
         foreach ($this->DataProviderGoodSources() as $args) {
             if ( ! isset($args[1]['ConfigureDatabaseConnection'])) {
@@ -256,7 +256,7 @@ class ImplementationTest extends Base
     public function DataProviderGoodSourcesWithDatabaseConnection() : Generator
     {
         /**
-        * @var mixed[] $args
+        * @var mixed[]
         */
         foreach ($this->DataProviderGoodSources() as $args) {
             if (isset($args[1]['ConfigureDatabaseConnection'])) {
@@ -362,7 +362,7 @@ class ImplementationTest extends Base
         $this->expectExceptionMessage('Database Connection already made!');
 
         /**
-        * @var array<int, string|null|array> $configureArgs
+        * @var array<int, string|null|array>
         * @var string $configureArgs[0]
         * @var string|null $configureArgs[1]
         * @var string|null $configureArgs[2]

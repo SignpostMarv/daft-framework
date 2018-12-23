@@ -31,7 +31,7 @@ class FastRouteCacheCommand extends Command
         $cacheFilename .= '.cache';
 
         /**
-        * @var string[] $sources
+        * @var string[]
         */
         $sources = $input->getArgument('sources');
 

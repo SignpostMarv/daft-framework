@@ -50,7 +50,7 @@ class CookieMiddlewareTest extends Base
         );
 
         /**
-        * @var array<string, bool|string> $cookieConfig
+        * @var array<string, bool|string>
         */
         $cookieConfig = [];
 
@@ -65,7 +65,7 @@ class CookieMiddlewareTest extends Base
         $config[CookieMiddleware::class] = $cookieConfig;
 
         /**
-        * @var arary<string, string|array<int, string>> $sourceConfig
+        * @var arary<string, string|array<int, string>>
         */
         $sourceConfig = (array) $config[DaftSource::class];
 
@@ -119,7 +119,7 @@ class CookieMiddlewareTest extends Base
         }
 
         /**
-        * @var arary<string, string|array<int, string>> $sourceConfig
+        * @var arary<string, string|array<int, string>>
         */
         $sourceConfig = (array) $config[DaftSource::class];
 
@@ -151,7 +151,7 @@ class CookieMiddlewareTest extends Base
 
         if (is_string($secure) && is_string($http) && is_string($sameSite)) {
             /**
-            * @var array<string, string|bool> $cookieConfig
+            * @var array<string, string|bool>
             */
             $cookieConfig = $config[CookieMiddleware::class];
 
@@ -176,25 +176,25 @@ class CookieMiddlewareTest extends Base
     public function DataProvderCookeMiddlewareTest() : Generator
     {
         /**
-        * @var array $cookie
+        * @var array
         */
         foreach ($this->DataProviderCookieNameValue() as $cookie) {
             /**
-            * @var array $handlerArgs
+            * @var array
             */
             foreach ($this->DataProviderHttpHandlerInstances() as $handlerArgs) {
                 yield array_merge($handlerArgs, $cookie, [null, null, null]);
 
                 /**
-                * @var string $secure
+                * @var string
                 */
                 foreach ($this->DataProviderCookieSecure() as $secure) {
                     /**
-                    * @var string $http
+                    * @var string
                     */
                     foreach ($this->DataProviderCookieHttp() as $http) {
                         /**
-                        * @var string $sameSite
+                        * @var string
                         */
                         foreach ($this->DataProviderCookieSameSite() as $sameSite) {
                             yield array_merge($handlerArgs, $cookie, [$secure, $http, $sameSite]);

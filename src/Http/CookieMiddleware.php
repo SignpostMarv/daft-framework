@@ -20,7 +20,7 @@ class CookieMiddleware implements DaftRequestInterceptor, DaftResponseModifier
         Response $response
     ) : Response {
         /**
-        * @var Response $response
+        * @var Response
         */
         $response = static::OmNomNom($request, $response);
 
@@ -51,7 +51,7 @@ class CookieMiddleware implements DaftRequestInterceptor, DaftResponseModifier
         ? string $configSameSite
     ) : void {
         /**
-        * @var Cookie $cookie
+        * @var Cookie
         */
         foreach ($response->headers->getCookies() as $cookie) {
             self::PerhapsReconfigureCookie(
@@ -111,7 +111,7 @@ class CookieMiddleware implements DaftRequestInterceptor, DaftResponseModifier
             $config = (array) $config[self::class];
 
             /**
-            * @var string|null $sameSite
+            * @var string|null
             */
             $sameSite = $config['sameSite'] ?? null;
             $sameSite = is_string($sameSite) ? $sameSite : null;
