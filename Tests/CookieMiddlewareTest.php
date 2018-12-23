@@ -175,13 +175,38 @@ class CookieMiddlewareTest extends Base
 
     public function DataProvderCookeMiddlewareTest() : Generator
     {
-        foreach ($this->DataProviderCookieNameValue() as $cookie) {
-            foreach ($this->DataProviderHttpHandlerInstances() as $handlerArgs) {
+        /**
+        * @var iterable<array<int, string>>
+        */
+        $cookieSources = $this->DataProviderCookieNameValue();
+
+        foreach ($cookieSources as $cookie) {
+            /**
+            * @var iterable<array>
+            */
+            $handlerArgsSources = $this->DataProviderHttpHandlerInstances();
+
+            foreach ($handlerArgsSources as $handlerArgs) {
                 yield array_merge($handlerArgs, $cookie, [null, null, null]);
 
-                foreach ($this->DataProviderCookieSecure() as $secure) {
-                    foreach ($this->DataProviderCookieHttp() as $http) {
-                        foreach ($this->DataProviderCookieSameSite() as $sameSite) {
+                /**
+                * @var iterable<string>
+                */
+                $secureSources = $this->DataProviderCookieSecure();
+
+                foreach ($secureSources as $secure) {
+                    /**
+                    * @var iterable<string>
+                    */
+                    $httpSources = $this->DataProviderCookieHttp();
+
+                    foreach ($httpSources as $http) {
+                        /**
+                        * @var iterable<string>
+                        */
+                        $sameSiteSources = $this->DataProviderCookieSameSite();
+
+                        foreach ($sameSiteSources as $sameSite) {
                             yield array_merge($handlerArgs, $cookie, [$secure, $http, $sameSite]);
                         }
                     }

@@ -8,6 +8,7 @@ namespace SignpostMarv\DaftFramework\Tests;
 
 use Generator;
 use InvalidArgumentException;
+use RuntimeException;
 use SignpostMarv\DaftFramework\HttpHandler;
 use SignpostMarv\DaftRouter\DaftSource;
 use SignpostMarv\DaftRouter\Tests\ImplementationTest as Base;
@@ -39,7 +40,12 @@ class HttpHandlerTest extends Base
 
     public function DataProviderHttpHandlerHandle() : Generator
     {
-        foreach ($this->DataProviderHttpHandlerInstances() as $args) {
+        /**
+        * @var iterable<array>
+        */
+        $argsSources = $this->DataProviderHttpHandlerInstances();
+
+        foreach ($argsSources as $args) {
             /**
             * @var string
             */
@@ -65,16 +71,35 @@ class HttpHandlerTest extends Base
             */
             $config = $args[4];
 
-            foreach ($this->DataProviderVerifyHandlerGood() as $testArgs) {
+            /**
+            * @var iterable<array>
+            */
+            $testArgsSources = $this->DataProviderVerifyHandlerGood();
+
+            foreach ($testArgsSources as $testArgs) {
                 list($baseUrl, $config, $testArgs) = $this->prepDataProviderVerifyHandlerGoodArgs(
                     $baseUrl,
                     $config,
                     $testArgs
                 );
 
+                if (
+                    ! is_array($testArgs) ||
+                    ! isset($testArgs[0], $testArgs[1], $testArgs[2], $testArgs[3], $testArgs[4])
+                ) {
+                    throw new RuntimeException(sprintf(
+                        'Unsupported args derived from %s::prepDataProviderVerifyHandlerGoodArgs',
+                        get_class($this)
+                    ));
+                }
+
                 $baseUrl = (string) $baseUrl;
                 $config = (array) $config;
-                $testArgs = (array) $testArgs;
+
+                /**
+                * @var array
+                */
+                $testArgs = $testArgs;
 
                 /**
                 * @var string
@@ -150,10 +175,20 @@ class HttpHandlerTest extends Base
 
     public function DataProviderTestDroppedConfigProperty() : Generator
     {
-        foreach ($this->DataProviderHttpHandlerInstances() as $args) {
+        /**
+        * @var iterable<array>
+        */
+        $argsSources = $this->DataProviderHttpHandlerInstances();
+
+        foreach ($argsSources as $args) {
             list($implementation, $postConstructionCalls, $baseUrl, $basePath, $config) = $args;
 
-            foreach ($this->DataProviderVerifyHandlerGood() as $testArgs) {
+            /**
+            * @var iterable<array>
+            */
+            $testArgsSources = $this->DataProviderVerifyHandlerGood();
+
+            foreach ($testArgsSources as $testArgs) {
                 list($baseUrl, $config, $testArgs) = $this->prepDataProviderVerifyHandlerGoodArgs(
                     (string) $baseUrl,
                     (array) $config,

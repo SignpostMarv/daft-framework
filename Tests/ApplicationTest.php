@@ -42,7 +42,12 @@ class ApplicationTest extends Base
     */
     final public function DataProviderConsoleApplicationConfigFiltered() : Generator
     {
-        foreach ($this->DataProviderConsoleApplicationConfig() as $args) {
+        /**
+        * @var iterable<array>
+        */
+        $argsSources = $this->DataProviderConsoleApplicationConfig();
+
+        foreach ($argsSources as $args) {
             if (
                 self::NUM_EXPECTED_ARGS === count($args) &&
                 is_string($args[0]) &&
@@ -62,9 +67,16 @@ class ApplicationTest extends Base
 
     final public function DataProviderDaftConsoleCommands() : Generator
     {
-        foreach ($this->DataProviderConsoleApplicationConfigFiltered() as $args) {
-            if ( ! is_a($args[3], Framework::class, true)) {
-                static::assertTrue(is_a($args[3], Framework::class, true));
+        /**
+        * @var iterable<array>
+        */
+        $argsSources = $this->DataProviderConsoleApplicationConfigFiltered();
+
+        foreach ($argsSources as $args) {
+            $frameworkImplementation = (string) $args[3];
+
+            if ( ! is_a($frameworkImplementation, Framework::class, true)) {
+                static::assertTrue(is_a($frameworkImplementation, Framework::class, true));
             }
 
             /**
@@ -72,7 +84,12 @@ class ApplicationTest extends Base
             */
             $framework = new $args[3](...$args[4]);
 
-            foreach (($args[2] ?? []) as $maybeCommand) {
+            /**
+            * @var scalar[]
+            */
+            $maybeCommandSources = ($args[2] ?? []);
+
+            foreach ($maybeCommandSources as $maybeCommand) {
                 if (is_string($maybeCommand) && is_a($maybeCommand, Command::class, true)) {
                     /**
                     * @var Command
@@ -225,16 +242,31 @@ class ApplicationTest extends Base
             '/fixtures/here-is-one-i-made-earlier.fast-route.cache'
         );
 
-        foreach ($this->DataProviderConsoleApplicationConfigFiltered() as $args) {
+        /**
+        * @var iterable<array>
+        */
+        $argsSources = $this->DataProviderConsoleApplicationConfigFiltered();
+
+        foreach ($argsSources as $i => $args) {
+            /**
+            * @var string
+            */
             $frameworkImplementation = $args[3];
 
             if ( ! is_a($frameworkImplementation, Framework::class, true)) {
                 throw new RuntimeException(sprintf(
-                    'Index 3 retrieved from %s::%s must be an implementation of %s, %s given!',
+                    'Index %s[3] retrieved from %s::%s must be an implementation of %s, %s given!',
+                    $i,
                     get_class($this),
                     'DataProviderConsoleApplicationConfigFiltered',
                     Framework::class,
                     $frameworkImplementation
+                ));
+            } elseif ( ! is_string($args[0]) || ! is_string($args[1])) {
+                throw new RuntimeException(sprintf(
+                    'Indices %s[0] and %s[1] must be strings!',
+                    $i,
+                    $i
                 ));
             }
 
@@ -255,8 +287,8 @@ class ApplicationTest extends Base
             $framework = new $frameworkImplementation(...$args[4]);
 
             $application = Application::CollectApplicationWithCommands(
-                $args[0],
-                $args[1],
+                (string) $args[0],
+                (string) $args[1],
                 $framework
             );
 

@@ -240,7 +240,12 @@ class ImplementationTest extends Base
 
     public function DataProviderGoodSourcesSansDatabaseConnection() : Generator
     {
-        foreach ($this->DataProviderGoodSources() as $args) {
+        /**
+        * @var iterable<array>
+        */
+        $sources = $this->DataProviderGoodSources();
+
+        foreach ($sources as $args) {
             if ( ! isset($args[1]['ConfigureDatabaseConnection'])) {
                 yield $args;
             }
@@ -249,7 +254,12 @@ class ImplementationTest extends Base
 
     public function DataProviderGoodSourcesWithDatabaseConnection() : Generator
     {
-        foreach ($this->DataProviderGoodSources() as $args) {
+        /**
+        * @var iterable<array>
+        */
+        $sources = $this->DataProviderGoodSources();
+
+        foreach ($sources as $args) {
             if (isset($args[1]['ConfigureDatabaseConnection'])) {
                 yield $args;
             }

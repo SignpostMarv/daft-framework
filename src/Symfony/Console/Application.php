@@ -76,8 +76,13 @@ class Application extends Base
             );
         }
 
-        foreach ($this->GetCommandCollector()->Collect(...$sources) as $implementation) {
-            if (is_a($implementation, BaseCommand::class, true)) {
+        /**
+        * @var iterable<scalar|array|object|null>
+        */
+        $implementations = $this->GetCommandCollector()->Collect(...$sources);
+
+        foreach ($implementations as $implementation) {
+            if (is_string($implementation) && is_a($implementation, BaseCommand::class, true)) {
                 /**
                 * @var BaseCommand
                 */
