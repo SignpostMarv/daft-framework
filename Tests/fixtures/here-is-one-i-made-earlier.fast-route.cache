@@ -5,32 +5,62 @@
     array (
       '/' => 
       array (
-        0 => 'SignpostMarv\\DaftRouter\\Tests\\Fixtures\\NotLoggedIn',
-        1 => 'SignpostMarv\\DaftRouter\\Tests\\Fixtures\\AppendHeader',
-        2 => 'SignpostMarv\\DaftRouter\\Tests\\Fixtures\\Home',
+        'SignpostMarv\\DaftRouter\\DaftRequestInterceptor' => 
+        array (
+          0 => 'SignpostMarv\\DaftRouter\\Tests\\Fixtures\\NotLoggedIn',
+        ),
+        'SignpostMarv\\DaftRouter\\DaftResponseModifier' => 
+        array (
+          0 => 'SignpostMarv\\DaftRouter\\Tests\\Fixtures\\AppendHeader',
+        ),
+        0 => 'SignpostMarv\\DaftRouter\\Tests\\Fixtures\\Home',
       ),
       '/login' => 
       array (
+        'SignpostMarv\\DaftRouter\\DaftRequestInterceptor' => 
+        array (
+        ),
+        'SignpostMarv\\DaftRouter\\DaftResponseModifier' => 
+        array (
+        ),
         0 => 'SignpostMarv\\DaftRouter\\Tests\\Fixtures\\Login',
       ),
       '/admin/login' => 
       array (
-        0 => 'SignpostMarv\\DaftRouter\\Tests\\Fixtures\\NotLoggedIn',
-        1 => 'SignpostMarv\\DaftRouter\\Tests\\Fixtures\\AppendHeader',
-        2 => 'SignpostMarv\\DaftRouter\\Tests\\Fixtures\\Login',
+        'SignpostMarv\\DaftRouter\\DaftRequestInterceptor' => 
+        array (
+          0 => 'SignpostMarv\\DaftRouter\\Tests\\Fixtures\\NotLoggedIn',
+        ),
+        'SignpostMarv\\DaftRouter\\DaftResponseModifier' => 
+        array (
+          0 => 'SignpostMarv\\DaftRouter\\Tests\\Fixtures\\AppendHeader',
+        ),
+        0 => 'SignpostMarv\\DaftRouter\\Tests\\Fixtures\\Login',
       ),
     ),
     'POST' => 
     array (
       '/login' => 
       array (
+        'SignpostMarv\\DaftRouter\\DaftRequestInterceptor' => 
+        array (
+        ),
+        'SignpostMarv\\DaftRouter\\DaftResponseModifier' => 
+        array (
+        ),
         0 => 'SignpostMarv\\DaftRouter\\Tests\\Fixtures\\Login',
       ),
       '/admin/login' => 
       array (
-        0 => 'SignpostMarv\\DaftRouter\\Tests\\Fixtures\\NotLoggedIn',
-        1 => 'SignpostMarv\\DaftRouter\\Tests\\Fixtures\\AppendHeader',
-        2 => 'SignpostMarv\\DaftRouter\\Tests\\Fixtures\\Login',
+        'SignpostMarv\\DaftRouter\\DaftRequestInterceptor' => 
+        array (
+          0 => 'SignpostMarv\\DaftRouter\\Tests\\Fixtures\\NotLoggedIn',
+        ),
+        'SignpostMarv\\DaftRouter\\DaftResponseModifier' => 
+        array (
+          0 => 'SignpostMarv\\DaftRouter\\Tests\\Fixtures\\AppendHeader',
+        ),
+        0 => 'SignpostMarv\\DaftRouter\\Tests\\Fixtures\\Login',
       ),
     ),
   ),

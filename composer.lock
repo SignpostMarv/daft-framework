@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "70e4392bd2b36e25648ef4e40a42dc33",
+    "content-hash": "4e43b376be315c0ccbf2176a4ebd6748",
     "packages": [
         {
             "name": "nikic/fast-route",
@@ -209,16 +209,16 @@
         },
         {
             "name": "signpostmarv/daft-router",
-            "version": "v0.4.1",
+            "version": "v0.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/SignpostMarv/daft-router.git",
-                "reference": "0605f608de0e45436134338daa8c0fef4556a08f"
+                "reference": "eebaaddd51c242c451d490a974cda051799a01e0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SignpostMarv/daft-router/zipball/0605f608de0e45436134338daa8c0fef4556a08f",
-                "reference": "0605f608de0e45436134338daa8c0fef4556a08f",
+                "url": "https://api.github.com/repos/SignpostMarv/daft-router/zipball/eebaaddd51c242c451d490a974cda051799a01e0",
+                "reference": "eebaaddd51c242c451d490a974cda051799a01e0",
                 "shasum": ""
             },
             "require": {
@@ -257,7 +257,7 @@
                 }
             ],
             "description": "Daft Router",
-            "time": "2018-12-23T14:11:34+00:00"
+            "time": "2018-12-23T15:11:53+00:00"
         },
         {
             "name": "symfony/console",
