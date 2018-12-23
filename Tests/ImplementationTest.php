@@ -385,7 +385,9 @@ class ImplementationTest extends Base
     */
     public function testUnpairedFrameworksFail(string $implementation) : void
     {
+        if ( ! is_a($implementation, Framework::class, true)) {
         static::assertTrue(is_a($implementation, Framework::class, true));
+        }
 
         static::assertFalse(Request::createFromGlobals() === Request::createFromGlobals());
 
@@ -411,6 +413,15 @@ class ImplementationTest extends Base
         array $postConstructionCalls,
         ...$implementationArgs
     ) : void {
+        if ( ! is_a($implementation, Framework::class, true)) {
+            throw new InvalidArgumentException(sprintf(
+                'Argument 1 passed to %s must be an implementation of %s, %s given!',
+                __METHOD__,
+                Framework::class,
+                $implementation
+            ));
+        }
+
         list($instance, $requestA, $requestB) = $this->PrepareReferenceDisposalTest(
             $implementation,
             $postConstructionCalls,
@@ -443,6 +454,15 @@ class ImplementationTest extends Base
         array $postConstructionCalls,
         ...$implementationArgs
     ) : void {
+        if ( ! is_a($implementation, Framework::class, true)) {
+            throw new InvalidArgumentException(sprintf(
+                'Argument 1 passed to %s must be an implementation of %s, %s given!',
+                __METHOD__,
+                Framework::class,
+                $implementation
+            ));
+        }
+
         list($instance, $requestA, $requestB) = $this->PrepareReferenceDisposalTest(
             $implementation,
             $postConstructionCalls,
@@ -472,6 +492,15 @@ class ImplementationTest extends Base
     */
     public function testNormaliseUrlFails(string $implementation) : void
     {
+        if ( ! is_a($implementation, Framework::class, true)) {
+            throw new InvalidArgumentException(sprintf(
+                'Argument 1 passed to %s must be an implementation of %s, %s given!',
+                __METHOD__,
+                Framework::class,
+                $implementation
+            ));
+        }
+
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage(
             'Base URL must have at least a scheme, host & path in order to be normalised!'
@@ -498,6 +527,15 @@ class ImplementationTest extends Base
         Request $requestB,
         ...$implementationArgs
     ) : array {
+        if ( ! is_a($implementation, Framework::class, true)) {
+            throw new InvalidArgumentException(sprintf(
+                'Argument 1 passed to %s must be an implementation of %s, %s given!',
+                __METHOD__,
+                Framework::class,
+                $implementation
+            ));
+        }
+
         $instance = $this->ObtainFrameworkInstance($implementation, ...$implementationArgs);
         $this->ConfigureFrameworkInstance($instance, $postConstructionCalls);
 

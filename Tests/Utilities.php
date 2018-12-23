@@ -21,6 +21,7 @@ class Utilities
         string $implementation,
         ...$implementationArgs
     ) : Framework {
+        if ( ! is_a($implementation, Framework::class, true)) {
         $testCase::assertTrue(
             is_a($implementation, Framework::class, true),
             sprintf(
@@ -30,6 +31,7 @@ class Utilities
                 Framework::class
             )
         );
+        }
 
         /**
         * @var Framework $out

@@ -10,6 +10,7 @@ use BadMethodCallException;
 use Generator;
 use PHPUnit\Framework\TestCase as Base;
 use ReflectionMethod;
+use RuntimeException;
 use SignpostMarv\DaftFramework\Framework;
 use SignpostMarv\DaftFramework\Symfony\Console\Application;
 use SignpostMarv\DaftFramework\Symfony\Console\Command\Command;
@@ -69,7 +70,9 @@ class ApplicationTest extends Base
         * @var string $args[3]
         */
         foreach ($this->DataProviderConsoleApplicationConfigFiltered() as $args) {
+            if ( ! is_a($args[3], Framework::class, true)) {
             static::assertTrue(is_a($args[3], Framework::class, true));
+            }
 
             /**
             * @var Framework $framework
@@ -104,7 +107,9 @@ class ApplicationTest extends Base
         string $frameworkImplementation,
         array $frameworkArgs
     ) : void {
+        if ( ! is_a($frameworkImplementation, Framework::class, true)) {
         static::assertTrue(is_a($frameworkImplementation, Framework::class, true));
+        }
 
         /**
         * @var Framework $framework
@@ -145,7 +150,17 @@ class ApplicationTest extends Base
         static::assertSame($name, $application->getName());
         static::assertSame($version, $application->getVersion());
 
-        foreach ($expectedCommandInstances as $expectedComamnd) {
+        foreach ($expectedCommandInstances as $i => $expectedComamnd) {
+            if ( ! is_a($expectedComamnd, BaseCommand::class, true)) {
+                throw new RuntimeException(sprintf(
+                    'Index %s of Argument 3 passed to %s must be an implementation of %s, %s given!',
+                    $i,
+                    __METHOD__,
+                    BaseCommand::class,
+                    $expectedComamnd
+                ));
+            }
+
             /**
             * @var BaseCommand $command
             */
@@ -229,6 +244,16 @@ class ApplicationTest extends Base
         */
         foreach ($this->DataProviderConsoleApplicationConfigFiltered() as $args) {
             $frameworkImplementation = $args[3];
+
+            if ( ! is_a($frameworkImplementation, Framework::class, true)) {
+                throw new RuntimeException(sprintf(
+                    'Index 3 retrieved from %s::%s must be an implementation of %s, %s given!',
+                    get_class($this),
+                    'DataProviderConsoleApplicationConfigFiltered',
+                    Framework::class,
+                    $frameworkImplementation
+                ));
+            }
 
             /**
             * @var array<string, array> $args42
