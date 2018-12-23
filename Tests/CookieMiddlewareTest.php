@@ -158,17 +158,35 @@ class CookieMiddlewareTest extends Base
             static::assertSame(
                 $cookieConfig['secure'],
                 $cookie->isSecure(),
+                sprintf(
                 'Secure must match flipped value with middleware'
+                    .
+                    ' %s vs %s',
+                    var_export($cookieConfig['secure'], true),
+                    var_export($cookie->isSecure(), true)
+                )
             );
             static::assertSame(
                 $cookieConfig['httpOnly'],
                 $cookie->isHttpOnly(),
+                sprintf(
                 'HttpOnly must match flipped value with middleware'
+                    .
+                    ' %s vs %s',
+                    var_export($cookieConfig['httpOnly'], true),
+                    var_export($cookie->isHttpOnly(), true)
+                )
             );
             static::assertSame(
                 $cookieConfig['sameSite'],
                 $cookie->getSameSite(),
+                sprintf(
                 'SameSite must match flipped value with middleware'
+                    .
+                    ' %s vs %s',
+                    var_export($cookieConfig['sameSite'], true),
+                    var_export($cookie->getSameSite(), true)
+                )
             );
         }
     }
