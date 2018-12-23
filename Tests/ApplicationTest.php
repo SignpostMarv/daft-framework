@@ -71,7 +71,7 @@ class ApplicationTest extends Base
         */
         foreach ($this->DataProviderConsoleApplicationConfigFiltered() as $args) {
             if ( ! is_a($args[3], Framework::class, true)) {
-            static::assertTrue(is_a($args[3], Framework::class, true));
+                static::assertTrue(is_a($args[3], Framework::class, true));
             }
 
             /**
@@ -108,7 +108,7 @@ class ApplicationTest extends Base
         array $frameworkArgs
     ) : void {
         if ( ! is_a($frameworkImplementation, Framework::class, true)) {
-        static::assertTrue(is_a($frameworkImplementation, Framework::class, true));
+            static::assertTrue(is_a($frameworkImplementation, Framework::class, true));
         }
 
         /**

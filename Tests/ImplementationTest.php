@@ -386,7 +386,7 @@ class ImplementationTest extends Base
     public function testUnpairedFrameworksFail(string $implementation) : void
     {
         if ( ! is_a($implementation, Framework::class, true)) {
-        static::assertTrue(is_a($implementation, Framework::class, true));
+            static::assertTrue(is_a($implementation, Framework::class, true));
         }
 
         static::assertFalse(Request::createFromGlobals() === Request::createFromGlobals());
