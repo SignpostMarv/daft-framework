@@ -161,32 +161,33 @@
         },
         {
             "name": "signpostmarv/daft-interface-collector",
-            "version": "v0.4.8",
+            "version": "v0.4.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/SignpostMarv/daft-interface-collector.git",
-                "reference": "5fe7633ecbe64bcbdaa124770ec4074a0991919a"
+                "reference": "8745ebb4f47df99039967a1a5dfcb72366caf0e4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SignpostMarv/daft-interface-collector/zipball/5fe7633ecbe64bcbdaa124770ec4074a0991919a",
-                "reference": "5fe7633ecbe64bcbdaa124770ec4074a0991919a",
+                "url": "https://api.github.com/repos/SignpostMarv/daft-interface-collector/zipball/8745ebb4f47df99039967a1a5dfcb72366caf0e4",
+                "reference": "8745ebb4f47df99039967a1a5dfcb72366caf0e4",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.1"
             },
             "require-dev": {
-                "maglnet/composer-require-checker": "^1.0",
-                "phpstan/phpstan": "^0.10.1",
+                "bmitch/churn-php": "^1.0",
+                "maglnet/composer-require-checker": "^1.1",
+                "phpstan/phpstan": "^0.10.6",
                 "phpstan/phpstan-phpunit": "^0.10.0",
-                "phpstan/phpstan-strict-rules": "^0.10.0",
-                "phpunit/phpunit": "^7.2",
+                "phpstan/phpstan-strict-rules": "^0.10.1",
+                "phpunit/phpunit": "^7.5",
                 "povils/phpmnd": "^2.0",
                 "roave/security-advisories": "dev-master",
-                "sebastian/phpcpd": "^4.0",
-                "signpostmarv/php-cs-fixer-config": "^0.5.1",
-                "vimeo/psalm": "^2.0"
+                "sebastian/phpcpd": "^4.1",
+                "signpostmarv/php-cs-fixer-config": "^0.6.0",
+                "vimeo/psalm": "^3.0"
             },
             "type": "library",
             "autoload": {
@@ -205,7 +206,7 @@
                 }
             ],
             "description": "interface collector. daft reasons again.",
-            "time": "2018-07-19T20:22:23+00:00"
+            "time": "2018-12-26T23:44:24+00:00"
         },
         {
             "name": "signpostmarv/daft-router",
