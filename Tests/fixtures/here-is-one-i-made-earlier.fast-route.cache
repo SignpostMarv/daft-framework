@@ -25,18 +25,6 @@
         ),
         0 => 'SignpostMarv\\DaftRouter\\Tests\\Fixtures\\Login',
       ),
-      '/admin/login' => 
-      array (
-        'SignpostMarv\\DaftRouter\\DaftRequestInterceptor' => 
-        array (
-          0 => 'SignpostMarv\\DaftRouter\\Tests\\Fixtures\\NotLoggedIn',
-        ),
-        'SignpostMarv\\DaftRouter\\DaftResponseModifier' => 
-        array (
-          0 => 'SignpostMarv\\DaftRouter\\Tests\\Fixtures\\AppendHeader',
-        ),
-        0 => 'SignpostMarv\\DaftRouter\\Tests\\Fixtures\\Login',
-      ),
     ),
     'POST' => 
     array (
@@ -50,21 +38,67 @@
         ),
         0 => 'SignpostMarv\\DaftRouter\\Tests\\Fixtures\\Login',
       ),
-      '/admin/login' => 
-      array (
-        'SignpostMarv\\DaftRouter\\DaftRequestInterceptor' => 
-        array (
-          0 => 'SignpostMarv\\DaftRouter\\Tests\\Fixtures\\NotLoggedIn',
-        ),
-        'SignpostMarv\\DaftRouter\\DaftResponseModifier' => 
-        array (
-          0 => 'SignpostMarv\\DaftRouter\\Tests\\Fixtures\\AppendHeader',
-        ),
-        0 => 'SignpostMarv\\DaftRouter\\Tests\\Fixtures\\Login',
-      ),
     ),
   ),
   1 => 
   array (
+    'GET' => 
+    array (
+      0 => 
+      array (
+        'regex' => '~^(?|/(admin)/login)$~',
+        'routeMap' => 
+        array (
+          2 => 
+          array (
+            0 => 
+            array (
+              'SignpostMarv\\DaftRouter\\DaftRequestInterceptor' => 
+              array (
+                0 => 'SignpostMarv\\DaftRouter\\Tests\\Fixtures\\NotLoggedIn',
+              ),
+              'SignpostMarv\\DaftRouter\\DaftResponseModifier' => 
+              array (
+                0 => 'SignpostMarv\\DaftRouter\\Tests\\Fixtures\\AppendHeader',
+              ),
+              0 => 'SignpostMarv\\DaftRouter\\Tests\\Fixtures\\Login',
+            ),
+            1 => 
+            array (
+              'mode' => 'mode',
+            ),
+          ),
+        ),
+      ),
+    ),
+    'POST' => 
+    array (
+      0 => 
+      array (
+        'regex' => '~^(?|/(admin)/login)$~',
+        'routeMap' => 
+        array (
+          2 => 
+          array (
+            0 => 
+            array (
+              'SignpostMarv\\DaftRouter\\DaftRequestInterceptor' => 
+              array (
+                0 => 'SignpostMarv\\DaftRouter\\Tests\\Fixtures\\NotLoggedIn',
+              ),
+              'SignpostMarv\\DaftRouter\\DaftResponseModifier' => 
+              array (
+                0 => 'SignpostMarv\\DaftRouter\\Tests\\Fixtures\\AppendHeader',
+              ),
+              0 => 'SignpostMarv\\DaftRouter\\Tests\\Fixtures\\Login',
+            ),
+            1 => 
+            array (
+              'mode' => 'mode',
+            ),
+          ),
+        ),
+      ),
+    ),
   ),
 );
