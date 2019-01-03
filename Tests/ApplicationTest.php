@@ -9,6 +9,7 @@ namespace SignpostMarv\DaftFramework\Tests;
 use BadMethodCallException;
 use Generator;
 use PHPUnit\Framework\TestCase as Base;
+use ReflectionClass;
 use ReflectionMethod;
 use RuntimeException;
 use SignpostMarv\DaftFramework\Framework;
@@ -79,10 +80,11 @@ class ApplicationTest extends Base
                 static::assertTrue(is_a($frameworkImplementation, Framework::class, true));
             }
 
-            /**
-            * @var Framework
-            */
-            $framework = new $args[3](...$args[4]);
+            $framework = Utilities::ObtainFrameworkInstanceMixedArgs(
+                $this,
+                $frameworkImplementation,
+                ...array_values((array) $args[4])
+            );
 
             /**
             * @var scalar[]
@@ -90,7 +92,19 @@ class ApplicationTest extends Base
             $maybeCommandSources = ($args[2] ?? []);
 
             foreach ($maybeCommandSources as $maybeCommand) {
-                if (is_string($maybeCommand) && is_a($maybeCommand, Command::class, true)) {
+                if (
+                    is_string($maybeCommand) &&
+                    is_a($maybeCommand, Command::class, true) &&
+                    Command::class !== $maybeCommand
+                ) {
+                    $refClass = new ReflectionClass($maybeCommand);
+
+                    if ($refClass->isAbstract()) {
+                        static::assertFalse($refClass->isAbstract());
+
+                        return;
+                    }
+
                     /**
                     * @var Command
                     */
@@ -116,12 +130,15 @@ class ApplicationTest extends Base
     ) : void {
         if ( ! is_a($frameworkImplementation, Framework::class, true)) {
             static::assertTrue(is_a($frameworkImplementation, Framework::class, true));
+
+            return;
         }
 
-        /**
-        * @var Framework
-        */
-        $framework = new $frameworkImplementation(...$frameworkArgs);
+        $framework = Utilities::ObtainFrameworkInstanceMixedArgs(
+            $this,
+            $frameworkImplementation,
+            ...$frameworkArgs
+        );
 
         static::assertSame($frameworkArgs[0], $framework->ObtainBaseUrl());
         static::assertSame($frameworkArgs[1], $framework->ObtainBasePath());
@@ -281,10 +298,11 @@ class ApplicationTest extends Base
 
             $args[4] = $args4;
 
-            /**
-            * @var Framework
-            */
-            $framework = new $frameworkImplementation(...$args[4]);
+            $framework = Utilities::ObtainFrameworkInstanceMixedArgs(
+                $this,
+                $frameworkImplementation,
+                ...$args[4]
+            );
 
             $application = Application::CollectApplicationWithCommands(
                 (string) $args[0],

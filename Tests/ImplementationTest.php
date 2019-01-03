@@ -388,6 +388,8 @@ class ImplementationTest extends Base
     {
         if ( ! is_a($implementation, Framework::class, true)) {
             static::assertTrue(is_a($implementation, Framework::class, true));
+
+            return;
         }
 
         static::assertFalse(Request::createFromGlobals() === Request::createFromGlobals());
@@ -520,6 +522,8 @@ class ImplementationTest extends Base
     /**
     * @param array<string, mixed[]> $postConstructionCalls
     * @param mixed ...$implementationArgs
+    *
+    * @return array{0:Framework, 1:Request, 2:Request}
     */
     protected function PrepareReferenceDisposalTest(
         string $implementation,
@@ -557,7 +561,11 @@ class ImplementationTest extends Base
     */
     protected function ObtainFrameworkInstance(string $implementation, ...$implementationArgs) : Framework
     {
-        return Utilities::ObtainFrameworkInstance($this, $implementation, ...$implementationArgs);
+        return Utilities::ObtainFrameworkInstanceMixedArgs(
+            $this,
+            $implementation,
+            ...$implementationArgs
+        );
     }
 
     /**

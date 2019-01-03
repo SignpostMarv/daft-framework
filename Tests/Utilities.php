@@ -8,6 +8,7 @@ namespace SignpostMarv\DaftFramework\Tests;
 
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
+use RuntimeException;
 use SignpostMarv\DaftFramework\Framework;
 use SignpostMarv\DaftFramework\HttpHandler;
 
@@ -16,9 +17,44 @@ class Utilities
     /**
     * @param mixed ...$implementationArgs
     */
+    public static function ObtainFrameworkInstanceMixedArgs(
+        TestCase $testCase,
+        string $implementation,
+        ...$implementationArgs
+    ) : Framework {
+        $testCase::assertIsString($implementationArgs[0] ?? null);
+        $testCase::assertIsString($implementationArgs[1] ?? null);
+        $testCase::assertIsArray($implementationArgs[2] ?? null);
+
+        /**
+        * @var array{0:string, 1:string, 2:array}
+        */
+        $implementationArgs = $implementationArgs;
+
+        list($baseUrl, $basePath, $config) = $implementationArgs;
+        $implementationArgs = array_slice($implementationArgs, 3);
+
+        return static::ObtainFrameworkInstance(
+            $testCase,
+            $implementation,
+            $baseUrl,
+            $basePath,
+            $config,
+            ...$implementationArgs
+        );
+    }
+
+    /**
+    * @param mixed ...$implementationArgs
+    *
+    * @psalm-suppress TooManyArguments
+    */
     public static function ObtainFrameworkInstance(
         TestCase $testCase,
         string $implementation,
+        string $baseUrl,
+        string $basePath,
+        array $config,
         ...$implementationArgs
     ) : Framework {
         if ( ! is_a($implementation, Framework::class, true)) {
@@ -31,12 +67,14 @@ class Utilities
                     Framework::class
                 )
             );
+
+            throw new RuntimeException('unreachable line here');
         }
 
         /**
         * @var Framework
         */
-        $out = new $implementation(...$implementationArgs);
+        $out = new $implementation($baseUrl, $basePath, $config, ...$implementationArgs);
 
         return $out;
     }
@@ -47,6 +85,9 @@ class Utilities
     public static function ObtainHttpHandlerInstance(
         TestCase $testCase,
         string $implementation,
+        string $baseUrl,
+        string $basePath,
+        array $config,
         ...$implementationArgs
     ) : HttpHandler {
         $testCase::assertTrue(
@@ -65,6 +106,9 @@ class Utilities
         $instance = static::ObtainFrameworkInstance(
             $testCase,
             $implementation,
+            $baseUrl,
+            $basePath,
+            $config,
             ...$implementationArgs
         );
 
