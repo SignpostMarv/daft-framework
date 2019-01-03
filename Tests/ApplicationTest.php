@@ -66,6 +66,9 @@ class ApplicationTest extends Base
         }
     }
 
+    /**
+    * @psalm-suppress AbstractInstantiation
+    */
     final public function DataProviderDaftConsoleCommands() : Generator
     {
         /**
