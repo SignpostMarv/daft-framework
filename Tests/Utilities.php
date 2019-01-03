@@ -82,6 +82,36 @@ class Utilities
     /**
     * @param mixed ...$implementationArgs
     */
+    public static function ObtainHttpHandlerInstanceMixedArgs(
+        TestCase $testCase,
+        string $implementation,
+        ...$implementationArgs
+    ) : HttpHandler {
+        $testCase::assertIsString($implementationArgs[0] ?? null);
+        $testCase::assertIsString($implementationArgs[1] ?? null);
+        $testCase::assertIsArray($implementationArgs[2] ?? null);
+
+        /**
+        * @var array{0:string, 1:string, 2:array}
+        */
+        $implementationArgs = $implementationArgs;
+
+        list($baseUrl, $basePath, $config) = $implementationArgs;
+        $implementationArgs = array_slice($implementationArgs, 3);
+
+        return static::ObtainHttpHandlerInstance(
+            $testCase,
+            $implementation,
+            $baseUrl,
+            $basePath,
+            $config,
+            ...$implementationArgs
+        );
+    }
+
+    /**
+    * @param mixed ...$implementationArgs
+    */
     public static function ObtainHttpHandlerInstance(
         TestCase $testCase,
         string $implementation,
@@ -103,7 +133,7 @@ class Utilities
         /**
         * @var HttpHandler
         */
-        $instance = static::ObtainFrameworkInstance(
+        $instance = static::ObtainFrameworkInstanceMixedArgs(
             $testCase,
             $implementation,
             $baseUrl,

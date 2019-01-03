@@ -122,7 +122,7 @@ class HttpHandlerTest extends Base
                 */
                 $requestArgs = $testArgs[4];
 
-                $instance = Utilities::ObtainHttpHandlerInstance(
+                $instance = Utilities::ObtainHttpHandlerInstanceMixedArgs(
                     $this,
                     $implementation,
                     $baseUrl,
@@ -243,7 +243,7 @@ class HttpHandlerTest extends Base
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage(sprintf('%s config not found!', DaftSource::class));
 
-        $instance = Utilities::ObtainHttpHandlerInstance(
+        $instance = Utilities::ObtainHttpHandlerInstanceMixedArgs(
             $this,
             $implementation,
             $baseUrl,

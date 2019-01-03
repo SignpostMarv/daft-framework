@@ -79,7 +79,7 @@ class CookieMiddlewareTest extends Base
 
         $config[DaftSource::class] = $sourceConfig;
 
-        $instance = Utilities::ObtainHttpHandlerInstance(
+        $instance = Utilities::ObtainHttpHandlerInstanceMixedArgs(
             $this,
             $implementation,
             $baseUrl,
@@ -128,7 +128,7 @@ class CookieMiddlewareTest extends Base
 
         $config[DaftSource::class] = $sourceConfig;
 
-        $instance = Utilities::ObtainHttpHandlerInstance(
+        $instance = Utilities::ObtainHttpHandlerInstanceMixedArgs(
             $this,
             $implementation,
             $baseUrl,
