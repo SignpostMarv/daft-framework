@@ -363,7 +363,7 @@ class ImplementationTest extends Base
         $this->expectExceptionMessage('Database Connection already made!');
 
         /**
-        * @var array<int, string|null|array>
+        * @var array<int, string|array|null>
         * @var string $configureArgs[0]
         * @var string|null $configureArgs[1]
         * @var string|null $configureArgs[2]
