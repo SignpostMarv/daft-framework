@@ -21,9 +21,9 @@ abstract class Command extends Base
 
     final protected static function tempnamCheck(OutputInterface $output) : ? string
     {
-        $tempnam = realpath(static::tempnam());
+        $tempnam = strval(realpath(static::tempnam()));
 
-        if ( ! is_string($tempnam) || ! is_writable($tempnam) || is_dir($tempnam)) {
+        if (is_dir($tempnam) || ! is_file($tempnam) || ! is_writable($tempnam)) {
             $output->writeln('could not get temporary filename!');
 
             return null;
