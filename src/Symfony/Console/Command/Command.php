@@ -16,14 +16,14 @@ abstract class Command extends Base
 
     protected static function tempnam() : string
     {
-        return strval(tempnam(sys_get_temp_dir(), static::class));
+        return (string) (tempnam(sys_get_temp_dir(), static::class));
     }
 
     final protected static function tempnamCheck(OutputInterface $output) : ? string
     {
         $tempnam = realpath(static::tempnam());
 
-        if ( ! is_string($tempnam) || ! is_writeable($tempnam) || is_dir($tempnam)) {
+        if ( ! is_string($tempnam) || ! is_writable($tempnam) || is_dir($tempnam)) {
             $output->writeln('could not get temporary filename!');
 
             return null;
