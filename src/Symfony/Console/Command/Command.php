@@ -14,22 +14,15 @@ abstract class Command extends Base
 {
     use AttachDaftFramework;
 
-    /**
-    * @return string|false
-    */
-    protected static function tempnam()
+    protected static function tempnam() : ? string
     {
-        return tempnam(sys_get_temp_dir(), static::class);
+        $out = tempnam(sys_get_temp_dir(), static::class);
+
+        return is_string($out) ? $out : null;
     }
 
-    /**
-    * @return string|false
-    */
-    final protected static function tempnamCheck(OutputInterface $output)
+    final protected static function tempnamCheck(OutputInterface $output) : ? string
     {
-        /**
-        * @var string|false
-        */
         $tempnam = static::tempnam();
 
         if ( ! is_string($tempnam)) {

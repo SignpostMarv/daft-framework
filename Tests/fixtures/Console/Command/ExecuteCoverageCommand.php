@@ -15,11 +15,8 @@ class ExecuteCoverageCommand extends FastRouteCacheCommand
     */
     protected static $defaultName = 'test:execute-coverage';
 
-    /**
-    * @return string|false
-    */
-    protected static function tempnam()
+    protected static function tempnam() : ? string
     {
-        return false;
+        return null;
     }
 }
