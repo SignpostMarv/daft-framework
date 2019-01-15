@@ -38,9 +38,6 @@ class ApplicationTest extends Base
         $this->runTestInSeparateProcess = false;
     }
 
-    /**
-    * @psalm-suppress UnresolvableInclude
-    */
     final public function DataProviderConsoleApplicationConfigFiltered() : Generator
     {
         /**
@@ -66,9 +63,6 @@ class ApplicationTest extends Base
         }
     }
 
-    /**
-    * @psalm-suppress AbstractInstantiation
-    */
     final public function DataProviderDaftConsoleCommands() : Generator
     {
         /**

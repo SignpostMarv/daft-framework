@@ -46,8 +46,6 @@ class Utilities
 
     /**
     * @param mixed ...$implementationArgs
-    *
-    * @psalm-suppress TooManyArguments
     */
     public static function ObtainFrameworkInstance(
         TestCase $testCase,
