@@ -13,6 +13,10 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class FastRouteCacheCommand extends Command
 {
+    const INT_RETURN_OK = 0;
+
+    const INT_RETURN_FAIL = 1;
+
     /**
     * @var string
     */
@@ -23,7 +27,7 @@ class FastRouteCacheCommand extends Command
         $cacheFilename = static::tempnamCheck($output);
 
         if ( ! is_string($cacheFilename)) {
-            return 1;
+            return self::INT_RETURN_FAIL;
         }
 
         unlink($cacheFilename);
@@ -41,7 +45,7 @@ class FastRouteCacheCommand extends Command
 
         unlink($cacheFilename);
 
-        return 0;
+        return self::INT_RETURN_OK;
     }
 
     protected function configure() : void

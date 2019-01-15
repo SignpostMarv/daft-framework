@@ -14,6 +14,10 @@ use Symfony\Component\HttpFoundation\Request;
 
 class Framework
 {
+    const DEFAULT_BOOL_REQUIRE_FILE_EXISTS = true;
+
+    const BOOL_IN_ARRAY_STRICT = true;
+
     /**
     * @var string
     */
@@ -109,7 +113,10 @@ class Framework
         return $this->config;
     }
 
-    public function FileIsUnderBasePath(string $filename, bool $requireFileExists = true) : bool
+    public function FileIsUnderBasePath(
+        string $filename,
+        bool $requireFileExists = self::DEFAULT_BOOL_REQUIRE_FILE_EXISTS
+    ) : bool
     {
         $realpath = realpath($filename);
 
@@ -143,7 +150,7 @@ class Framework
     public static function DisposeOfFrameworkReferences(self ...$frameworks) : void
     {
         foreach (array_keys(self::$requestpair) as $hash) {
-            if (in_array(self::$requestpair[$hash], $frameworks, true)) {
+            if (in_array(self::$requestpair[$hash], $frameworks, self::BOOL_IN_ARRAY_STRICT)) {
                 unset(self::$requestpair[$hash]);
             }
         }
