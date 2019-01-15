@@ -130,7 +130,7 @@ class ApplicationTest extends Base
         array $expectedCommandInstances,
         string $frameworkImplementation,
         array $frameworkArgs
-    ) : void {
+    ) {
         if ( ! is_a($frameworkImplementation, Framework::class, true)) {
             static::assertTrue(is_a($frameworkImplementation, Framework::class, true));
 
@@ -215,7 +215,7 @@ class ApplicationTest extends Base
         array $expectedCommandInstances,
         string $frameworkImplementation,
         array $frameworkArgs
-    ) : void {
+    ) {
         $constructedApplication = new Application($name, $version);
 
         $this->expectException(BadMethodCallException::class);
@@ -231,7 +231,7 @@ class ApplicationTest extends Base
     *
     * @depends testApplicationSetup
     */
-    public function testCommandFrameworkAttachment(Framework $framework, Command $command) : void
+    public function testCommandFrameworkAttachment(Framework $framework, Command $command)
     {
         static::assertFalse($command->CheckIfUsingFrameworkInstance($framework));
 
@@ -273,6 +273,11 @@ class ApplicationTest extends Base
             */
             $frameworkImplementation = $args[3];
 
+            /**
+            * @var scalar
+            */
+            $args1 = $args[1];
+
             if ( ! is_a($frameworkImplementation, Framework::class, true)) {
                 throw new RuntimeException(sprintf(
                     'Index %s[3] retrieved from %s::%s must be an implementation of %s, %s given!',
@@ -308,8 +313,8 @@ class ApplicationTest extends Base
             );
 
             $application = Application::CollectApplicationWithCommands(
-                (string) $args[0],
-                (string) $args[1],
+                $args[0],
+                (string) $args1,
                 $framework
             );
 
@@ -323,7 +328,7 @@ class ApplicationTest extends Base
     public function testFastRouteCacheCommand(
         Application $application,
         string $expectedOutput
-    ) : void {
+    ) {
         $command = new FastRouteCacheCommand();
 
         $ref = new ReflectionMethod($command, 'configure');
@@ -387,7 +392,7 @@ class ApplicationTest extends Base
     /**
     * @dataProvider DataProviderFastRouteCacheComamnd
     */
-    public function testExecuteCoverageCommand(Application $application) : void
+    public function testExecuteCoverageCommand(Application $application)
     {
         $command = $application->find('test:execute-coverage');
 

@@ -166,7 +166,7 @@ class HttpHandlerTest extends Base
         Request $request,
         int $expectedStatus,
         string $expectedContent
-    ) : void {
+    ) {
         $response = $instance->handle($request);
 
         static::assertSame($expectedStatus, $response->getStatusCode());
@@ -239,7 +239,7 @@ class HttpHandlerTest extends Base
         string $basePath,
         array $config,
         array $args1
-    ) : void {
+    ) {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage(sprintf('%s config not found!', DaftSource::class));
 
@@ -263,7 +263,7 @@ class HttpHandlerTest extends Base
         Request $request,
         int $expectedStatus,
         string $expectedContent
-    ) : void {
+    ) {
         $dispatcher = new EventDispatcher();
         $instance->AttachToEventDispatcher($dispatcher);
 

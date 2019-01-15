@@ -64,9 +64,9 @@ class HttpHandler extends Framework
         );
     }
 
-    public function AttachToEventDispatcher(EventDispatcher $dispatcher) : void
+    public function AttachToEventDispatcher(EventDispatcher $dispatcher)
     {
-        $dispatcher->addListener(KernelEvents::REQUEST, function (GetResponseEvent $e) : void {
+        $dispatcher->addListener(KernelEvents::REQUEST, function (GetResponseEvent $e) {
             if ( ! $e->hasResponse()) {
                 $e->setResponse($this->handle($e->getRequest()));
             }
@@ -89,7 +89,7 @@ class HttpHandler extends Framework
         return parent::ValidateConfig($config);
     }
 
-    protected function ValidateDaftSourceSubConfig(array $subConfig) : void
+    protected function ValidateDaftSourceSubConfig(array $subConfig)
     {
         if ( ! is_string($subConfig['cacheFile'])) {
             throw new InvalidArgumentException(sprintf(self::ERROR_SOURCE_CONFIG, 'cacheFile'));

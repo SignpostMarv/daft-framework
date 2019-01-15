@@ -26,7 +26,10 @@ class Application extends Base
         return $this->addStrict($command);
     }
 
-    public function addStrict(BaseCommand $command) : ? BaseCommand
+    /**
+    * @return BaseCommand|null
+    */
+    public function addStrict(BaseCommand $command)
     {
         $out = parent::add($command);
 
@@ -66,7 +69,7 @@ class Application extends Base
         );
     }
 
-    public function CollectCommands(string ...$sources) : void
+    public function CollectCommands(string ...$sources)
     {
         $framework = $this->GetDaftFramework();
 

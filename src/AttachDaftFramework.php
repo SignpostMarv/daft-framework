@@ -15,7 +15,7 @@ trait AttachDaftFramework
     */
     protected $daftFrameworkInstance;
 
-    public function AttachDaftFramework(Framework $framework) : void
+    public function AttachDaftFramework(Framework $framework)
     {
         if ($this->daftFrameworkInstance instanceof Framework) {
             throw new BadMethodCallException(
@@ -26,7 +26,10 @@ trait AttachDaftFramework
         $this->daftFrameworkInstance = $framework;
     }
 
-    public function DetachDaftFramework() : ? Framework
+    /**
+    * @return Framework|null
+    */
+    public function DetachDaftFramework()
     {
         $out = $this->daftFrameworkInstance;
 
@@ -37,7 +40,10 @@ trait AttachDaftFramework
         return $out;
     }
 
-    public function GetDaftFramework() : ? Framework
+    /**
+    * @return Framework|null
+    */
+    public function GetDaftFramework()
     {
         return $this->daftFrameworkInstance;
     }

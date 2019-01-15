@@ -36,10 +36,10 @@ class CookieMiddlewareTest extends Base
         array $config,
         string $cookieName,
         string $cookieValue,
-        ? string $secure,
-        ? string $http,
-        ? string $sameSite
-    ) : void {
+        string $secure = null,
+        string $http = null,
+        string $sameSite = null
+    ) {
         $url = sprintf(
             'cookie-test/%s/%s/%s/%s/%s',
             rawurlencode($cookieName),

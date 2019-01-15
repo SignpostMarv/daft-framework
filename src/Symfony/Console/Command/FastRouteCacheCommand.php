@@ -48,7 +48,7 @@ class FastRouteCacheCommand extends Command
         return self::INT_RETURN_OK;
     }
 
-    protected function configure() : void
+    protected function configure()
     {
         $this->setDescription(
             'Update the cache used by the daft framework router'

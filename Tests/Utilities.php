@@ -22,9 +22,9 @@ class Utilities
         string $implementation,
         ...$implementationArgs
     ) : Framework {
-        $testCase::assertIsString($implementationArgs[0] ?? null);
-        $testCase::assertIsString($implementationArgs[1] ?? null);
-        $testCase::assertIsArray($implementationArgs[2] ?? null);
+        $testCase::assertInternalType('string', $implementationArgs[0] ?? null);
+        $testCase::assertInternalType('string', $implementationArgs[1] ?? null);
+        $testCase::assertInternalType('array', $implementationArgs[2] ?? null);
 
         /**
         * @var array{0:string, 1:string, 2:array}
@@ -87,9 +87,9 @@ class Utilities
         string $implementation,
         ...$implementationArgs
     ) : HttpHandler {
-        $testCase::assertIsString($implementationArgs[0] ?? null);
-        $testCase::assertIsString($implementationArgs[1] ?? null);
-        $testCase::assertIsArray($implementationArgs[2] ?? null);
+        $testCase::assertInternalType('string', $implementationArgs[0] ?? null);
+        $testCase::assertInternalType('string', $implementationArgs[1] ?? null);
+        $testCase::assertInternalType('array', $implementationArgs[2] ?? null);
 
         /**
         * @var array{0:string, 1:string, 2:array}
@@ -152,7 +152,7 @@ class Utilities
         TestCase $testCase,
         Framework $instance,
         array $postConstructionCalls
-    ) : void {
+    ) {
         if (count($postConstructionCalls) > 0) {
             $reflector = new ReflectionClass($instance);
 

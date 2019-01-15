@@ -19,7 +19,10 @@ abstract class Command extends Base
         return (string) realpath((string) tempnam(sys_get_temp_dir(), static::class));
     }
 
-    final protected static function tempnamCheck(OutputInterface $output) : ? string
+    /**
+    * @return string|null
+    */
+    final protected static function tempnamCheck(OutputInterface $output)
     {
         $tempnam = static::tempnam();
 

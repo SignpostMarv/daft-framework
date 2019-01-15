@@ -16,8 +16,6 @@ class Framework
 {
     const DEFAULT_BOOL_REQUIRE_FILE_EXISTS = true;
 
-    const BOOL_IN_ARRAY_STRICT = true;
-
     /**
     * @var string
     */
@@ -90,7 +88,7 @@ class Framework
         string $username = null,
         string $password = null,
         array $options = []
-    ) : void {
+    ) {
         if ($this->db instanceof EasyDB) {
             throw new BadMethodCallException('Database Connection already made!');
         }
@@ -128,7 +126,7 @@ class Framework
             );
     }
 
-    public static function PairWithRequest(self $framework, Request $request) : void
+    public static function PairWithRequest(self $framework, Request $request)
     {
         self::$requestpair[spl_object_hash($request)] = $framework;
     }
@@ -146,16 +144,16 @@ class Framework
         return $framework;
     }
 
-    public static function DisposeOfFrameworkReferences(self ...$frameworks) : void
+    public static function DisposeOfFrameworkReferences(self ...$frameworks)
     {
         foreach (array_keys(self::$requestpair) as $hash) {
-            if (in_array(self::$requestpair[$hash], $frameworks, self::BOOL_IN_ARRAY_STRICT)) {
+            if (in_array(self::$requestpair[$hash], $frameworks, true)) {
                 unset(self::$requestpair[$hash]);
             }
         }
     }
 
-    public static function DisposeOfRequestReferences(Request ...$requests) : void
+    public static function DisposeOfRequestReferences(Request ...$requests)
     {
         foreach ($requests as $request) {
             $hash = spl_object_hash($request);

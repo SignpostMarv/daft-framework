@@ -27,7 +27,7 @@ class ImplementationTest extends Base
         $this->runTestInSeparateProcess = false;
     }
 
-    public function tearDown() : void
+    public function tearDown()
     {
         /**
         * @var string[]
@@ -302,11 +302,11 @@ class ImplementationTest extends Base
     public function testThingsFail(
         string $implementation,
         string $expectedExceptionClass,
-        ? string $expectedExceptionMessage,
-        ? int $expectedExceptionCode,
-        array $postConstructionCalls,
+        string $expectedExceptionMessage = null,
+        int $expectedExceptionCode = null,
+        array $postConstructionCalls = [],
         ...$implementationArgs
-    ) : void {
+    ) {
         $this->expectException($expectedExceptionClass);
         if (is_string($expectedExceptionMessage)) {
             $this->expectExceptionMessage($expectedExceptionMessage);
@@ -331,7 +331,7 @@ class ImplementationTest extends Base
         string $implementation,
         array $postConstructionCalls,
         ...$implementationArgs
-    ) : void {
+    ) {
         $instance = $this->ObtainFrameworkInstance($implementation, ...$implementationArgs);
         $this->ConfigureFrameworkInstance($instance, $postConstructionCalls);
 
@@ -353,7 +353,7 @@ class ImplementationTest extends Base
         string $implementation,
         array $postConstructionCalls,
         ...$implementationArgs
-    ) : void {
+    ) {
         $instance = $this->ObtainFrameworkInstance($implementation, ...$implementationArgs);
         $this->ConfigureFrameworkInstance($instance, $postConstructionCalls);
 
@@ -384,7 +384,7 @@ class ImplementationTest extends Base
     *
     * @depends testEverythingInitialisesFine
     */
-    public function testUnpairedFrameworksFail(string $implementation) : void
+    public function testUnpairedFrameworksFail(string $implementation)
     {
         if ( ! is_a($implementation, Framework::class, true)) {
             static::assertTrue(is_a($implementation, Framework::class, true));
@@ -415,7 +415,7 @@ class ImplementationTest extends Base
         string $implementation,
         array $postConstructionCalls,
         ...$implementationArgs
-    ) : void {
+    ) {
         if ( ! is_a($implementation, Framework::class, true)) {
             throw new InvalidArgumentException(sprintf(
                 'Argument 1 passed to %s must be an implementation of %s, %s given!',
@@ -456,7 +456,7 @@ class ImplementationTest extends Base
         string $implementation,
         array $postConstructionCalls,
         ...$implementationArgs
-    ) : void {
+    ) {
         if ( ! is_a($implementation, Framework::class, true)) {
             throw new InvalidArgumentException(sprintf(
                 'Argument 1 passed to %s must be an implementation of %s, %s given!',
@@ -493,7 +493,7 @@ class ImplementationTest extends Base
     /**
     * @dataProvider DataProviderGoodSources
     */
-    public function testNormaliseUrlFails(string $implementation) : void
+    public function testNormaliseUrlFails(string $implementation)
     {
         if ( ! is_a($implementation, Framework::class, true)) {
             throw new InvalidArgumentException(sprintf(
@@ -574,7 +574,7 @@ class ImplementationTest extends Base
     protected function ConfigureFrameworkInstance(
         Framework $instance,
         array $postConstructionCalls
-    ) : void {
+    ) {
         Utilities::ConfigureFrameworkInstance($this, $instance, $postConstructionCalls);
     }
 }

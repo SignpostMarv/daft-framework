@@ -27,10 +27,13 @@ class CookieMiddleware implements DaftRequestInterceptor, DaftResponseModifier
         return $response;
     }
 
+    /**
+    * @return Response|null
+    */
     public static function DaftRouterMiddlewareHandler(
         Request $request,
-        ? Response $response
-    ) : ? Response {
+        Response $response = null
+    ) {
         return static::OmNomNom($request, $response);
     }
 
@@ -48,8 +51,8 @@ class CookieMiddleware implements DaftRequestInterceptor, DaftResponseModifier
         Response $response,
         bool $configSecure,
         bool $configHttpOnly,
-        ? string $configSameSite
-    ) : void {
+        string $configSameSite = null
+    ) {
         foreach ($response->headers->getCookies() as $cookie) {
             self::PerhapsReconfigureCookie(
                 $response,
@@ -66,8 +69,8 @@ class CookieMiddleware implements DaftRequestInterceptor, DaftResponseModifier
         Cookie $cookie,
         bool $isSecure,
         bool $isHttpOnly,
-        ? string $sameSite
-    ) : void {
+        string $sameSite = null
+    ) {
         $updateSecure = $cookie->isSecure() !== $isSecure;
         $updateHttpOnly = $cookie->isHttpOnly() !== $isHttpOnly;
         $updateSameSite = $cookie->getSameSite() !== $sameSite;
@@ -82,8 +85,8 @@ class CookieMiddleware implements DaftRequestInterceptor, DaftResponseModifier
         Cookie $cookie,
         bool $configSecure,
         bool $configHttpOnly,
-        ? string $configSameSite
-    ) : void {
+        string $configSameSite = null
+    ) {
         $cookieName = $cookie->getName();
         $cookiePath = $cookie->getPath();
         $cookieDomain = $cookie->getDomain();
@@ -101,7 +104,10 @@ class CookieMiddleware implements DaftRequestInterceptor, DaftResponseModifier
         ));
     }
 
-    protected static function OmNomNom(Request $request, ? Response $response) : ? Response
+    /**
+    * @return Response|null
+    */
+    protected static function OmNomNom(Request $request, Response $response = null)
     {
         $config = Framework::ObtainFrameworkForRequest($request)->ObtainConfig();
         if (isset($response, $config[self::class])) {
