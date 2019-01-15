@@ -116,8 +116,7 @@ class Framework
     public function FileIsUnderBasePath(
         string $filename,
         bool $requireFileExists = self::DEFAULT_BOOL_REQUIRE_FILE_EXISTS
-    ) : bool
-    {
+    ) : bool {
         $realpath = realpath($filename);
 
         return
