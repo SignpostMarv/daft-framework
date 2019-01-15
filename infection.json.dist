@@ -27,7 +27,8 @@
             "ignore": [
                 "SignpostMarv\\DaftFramework\\Framework::NormaliseUrl",
                 "SignpostMarv\\DaftFramework\\HttpHandler::__construct",
-                "SignpostMarv\\DaftFramework\\HttpHandler::handle"
+                "SignpostMarv\\DaftFramework\\HttpHandler::handle",
+                "SignpostMarv\\DaftFramework\\Symfony\\Console\\Command\\Command::tempnam"
             ]
         },
         "FunctionCallRemoval": {
@@ -43,7 +44,8 @@
         },
         "LogicalOr": {
             "ignore": [
-                "SignpostMarv\\DaftFramework\\Http\\CookieMiddleware::PerhapsReconfigureCookie"
+                "SignpostMarv\\DaftFramework\\Http\\CookieMiddleware::PerhapsReconfigureCookie",
+                "SignpostMarv\\DaftFramework\\Symfony\\Console\\Command\\Command::tempnamCheck"
             ]
         },
         "MethodCallRemoval": {
