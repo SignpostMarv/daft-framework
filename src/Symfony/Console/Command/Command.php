@@ -26,12 +26,10 @@ abstract class Command extends Base
     {
         $tempnam = static::tempnam();
 
-        if (is_dir($tempnam) || ! is_file($tempnam) || ! is_writable($tempnam)) {
-            $output->writeln('could not get temporary filename!');
-
-            return;
+        if ( ! is_dir($tempnam) && is_file($tempnam) && is_writable($tempnam)) {
+            return $tempnam;
         }
 
-        return $tempnam;
+        $output->writeln('could not get temporary filename!');
     }
 }
