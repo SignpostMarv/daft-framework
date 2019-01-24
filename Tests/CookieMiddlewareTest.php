@@ -112,11 +112,11 @@ class CookieMiddlewareTest extends Base
                 'HttpOnly must match without middleware'
             );
             if (method_exists($cookie, 'getSameSite')) {
-            static::assertSame(
-                $sameSite,
-                $cookie->getSameSite(),
-                'SameSite must match without middleware'
-            );
+                static::assertSame(
+                    $sameSite,
+                    $cookie->getSameSite(),
+                    'SameSite must match without middleware'
+                );
             }
         }
 
@@ -176,15 +176,15 @@ class CookieMiddlewareTest extends Base
                 )
             );
             if (method_exists($cookie, 'getSameSite')) {
-            static::assertSame(
-                $cookieConfig['sameSite'],
-                $cookie->getSameSite(),
-                sprintf(
-                    'SameSite must match flipped value with middleware %s vs %s',
-                    var_export($cookieConfig['sameSite'], true),
-                    var_export($cookie->getSameSite(), true)
-                )
-            );
+                static::assertSame(
+                    $cookieConfig['sameSite'],
+                    $cookie->getSameSite(),
+                    sprintf(
+                        'SameSite must match flipped value with middleware %s vs %s',
+                        var_export($cookieConfig['sameSite'], true),
+                        var_export($cookie->getSameSite(), true)
+                    )
+                );
             }
         }
     }

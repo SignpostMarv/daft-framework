@@ -76,7 +76,7 @@ class CookieMiddleware implements DaftRequestInterceptor, DaftResponseModifier
 
         $updateSameSite = false;
         if (method_exists($cookie, 'getSameSite')) {
-        $updateSameSite = $cookie->getSameSite() !== $sameSite;
+            $updateSameSite = $cookie->getSameSite() !== $sameSite;
         }
 
         if ($updateSecure || $updateHttpOnly || $updateSameSite) {
