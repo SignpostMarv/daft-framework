@@ -40,7 +40,7 @@
         ]
     },
     "require": {
-        "php": "^7.0,<7.1",
+        "php": "^7.0,>=7.0.8,<7.1",
         "ext-mbstring": "*",
         "paragonie/easydb": "^2.6",
         "signpostmarv/daft-interface-collector": "^0.5.0",

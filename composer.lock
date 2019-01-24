@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bd4917ff34cfb34acbe464f7b72f872a",
+    "content-hash": "bf2f3b0fd2581512c0ea9c0735db1a53",
     "packages": [
         {
             "name": "nikic/fast-route",
@@ -724,7 +724,7 @@
                 },
                 {
                     "name": "Gert de Pagter",
-                    "email": "BackEndTea@gmail.com"
+                    "email": "backendtea@gmail.com"
                 }
             ],
             "description": "Symfony polyfill for ctype functions",
@@ -4587,7 +4587,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.0,<7.1",
+        "php": "^7.0,>=7.0.8,<7.1",
         "ext-mbstring": "*"
     },
     "platform-dev": []
