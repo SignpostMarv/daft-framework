@@ -73,7 +73,11 @@ class CookieMiddleware implements DaftRequestInterceptor, DaftResponseModifier
     ) {
         $updateSecure = $cookie->isSecure() !== $isSecure;
         $updateHttpOnly = $cookie->isHttpOnly() !== $isHttpOnly;
+
+        $updateSameSite = false;
+        if (method_exists($cookie, 'getSameSite')) {
         $updateSameSite = $cookie->getSameSite() !== $sameSite;
+        }
 
         if ($updateSecure || $updateHttpOnly || $updateSameSite) {
             static::ReconfigureCookie($response, $cookie, $isSecure, $isHttpOnly, $sameSite);
@@ -91,7 +95,7 @@ class CookieMiddleware implements DaftRequestInterceptor, DaftResponseModifier
         $cookiePath = $cookie->getPath();
         $cookieDomain = $cookie->getDomain();
         $response->headers->removeCookie($cookieName, $cookiePath, $cookieDomain);
-        $response->headers->setCookie(new Cookie(
+        $args = [
             $cookieName,
             $cookie->getValue(),
             $cookie->getExpiresTime(),
@@ -99,8 +103,13 @@ class CookieMiddleware implements DaftRequestInterceptor, DaftResponseModifier
             $cookieDomain,
             $configSecure,
             $configHttpOnly,
-            $cookie->isRaw(),
-            $configSameSite
+        ];
+        if (method_exists($cookie, 'getSameSite')) {
+            $args[] = (bool) $cookie->isRaw();
+            $args[] = $configSameSite;
+        }
+        $response->headers->setCookie(new Cookie(
+            ...$args
         ));
     }
 

@@ -14,6 +14,20 @@ abstract class Command extends Base
 {
     use AttachDaftFramework;
 
+    /**
+    * @var string
+    */
+    protected static $defaultName = '';
+
+    public static function getDefaultName() : string
+    {
+        if (method_exists(Base::class, 'getDefaultName')) {
+            return (string) parent::getDefaultName();
+        }
+
+        return static::$defaultName;
+    }
+
     protected static function tempnam() : string
     {
         return (string) realpath((string) tempnam(sys_get_temp_dir(), static::class));

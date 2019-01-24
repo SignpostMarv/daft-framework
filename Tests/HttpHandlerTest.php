@@ -267,13 +267,23 @@ class HttpHandlerTest extends Base
         $dispatcher = new EventDispatcher();
         $instance->AttachToEventDispatcher($dispatcher);
 
-        $kernel = new HttpKernel(
+        $args = [
             $dispatcher,
             new ControllerResolver(),
             new RequestStack(),
-            new ArgumentResolver()
+        ];
+
+        if (class_exists(ArgumentResolver::class)) {
+            $args[] = new ArgumentResolver();
+        }
+
+        $kernel = new HttpKernel(
+            ...$args
         );
 
+        /**
+        * @var \Symfony\Component\HttpFoundation\Response
+        */
         $response = $kernel->handle($request);
 
         $kernel->terminate($request, $response);

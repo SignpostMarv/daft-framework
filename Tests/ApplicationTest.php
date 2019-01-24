@@ -329,7 +329,7 @@ class ApplicationTest extends Base
         Application $application,
         string $expectedOutput
     ) {
-        $command = new FastRouteCacheCommand();
+        $command = new FastRouteCacheCommand(FastRouteCacheCommand::getDefaultName());
 
         $ref = new ReflectionMethod($command, 'configure');
         $ref->setAccessible(true);

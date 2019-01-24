@@ -40,15 +40,15 @@
         ]
     },
     "require": {
-        "php": "^7.0,<7.1",
+        "php": "^7.0,<7.0.8",
         "ext-mbstring": "*",
         "paragonie/easydb": "^2.6",
         "signpostmarv/daft-interface-collector": "^0.5.0",
-        "signpostmarv/daft-router": "^0.8.0",
-        "symfony/console": "^3.4",
-        "symfony/event-dispatcher": "^3.4",
-        "symfony/http-foundation": "^3.4",
-        "symfony/http-kernel": "^3.4"
+        "signpostmarv/daft-router": "^0.9.0",
+        "symfony/console": "^2.8|^3.0|^3.4",
+        "symfony/event-dispatcher": "^3.0|^3.4",
+        "symfony/http-foundation": "^2.8|^3.4",
+        "symfony/http-kernel": "^2.8|^3.4"
     },
     "require-dev": {
         "maglnet/composer-require-checker": "^0.1.6",
@@ -59,7 +59,7 @@
         "povils/phpmnd": "^1.1",
         "roave/security-advisories": "dev-master",
         "sebastian/phpcpd": "^3.0",
-        "signpostmarv/php-cs-fixer-config": "^0.6.0",
+        "signpostmarv/php-cs-fixer-config": "^0.6.1",
         "vimeo/psalm": "^1.1"
     }
 }

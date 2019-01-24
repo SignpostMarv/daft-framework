@@ -17,9 +17,19 @@ class CookieTest implements DaftRoute
 {
     use DaftRouterAutoMethodCheckingTrait;
 
+    /**
+    * @psalm-suppress TooManyArguments
+    */
     public static function DaftRouterHandleRequest(Request $request, array $args) : Response
     {
         $resp = new Response('');
+
+        $objArgs = [];
+
+        if (method_exists(Cookie::class, 'getSameSite')) {
+            $objArgs[] = false;
+            $objArgs[] = is_string($args['same-site']) ? $args['same-site'] : null;
+        }
 
         $cookie = new Cookie(
             (string) ($args['name'] ?? null),
@@ -29,8 +39,7 @@ class CookieTest implements DaftRoute
             null,
             '1' === $args['secure'],
             '1' === $args['http'],
-            false,
-            is_string($args['same-site']) ? $args['same-site'] : null
+            ...$objArgs
         );
 
         $resp->headers->setCookie($cookie);

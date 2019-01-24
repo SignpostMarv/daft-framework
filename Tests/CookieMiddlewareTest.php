@@ -111,11 +111,13 @@ class CookieMiddlewareTest extends Base
                 $cookie->isHttpOnly(),
                 'HttpOnly must match without middleware'
             );
+            if (method_exists($cookie, 'getSameSite')) {
             static::assertSame(
                 $sameSite,
                 $cookie->getSameSite(),
                 'SameSite must match without middleware'
             );
+            }
         }
 
         /**
@@ -173,6 +175,7 @@ class CookieMiddlewareTest extends Base
                     var_export($cookie->isHttpOnly(), true)
                 )
             );
+            if (method_exists($cookie, 'getSameSite')) {
             static::assertSame(
                 $cookieConfig['sameSite'],
                 $cookie->getSameSite(),
@@ -182,6 +185,7 @@ class CookieMiddlewareTest extends Base
                     var_export($cookie->getSameSite(), true)
                 )
             );
+            }
         }
     }
 
