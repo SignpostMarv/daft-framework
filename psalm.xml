@@ -5,17 +5,18 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns="https://getpsalm.org/schema/config"
     xsi:schemaLocation="https://getpsalm.org/schema/config"
+    errorBaseline="./psalm.baseline.xml"
 >
     <projectFiles>
-        <file name=".php_cs.dist" />
-        <file name="Tests/fixtures/bin/daft-framework" />
-        <directory name="src" />
-        <directory name="./Tests/" />
+        <file name=".php_cs.dist"/>
+        <file name="Tests/fixtures/bin/daft-framework"/>
+        <directory name="src"/>
+        <directory name="./Tests/"/>
         <ignoreFiles>
-            <directory name="./vendor/phpunit/phpunit/" />
+            <directory name="./vendor/phpunit/phpunit/"/>
         </ignoreFiles>
     </projectFiles>
 
     <issueHandlers>
     </issueHandlers>
-</psalm>
+<plugins><pluginClass class="Psalm\PhpUnitPlugin\Plugin"/></plugins></psalm>

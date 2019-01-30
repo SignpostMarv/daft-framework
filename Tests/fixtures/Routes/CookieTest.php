@@ -54,6 +54,9 @@ class CookieTest implements DaftRoute
         ];
     }
 
+    /**
+    * @param array<string, string> $args
+    */
     public static function DaftRouterHttpRoute(array $args, string $method = 'GET') : string
     {
         $args = static::DaftRouterHttpRouteArgs($args, $method);
@@ -68,6 +71,13 @@ class CookieTest implements DaftRoute
         );
     }
 
+    /**
+    * @param array<string, string> $args
+    *
+    * @return array<string, string>
+    *
+    * @psalm-return array{name:string, value:string, secure:string, http:string, same-site:string}
+    */
     public static function DaftRouterHttpRouteArgs(array $args, string $method) : array
     {
         static::DaftRouterAutoMethodChecking($method);
@@ -93,6 +103,13 @@ class CookieTest implements DaftRoute
         ];
     }
 
+    /**
+    * @param array<string, string> $args
+    *
+    * @return array<string, string>
+    *
+    * @psalm-return array{name:scalar, value:scalar, secure:scalar, http:scalar, same-site:scalar}
+    */
     public static function DaftRouterHttpRouteArgsTyped(array $args, string $method) : array
     {
         return static::DaftRouterHttpRouteArgs($args, $method);
