@@ -5,4 +5,14 @@
       <code>include($configFile)</code>
     </UnresolvableInclude>
   </file>
+  <file src="Tests\HttpHandlerTest.php">
+    <UndefinedClass occurrences="1">
+      <code>ArgumentResolver</code>
+    </UndefinedClass>
+  </file>
+  <file src="src\Http\CookieMiddleware.php">
+    <InvalidScalarArgument occurrences="1">
+      <code>$args</code>
+    </InvalidScalarArgument>
+  </file>
 </files>
