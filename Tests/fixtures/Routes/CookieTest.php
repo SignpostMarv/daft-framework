@@ -19,6 +19,13 @@ class CookieTest implements DaftRoute
 
     public static function DaftRouterHandleRequest(Request $request, array $args) : Response
     {
+        /**
+        * @var array<string, string>
+        */
+        $args = $args;
+
+        $args = static::DaftRouterHttpRouteArgsTyped($args, $request->getMethod());
+
         $resp = new Response('');
 
         $cookie = new Cookie(
