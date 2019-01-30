@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<files>
+  <file src="Tests\ApplicationTest.php">
+    <UnresolvableInclude occurrences="1">
+      <code>include($configFile)</code>
+    </UnresolvableInclude>
+  </file>
+</files>
