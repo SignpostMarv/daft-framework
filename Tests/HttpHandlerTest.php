@@ -291,18 +291,21 @@ class HttpHandlerTest extends Base
 
         list($uri) = (array) $requestArgs;
 
+        /**
+        * @var array
+        */
         $parsed = parse_url((string) $uri);
 
-        $baseUrl = (string) $parsed['scheme'] . '://' . (string) $parsed['host'];
+        $baseUrl = (string) ($parsed['scheme'] ?? '') . '://' . (string) ($parsed['host'] ?? '');
 
-        if (isset($parsed['port'])) {
-            $baseUrl .= ':' . (string) ((int) $parsed['port']);
+        if (isset($parsed['port']) && is_int($parsed['port'])) {
+            $baseUrl .= ':' . (string) $parsed['port'];
         }
 
         $baseUrl .= '/' . (string) $prefix;
 
         /**
-        * @var array<string, string|array<int, stirng>>
+        * @var array<string, string|array<int, string>>
         * @var array<int, string> $daftSourceConfig['sources']
         * @var string $daftSourceConfig['cacheFile']
         */

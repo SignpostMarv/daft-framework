@@ -65,7 +65,7 @@ class CookieMiddlewareTest extends Base
         $config[CookieMiddleware::class] = $cookieConfig;
 
         /**
-        * @var arary<string, string|array<int, string>>
+        * @var array<string, string|array<int, string>>
         */
         $sourceConfig = (array) $config[DaftSource::class];
 
@@ -119,7 +119,7 @@ class CookieMiddlewareTest extends Base
         }
 
         /**
-        * @var arary<string, string|array<int, string>>
+        * @var array<string, string|array<int, string>>
         */
         $sourceConfig = (array) $config[DaftSource::class];
 

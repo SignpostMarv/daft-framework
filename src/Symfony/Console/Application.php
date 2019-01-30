@@ -69,6 +69,9 @@ class Application extends Base
         );
     }
 
+    /**
+    * @psalm-param class-string ...$sources
+    */
     public function CollectCommands(string ...$sources)
     {
         $framework = $this->GetDaftFramework();
@@ -111,6 +114,8 @@ class Application extends Base
 
         /**
         * @var string[]
+        *
+        * @psalm-var class-string[]
         */
         $sources = array_values(array_filter($config, 'is_string'));
 

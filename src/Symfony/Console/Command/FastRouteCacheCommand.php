@@ -36,6 +36,8 @@ class FastRouteCacheCommand extends Command
 
         /**
         * @var string[]
+        *
+        * @psalm-var array<int, class-string<\SignpostMarv\DaftRouter\DaftSource>>
         */
         $sources = $input->getArgument('sources');
 

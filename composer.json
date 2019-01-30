@@ -59,7 +59,7 @@
         "povils/phpmnd": "^1.1",
         "roave/security-advisories": "dev-master",
         "sebastian/phpcpd": "^3.0",
-        "signpostmarv/php-cs-fixer-config": "^0.6.0",
+        "signpostmarv/php-cs-fixer-config": "^0.6.1",
         "vimeo/psalm": "^1.1"
     }
 }
