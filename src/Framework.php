@@ -67,13 +67,28 @@ class Framework
             );
         }
 
-        $baseUrl = (string) $parsed['scheme'] . '://' . (string) $parsed['host'];
+        /**
+        * @var string
+        */
+        $scheme = $parsed['scheme'] ?? '';
+
+        /**
+        * @var string
+        */
+        $host = $parsed['host'] ?? '';
+
+        $baseUrl = $scheme . '://' . $host;
 
         if (isset($parsed['port'])) {
             $baseUrl .= ':' . (string) $parsed['port'];
         }
 
-        return $baseUrl . str_replace('//', '/', (string) $parsed['path']);
+        /**
+        * @var string
+        */
+        $path = $parsed['path'] ?? '';
+
+        return $baseUrl . str_replace('//', '/', $path);
     }
 
     public function ObtainDatabaseConnection() : EasyDB

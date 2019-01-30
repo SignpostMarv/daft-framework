@@ -116,6 +116,8 @@ class ApplicationTest extends Base
     /**
     * @param array<int, string> $expectedCommandInstances
     *
+    * @psalm-param array<int, class-string> $expectedCommandInstances
+    *
     * @dataProvider DataProviderConsoleApplicationConfigFiltered
     */
     public function testApplicationSetup(
@@ -198,6 +200,8 @@ class ApplicationTest extends Base
 
     /**
     * @param array<int, string> $expectedCommandInstances
+    *
+    * @psalm-param array<int, class-string> $expectedCommandInstances
     *
     * @dataProvider DataProviderConsoleApplicationConfigFiltered
     *

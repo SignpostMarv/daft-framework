@@ -36,7 +36,9 @@ class CookieMiddleware implements DaftRequestInterceptor, DaftResponseModifier
 
     public static function DaftRouterRoutePrefixRequirements() : array
     {
-        return [];
+        return [
+            '/',
+        ];
     }
 
     public static function DaftRouterRoutePrefixExceptions() : array

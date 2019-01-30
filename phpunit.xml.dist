@@ -1,5 +1,8 @@
 <phpunit bootstrap="./vendor/autoload.php">
   <testsuites>
+  <testsuite name="DaftFramework">
+    <directory>./Tests/</directory>
+  </testsuite>
     <testsuite name="FastRoute Tests">
       <directory>./vendor/signpostmarv/daft-router/tests/fast-route/</directory>
     </testsuite>

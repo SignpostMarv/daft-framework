@@ -30,6 +30,8 @@ class HttpHandler extends Framework
 
     /**
     * @var array<int, string>
+    *
+    * @psalm-var array<int, class-string<DaftSource>>
     */
     private $routerSources;
 
@@ -41,6 +43,8 @@ class HttpHandler extends Framework
 
         /**
         * @var string[]
+        *
+        * @psalm-var array<int, class-string<DaftSource>>
         */
         $sources = (array) ((array) $config[DaftSource::class])['sources'];
 
