@@ -7,7 +7,6 @@ declare(strict_types=1);
 namespace SignpostMarv\DaftFramework\Tests;
 
 use PHPUnit\Framework\TestCase;
-use ReflectionClass;
 use RuntimeException;
 use SignpostMarv\DaftFramework\Framework;
 use SignpostMarv\DaftFramework\HttpHandler;
