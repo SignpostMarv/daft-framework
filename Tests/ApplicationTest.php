@@ -66,14 +66,12 @@ class ApplicationTest extends Base
         }
     }
 
+    /**
+    * @psalm-return Generator<int, array{0:Framework, 1:Command}, mixed, void>
+    */
     final public function DataProviderDaftConsoleCommands() : Generator
     {
-        /**
-        * @var iterable<array>
-        */
-        $argsSources = $this->DataProviderConsoleApplicationConfigFiltered();
-
-        foreach ($argsSources as $args) {
+        foreach ($this->DataProviderConsoleApplicationConfigFiltered() as $args) {
             $frameworkImplementation = (string) $args[3];
 
             if ( ! is_a($frameworkImplementation, Framework::class, true)) {
@@ -213,9 +211,7 @@ class ApplicationTest extends Base
     public function testCommandCollectionWithoutFramework(
         string $name,
         string $version,
-        array $expectedCommandInstances,
-        string $frameworkImplementation,
-        array $frameworkArgs
+        array $expectedCommandInstances
     ) : void {
         $constructedApplication = new Application($name, $version);
 
@@ -256,6 +252,9 @@ class ApplicationTest extends Base
         $command->AttachDaftFramework($framework);
     }
 
+    /**
+    * @psalm-return Generator<int, array{0:Application, 1:string}, mixed, void>
+    */
     public function DataProviderFastRouteCacheComamnd() : Generator
     {
         $expectedOutput = file_get_contents(

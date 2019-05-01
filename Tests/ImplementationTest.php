@@ -15,6 +15,7 @@ use SignpostMarv\DaftFramework\HttpHandler;
 use SignpostMarv\DaftRouter\DaftSource;
 use SignpostMarv\DaftRouter\Tests\Fixtures\Config as DaftRouterFixturesConfig;
 use Symfony\Component\HttpFoundation\Request;
+use Throwable;
 
 class ImplementationTest extends Base
 {
@@ -49,6 +50,9 @@ class ImplementationTest extends Base
         }
     }
 
+    /**
+    * @psalm-return Generator<int, array{0:class-string<Framework>, 1:array<string, array<int, mixed>>, 2:string, 3:string, 4:array}, mixed, void>
+    */
     public function DataProviderGoodSources() : Generator
     {
         yield from [
@@ -143,6 +147,9 @@ class ImplementationTest extends Base
         }
     }
 
+    /**
+    * @psalm-return Generator<int, array{0:class-string<Framework>, 1:class-string<Throwable>, 2:string, 3:int|null, 4:array, 5:string, 6:string, 7:array}, mixed, void>
+    */
     public function DataProviderBadSources() : Generator
     {
         yield from [
@@ -238,28 +245,24 @@ class ImplementationTest extends Base
         ];
     }
 
+    /**
+    * @psalm-return Generator<int, array{0:class-string<Framework>, 1:array<string, array<int, mixed>>, 2:string, 3:string, 4:array}, mixed, void>
+    */
     public function DataProviderGoodSourcesSansDatabaseConnection() : Generator
     {
-        /**
-        * @var iterable<array>
-        */
-        $sources = $this->DataProviderGoodSources();
-
-        foreach ($sources as $args) {
+        foreach ($this->DataProviderGoodSources() as $args) {
             if ( ! isset($args[1]['ConfigureDatabaseConnection'])) {
                 yield $args;
             }
         }
     }
 
+    /**
+    * @psalm-return Generator<int, array{0:class-string<Framework>, 1:array<string, array<int, mixed>>, 2:string, 3:string, 4:array}, mixed, void>
+    */
     public function DataProviderGoodSourcesWithDatabaseConnection() : Generator
     {
-        /**
-        * @var iterable<array>
-        */
-        $sources = $this->DataProviderGoodSources();
-
-        foreach ($sources as $args) {
+        foreach ($this->DataProviderGoodSources() as $args) {
             if (isset($args[1]['ConfigureDatabaseConnection'])) {
                 yield $args;
             }
@@ -292,6 +295,8 @@ class ImplementationTest extends Base
     }
 
     /**
+    * @psalm-param class-string<Throwable> $expectedExceptionClass
+    *
     * @param array<string, array<int, mixed>> $postConstructionCalls
     * @param mixed ...$implementationArgs
     *
@@ -425,7 +430,7 @@ class ImplementationTest extends Base
             ));
         }
 
-        list($instance, $requestA, $requestB) = $this->PrepareReferenceDisposalTest(
+        list($instance, $requestA) = $this->PrepareReferenceDisposalTest(
             $implementation,
             $postConstructionCalls,
             Request::createFromGlobals(),
@@ -543,9 +548,6 @@ class ImplementationTest extends Base
 
         $instance = $this->ObtainFrameworkInstance($implementation, ...$implementationArgs);
         $this->ConfigureFrameworkInstance($instance, $postConstructionCalls);
-
-        $requestA = Request::createFromGlobals();
-        $requestB = Request::createFromGlobals();
 
         $implementation::PairWithRequest($instance, $requestA);
         $implementation::PairWithRequest($instance, $requestB);

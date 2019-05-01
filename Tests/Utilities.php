@@ -152,8 +152,6 @@ class Utilities
         array $postConstructionCalls
     ) : void {
         if (count($postConstructionCalls) > 0) {
-            $reflector = new ReflectionClass($instance);
-
             foreach (array_keys($postConstructionCalls) as $method) {
                 $testCase::assertTrue(method_exists($instance, $method), sprintf(
                     'Argument %u passed to %s must contain keys referring to methods on %s',

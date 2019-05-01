@@ -1,8 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <files>
   <file src="Tests\ApplicationTest.php">
+    <PossiblyUnusedMethod occurrences="1">
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
     <UnresolvableInclude occurrences="1">
       <code>include($configFile)</code>
     </UnresolvableInclude>
+  </file>
+  <file src="Tests\CookieMiddlewareTest.php">
+    <PossiblyUnusedMethod occurrences="1">
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+    <PossiblyUnusedParam occurrences="1">
+      <code>$postConstructionCalls</code>
+    </PossiblyUnusedParam>
+  </file>
+  <file src="Tests\ImplementationTest.php">
+    <InvalidArgument occurrences="1">
+      <code>testThingsFail</code>
+    </InvalidArgument>
+    <PossiblyUnusedMethod occurrences="1">
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src\HttpHandler.php">
+    <PossiblyUnusedMethod occurrences="1">
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src\Symfony\Console\DaftConsoleSource.php">
+    <PossiblyUnusedMethod occurrences="1">
+      <code>DaftFrameworkConsoleSources</code>
+    </PossiblyUnusedMethod>
   </file>
 </files>

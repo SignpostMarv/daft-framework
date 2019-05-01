@@ -21,6 +21,9 @@ use Symfony\Component\HttpKernel\HttpKernel;
 
 class HttpHandlerTest extends Base
 {
+    /**
+    * @psalm-return Generator<int, array{0:class-string<HttpHandler>, 1:array, 2:string, 3:string, 4:array}, mixed, void>
+    */
     public function DataProviderHttpHandlerInstances() : Generator
     {
         yield from [
@@ -38,14 +41,12 @@ class HttpHandlerTest extends Base
         ];
     }
 
+    /**
+    * @psalm-return Generator<int, array{0:HttpHandler, 1:Request, 2:int, 3:string}, mixed, void>
+    */
     public function DataProviderHttpHandlerHandle() : Generator
     {
-        /**
-        * @var iterable<array>
-        */
-        $argsSources = $this->DataProviderHttpHandlerInstances();
-
-        foreach ($argsSources as $args) {
+        foreach ($this->DataProviderHttpHandlerInstances() as $args) {
             /**
             * @var string
             */
@@ -71,20 +72,13 @@ class HttpHandlerTest extends Base
             */
             $config = $args[4];
 
-            /**
-            * @var iterable<array>
-            */
-            $testArgsSources = $this->DataProviderVerifyHandlerGood();
-
-            foreach ($testArgsSources as $testArgs) {
+            foreach ($this->DataProviderVerifyHandlerGood() as $testArgs) {
                 list($baseUrl, $config, $testArgs) = $this->prepDataProviderVerifyHandlerGoodArgs(
-                    $baseUrl,
                     $config,
                     $testArgs
                 );
 
                 if (
-                    ! is_array($testArgs) ||
                     ! isset($testArgs[0], $testArgs[1], $testArgs[2], $testArgs[3], $testArgs[4])
                 ) {
                     throw new RuntimeException(sprintf(
@@ -102,21 +96,15 @@ class HttpHandlerTest extends Base
                 $testArgs = $testArgs;
 
                 /**
-                * @var string
-                */
-                $sources = $testArgs[0];
-                /**
-                * @var string
-                */
-                $prefix = $testArgs[1];
-                /**
                 * @var int
                 */
                 $expectedStatus = $testArgs[2];
+
                 /**
                 * @var string
                 */
                 $expectedContent = $testArgs[3];
+
                 /**
                 * @var array
                 */
@@ -173,34 +161,19 @@ class HttpHandlerTest extends Base
         static::assertSame($expectedContent, $response->getContent());
     }
 
+    /**
+    * @psalm-return Generator<int, array{0:class-string<HttpHandler>, 1:string, 2:string, 3:array, 4:array<string, mixed[]>}, mixed, void>
+    */
     public function DataProviderTestDroppedConfigProperty() : Generator
     {
-        /**
-        * @var iterable<array>
-        */
-        $argsSources = $this->DataProviderHttpHandlerInstances();
+        foreach ($this->DataProviderHttpHandlerInstances() as $args) {
+            list($implementation, , $baseUrl, $basePath, $config) = $args;
 
-        foreach ($argsSources as $args) {
-            list($implementation, $postConstructionCalls, $baseUrl, $basePath, $config) = $args;
-
-            /**
-            * @var iterable<array>
-            */
-            $testArgsSources = $this->DataProviderVerifyHandlerGood();
-
-            foreach ($testArgsSources as $testArgs) {
-                list($baseUrl, $config, $testArgs) = $this->prepDataProviderVerifyHandlerGoodArgs(
-                    (string) $baseUrl,
+            foreach ($this->DataProviderVerifyHandlerGood() as $testArgs) {
+                list($baseUrl, $config) = $this->prepDataProviderVerifyHandlerGoodArgs(
                     (array) $config,
                     $testArgs
                 );
-                list(
-                    $sources,
-                    $prefix,
-                    $expectedStatus,
-                    $expectedContent,
-                    $requestArgs
-                ) = (array) $testArgs;
 
                 foreach (['cacheFile', 'sources'] as $omitSubProperty) {
                     /**
@@ -282,12 +255,14 @@ class HttpHandlerTest extends Base
         static::assertSame($expectedContent, $response->getContent());
     }
 
+    /**
+    * @psalm-return array{0:string, 1:array, 2:array}
+    */
     protected function prepDataProviderVerifyHandlerGoodArgs(
-        string $baseUrl,
         array $config,
         array $testArgs
     ) : array {
-        list($sources, $prefix, $expectedStatus, $expectedContent, $requestArgs) = $testArgs;
+        list($sources, $prefix, , , $requestArgs) = $testArgs;
 
         list($uri) = (array) $requestArgs;
 

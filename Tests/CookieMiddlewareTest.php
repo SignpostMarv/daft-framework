@@ -185,40 +185,18 @@ class CookieMiddlewareTest extends Base
         }
     }
 
+    /**
+    * @psalm-return Generator<int, array{0:class-string<HttpHandler>, 1:mixed[], 2:string, 3:string, 4:array, 5:string, 6:string, 7:string|null, 8:string|null, 9:string|null}, mixed, void>
+    */
     public function DataProvderCookeMiddlewareTest() : Generator
     {
-        /**
-        * @var iterable<array<int, string>>
-        */
-        $cookieSources = $this->DataProviderCookieNameValue();
-
-        foreach ($cookieSources as $cookie) {
-            /**
-            * @var iterable<array>
-            */
-            $handlerArgsSources = $this->DataProviderHttpHandlerInstances();
-
-            foreach ($handlerArgsSources as $handlerArgs) {
+        foreach ($this->DataProviderCookieNameValue() as $cookie) {
+            foreach ($this->DataProviderHttpHandlerInstances() as $handlerArgs) {
                 yield array_merge($handlerArgs, $cookie, [null, null, null]);
 
-                /**
-                * @var iterable<string>
-                */
-                $secureSources = $this->DataProviderCookieSecure();
-
-                foreach ($secureSources as $secure) {
-                    /**
-                    * @var iterable<string>
-                    */
-                    $httpSources = $this->DataProviderCookieHttp();
-
-                    foreach ($httpSources as $http) {
-                        /**
-                        * @var iterable<string>
-                        */
-                        $sameSiteSources = $this->DataProviderCookieSameSite();
-
-                        foreach ($sameSiteSources as $sameSite) {
+                foreach ($this->DataProviderCookieSecure() as $secure) {
+                    foreach ($this->DataProviderCookieHttp() as $http) {
+                        foreach ($this->DataProviderCookieSameSite() as $sameSite) {
                             yield array_merge($handlerArgs, $cookie, [$secure, $http, $sameSite]);
                         }
                     }
@@ -227,6 +205,9 @@ class CookieMiddlewareTest extends Base
         }
     }
 
+    /**
+    * @psalm-return Generator<int, array{0:class-string<HttpHandler>, 1:array, 2:string, 3:string, 4:array}, mixed, void>
+    */
     public function DataProviderHttpHandlerInstances() : Generator
     {
         yield from [
@@ -242,6 +223,9 @@ class CookieMiddlewareTest extends Base
         ];
     }
 
+    /**
+    * @psalm-return Generator<int, array{0:string, 1:string}, mixed, void>
+    */
     public function DataProviderCookieNameValue() : Generator
     {
         yield from [
@@ -249,16 +233,25 @@ class CookieMiddlewareTest extends Base
         ];
     }
 
+    /**
+    * @psalm-return Generator<int, string, mixed, void>
+    */
     public function DataProviderCookieSecure() : Generator
     {
         yield from ['0', '1'];
     }
 
+    /**
+    * @psalm-return Generator<int, string, mixed, void>
+    */
     public function DataProviderCookieHttp() : Generator
     {
         yield from ['0', '1'];
     }
 
+    /**
+    * @psalm-return Generator<int, string, mixed, void>
+    */
     public function DataProviderCookieSameSite() : Generator
     {
         yield from ['lax', 'strict'];
