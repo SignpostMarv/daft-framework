@@ -38,27 +38,30 @@ class ApplicationTest extends Base
         $this->runTestInSeparateProcess = false;
     }
 
+    /**
+    * @psalm-return Generator<int, array{0:string, 1:string, 2:array<int, class-string>, 3:class-string<Framework>, 4:array}, mixed, void>
+    */
     final public function DataProviderConsoleApplicationConfigFiltered() : Generator
     {
-        /**
-        * @var iterable<array>
-        */
-        $argsSources = $this->DataProviderConsoleApplicationConfig();
-
-        foreach ($argsSources as $args) {
+        foreach ($this->DataProviderConsoleApplicationConfig() as $args) {
             if (
                 self::NUM_EXPECTED_ARGS === count($args) &&
-                is_string($args[0]) &&
                 is_file($args[0])
             ) {
-                $configFile = (string) array_shift($args);
+                $configFile = array_shift($args);
+
                 end($args);
                 $key = (int) key($args);
                 $appendTo = (array) $args[$key];
                 $appendTo[] = (array) include($configFile);
                 $args[$key] = $appendTo;
 
-                yield array_values($args);
+                /**
+                * @psalm-var array{0:string, 1:string, 2:array<int, class-string>, 3:class-string<Framework>, 4:array}
+                */
+                $args = $args;
+
+                yield $args;
             }
         }
     }
@@ -260,12 +263,7 @@ class ApplicationTest extends Base
             '/fixtures/here-is-one-i-made-earlier.fast-route.cache'
         );
 
-        /**
-        * @var iterable<array>
-        */
-        $argsSources = $this->DataProviderConsoleApplicationConfigFiltered();
-
-        foreach ($argsSources as $i => $args) {
+        foreach ($this->DataProviderConsoleApplicationConfigFiltered() as $i => $args) {
             /**
             * @var string
             */
@@ -280,18 +278,12 @@ class ApplicationTest extends Base
                     Framework::class,
                     $frameworkImplementation
                 ));
-            } elseif ( ! is_string($args[0]) || ! is_string($args[1])) {
-                throw new RuntimeException(sprintf(
-                    'Indices %s[0] and %s[1] must be strings!',
-                    $i,
-                    $i
-                ));
             }
 
             /**
             * @var array<string, array>
             */
-            $args42 = (array) ((array) $args[4])[2];
+            $args42 = (array) ((array) $args[4])[2] ?? [];
             $args42[DaftConsoleSource::class][] = FastRouteCacheCommand::class;
             $args42[DaftSource::class]['sources'] = [Config::class];
             $args4 = (array) $args[4];
@@ -411,6 +403,9 @@ class ApplicationTest extends Base
         );
     }
 
+    /**
+    * @psalm-return Generator<int, array{0:string, 1:string, 2:string, 3:array<int, class-string>, 4:class-string<Framework>, 5:array}, mixed, void>
+    */
     protected function DataProviderConsoleApplicationConfig() : Generator
     {
         yield from [
