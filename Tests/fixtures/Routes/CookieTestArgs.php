@@ -7,7 +7,6 @@ declare(strict_types=1);
 namespace SignpostMarv\DaftFramework\Tests\fixtures\Routes;
 
 use SignpostMarv\DaftRouter\TypedArgs;
-use Symfony\Component\HttpFoundation\Cookie;
 
 /**
 * @template T as array{name:string, value:string, secure:bool, http:bool, same-site:'lax'|'strict'}
@@ -28,8 +27,8 @@ class CookieTestArgs extends TypedArgs
     */
     public function __construct(array $args)
     {
-        $args['secure'] = !! $args['secure'];
-        $args['http'] = !! $args['http'];
+        $args['secure'] = (bool) $args['secure'];
+        $args['http'] = (bool) $args['http'];
 
         /**
         * @var T
