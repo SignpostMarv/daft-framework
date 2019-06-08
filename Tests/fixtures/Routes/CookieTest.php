@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\Response;
 /**
 * @template T as array{name:string, value:string, secure:'0'|'1', http:'0':'1', same-site:'lax'|'strict'}
 *
-* @template-implements DaftRoute<T, T>
+* @template-implements DaftRoute<T>
 */
 class CookieTest implements DaftRoute
 {
@@ -27,15 +27,15 @@ class CookieTest implements DaftRoute
         $resp = new Response('');
 
         $cookie = new Cookie(
-            $args['name'],
-            $args['value'],
+            (string) $args['name'],
+            (string) $args['value'],
             123,
             '',
             null,
             '1' === $args['secure'],
             '1' === $args['http'],
             false,
-            $args['same-site']
+            (string) $args['same-site']
         );
 
         $resp->headers->setCookie($cookie);
@@ -50,12 +50,9 @@ class CookieTest implements DaftRoute
         ];
     }
 
-    /**
-    * @param array<string, string> $args
-    */
     public static function DaftRouterHttpRoute(array $args, string $method = 'GET') : string
     {
-        $args = static::DaftRouterHttpRouteArgs($args, $method);
+        static::DaftRouterAutoMethodChecking($method);
 
         return sprintf(
             '/cookie-test/%s/%s/%u/%u/%s',
@@ -67,47 +64,13 @@ class CookieTest implements DaftRoute
         );
     }
 
-    /**
-    * @param array<string, string> $args
-    *
-    * @return array<string, string>
-    *
-    * @psalm-return array{name:string, value:string, secure:string, http:string, same-site:string}
-    */
-    public static function DaftRouterHttpRouteArgs(array $args, string $method) : array
-    {
-        static::DaftRouterAutoMethodChecking($method);
-
-        if (
-            ! isset(
-                $args['name'],
-                $args['value'],
-                $args['secure'],
-                $args['http'],
-                $args['same-site']
-            )
-        ) {
-            throw new InvalidArgumentException('cookie args not specified!');
-        }
-
-        return [
-            'name' => $args['name'],
-            'value' => $args['value'],
-            'secure' => $args['secure'],
-            'http' => $args['http'],
-            'same-site' => $args['same-site'],
-        ];
-    }
-
-    /**
-    * @param array<string, string> $args
-    *
-    * @return array<string, string>
-    *
-    * @psalm-return T
-    */
     public static function DaftRouterHttpRouteArgsTyped(array $args, string $method) : array
     {
-        return static::DaftRouterHttpRouteArgs($args, $method);
+        /**
+        * @psalm-var T
+        */
+        $args = $args;
+
+        return $args;
     }
 }

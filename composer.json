@@ -43,7 +43,7 @@
         "ext-mbstring": "*",
         "paragonie/easydb": "^2.9",
         "signpostmarv/daft-interface-collector": "^1.1",
-        "signpostmarv/daft-router": "^1.2",
+        "signpostmarv/daft-router": "dev-master",
         "symfony/console": "^4.3",
         "symfony/event-dispatcher": "^4.3",
         "symfony/http-foundation": "^4.3",
