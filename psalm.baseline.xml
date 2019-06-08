@@ -27,12 +27,9 @@
     </InvalidArgument>
   </file>
   <file src="Tests\fixtures\Routes\CookieTest.php">
-    <LessSpecificImplementedReturnType occurrences="1">
-      <code>array</code>
-    </LessSpecificImplementedReturnType>
-    <TypeDoesNotContainType occurrences="1">
-      <code>'1' === $args['http']</code>
-    </TypeDoesNotContainType>
+    <MoreSpecificImplementedParamType occurrences="1">
+      <code>$args</code>
+    </MoreSpecificImplementedParamType>
   </file>
   <file src="src\HttpHandler.php">
     <MissingDependency occurrences="1">

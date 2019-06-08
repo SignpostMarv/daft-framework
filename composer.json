@@ -19,8 +19,7 @@
             "FastRoute\\": "./vendor/nikic/fast-route/test/",
             "SignpostMarv\\DaftInterfaceCollector\\Tests\\": "./vendor/signpostmarv/daft-interface-collector/Tests/",
             "SignpostMarv\\DaftFramework\\Tests\\": "./Tests/",
-            "SignpostMarv\\DaftRouter\\Tests\\": "./vendor/signpostmarv/daft-router/tests/daft-router/",
-            "SignpostMarv\\DaftRouter\\Tests\\FastRoute\\": "./vendor/signpostmarv/daft-router/tests/fast-route/"
+            "SignpostMarv\\DaftRouter\\Tests\\": "./vendor/signpostmarv/daft-router/Tests/"
         }
     },
     "config": {
@@ -30,7 +29,6 @@
     "scripts": {
         "tests": [
             "phpunit -vvvv --coverage-clover=phpunit.clover",
-            "phpstan analyse -c ./phpstan.neon .php_cs.dist src Tests ./Tests/fixtures/bin/daft-framework",
             "psalm --find-dead-code --shepherd",
             "phpcpd src Tests",
             "phpmnd ./ --exclude=./phpunit/ --exclude=./vendor/ --non-zero-exit-on-violation --hint",
@@ -39,11 +37,11 @@
         ]
     },
     "require": {
-        "php": "^7.1",
+        "php": "^7.3",
         "ext-mbstring": "*",
         "paragonie/easydb": "^2.9",
-        "signpostmarv/daft-interface-collector": "^1.1",
-        "signpostmarv/daft-router": "dev-master",
+        "signpostmarv/daft-interface-collector": "dev-master",
+        "signpostmarv/daft-router": "dev-typed-args",
         "symfony/console": "^4.3",
         "symfony/event-dispatcher": "^4.3",
         "symfony/http-foundation": "^4.3",
@@ -52,9 +50,6 @@
     "require-dev": {
         "infection/infection": "^0.13.1",
         "maglnet/composer-require-checker": "^2.0",
-        "phpstan/phpstan": "^0.11.8",
-        "phpstan/phpstan-phpunit": "^0.11.2",
-        "phpstan/phpstan-strict-rules": "^0.11.1",
         "phpunit/phpunit": "^7.5",
         "povils/phpmnd": "^2.1",
         "psalm/plugin-phpunit": "^0.6.0",

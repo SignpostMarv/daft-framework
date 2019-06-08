@@ -8,33 +8,39 @@ namespace SignpostMarv\DaftFramework\Tests\fixtures\Routes;
 
 use SignpostMarv\DaftRouter\DaftRoute;
 use SignpostMarv\DaftRouter\DaftRouterAutoMethodCheckingTrait;
+use SignpostMarv\DaftRouter\TypedArgs;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
-* @template T as array{name:string, value:string, secure:'0'|'1', http:'0':'1', same-site:'lax'|'strict'}
+* @template T1 as array{name:string, value:string, secure:bool, http:bool, same-site:'lax'|'strict'}
+* @template T2 as CookieTestArgs
+* @template T3 as array{name:string, value:string, secure:'0'|'1', http:'0'|'1', same-site:'lax'|'strict'}
 *
-* @template-implements DaftRoute<T>
+* @template-implements DaftRoute<T1, T2>
 */
 class CookieTest implements DaftRoute
 {
     use DaftRouterAutoMethodCheckingTrait;
 
-    public static function DaftRouterHandleRequest(Request $request, array $args) : Response
+    /**
+    * @param T2 $args
+    */
+    public static function DaftRouterHandleRequest(Request $request, TypedArgs $args) : Response
     {
         $resp = new Response('');
 
         $cookie = new Cookie(
-            (string) $args['name'],
-            (string) $args['value'],
+            $args->name,
+            $args->value,
             123,
             '',
             null,
-            '1' === $args['secure'],
-            '1' === $args['http'],
+            $args->secure,
+            $args->http,
             false,
-            (string) $args['same-site']
+            $args->SameSite()
         );
 
         $resp->headers->setCookie($cookie);
@@ -49,27 +55,30 @@ class CookieTest implements DaftRoute
         ];
     }
 
-    public static function DaftRouterHttpRoute(array $args, string $method = 'GET') : string
+    /**
+    * @param T2 $args
+    */
+    public static function DaftRouterHttpRoute(TypedArgs $args, string $method = 'GET') : string
     {
         static::DaftRouterAutoMethodChecking($method);
 
         return sprintf(
             '/cookie-test/%s/%s/%u/%u/%s',
-            $args['name'],
-            $args['value'],
-            $args['secure'],
-            $args['http'],
-            $args['same-site']
+            $args->name,
+            $args->value,
+            $args->secure,
+            $args->http,
+            $args->SameSite()
         );
     }
 
-    public static function DaftRouterHttpRouteArgsTyped(array $args, string $method) : array
+    /**
+    * @param T3 $args
+    */
+    public static function DaftRouterHttpRouteArgsTyped(array $args, string $method) : TypedArgs
     {
-        /**
-        * @psalm-var T
-        */
-        $args = $args;
+        static::DaftRouterAutoMethodChecking($method);
 
-        return $args;
+        return new CookieTestArgs($args);
     }
 }
