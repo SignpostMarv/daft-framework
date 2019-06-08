@@ -19,15 +19,6 @@ use Throwable;
 
 class ImplementationTest extends Base
 {
-    public function __construct(string $name = '', array $data = [], string $dataName = '')
-    {
-        parent::__construct($name, $data, $dataName);
-
-        $this->backupGlobals = false;
-        $this->backupStaticAttributes = false;
-        $this->runTestInSeparateProcess = false;
-    }
-
     public function tearDown() : void
     {
         /**
@@ -528,7 +519,7 @@ class ImplementationTest extends Base
     * @param array<string, mixed[]> $postConstructionCalls
     * @param mixed ...$implementationArgs
     *
-    * @return array{0:Framework, 1:Request, 2:Request}
+    * @psalm-return array{0:Framework, 1:Request, 2:Request}
     */
     protected function PrepareReferenceDisposalTest(
         string $implementation,

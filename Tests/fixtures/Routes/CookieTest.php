@@ -13,6 +13,11 @@ use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+* @template T as array{name:string, value:string, secure:'0'|'1', http:'0':'1', same-site:'lax'|'strict'}
+*
+* @template-implements DaftRoute<T, T>
+*/
 class CookieTest implements DaftRoute
 {
     use DaftRouterAutoMethodCheckingTrait;
@@ -22,15 +27,15 @@ class CookieTest implements DaftRoute
         $resp = new Response('');
 
         $cookie = new Cookie(
-            (string) ($args['name'] ?? null),
-            is_string($args['value']) ? $args['value'] : null,
+            $args['name'],
+            $args['value'],
             123,
             '',
             null,
             '1' === $args['secure'],
             '1' === $args['http'],
             false,
-            is_string($args['same-site']) ? $args['same-site'] : null
+            $args['same-site']
         );
 
         $resp->headers->setCookie($cookie);
@@ -99,7 +104,7 @@ class CookieTest implements DaftRoute
     *
     * @return array<string, string>
     *
-    * @psalm-return array{name:scalar, value:scalar, secure:scalar, http:scalar, same-site:scalar}
+    * @psalm-return T
     */
     public static function DaftRouterHttpRouteArgsTyped(array $args, string $method) : array
     {

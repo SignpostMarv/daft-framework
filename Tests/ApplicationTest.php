@@ -29,15 +29,6 @@ class ApplicationTest extends Base
 {
     const NUM_EXPECTED_ARGS = 6;
 
-    public function __construct(string $name = '', array $data = [], string $dataName = '')
-    {
-        parent::__construct($name, $data, $dataName);
-
-        $this->backupGlobals = false;
-        $this->backupStaticAttributes = false;
-        $this->runTestInSeparateProcess = false;
-    }
-
     /**
     * @psalm-return Generator<int, array{0:string, 1:string, 2:array<int, class-string>, 3:class-string<Framework>, 4:array}, mixed, void>
     */

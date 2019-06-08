@@ -60,11 +60,6 @@ class HttpHandlerTest extends Base
             /**
             * @var string
             */
-            $baseUrl = $args[2];
-
-            /**
-            * @var string
-            */
             $basePath = $args[3];
 
             /**
@@ -167,7 +162,7 @@ class HttpHandlerTest extends Base
     public function DataProviderTestDroppedConfigProperty() : Generator
     {
         foreach ($this->DataProviderHttpHandlerInstances() as $args) {
-            list($implementation, , $baseUrl, $basePath, $config) = $args;
+            list($implementation, , , $basePath, $config) = $args;
 
             foreach ($this->DataProviderVerifyHandlerGood() as $testArgs) {
                 list($baseUrl, $config) = $this->prepDataProviderVerifyHandlerGoodArgs(
