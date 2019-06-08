@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "95bedf3c6c5949e9ba20d534e3d6d5cb",
+    "content-hash": "c2c967927fe35b99342779340fef351b",
     "packages": [
         {
             "name": "nikic/fast-route",
@@ -1542,20 +1542,23 @@
         },
         {
             "name": "doctrine/lexer",
-            "version": "v1.0.1",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/lexer.git",
-                "reference": "83893c552fd2045dd78aef794c31e694c37c0b8c"
+                "reference": "1febd6c3ef84253d7c815bed85fc622ad207a9f8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/lexer/zipball/83893c552fd2045dd78aef794c31e694c37c0b8c",
-                "reference": "83893c552fd2045dd78aef794c31e694c37c0b8c",
+                "url": "https://api.github.com/repos/doctrine/lexer/zipball/1febd6c3ef84253d7c815bed85fc622ad207a9f8",
+                "reference": "1febd6c3ef84253d7c815bed85fc622ad207a9f8",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.5"
             },
             "type": "library",
             "extra": {
@@ -1564,8 +1567,8 @@
                 }
             },
             "autoload": {
-                "psr-0": {
-                    "Doctrine\\Common\\Lexer\\": "lib/"
+                "psr-4": {
+                    "Doctrine\\Common\\Lexer\\": "lib/Doctrine/Common/Lexer"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -1586,13 +1589,16 @@
                     "email": "schmittjoh@gmail.com"
                 }
             ],
-            "description": "Base library for a lexer that can be used in Top-Down, Recursive Descent Parsers.",
-            "homepage": "http://www.doctrine-project.org",
+            "description": "PHP Doctrine Lexer parser library that can be used in Top-Down, Recursive Descent Parsers.",
+            "homepage": "https://www.doctrine-project.org/projects/lexer.html",
             "keywords": [
+                "annotations",
+                "docblock",
                 "lexer",
-                "parser"
+                "parser",
+                "php"
             ],
-            "time": "2014-09-09T13:34:57+00:00"
+            "time": "2019-06-08T11:03:04+00:00"
         },
         {
             "name": "felixfbecker/advanced-json-rpc",
@@ -4269,31 +4275,28 @@
         },
         {
             "name": "signpostmarv/php-cs-fixer-config",
-            "version": "v0.9.0",
+            "version": "v0.10.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/SignpostMarv/PHP-CS-Fixer-Config.git",
-                "reference": "24ded97c93df6766b979d408588fd0879671c106"
+                "reference": "27f52c065c92ddb65e89db454bec3540653b7576"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SignpostMarv/PHP-CS-Fixer-Config/zipball/24ded97c93df6766b979d408588fd0879671c106",
-                "reference": "24ded97c93df6766b979d408588fd0879671c106",
+                "url": "https://api.github.com/repos/SignpostMarv/PHP-CS-Fixer-Config/zipball/27f52c065c92ddb65e89db454bec3540653b7576",
+                "reference": "27f52c065c92ddb65e89db454bec3540653b7576",
                 "shasum": ""
             },
             "require": {
-                "friendsofphp/php-cs-fixer": "^2.12",
+                "friendsofphp/php-cs-fixer": "^2.15",
                 "php": "^7.1,>=7.1.3"
             },
             "require-dev": {
-                "maglnet/composer-require-checker": "^1.1",
-                "phpstan/phpstan": "^0.11.2",
-                "phpstan/phpstan-phpunit": "^0.11.0",
-                "phpstan/phpstan-strict-rules": "^0.11.0",
+                "maglnet/composer-require-checker": "^2.0",
                 "povils/phpmnd": "^2.1",
                 "roave/security-advisories": "dev-master",
                 "sebastian/phpcpd": "^4.1",
-                "vimeo/psalm": "^3.0"
+                "vimeo/psalm": "^3.4"
             },
             "type": "library",
             "autoload": {
@@ -4312,7 +4315,7 @@
                 }
             ],
             "description": "PHP-CS-Fixer Config",
-            "time": "2019-02-20T00:33:24+00:00"
+            "time": "2019-06-08T22:52:15+00:00"
         },
         {
             "name": "symfony/filesystem",
