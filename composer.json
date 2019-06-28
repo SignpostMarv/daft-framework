@@ -36,6 +36,11 @@
             "php-cs-fixer fix --verbose --allow-risky=yes --dry-run"
         ]
     },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.1.x-dev"
+        }
+    },
     "suggest": {
         "vimeo/psalm": "Useful for static analysis to reduce runtime type checks etc."
     },
