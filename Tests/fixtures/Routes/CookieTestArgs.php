@@ -9,7 +9,7 @@ namespace SignpostMarv\DaftFramework\Tests\fixtures\Routes;
 use SignpostMarv\DaftRouter\TypedArgs;
 
 /**
-* @template T as array{name:string, value:string, secure:bool, http:bool, same-site:'lax'|'strict'}
+* @psalm-type T = array{name:string, value:string, secure:bool, http:bool, same-site:'lax'|'strict'}
 *
 * @tempalte-extends TypedArgs<T>
 *
@@ -21,9 +21,14 @@ use SignpostMarv\DaftRouter\TypedArgs;
 class CookieTestArgs extends TypedArgs
 {
     /**
-    * @template K as key-of<T>
+    * @var T
+    */
+    protected $typed;
+
+    /**
+    * @template K as 'name'|'value'|'secure'|'http'|'same-site'
     *
-    * @param array<K, string> $args
+    * @param array{name:string, value:string, secure:'0'|'1', http:'0'|'1', same-site:'lax'|'strict'} $args
     */
     public function __construct(array $args)
     {
