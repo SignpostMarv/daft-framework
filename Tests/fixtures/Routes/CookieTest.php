@@ -8,15 +8,15 @@ namespace SignpostMarv\DaftFramework\Tests\fixtures\Routes;
 
 use SignpostMarv\DaftRouter\DaftRoute;
 use SignpostMarv\DaftRouter\DaftRouterAutoMethodCheckingTrait;
-use SignpostMarv\DaftRouter\TypedArgs;
+use SignpostMarv\DaftRouter\TypedArgsInterface;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
-* @template T1 as array{name:string, value:string, secure:bool, http:bool, same-site:'lax'|'strict'}
-* @template T2 as CookieTestArgs
-* @template T3 as array{name:string, value:string, secure:'0'|'1', http:'0'|'1', same-site:'lax'|'strict'}
+* @psalm-type T1 = array{name:string, value:string, secure:bool, http:bool, same-site:'lax'|'strict'}
+* @psalm-type T2 = CookieTestArgs
+* @psalm-type T3 = array{name:string, value:string, secure:'0'|'1', http:'0'|'1', same-site:'lax'|'strict'}
 *
 * @template-implements DaftRoute<T1, T2>
 */
@@ -27,7 +27,7 @@ class CookieTest implements DaftRoute
     /**
     * @param T2 $args
     */
-    public static function DaftRouterHandleRequest(Request $request, TypedArgs $args) : Response
+    public static function DaftRouterHandleRequest(Request $request, TypedArgsInterface $args) : Response
     {
         $resp = new Response('');
 
@@ -58,7 +58,7 @@ class CookieTest implements DaftRoute
     /**
     * @param T2 $args
     */
-    public static function DaftRouterHttpRoute(TypedArgs $args, string $method = 'GET') : string
+    public static function DaftRouterHttpRoute(TypedArgsInterface $args, string $method = 'GET') : string
     {
         static::DaftRouterAutoMethodChecking($method);
 
@@ -75,7 +75,7 @@ class CookieTest implements DaftRoute
     /**
     * @param T3 $args
     */
-    public static function DaftRouterHttpRouteArgsTyped(array $args, string $method) : TypedArgs
+    public static function DaftRouterHttpRouteArgsTyped(array $args, string $method) : TypedArgsInterface
     {
         static::DaftRouterAutoMethodChecking($method);
 
