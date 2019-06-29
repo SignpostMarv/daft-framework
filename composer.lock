@@ -303,12 +303,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/SignpostMarv/daft-router.git",
-                "reference": "a1e7d8264a6d534c768bde49985be5da49ce1634"
+                "reference": "680f31b996d31ac25f4c37f1938fe27aec06d29a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SignpostMarv/daft-router/zipball/a1e7d8264a6d534c768bde49985be5da49ce1634",
-                "reference": "a1e7d8264a6d534c768bde49985be5da49ce1634",
+                "url": "https://api.github.com/repos/SignpostMarv/daft-router/zipball/680f31b996d31ac25f4c37f1938fe27aec06d29a",
+                "reference": "680f31b996d31ac25f4c37f1938fe27aec06d29a",
                 "shasum": ""
             },
             "require": {
@@ -354,7 +354,7 @@
                 }
             ],
             "description": "Daft Router",
-            "time": "2019-06-29T11:53:59+00:00"
+            "time": "2019-06-29T13:05:56+00:00"
         },
         {
             "name": "symfony/console",
