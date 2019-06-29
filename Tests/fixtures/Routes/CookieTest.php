@@ -7,7 +7,7 @@ declare(strict_types=1);
 namespace SignpostMarv\DaftFramework\Tests\fixtures\Routes;
 
 use SignpostMarv\DaftRouter\DaftRouterAutoMethodCheckingTrait;
-use SignpostMarv\DaftRouter\DaftRouteTypedArgs;
+use SignpostMarv\DaftRouter\DaftRouteAcceptsOnlyTypedArgs;
 use SignpostMarv\DaftRouter\TypedArgs;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,9 +18,9 @@ use Symfony\Component\HttpFoundation\Response;
 * @psalm-type T2 = CookieTestArgs
 * @psalm-type T3 = array{name:string, value:string, secure:'0'|'1', http:'0'|'1', same-site:'lax'|'strict'}
 *
-* @template-extends DaftRouteTypedArgs<T1, T2>
+* @template-extends DaftRouteAcceptsOnlyTypedArgs<T1, T2, Response>
 */
-class CookieTest extends DaftRouteTypedArgs
+class CookieTest extends DaftRouteAcceptsOnlyTypedArgs
 {
     use DaftRouterAutoMethodCheckingTrait;
 
