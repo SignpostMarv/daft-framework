@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d60e50aa2f2a744201098e2686c6ab3f",
+    "content-hash": "284421b63111aa11218f041526a17aed",
     "packages": [
         {
             "name": "nikic/fast-route",
@@ -299,16 +299,16 @@
         },
         {
             "name": "signpostmarv/daft-router",
-            "version": "v2.3.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/SignpostMarv/daft-router.git",
-                "reference": "5f1fc5f07ece811fc3497163b0f0ece17970e490"
+                "reference": "b2b5272e5f6a043b2c8e43529f2903cdfc9d5d3f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SignpostMarv/daft-router/zipball/5f1fc5f07ece811fc3497163b0f0ece17970e490",
-                "reference": "5f1fc5f07ece811fc3497163b0f0ece17970e490",
+                "url": "https://api.github.com/repos/SignpostMarv/daft-router/zipball/b2b5272e5f6a043b2c8e43529f2903cdfc9d5d3f",
+                "reference": "b2b5272e5f6a043b2c8e43529f2903cdfc9d5d3f",
                 "shasum": ""
             },
             "require": {
@@ -333,6 +333,11 @@
                 "vimeo/psalm": "Useful for static analysis to reduce runtime type checks etc."
             },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.0.x-dev"
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "SignpostMarv\\DaftRouter\\": "./src/"
@@ -349,7 +354,7 @@
                 }
             ],
             "description": "Daft Router",
-            "time": "2019-06-27T23:11:14+00:00"
+            "time": "2019-06-28T22:48:08+00:00"
         },
         {
             "name": "symfony/console",
@@ -5007,6 +5012,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "signpostmarv/daft-router": 20,
         "roave/security-advisories": 20
     },
     "prefer-stable": false,
