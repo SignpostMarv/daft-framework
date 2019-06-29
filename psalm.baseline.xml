@@ -56,11 +56,6 @@
       <code>$postConstructionCalls</code>
     </PossiblyUnusedParam>
   </file>
-  <file src="Tests/ImplementationTest.php">
-    <InvalidArgument occurrences="1">
-      <code>testThingsFail</code>
-    </InvalidArgument>
-  </file>
   <file src="Tests/fixtures/Routes/CookieTest.php">
     <MoreSpecificImplementedParamType occurrences="1">
       <code>$args</code>

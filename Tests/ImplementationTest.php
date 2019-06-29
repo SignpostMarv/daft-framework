@@ -139,7 +139,7 @@ class ImplementationTest extends Base
     }
 
     /**
-    * @psalm-return Generator<int, array{0:class-string<Framework>, 1:class-string<Throwable>, 2:string, 3:int|null, 4:array, 5:string, 6:string, 7:array}, mixed, void>
+    * @psalm-return Generator<int, array{0:class-string<Framework>, 1:class-string<Throwable>, 2:string, 3:int|null, 4:array<string, array<int, mixed>>, 5:string, 6:string, 7:array}, mixed, void>
     */
     public function DataProviderBadSources() : Generator
     {
@@ -286,8 +286,8 @@ class ImplementationTest extends Base
     }
 
     /**
-    * @psalm-param class-string<Throwable> $expectedExceptionClass
-    *
+    * @param class-string<Framework> $implementation
+    * @param class-string<Throwable> $expectedExceptionClass
     * @param array<string, array<int, mixed>> $postConstructionCalls
     * @param mixed ...$implementationArgs
     *
@@ -301,6 +301,9 @@ class ImplementationTest extends Base
         ? string $expectedExceptionMessage,
         ? int $expectedExceptionCode,
         array $postConstructionCalls,
+        string $baseUrl,
+        string $basePath,
+        array $config,
         ...$implementationArgs
     ) : void {
         $this->expectException($expectedExceptionClass);
@@ -311,7 +314,13 @@ class ImplementationTest extends Base
             $this->expectExceptionCode($expectedExceptionCode);
         }
 
-        $instance = $this->ObtainFrameworkInstance($implementation, ...$implementationArgs);
+        $instance = $this->ObtainFrameworkInstance(
+            $implementation,
+            $baseUrl,
+            $basePath,
+            $config,
+            ...$implementationArgs
+        );
         $this->ConfigureFrameworkInstance($instance, $postConstructionCalls);
     }
 
