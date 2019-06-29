@@ -21,7 +21,6 @@ class CookieMiddlewareTest extends Base
     */
     public function testCookieMiddleware(
         string $implementation,
-        array $postConstructionCalls,
         string $baseUrl,
         string $basePath,
         array $config,
@@ -177,18 +176,71 @@ class CookieMiddlewareTest extends Base
     }
 
     /**
-    * @psalm-return Generator<int, array{0:class-string<HttpHandler>, 1:mixed[], 2:string, 3:string, 4:array, 5:string, 6:string, 7:string|null, 8:string|null, 9:string|null}, mixed, void>
+    * @return Generator<int, array{0:class-string<HttpHandler>, 1:string, 2:string, 3:array, 4:string, 5:string, 6:string|null, 7:string|null, 8:string|null}, mixed, void>
     */
     public function DataProvderCookeMiddlewareTest() : Generator
     {
         foreach ($this->DataProviderCookieNameValue() as $cookie) {
             foreach ($this->DataProviderHttpHandlerInstances() as $handlerArgs) {
-                yield array_merge($handlerArgs, $cookie, [null, null, null]);
+                [
+                    $implementation,
+                    ,
+                    $baseUrl,
+                    $basePath,
+                    $config,
+                    $cookieName,
+                    $cookieValue,
+                    $secure,
+                    $http,
+                    $sameSite,
+                ] = array_merge($handlerArgs, $cookie, [null, null, null]);
+
+                /**
+                * @var array{0:class-string<HttpHandler>, 1:string, 2:string, 3:array, 4:string, 5:string, 6:string|null, 7:string|null, 8:string|null}
+                */
+                $yielding = [
+                    $implementation,
+                    $baseUrl,
+                    $basePath,
+                    $config,
+                    $cookieName,
+                    $cookieValue,
+                    $secure,
+                    $http,
+                    $sameSite,
+                ];
+
+                yield $yielding;
 
                 foreach ($this->DataProviderCookieSecure() as $secure) {
                     foreach ($this->DataProviderCookieHttp() as $http) {
                         foreach ($this->DataProviderCookieSameSite() as $sameSite) {
-                            yield array_merge($handlerArgs, $cookie, [$secure, $http, $sameSite]);
+                            [
+                                $implementation,
+                                ,
+                                $baseUrl,
+                                $basePath,
+                                $config,
+                                $cookieName,
+                                $cookieValue,
+                            ] = array_merge($handlerArgs, $cookie);
+
+                            /**
+                            * @var array{0:class-string<HttpHandler>, 1:string, 2:string, 3:array, 4:string, 5:string, 6:string|null, 7:string|null, 8:string|null}
+                            */
+                            $yielding = [
+                                $implementation,
+                                $baseUrl,
+                                $basePath,
+                                $config,
+                                $cookieName,
+                                $cookieValue,
+                                $secure,
+                                $http,
+                                $sameSite,
+                            ];
+
+                            yield $yielding;
                         }
                     }
                 }

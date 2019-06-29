@@ -51,11 +51,6 @@
       <code>include($configFile)</code>
     </UnresolvableInclude>
   </file>
-  <file src="Tests/CookieMiddlewareTest.php">
-    <PossiblyUnusedParam occurrences="1">
-      <code>$postConstructionCalls</code>
-    </PossiblyUnusedParam>
-  </file>
   <file src="Tests/fixtures/Routes/CookieTest.php">
     <MoreSpecificImplementedParamType occurrences="1">
       <code>$args</code>
