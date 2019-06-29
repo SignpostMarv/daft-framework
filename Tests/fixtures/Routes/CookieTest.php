@@ -6,9 +6,8 @@ declare(strict_types=1);
 
 namespace SignpostMarv\DaftFramework\Tests\fixtures\Routes;
 
-use SignpostMarv\DaftRouter\DaftRoute;
-use SignpostMarv\DaftRouter\DaftRouteTypedArgs;
 use SignpostMarv\DaftRouter\DaftRouterAutoMethodCheckingTrait;
+use SignpostMarv\DaftRouter\DaftRouteTypedArgs;
 use SignpostMarv\DaftRouter\TypedArgs;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Request;
