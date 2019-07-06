@@ -57,9 +57,9 @@
     },
     "require-dev": {
         "ext-pdo_sqlite": "*",
-        "infection/infection": "^0.13.1",
+        "infection/infection": "^0.13.4",
         "maglnet/composer-require-checker": "^2.0",
-        "phpunit/phpunit": "^7.5",
+        "phpunit/phpunit": "^8.2",
         "povils/phpmnd": "^2.1",
         "psalm/plugin-phpunit": "^0.6.0",
         "roave/security-advisories": "dev-master",
