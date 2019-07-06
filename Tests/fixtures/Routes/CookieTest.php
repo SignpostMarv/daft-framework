@@ -7,7 +7,7 @@ declare(strict_types=1);
 namespace SignpostMarv\DaftFramework\Tests\fixtures\Routes;
 
 use SignpostMarv\DaftRouter\DaftRouteAcceptsOnlyTypedArgs;
-use SignpostMarv\DaftRouter\DaftRouterAutoMethodCheckingTrait;
+use SignpostMarv\DaftRouter\DaftRouterHttpRouteDefaultMethodGet;
 use SignpostMarv\DaftRouter\TypedArgs;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,17 +18,19 @@ use Symfony\Component\HttpFoundation\Response;
 * @psalm-type T2 = CookieTestArgs
 * @psalm-type T3 = array{name:string, value:string, secure:'0'|'1', http:'0'|'1', same-site:'lax'|'strict'}
 *
-* @template-extends DaftRouteAcceptsOnlyTypedArgs<T1, T3, T2, Response>
+* @template-extends DaftRouteAcceptsOnlyTypedArgs<T1, T3, T2, Response, 'GET', 'GET'>
 */
 class CookieTest extends DaftRouteAcceptsOnlyTypedArgs
 {
-    use DaftRouterAutoMethodCheckingTrait;
+    use DaftRouterHttpRouteDefaultMethodGet;
 
     /**
     * @param T2 $args
     */
     public static function DaftRouterHandleRequestWithTypedArgs(Request $request, TypedArgs $args) : Response
     {
+        static::DaftRouterAutoMethodChecking($request->getMethod());
+
         $resp = new Response('');
 
         $cookie = new Cookie(
@@ -57,13 +59,12 @@ class CookieTest extends DaftRouteAcceptsOnlyTypedArgs
 
     /**
     * @param T2 $args
+    * @param 'GET'|null $method
     */
     public static function DaftRouterHttpRouteWithTypedArgs(
         TypedArgs $args,
-        string $method = 'GET'
+        string $method = null
     ) : string {
-        static::DaftRouterAutoMethodChecking($method);
-
         return sprintf(
             '/cookie-test/%s/%s/%u/%u/%s',
             $args->name,
@@ -76,13 +77,12 @@ class CookieTest extends DaftRouteAcceptsOnlyTypedArgs
 
     /**
     * @param T3 $args
+    * @param 'GET'|null $method
     *
     * @return T2
     */
-    public static function DaftRouterHttpRouteArgsTyped(array $args, string $method)
+    public static function DaftRouterHttpRouteArgsTyped(array $args, string $method = null)
     {
-        static::DaftRouterAutoMethodChecking($method);
-
         return new CookieTestArgs($args);
     }
 }
