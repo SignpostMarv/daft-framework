@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0b0349d84d7ebe8a68c22b184e9c4ecd",
+    "content-hash": "d7f6e4b6251d61be0047487adba31998",
     "packages": [
         {
             "name": "nikic/fast-route",
@@ -299,16 +299,16 @@
         },
         {
             "name": "signpostmarv/daft-router",
-            "version": "v3.0.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/SignpostMarv/daft-router.git",
-                "reference": "a2e112d12061ee8a57a7646245ce44aafffc27cf"
+                "reference": "5e503b61cb2daa0c6627155851b08569da2ef8c1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SignpostMarv/daft-router/zipball/a2e112d12061ee8a57a7646245ce44aafffc27cf",
-                "reference": "a2e112d12061ee8a57a7646245ce44aafffc27cf",
+                "url": "https://api.github.com/repos/SignpostMarv/daft-router/zipball/5e503b61cb2daa0c6627155851b08569da2ef8c1",
+                "reference": "5e503b61cb2daa0c6627155851b08569da2ef8c1",
                 "shasum": ""
             },
             "require": {
@@ -336,7 +336,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.0.x-dev"
+                    "dev-master": "3.1.x-dev"
                 }
             },
             "autoload": {
@@ -355,7 +355,7 @@
                 }
             ],
             "description": "Daft Router",
-            "time": "2019-07-06T06:08:01+00:00"
+            "time": "2019-07-06T22:09:38+00:00"
         },
         {
             "name": "symfony/console",
@@ -5062,6 +5062,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "signpostmarv/daft-router": 20,
         "roave/security-advisories": 20,
         "vimeo/psalm": 20
     },
