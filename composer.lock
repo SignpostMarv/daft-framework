@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bb3b6a7cc61cf3069e14b974ab9d8c02",
+    "content-hash": "03f0e68cdb23274701c1be570aa4a515",
     "packages": [
         {
             "name": "nikic/fast-route",
@@ -299,7 +299,7 @@
         },
         {
             "name": "signpostmarv/daft-router",
-            "version": "dev-master",
+            "version": "v3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/SignpostMarv/daft-router.git",
@@ -5062,7 +5062,6 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "signpostmarv/daft-router": 20,
         "roave/security-advisories": 20,
         "vimeo/psalm": 20
     },
