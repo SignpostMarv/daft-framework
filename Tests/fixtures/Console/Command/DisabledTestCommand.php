@@ -10,13 +10,13 @@ use SignpostMarv\DaftFramework\Symfony\Console\Command\Command;
 
 class DisabledTestCommand extends Command
 {
-    /**
-    * @var string
-    */
-    protected static $defaultName = 'test:disabled';
+	/**
+	* @var string
+	*/
+	protected static $defaultName = 'test:disabled';
 
-    public function isEnabled() : bool
-    {
-        return false;
-    }
+	public function isEnabled() : bool
+	{
+		return false;
+	}
 }

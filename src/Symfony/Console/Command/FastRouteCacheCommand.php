@@ -13,51 +13,51 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class FastRouteCacheCommand extends Command
 {
-    const INT_RETURN_OK = 0;
+	const INT_RETURN_OK = 0;
 
-    const INT_RETURN_FAIL = 1;
+	const INT_RETURN_FAIL = 1;
 
-    /**
-    * @var string
-    */
-    protected static $defaultName = 'daft-framework:router:update-cache';
+	/**
+	* @var string
+	*/
+	protected static $defaultName = 'daft-framework:router:update-cache';
 
-    public function execute(InputInterface $input, OutputInterface $output) : int
-    {
-        $cacheFilename = static::tempnamCheck($output);
+	public function execute(InputInterface $input, OutputInterface $output) : int
+	{
+		$cacheFilename = static::tempnamCheck($output);
 
-        if ( ! is_string($cacheFilename)) {
-            return self::INT_RETURN_FAIL;
-        }
+		if ( ! is_string($cacheFilename)) {
+			return self::INT_RETURN_FAIL;
+		}
 
-        unlink($cacheFilename);
+		unlink($cacheFilename);
 
-        $cacheFilename .= '.cache';
+		$cacheFilename .= '.cache';
 
-        /**
-        * @var string[]
-        *
-        * @psalm-var array<int, class-string<\SignpostMarv\DaftRouter\DaftSource>>
-        */
-        $sources = $input->getArgument('sources');
+		/**
+		* @var string[]
+		*
+		* @psalm-var array<int, class-string<\SignpostMarv\DaftRouter\DaftSource>>
+		*/
+		$sources = $input->getArgument('sources');
 
-        Compiler::ObtainDispatcher(['cacheFile' => $cacheFilename], ...$sources);
+		Compiler::ObtainDispatcher(['cacheFile' => $cacheFilename], ...$sources);
 
-        $output->write(file_get_contents($cacheFilename) ?: 'false');
+		$output->write(file_get_contents($cacheFilename) ?: 'false');
 
-        unlink($cacheFilename);
+		unlink($cacheFilename);
 
-        return self::INT_RETURN_OK;
-    }
+		return self::INT_RETURN_OK;
+	}
 
-    protected function configure() : void
-    {
-        $this->setDescription(
-            'Update the cache used by the daft framework router'
-        )->addArgument(
-            'sources',
-            InputArgument::REQUIRED | InputArgument::IS_ARRAY,
-            'class names for sources'
-        );
-    }
+	protected function configure() : void
+	{
+		$this->setDescription(
+			'Update the cache used by the daft framework router'
+		)->addArgument(
+			'sources',
+			InputArgument::REQUIRED | InputArgument::IS_ARRAY,
+			'class names for sources'
+		);
+	}
 }

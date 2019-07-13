@@ -10,40 +10,40 @@ use BadMethodCallException;
 
 trait AttachDaftFramework
 {
-    /**
-    * @var Framework|null
-    */
-    protected $daftFrameworkInstance;
+	/**
+	* @var Framework|null
+	*/
+	protected $daftFrameworkInstance;
 
-    public function AttachDaftFramework(Framework $framework) : void
-    {
-        if ($this->daftFrameworkInstance instanceof Framework) {
-            throw new BadMethodCallException(
-                'Framework must not be attached if a framework is already attached!'
-            );
-        }
+	public function AttachDaftFramework(Framework $framework) : void
+	{
+		if ($this->daftFrameworkInstance instanceof Framework) {
+			throw new BadMethodCallException(
+				'Framework must not be attached if a framework is already attached!'
+			);
+		}
 
-        $this->daftFrameworkInstance = $framework;
-    }
+		$this->daftFrameworkInstance = $framework;
+	}
 
-    public function DetachDaftFramework() : ? Framework
-    {
-        $out = $this->daftFrameworkInstance;
+	public function DetachDaftFramework() : ? Framework
+	{
+		$out = $this->daftFrameworkInstance;
 
-        if ($out instanceof Framework) {
-            $this->daftFrameworkInstance = null;
-        }
+		if ($out instanceof Framework) {
+			$this->daftFrameworkInstance = null;
+		}
 
-        return $out;
-    }
+		return $out;
+	}
 
-    public function GetDaftFramework() : ? Framework
-    {
-        return $this->daftFrameworkInstance;
-    }
+	public function GetDaftFramework() : ? Framework
+	{
+		return $this->daftFrameworkInstance;
+	}
 
-    public function CheckIfUsingFrameworkInstance(Framework ...$instances) : bool
-    {
-        return in_array($this->daftFrameworkInstance, $instances, true);
-    }
+	public function CheckIfUsingFrameworkInstance(Framework ...$instances) : bool
+	{
+		return in_array($this->daftFrameworkInstance, $instances, true);
+	}
 }

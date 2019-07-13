@@ -14,178 +14,178 @@ use Symfony\Component\HttpFoundation\Request;
 
 class Framework
 {
-    const DEFAULT_BOOL_REQUIRE_FILE_EXISTS = true;
+	const DEFAULT_BOOL_REQUIRE_FILE_EXISTS = true;
 
-    const BOOL_IN_ARRAY_STRICT = true;
+	const BOOL_IN_ARRAY_STRICT = true;
 
-    /**
-    * @var string
-    */
-    private $baseUrl;
+	/**
+	* @var string
+	*/
+	private $baseUrl;
 
-    /**
-    * @var string
-    */
-    private $basePath;
+	/**
+	* @var string
+	*/
+	private $basePath;
 
-    /**
-    * @var EasyDB|null
-    */
-    private $db;
+	/**
+	* @var EasyDB|null
+	*/
+	private $db;
 
-    /**
-    * @var array
-    */
-    private $config;
+	/**
+	* @var array
+	*/
+	private $config;
 
-    /**
-    * @var array<string, self>
-    */
-    private static $requestpair = [];
+	/**
+	* @var array<string, self>
+	*/
+	private static $requestpair = [];
 
-    public function __construct(string $baseUrl, string $basePath, array $config = [])
-    {
-        if ( ! is_dir($basePath)) {
-            throw new InvalidArgumentException('Base path must be a directory!');
-        } elseif (realpath($basePath) !== $basePath) {
-            throw new InvalidArgumentException('Path should be explicitly set to via realpath!');
-        }
+	public function __construct(string $baseUrl, string $basePath, array $config = [])
+	{
+		if ( ! is_dir($basePath)) {
+			throw new InvalidArgumentException('Base path must be a directory!');
+		} elseif (realpath($basePath) !== $basePath) {
+			throw new InvalidArgumentException('Path should be explicitly set to via realpath!');
+		}
 
-        $this->baseUrl = static::NormaliseUrl($baseUrl);
-        $this->basePath = $basePath;
+		$this->baseUrl = static::NormaliseUrl($baseUrl);
+		$this->basePath = $basePath;
 
-        $this->config = $this->ValidateConfig($config);
-    }
+		$this->config = $this->ValidateConfig($config);
+	}
 
-    public static function NormaliseUrl(string $baseUrl) : string
-    {
-        $parsed = (array) parse_url($baseUrl);
+	public static function NormaliseUrl(string $baseUrl) : string
+	{
+		$parsed = (array) parse_url($baseUrl);
 
-        if ( ! isset($parsed['scheme'], $parsed['host'], $parsed['path'])) {
-            throw new InvalidArgumentException(
-                'Base URL must have at least a scheme, host & path in order to be normalised!'
-            );
-        }
+		if ( ! isset($parsed['scheme'], $parsed['host'], $parsed['path'])) {
+			throw new InvalidArgumentException(
+				'Base URL must have at least a scheme, host & path in order to be normalised!'
+			);
+		}
 
-        /**
-        * @var string
-        */
-        $scheme = $parsed['scheme'] ?? '';
+		/**
+		* @var string
+		*/
+		$scheme = $parsed['scheme'] ?? '';
 
-        /**
-        * @var string
-        */
-        $host = $parsed['host'] ?? '';
+		/**
+		* @var string
+		*/
+		$host = $parsed['host'] ?? '';
 
-        $baseUrl = $scheme . '://' . $host;
+		$baseUrl = $scheme . '://' . $host;
 
-        if (isset($parsed['port'])) {
-            $baseUrl .= ':' . (string) $parsed['port'];
-        }
+		if (isset($parsed['port'])) {
+			$baseUrl .= ':' . (string) $parsed['port'];
+		}
 
-        /**
-        * @var string
-        */
-        $path = $parsed['path'] ?? '';
+		/**
+		* @var string
+		*/
+		$path = $parsed['path'] ?? '';
 
-        return $baseUrl . str_replace('//', '/', $path);
-    }
+		return $baseUrl . str_replace('//', '/', $path);
+	}
 
-    public function ObtainDatabaseConnection() : EasyDB
-    {
-        if ( ! ($this->db instanceof EasyDB)) {
-            throw new BadMethodCallException('Database Connection not available!');
-        }
+	public function ObtainDatabaseConnection() : EasyDB
+	{
+		if ( ! ($this->db instanceof EasyDB)) {
+			throw new BadMethodCallException('Database Connection not available!');
+		}
 
-        return $this->db;
-    }
+		return $this->db;
+	}
 
-    public function ConfigureDatabaseConnection(
-        string $dsn,
-        string $username = null,
-        string $password = null,
-        array $options = []
-    ) : void {
-        if ($this->db instanceof EasyDB) {
-            throw new BadMethodCallException('Database Connection already made!');
-        }
+	public function ConfigureDatabaseConnection(
+		string $dsn,
+		string $username = null,
+		string $password = null,
+		array $options = []
+	) : void {
+		if ($this->db instanceof EasyDB) {
+			throw new BadMethodCallException('Database Connection already made!');
+		}
 
-        $this->db = Factory::create($dsn, $username, $password, $options);
-    }
+		$this->db = Factory::create($dsn, $username, $password, $options);
+	}
 
-    public function ObtainBaseUrl() : string
-    {
-        return $this->baseUrl;
-    }
+	public function ObtainBaseUrl() : string
+	{
+		return $this->baseUrl;
+	}
 
-    public function ObtainBasePath() : string
-    {
-        return $this->basePath;
-    }
+	public function ObtainBasePath() : string
+	{
+		return $this->basePath;
+	}
 
-    public function ObtainConfig() : array
-    {
-        return $this->config;
-    }
+	public function ObtainConfig() : array
+	{
+		return $this->config;
+	}
 
-    public function FileIsUnderBasePath(
-        string $filename,
-        bool $requireFileExists = self::DEFAULT_BOOL_REQUIRE_FILE_EXISTS
-    ) : bool {
-        $realpath = realpath($filename);
+	public function FileIsUnderBasePath(
+		string $filename,
+		bool $requireFileExists = self::DEFAULT_BOOL_REQUIRE_FILE_EXISTS
+	) : bool {
+		$realpath = realpath($filename);
 
-        return
-            ( ! $requireFileExists && ! file_exists($filename)) ||
-            (
-                is_file($filename) &&
-                is_string($realpath) &&
-                0 === mb_strpos($realpath, $this->basePath)
-            );
-    }
+		return
+			( ! $requireFileExists && ! file_exists($filename)) ||
+			(
+				is_file($filename) &&
+				is_string($realpath) &&
+				0 === mb_strpos($realpath, $this->basePath)
+			);
+	}
 
-    public static function PairWithRequest(self $framework, Request $request) : void
-    {
-        self::$requestpair[spl_object_hash($request)] = $framework;
-    }
+	public static function PairWithRequest(self $framework, Request $request) : void
+	{
+		self::$requestpair[spl_object_hash($request)] = $framework;
+	}
 
-    public static function ObtainFrameworkForRequest(Request $request) : self
-    {
-        $framework = self::$requestpair[spl_object_hash($request)] ?? null;
+	public static function ObtainFrameworkForRequest(Request $request) : self
+	{
+		$framework = self::$requestpair[spl_object_hash($request)] ?? null;
 
-        if ( ! ($framework instanceof self)) {
-            throw new InvalidArgumentException(
-                'No framework instance has been paired with the provided request!'
-            );
-        }
+		if ( ! ($framework instanceof self)) {
+			throw new InvalidArgumentException(
+				'No framework instance has been paired with the provided request!'
+			);
+		}
 
-        return $framework;
-    }
+		return $framework;
+	}
 
-    public static function DisposeOfFrameworkReferences(self ...$frameworks) : void
-    {
-        foreach (array_keys(self::$requestpair) as $hash) {
-            if (in_array(self::$requestpair[$hash], $frameworks, self::BOOL_IN_ARRAY_STRICT)) {
-                unset(self::$requestpair[$hash]);
-            }
-        }
-    }
+	public static function DisposeOfFrameworkReferences(self ...$frameworks) : void
+	{
+		foreach (array_keys(self::$requestpair) as $hash) {
+			if (in_array(self::$requestpair[$hash], $frameworks, self::BOOL_IN_ARRAY_STRICT)) {
+				unset(self::$requestpair[$hash]);
+			}
+		}
+	}
 
-    public static function DisposeOfRequestReferences(Request ...$requests) : void
-    {
-        foreach ($requests as $request) {
-            $hash = spl_object_hash($request);
+	public static function DisposeOfRequestReferences(Request ...$requests) : void
+	{
+		foreach ($requests as $request) {
+			$hash = spl_object_hash($request);
 
-            if (isset(self::$requestpair[$hash])) {
-                unset(self::$requestpair[$hash]);
-            }
-        }
-    }
+			if (isset(self::$requestpair[$hash])) {
+				unset(self::$requestpair[$hash]);
+			}
+		}
+	}
 
-    /**
-    * @throws InvalidArgumentException if $config contains something not valid
-    */
-    protected function ValidateConfig(array $config) : array
-    {
-        return $config;
-    }
+	/**
+	* @throws InvalidArgumentException if $config contains something not valid
+	*/
+	protected function ValidateConfig(array $config) : array
+	{
+		return $config;
+	}
 }

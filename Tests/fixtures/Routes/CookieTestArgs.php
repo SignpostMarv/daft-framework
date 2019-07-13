@@ -20,39 +20,39 @@ use SignpostMarv\DaftRouter\TypedArgs;
 */
 class CookieTestArgs extends TypedArgs
 {
-    /**
-    * @var T
-    */
-    protected $typed;
+	/**
+	* @var T
+	*/
+	protected $typed;
 
-    /**
-    * @template K as 'name'|'value'|'secure'|'http'|'same-site'
-    *
-    * @param array{name:string, value:string, secure:'0'|'1', http:'0'|'1', same-site:'lax'|'strict'} $args
-    */
-    public function __construct(array $args)
-    {
-        $args['secure'] = (bool) $args['secure'];
-        $args['http'] = (bool) $args['http'];
+	/**
+	* @template K as 'name'|'value'|'secure'|'http'|'same-site'
+	*
+	* @param array{name:string, value:string, secure:'0'|'1', http:'0'|'1', same-site:'lax'|'strict'} $args
+	*/
+	public function __construct(array $args)
+	{
+		$args['secure'] = (bool) $args['secure'];
+		$args['http'] = (bool) $args['http'];
 
-        /**
-        * @var T
-        */
-        $args = $args;
+		/**
+		* @var T
+		*/
+		$args = $args;
 
-        $this->typed = $args;
-    }
+		$this->typed = $args;
+	}
 
-    /**
-    * @return 'lax'|'strict'
-    */
-    public function SameSite() : string
-    {
-        /**
-        * @var 'lax'|'strict'
-        */
-        $out = $this->__get('same-site');
+	/**
+	* @return 'lax'|'strict'
+	*/
+	public function SameSite() : string
+	{
+		/**
+		* @var 'lax'|'strict'
+		*/
+		$out = $this->__get('same-site');
 
-        return $out;
-    }
+		return $out;
+	}
 }

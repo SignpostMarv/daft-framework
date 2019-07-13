@@ -8,10 +8,10 @@ namespace SignpostMarv\DaftFramework\Symfony\Console;
 
 interface DaftConsoleSource
 {
-    /**
-    * Provides an array of Command\Command implmentations, or DaftConsoleSource implementations.
-    *
-    * @return array<int, string>
-    */
-    public static function DaftFrameworkConsoleSources() : array;
+	/**
+	* Provides an array of Command\Command implmentations, or DaftConsoleSource implementations.
+	*
+	* @return array<int, string>
+	*/
+	public static function DaftFrameworkConsoleSources() : array;
 }

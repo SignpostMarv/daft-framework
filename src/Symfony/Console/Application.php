@@ -16,108 +16,108 @@ use Symfony\Component\Console\Command\Command as BaseCommand;
 
 class Application extends Base
 {
-    use AttachDaftFramework;
+	use AttachDaftFramework;
 
-    /**
-    * @return BaseCommand|null
-    */
-    public function add(BaseCommand $command)
-    {
-        return $this->addStrict($command);
-    }
+	/**
+	* @return BaseCommand|null
+	*/
+	public function add(BaseCommand $command)
+	{
+		return $this->addStrict($command);
+	}
 
-    public function addStrict(BaseCommand $command) : ? BaseCommand
-    {
-        $out = parent::add($command);
+	public function addStrict(BaseCommand $command) : ? BaseCommand
+	{
+		$out = parent::add($command);
 
-        if ($out instanceof Command) {
-            $maybeFramework = $this->GetDaftFramework();
+		if ($out instanceof Command) {
+			$maybeFramework = $this->GetDaftFramework();
 
-            if ( ! ($maybeFramework instanceof Framework)) {
-                throw new BadMethodCallException(
-                    'Cannot add a daft framework command without a framework being attached!'
-                );
-            }
+			if ( ! ($maybeFramework instanceof Framework)) {
+				throw new BadMethodCallException(
+					'Cannot add a daft framework command without a framework being attached!'
+				);
+			}
 
-            $out->AttachDaftFramework($maybeFramework);
-        } elseif ($command instanceof Command) {
-            $command->DetachDaftFramework();
-        }
+			$out->AttachDaftFramework($maybeFramework);
+		} elseif ($command instanceof Command) {
+			$command->DetachDaftFramework();
+		}
 
-        return $out;
-    }
+		return $out;
+	}
 
-    public function GetCommandCollector() : StaticMethodCollector
-    {
-        return new StaticMethodCollector(
-            [
-                DaftConsoleSource::class => [
-                    'DaftFrameworkConsoleSources' => [
-                        DaftConsoleSource::class,
-                        BaseCommand::class,
-                        Command::class,
-                    ],
-                ],
-            ],
-            [
-                BaseCommand::class,
-                Command::class,
-            ]
-        );
-    }
+	public function GetCommandCollector() : StaticMethodCollector
+	{
+		return new StaticMethodCollector(
+			[
+				DaftConsoleSource::class => [
+					'DaftFrameworkConsoleSources' => [
+						DaftConsoleSource::class,
+						BaseCommand::class,
+						Command::class,
+					],
+				],
+			],
+			[
+				BaseCommand::class,
+				Command::class,
+			]
+		);
+	}
 
-    /**
-    * @psalm-param class-string ...$sources
-    */
-    public function CollectCommands(string ...$sources) : void
-    {
-        $framework = $this->GetDaftFramework();
+	/**
+	* @psalm-param class-string ...$sources
+	*/
+	public function CollectCommands(string ...$sources) : void
+	{
+		$framework = $this->GetDaftFramework();
 
-        if ( ! ($framework instanceof Framework)) {
-            throw new BadMethodCallException(
-                'Cannot collect commands without an attached framework instance!'
-            );
-        }
+		if ( ! ($framework instanceof Framework)) {
+			throw new BadMethodCallException(
+				'Cannot collect commands without an attached framework instance!'
+			);
+		}
 
-        /**
-        * @var iterable<scalar|array|object|null>
-        */
-        $implementations = $this->GetCommandCollector()->Collect(...$sources);
+		/**
+		* @var iterable<scalar|array|object|null>
+		*/
+		$implementations = $this->GetCommandCollector()->Collect(...$sources);
 
-        foreach ($implementations as $implementation) {
-            if (is_string($implementation) && is_a($implementation, BaseCommand::class, true)) {
-                /**
-                * @var BaseCommand
-                */
-                $command = new $implementation($implementation::getDefaultName());
+		foreach ($implementations as $implementation) {
+			if (is_string($implementation) && is_a($implementation, BaseCommand::class, true)) {
+				/**
+				* @var BaseCommand
+				*/
+				$command = new $implementation($implementation::getDefaultName());
 
-                $this->add($command);
-            }
-        }
-    }
+				$this->add($command);
+			}
+		}
+	}
 
-    /**
-    * @return static
-    */
-    public static function CollectApplicationWithCommands(
-        string $name,
-        string $version,
-        Framework $framework
-    ) : self {
-        $application = new static($name, $version);
-        $application->AttachDaftFramework($framework);
+	/**
+	* @return static
+	*/
+	public static function CollectApplicationWithCommands(
+		string $name,
+		string $version,
+		Framework $framework
+	) : self {
+		$application = new static($name, $version);
+		$application->AttachDaftFramework($framework);
 
-        $config = (array) ($framework->ObtainConfig()[DaftConsoleSource::class] ?? []);
+		$config = (array) ($framework->ObtainConfig()[DaftConsoleSource::class] ?? []);
 
-        /**
-        * @var string[]
-        *
-        * @psalm-var class-string[]
-        */
-        $sources = array_values(array_filter($config, 'is_string'));
+		/**
+		* @var string[]
+		*
+		* @psalm-var class-string[]
+		*/
+		$sources = array_values(array_filter($config, 'is_string'));
 
-        $application->CollectCommands(...$sources);
+		$application->CollectCommands(...$sources);
 
-        return $application;
-    }
+		return $application;
+	}
 }

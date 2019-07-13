@@ -10,8 +10,8 @@ use SignpostMarv\DaftFramework\Symfony\Console\Command\Command;
 
 class TestCommand extends Command
 {
-    /**
-    * @var string
-    */
-    protected static $defaultName = 'test';
+	/**
+	* @var string
+	*/
+	protected static $defaultName = 'test';
 }

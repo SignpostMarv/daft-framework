@@ -1,87 +1,87 @@
 {
-    "timeout": 10,
-    "source": {
-        "directories": [
-            "src"
-        ]
-    },
-    "logs": {
-        "text": "infection.log"
-    },
-    "mutators": {
-        "@default": true,
-        "Assignment": {
-            "ignore": [
-                "SignpostMarv\\DaftFramework\\Symfony\\Console\\Command\\FastRouteCacheCommand::execute"
-            ]
-        },
-        "CastArray": {
-            "ignore": [
-                "SignpostMarv\\DaftFramework\\Framework::NormaliseUrl",
-                "SignpostMarv\\DaftFramework\\HttpHandler::__construct",
-                "SignpostMarv\\DaftFramework\\Http\\CookieMiddleware::OmNomNom",
-                "SignpostMarv\\DaftFramework\\Symfony\\Console\\Application::CollectApplicationWithCommands"
-            ]
-        },
-        "CastString": {
-            "ignore": [
-                "SignpostMarv\\DaftFramework\\Framework::NormaliseUrl",
-                "SignpostMarv\\DaftFramework\\HttpHandler::__construct",
-                "SignpostMarv\\DaftFramework\\HttpHandler::handle",
-                "SignpostMarv\\DaftFramework\\Symfony\\Console\\Command\\Command::tempnam"
-            ]
-        },
-        "FunctionCallRemoval": {
-            "ignore": [
-                "SignpostMarv\\DaftFramework\\Symfony\\Console\\Command\\FastRouteCacheCommand::execute"
-            ]
-        },
-        "LogicalAnd": {
-            "ignore": [
-                "SignpostMarv\\DaftFramework\\Framework::FileIsUnderBasePath",
-                "SignpostMarv\\DaftFramework\\Symfony\\Console\\Application::CollectCommands"
-            ]
-        },
-        "LogicalOr": {
-            "ignore": [
-                "SignpostMarv\\DaftFramework\\Http\\CookieMiddleware::PerhapsReconfigureCookie",
-                "SignpostMarv\\DaftFramework\\Symfony\\Console\\Command\\Command::tempnamCheck"
-            ]
-        },
-        "MethodCallRemoval": {
-            "ignore": [
-                "SignpostMarv\\DaftFramework\\Http\\CookieMiddleware::ReconfigureCookie",
-                "SignpostMarv\\DaftFramework\\Symfony\\Console\\Application::addStrict"
-            ]
-        },
-        "NotIdentical": {
-            "ignore": [
-                "SignpostMarv\\DaftFramework\\Http\\CookieMiddleware::PerhapsReconfigureCookie"
-            ]
-        },
-        "PublicVisibility": {
-            "ignore": [
-                "SignpostMarv\\DaftFramework\\AttachDaftFramework::GetDaftFramework",
-                "SignpostMarv\\DaftFramework\\Framework::FileIsUnderBasePath",
-                "SignpostMarv\\DaftFramework\\Http\\CookieMiddleware::PerhapsReconfigureCookie",
-                "SignpostMarv\\DaftFramework\\Http\\CookieMiddleware::PerhapsReconfigureResponseCookies",
-                "SignpostMarv\\DaftFramework\\Http\\CookieMiddleware::ReconfigureCookie",
-                "SignpostMarv\\DaftFramework\\Symfony\\Console\\Application::addStrict",
-                "SignpostMarv\\DaftFramework\\Symfony\\Console\\Application::GetCommandCollector",
-                "SignpostMarv\\DaftFramework\\Symfony\\Console\\Command\\FastRouteCacheCommand::execute"
-            ]
-        },
-        "ProtectedVisibility": {
-            "ignore": [
-                "SignpostMarv\\DaftFramework\\HttpHandler::ValidateDaftSourceSubConfig",
-                "SignpostMarv\\DaftFramework\\Http\\CookieMiddleware::OmNomNom",
-                "SignpostMarv\\DaftFramework\\Symfony\\Console\\Command\\Command::tempnam"
-            ]
-        },
-        "TrueValue": {
-            "ignore": [
-                "SignpostMarv\\DaftFramework\\AttachDaftFramework::CheckIfUsingFrameworkInstance"
-            ]
-        }
-    }
+	"timeout": 10,
+	"source": {
+		"directories": [
+			"src"
+		]
+	},
+	"logs": {
+		"text": "infection.log"
+	},
+	"mutators": {
+		"@default": true,
+		"Assignment": {
+			"ignore": [
+				"SignpostMarv\\DaftFramework\\Symfony\\Console\\Command\\FastRouteCacheCommand::execute"
+			]
+		},
+		"CastArray": {
+			"ignore": [
+				"SignpostMarv\\DaftFramework\\Framework::NormaliseUrl",
+				"SignpostMarv\\DaftFramework\\HttpHandler::__construct",
+				"SignpostMarv\\DaftFramework\\Http\\CookieMiddleware::OmNomNom",
+				"SignpostMarv\\DaftFramework\\Symfony\\Console\\Application::CollectApplicationWithCommands"
+			]
+		},
+		"CastString": {
+			"ignore": [
+				"SignpostMarv\\DaftFramework\\Framework::NormaliseUrl",
+				"SignpostMarv\\DaftFramework\\HttpHandler::__construct",
+				"SignpostMarv\\DaftFramework\\HttpHandler::handle",
+				"SignpostMarv\\DaftFramework\\Symfony\\Console\\Command\\Command::tempnam"
+			]
+		},
+		"FunctionCallRemoval": {
+			"ignore": [
+				"SignpostMarv\\DaftFramework\\Symfony\\Console\\Command\\FastRouteCacheCommand::execute"
+			]
+		},
+		"LogicalAnd": {
+			"ignore": [
+				"SignpostMarv\\DaftFramework\\Framework::FileIsUnderBasePath",
+				"SignpostMarv\\DaftFramework\\Symfony\\Console\\Application::CollectCommands"
+			]
+		},
+		"LogicalOr": {
+			"ignore": [
+				"SignpostMarv\\DaftFramework\\Http\\CookieMiddleware::PerhapsReconfigureCookie",
+				"SignpostMarv\\DaftFramework\\Symfony\\Console\\Command\\Command::tempnamCheck"
+			]
+		},
+		"MethodCallRemoval": {
+			"ignore": [
+				"SignpostMarv\\DaftFramework\\Http\\CookieMiddleware::ReconfigureCookie",
+				"SignpostMarv\\DaftFramework\\Symfony\\Console\\Application::addStrict"
+			]
+		},
+		"NotIdentical": {
+			"ignore": [
+				"SignpostMarv\\DaftFramework\\Http\\CookieMiddleware::PerhapsReconfigureCookie"
+			]
+		},
+		"PublicVisibility": {
+			"ignore": [
+				"SignpostMarv\\DaftFramework\\AttachDaftFramework::GetDaftFramework",
+				"SignpostMarv\\DaftFramework\\Framework::FileIsUnderBasePath",
+				"SignpostMarv\\DaftFramework\\Http\\CookieMiddleware::PerhapsReconfigureCookie",
+				"SignpostMarv\\DaftFramework\\Http\\CookieMiddleware::PerhapsReconfigureResponseCookies",
+				"SignpostMarv\\DaftFramework\\Http\\CookieMiddleware::ReconfigureCookie",
+				"SignpostMarv\\DaftFramework\\Symfony\\Console\\Application::addStrict",
+				"SignpostMarv\\DaftFramework\\Symfony\\Console\\Application::GetCommandCollector",
+				"SignpostMarv\\DaftFramework\\Symfony\\Console\\Command\\FastRouteCacheCommand::execute"
+			]
+		},
+		"ProtectedVisibility": {
+			"ignore": [
+				"SignpostMarv\\DaftFramework\\HttpHandler::ValidateDaftSourceSubConfig",
+				"SignpostMarv\\DaftFramework\\Http\\CookieMiddleware::OmNomNom",
+				"SignpostMarv\\DaftFramework\\Symfony\\Console\\Command\\Command::tempnam"
+			]
+		},
+		"TrueValue": {
+			"ignore": [
+				"SignpostMarv\\DaftFramework\\AttachDaftFramework::CheckIfUsingFrameworkInstance"
+			]
+		}
+	}
 }

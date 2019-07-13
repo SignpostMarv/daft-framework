@@ -10,13 +10,13 @@ use SignpostMarv\DaftFramework\Symfony\Console\Command\FastRouteCacheCommand;
 
 class ExecuteCoverageCommand extends FastRouteCacheCommand
 {
-    /**
-    * @var string
-    */
-    protected static $defaultName = 'test:execute-coverage';
+	/**
+	* @var string
+	*/
+	protected static $defaultName = 'test:execute-coverage';
 
-    protected static function tempnam() : string
-    {
-        return (string) false;
-    }
+	protected static function tempnam() : string
+	{
+		return (string) false;
+	}
 }
