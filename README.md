@@ -1,9 +1,9 @@
-Copyright 2018 SignpostMarv
+Copyright 2019 SignpostMarv
 
 # daft-framework
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/SignpostMarv/daft-framework/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/SignpostMarv/daft-framework/?branch=master)
-[![Code Coverage](https://scrutinizer-ci.com/g/SignpostMarv/daft-framework/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/SignpostMarv/daft-framework/?branch=master)
-[![Build Status](https://scrutinizer-ci.com/g/SignpostMarv/daft-framework/badges/build.png?b=master)](https://scrutinizer-ci.com/g/SignpostMarv/daft-framework/build-status/master)
+[![Coverage Status](https://coveralls.io/repos/github/SignpostMarv/daft-framework/badge.svg?branch=master)](https://coveralls.io/github/SignpostMarv/daft-framework?branch=master)
+[![Build Status](https://travis-ci.org/SignpostMarv/daft-framework.svg?branch=master)](https://travis-ci.org/SignpostMarv/daft-framework)
+[![Type Coverage](https://shepherd.dev/github/signpostmarv/daft-framework/coverage.svg)](https://shepherd.dev/github/signpostmarv/daft-framework)
 
 I needed to make a framework using the other daft packages. Because reasons.
 
