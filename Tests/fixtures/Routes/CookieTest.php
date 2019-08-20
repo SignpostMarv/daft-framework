@@ -42,7 +42,7 @@ class CookieTest extends DaftRouteAcceptsOnlyTypedArgs
 			$args->secure,
 			$args->http,
 			false,
-			$args->SameSite()
+			$args->sameSite
 		);
 
 		$resp->headers->setCookie($cookie);
@@ -71,7 +71,7 @@ class CookieTest extends DaftRouteAcceptsOnlyTypedArgs
 			$args->value,
 			$args->secure,
 			$args->http,
-			$args->SameSite()
+			$args->sameSite
 		);
 	}
 
@@ -83,6 +83,6 @@ class CookieTest extends DaftRouteAcceptsOnlyTypedArgs
 	*/
 	public static function DaftRouterHttpRouteArgsTyped(array $args, string $method = null)
 	{
-		return new CookieTestArgs($args);
+		return CookieTestArgs::__fromArray($args);
 	}
 }

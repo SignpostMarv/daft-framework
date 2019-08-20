@@ -9,50 +9,98 @@ namespace SignpostMarv\DaftFramework\Tests\fixtures\Routes;
 use SignpostMarv\DaftRouter\TypedArgs;
 
 /**
-* @psalm-type T = array{name:string, value:string, secure:bool, http:bool, same-site:'lax'|'strict'}
+* @template T as array{name:string, value:string, secure:bool, http:bool, same-site:'lax'|'strict'}
+* @template S as array{name:string, value:string, secure:'0'|'1', http:'0'|'1', same-site:'lax'|'strict'}
 *
-* @tempalte-extends TypedArgs<T>
-*
-* @property-read string $name
-* @property-read string $value
-* @property-read bool $secure
-* @property-read bool $http
+* @tempalte-extends TypedArgs<T, S>
 */
 class CookieTestArgs extends TypedArgs
 {
-	/**
-	* @var T
-	*/
-	protected $typed;
+	const TYPED_PROPERTIES = [
+		'name',
+		'value',
+		'secure',
+		'http',
+		'sameSite',
+	];
 
 	/**
-	* @template K as 'name'|'value'|'secure'|'http'|'same-site'
+	* @readonly
 	*
-	* @param array{name:string, value:string, secure:'0'|'1', http:'0'|'1', same-site:'lax'|'strict'} $args
+	* @var string
+	*/
+	public $name;
+
+	/**
+	* @readonly
+	*
+	* @var string
+	*/
+	public $value;
+
+	/**
+	* @readonly
+	*
+	* @var bool
+	*/
+	public $secure;
+
+	/**
+	* @readonly
+	*
+	* @var bool
+	*/
+	public $http;
+
+	/**
+	* @readonly
+	*
+	* @var 'lax'|'strict'
+	*/
+	public $sameSite;
+
+	/**
+	* @param T $args
 	*/
 	public function __construct(array $args)
 	{
-		$args['secure'] = (bool) $args['secure'];
-		$args['http'] = (bool) $args['http'];
-
-		/**
-		* @var T
-		*/
-		$args = $args;
-
-		$this->typed = $args;
+		$this->name = $args['name'];
+		$this->value = $args['value'];
+		$this->secure = $args['secure'];
+		$this->http = $args['http'];
+		$this->sameSite = $args['same-site'];
 	}
 
 	/**
-	* @return 'lax'|'strict'
+	* @template K as key-of<T>
+	*
+	* @param K $property
+	* @param S[K] $value
+	*
+	* @return T[K]
 	*/
-	public function SameSite() : string
-	{
+	public static function PropertyScalarOrNullToValue(
+		string $property,
+		$value
+	) {
 		/**
-		* @var 'lax'|'strict'
+		* @var string
 		*/
-		$out = $this->__get('same-site');
+		$property = $property;
 
-		return $out;
+		if (
+			'secure' === $property ||
+			'http' === $property
+		) {
+			/**
+			* @var T[K]
+			*/
+			return (bool) $value;
+		}
+
+		/**
+		* @var T[K]
+		*/
+		return parent::PropertyScalarOrNullToValue($property, $value);
 	}
 }

@@ -29,7 +29,7 @@
 	"scripts": {
 		"tests": [
 			"phpunit -vvvv --coverage-clover=phpunit.clover",
-			"psalm --shepherd",
+			"psalm --shepherd --show-info=false",
 			"phpcpd src Tests",
 			"phpmnd ./ --exclude=./phpunit/ --exclude=./vendor/ --non-zero-exit-on-violation --hint",
 			"composer-require-checker check ./composer.json",
@@ -49,7 +49,7 @@
 		"ext-mbstring": "*",
 		"paragonie/easydb": "^2.10",
 		"signpostmarv/daft-interface-collector": "^2.0",
-		"signpostmarv/daft-router": "^3.1",
+		"signpostmarv/daft-router": "typed-object-args-dev",
 		"symfony/console": "^4.3",
 		"symfony/event-dispatcher": "^4.3",
 		"symfony/http-foundation": "^4.3",
