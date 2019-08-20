@@ -40,6 +40,35 @@
     <UnresolvableInclude occurrences="1">
       <code>include($configFile)</code>
     </UnresolvableInclude>
+    <UnusedFunctionCall occurrences="1">
+      <code>realpath</code>
+    </UnusedFunctionCall>
+  </file>
+  <file src="Tests/CookieMiddlewareTest.php">
+    <UnusedFunctionCall occurrences="1">
+      <code>realpath</code>
+    </UnusedFunctionCall>
+  </file>
+  <file src="Tests/HttpHandlerTest.php">
+    <UnusedFunctionCall occurrences="1">
+      <code>realpath</code>
+    </UnusedFunctionCall>
+  </file>
+  <file src="Tests/ImplementationTest.php">
+    <UnusedFunctionCall occurrences="12">
+      <code>realpath</code>
+      <code>realpath</code>
+      <code>realpath</code>
+      <code>realpath</code>
+      <code>sprintf</code>
+      <code>realpath</code>
+      <code>sprintf</code>
+      <code>realpath</code>
+      <code>sprintf</code>
+      <code>realpath</code>
+      <code>sprintf</code>
+      <code>realpath</code>
+    </UnusedFunctionCall>
   </file>
   <file src="Tests/fixtures/Routes/CookieTest.php">
     <PossiblyUnusedMethod occurrences="1">
