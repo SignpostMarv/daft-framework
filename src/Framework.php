@@ -12,6 +12,9 @@ use ParagonIE\EasyDB\EasyDB;
 use ParagonIE\EasyDB\Factory;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+* @template CONFIG as array<string, scalar|array|object|null>
+*/
 class Framework
 {
 	const DEFAULT_BOOL_REQUIRE_FILE_EXISTS = true;
@@ -43,8 +46,14 @@ class Framework
 	*/
 	private static $requestpair = [];
 
-	public function __construct(string $baseUrl, string $basePath, array $config = [])
-	{
+	/**
+	* @param CONFIG $config
+	*/
+	public function __construct(
+		string $baseUrl,
+		string $basePath,
+		array $config
+	) {
 		if ( ! is_dir($basePath)) {
 			throw new InvalidArgumentException('Base path must be a directory!');
 		} elseif (realpath($basePath) !== $basePath) {
@@ -59,7 +68,10 @@ class Framework
 
 	public static function NormaliseUrl(string $baseUrl) : string
 	{
-		$parsed = (array) parse_url($baseUrl);
+		/**
+		* @var array{scheme?:string, host?:string, path?:string, port?:int}
+		*/
+		$parsed = parse_url($baseUrl);
 
 		if ( ! isset($parsed['scheme'], $parsed['host'], $parsed['path'])) {
 			throw new InvalidArgumentException(
@@ -67,26 +79,16 @@ class Framework
 			);
 		}
 
-		/**
-		* @var string
-		*/
-		$scheme = $parsed['scheme'] ?? '';
-
-		/**
-		* @var string
-		*/
-		$host = $parsed['host'] ?? '';
+		$scheme = $parsed['scheme'];
+		$host = $parsed['host'];
 
 		$baseUrl = $scheme . '://' . $host;
 
 		if (isset($parsed['port'])) {
-			$baseUrl .= ':' . (string) $parsed['port'];
+			$baseUrl .= ':' . $parsed['port'];
 		}
 
-		/**
-		* @var string
-		*/
-		$path = $parsed['path'] ?? '';
+		$path = $parsed['path'];
 
 		return $baseUrl . str_replace('//', '/', $path);
 	}

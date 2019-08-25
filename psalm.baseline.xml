@@ -80,6 +80,11 @@
       <code>$args</code>
     </MoreSpecificImplementedParamType>
   </file>
+  <file src="Tests/fixtures/bin/daft-framework">
+    <MixedArgumentTypeCoercion occurrences="1">
+      <code>(array) include(dirname(__DIR__) . '/config.php')</code>
+    </MixedArgumentTypeCoercion>
+  </file>
   <file src="src/HttpHandler.php">
     <PossiblyUnusedMethod occurrences="1">
       <code>__construct</code>

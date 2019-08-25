@@ -28,7 +28,11 @@
 	},
 	"scripts": {
 		"tests": [
-			"phpunit -vvvv --coverage-clover=phpunit.clover",
+			"phpunit",
+			"infection --min-msi=100",
+			"@static-analysis"
+		],
+		"static-analysis": [
 			"psalm --shepherd --show-info=false",
 			"phpcpd src Tests",
 			"phpmnd ./ --exclude=./phpunit/ --exclude=./vendor/ --non-zero-exit-on-violation --hint",
@@ -60,7 +64,7 @@
 	},
 	"require-dev": {
 		"ext-pdo_sqlite": "*",
-		"infection/infection": "^0.13.4",
+		"infection/infection": "^0.13.5",
 		"maglnet/composer-require-checker": "^2.0",
 		"php-coveralls/php-coveralls": "^2.1",
 		"phpunit/phpunit": "^8.3",

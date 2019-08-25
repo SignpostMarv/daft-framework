@@ -80,19 +80,17 @@ class Application extends Base
 		}
 
 		/**
-		* @var iterable<scalar|array|object|null>
+		* @var iterable<class-string<BaseCommand>>
 		*/
 		$implementations = $this->GetCommandCollector()->Collect(...$sources);
 
 		foreach ($implementations as $implementation) {
-			if (is_string($implementation) && is_a($implementation, BaseCommand::class, true)) {
 				/**
 				* @var BaseCommand
 				*/
 				$command = new $implementation($implementation::getDefaultName());
 
 				$this->add($command);
-			}
 		}
 	}
 
@@ -107,14 +105,10 @@ class Application extends Base
 		$application = new static($name, $version);
 		$application->AttachDaftFramework($framework);
 
-		$config = (array) ($framework->ObtainConfig()[DaftConsoleSource::class] ?? []);
-
 		/**
-		* @var string[]
-		*
-		* @psalm-var class-string[]
+		* @var array<int, class-string>
 		*/
-		$sources = array_values(array_filter($config, 'is_string'));
+		$sources = (array) ($framework->ObtainConfig()[DaftConsoleSource::class] ?? []);
 
 		$application->CollectCommands(...$sources);
 

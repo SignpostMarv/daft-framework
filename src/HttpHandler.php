@@ -15,6 +15,16 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
+/**
+* @template CONFIG as array{
+	SignpostMarv\DaftRouter\DaftSource: array{
+		cacheFile:string,
+		sources:array<int, string>
+	}
+}
+*
+* @template-extends Framework<CONFIG>
+*/
 class HttpHandler extends Framework
 {
 	const ERROR_SOURCE_CONFIG = DaftSource::class . ' config does not specify "%s" correctly.';
@@ -35,20 +45,21 @@ class HttpHandler extends Framework
 	*/
 	private $routerSources;
 
-	public function __construct(string $baseUrl, string $basePath, array $config = [])
+	/**
+	* @param CONFIG $config
+	*/
+	public function __construct(string $baseUrl, string $basePath, array $config)
 	{
 		parent::__construct($baseUrl, $basePath, $config);
 
-		$this->routerCacheFile = (string) ((array) $config[DaftSource::class])['cacheFile'];
+		$this->routerCacheFile = $config[DaftSource::class]['cacheFile'];
 
 		/**
-		* @var string[]
-		*
-		* @psalm-var array<int, class-string<DaftSource>>
+		* @var  array<int, class-string<DaftSource>>
 		*/
-		$sources = (array) ((array) $config[DaftSource::class])['sources'];
+		$sources = $config[DaftSource::class]['sources'];
 
-		$this->routerSources = array_values(array_filter($sources, 'is_string'));
+		$this->routerSources = $sources;
 	}
 
 	public function handle(Request $request) : Response
@@ -64,7 +75,7 @@ class HttpHandler extends Framework
 
 		return $dispatcher->handle(
 			$request,
-			(string) parse_url($this->ObtainBaseUrl(), PHP_URL_PATH)
+			parse_url($this->ObtainBaseUrl(), PHP_URL_PATH)
 		);
 	}
 
