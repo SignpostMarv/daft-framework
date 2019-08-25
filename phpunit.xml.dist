@@ -1,4 +1,10 @@
-<phpunit bootstrap="./vendor/autoload.php">
+<phpunit
+	bootstrap="./vendor/autoload.php"
+	cacheResult="true"
+	cacheResultFile="./phpunit.cache"
+	resolveDependencies="true"
+	executionOrder="random"
+>
 	<testsuites>
 		<testsuite name="DaftFramework">
 			<directory>./Tests/</directory>

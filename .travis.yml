@@ -5,6 +5,8 @@ php:
 cache:
   directories:
     - ./vendor/
+    - ./phpunit.cache
+    - ./php_cs.cache
 install:
   - travis_retry composer install --no-interaction --no-suggest --prefer-source
 script:
