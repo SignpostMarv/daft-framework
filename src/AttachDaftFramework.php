@@ -42,8 +42,9 @@ trait AttachDaftFramework
 		return $this->daftFrameworkInstance;
 	}
 
-	public function CheckIfUsingFrameworkInstance(Framework ...$instances) : bool
-	{
+	public function CheckIfUsingFrameworkInstance(
+		Framework ...$instances
+	) : bool {
 		return in_array($this->daftFrameworkInstance, $instances, true);
 	}
 }

@@ -27,7 +27,9 @@ use Symfony\Component\HttpKernel\KernelEvents;
 */
 class HttpHandler extends Framework
 {
-	const ERROR_SOURCE_CONFIG = DaftSource::class . ' config does not specify "%s" correctly.';
+	const ERROR_SOURCE_CONFIG =
+		DaftSource::class .
+		' config does not specify "%s" correctly.';
 
 	const ERROR_ROUTER_CACHE_FILE_PATH =
 		DaftSource::class .
@@ -48,8 +50,11 @@ class HttpHandler extends Framework
 	/**
 	* @param CONFIG $config
 	*/
-	public function __construct(string $baseUrl, string $basePath, array $config)
-	{
+	public function __construct(
+		string $baseUrl,
+		string $basePath,
+		array $config
+	) {
 		parent::__construct($baseUrl, $basePath, $config);
 
 		$this->routerCacheFile = $config[DaftSource::class]['cacheFile'];
@@ -81,11 +86,14 @@ class HttpHandler extends Framework
 
 	public function AttachToEventDispatcher(EventDispatcher $dispatcher) : void
 	{
-		$dispatcher->addListener(KernelEvents::REQUEST, function (GetResponseEvent $e) : void {
-			if ( ! $e->hasResponse()) {
-				$e->setResponse($this->handle($e->getRequest()));
+		$dispatcher->addListener(
+			KernelEvents::REQUEST,
+			function (GetResponseEvent $e) : void {
+				if ( ! $e->hasResponse()) {
+					$e->setResponse($this->handle($e->getRequest()));
+				}
 			}
-		});
+		);
 	}
 
 	protected function ValidateConfig(array $config) : array
@@ -95,8 +103,17 @@ class HttpHandler extends Framework
 		*/
 		$subConfig = $config[DaftSource::class] ?? null;
 
-		if ( ! is_array($subConfig) || ! isset($subConfig['cacheFile'], $subConfig['sources'])) {
-			throw new InvalidArgumentException(sprintf('%s config not found!', DaftSource::class));
+		if (
+			! is_array($subConfig) ||
+			! isset(
+				$subConfig['cacheFile'],
+				$subConfig['sources']
+			)
+		) {
+			throw new InvalidArgumentException(sprintf(
+				'%s config not found!',
+				DaftSource::class
+			));
 		}
 
 		$this->ValidateDaftSourceSubConfig($subConfig);
@@ -107,11 +124,21 @@ class HttpHandler extends Framework
 	protected function ValidateDaftSourceSubConfig(array $subConfig) : void
 	{
 		if ( ! is_string($subConfig['cacheFile'])) {
-			throw new InvalidArgumentException(sprintf(self::ERROR_SOURCE_CONFIG, 'cacheFile'));
+			throw new InvalidArgumentException(sprintf(
+				self::ERROR_SOURCE_CONFIG,
+				'cacheFile'
+			));
 		} elseif ( ! is_array($subConfig['sources'])) {
-			throw new InvalidArgumentException(sprintf(self::ERROR_SOURCE_CONFIG, 'sources'));
-		} elseif ( ! $this->FileIsUnderBasePath($subConfig['cacheFile'], false)) {
-			throw new InvalidArgumentException(self::ERROR_ROUTER_CACHE_FILE_PATH);
+			throw new InvalidArgumentException(sprintf(
+				self::ERROR_SOURCE_CONFIG,
+				'sources'
+			));
+		} elseif (
+			! $this->FileIsUnderBasePath($subConfig['cacheFile'], false)
+		) {
+			throw new InvalidArgumentException(
+				self::ERROR_ROUTER_CACHE_FILE_PATH
+			);
 		}
 	}
 }

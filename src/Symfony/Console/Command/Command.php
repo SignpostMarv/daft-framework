@@ -27,11 +27,16 @@ abstract class Command extends Base
 		return realpath($tempnam);
 	}
 
-	final protected static function tempnamCheck(OutputInterface $output) : ? string
-	{
+	final protected static function tempnamCheck(
+		OutputInterface $output
+	) : ? string {
 		$tempnam = static::tempnam();
 
-		if (is_dir($tempnam) || ! is_file($tempnam) || ! is_writable($tempnam)) {
+		if (
+			is_dir($tempnam) ||
+			! is_file($tempnam) ||
+			! is_writable($tempnam)
+		) {
 			$output->writeln('could not get temporary filename!');
 
 			return null;

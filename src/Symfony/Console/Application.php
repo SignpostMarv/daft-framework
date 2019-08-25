@@ -108,7 +108,9 @@ class Application extends Base
 		/**
 		* @var array<int, class-string>
 		*/
-		$sources = (array) ($framework->ObtainConfig()[DaftConsoleSource::class] ?? []);
+		$sources = (array) (
+			$framework->ObtainConfig()[DaftConsoleSource::class] ?? []
+		);
 
 		$application->CollectCommands(...$sources);
 

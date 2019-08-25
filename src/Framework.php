@@ -55,9 +55,13 @@ class Framework
 		array $config
 	) {
 		if ( ! is_dir($basePath)) {
-			throw new InvalidArgumentException('Base path must be a directory!');
+			throw new InvalidArgumentException(
+				'Base path must be a directory!'
+			);
 		} elseif (realpath($basePath) !== $basePath) {
-			throw new InvalidArgumentException('Path should be explicitly set to via realpath!');
+			throw new InvalidArgumentException(
+				'Path should be explicitly set to via realpath!'
+			);
 		}
 
 		$this->baseUrl = static::NormaliseUrl($baseUrl);
@@ -96,7 +100,9 @@ class Framework
 	public function ObtainDatabaseConnection() : EasyDB
 	{
 		if ( ! ($this->db instanceof EasyDB)) {
-			throw new BadMethodCallException('Database Connection not available!');
+			throw new BadMethodCallException(
+				'Database Connection not available!'
+			);
 		}
 
 		return $this->db;
@@ -109,7 +115,9 @@ class Framework
 		array $options = []
 	) : void {
 		if ($this->db instanceof EasyDB) {
-			throw new BadMethodCallException('Database Connection already made!');
+			throw new BadMethodCallException(
+				'Database Connection already made!'
+			);
 		}
 
 		$this->db = Factory::create($dsn, $username, $password, $options);
@@ -145,8 +153,10 @@ class Framework
 			);
 	}
 
-	public static function PairWithRequest(self $framework, Request $request) : void
-	{
+	public static function PairWithRequest(
+		self $framework,
+		Request $request
+	) : void {
 		self::$requestpair[spl_object_hash($request)] = $framework;
 	}
 
@@ -163,17 +173,25 @@ class Framework
 		return $framework;
 	}
 
-	public static function DisposeOfFrameworkReferences(self ...$frameworks) : void
-	{
+	public static function DisposeOfFrameworkReferences(
+		self ...$frameworks
+	) : void {
 		foreach (array_keys(self::$requestpair) as $hash) {
-			if (in_array(self::$requestpair[$hash], $frameworks, self::BOOL_IN_ARRAY_STRICT)) {
+			if (
+				in_array(
+					self::$requestpair[$hash],
+					$frameworks,
+					self::BOOL_IN_ARRAY_STRICT
+				)
+			) {
 				unset(self::$requestpair[$hash]);
 			}
 		}
 	}
 
-	public static function DisposeOfRequestReferences(Request ...$requests) : void
-	{
+	public static function DisposeOfRequestReferences(
+		Request ...$requests
+	) : void {
 		foreach ($requests as $request) {
 			$hash = spl_object_hash($request);
 

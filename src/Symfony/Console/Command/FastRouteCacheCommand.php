@@ -6,6 +6,7 @@ declare(strict_types=1);
 
 namespace SignpostMarv\DaftFramework\Symfony\Console\Command;
 
+use SignpostMarv\DaftRouter\DaftSource;
 use SignpostMarv\DaftRouter\Router\Compiler;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -22,8 +23,10 @@ class FastRouteCacheCommand extends Command
 	*/
 	protected static $defaultName = 'daft-framework:router:update-cache';
 
-	public function execute(InputInterface $input, OutputInterface $output) : int
-	{
+	public function execute(
+		InputInterface $input,
+		OutputInterface $output
+	) : int {
 		$cacheFilename = static::tempnamCheck($output);
 
 		if ( ! is_string($cacheFilename)) {
@@ -37,11 +40,16 @@ class FastRouteCacheCommand extends Command
 		/**
 		* @var string[]
 		*
-		* @psalm-var array<int, class-string<\SignpostMarv\DaftRouter\DaftSource>>
+		* @psalm-var array<int, class-string<DaftSource>>
 		*/
 		$sources = $input->getArgument('sources');
 
-		Compiler::ObtainDispatcher(['cacheFile' => $cacheFilename], ...$sources);
+		Compiler::ObtainDispatcher(
+			[
+				'cacheFile' => $cacheFilename,
+			],
+			...$sources
+		);
 
 		$output->write(file_get_contents($cacheFilename) ?: 'false');
 

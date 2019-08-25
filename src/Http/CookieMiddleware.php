@@ -75,7 +75,13 @@ class CookieMiddleware implements DaftRequestInterceptor, DaftResponseModifier
 		$updateSameSite = $cookie->getSameSite() !== $sameSite;
 
 		if ($updateSecure || $updateHttpOnly || $updateSameSite) {
-			static::ReconfigureCookie($response, $cookie, $isSecure, $isHttpOnly, $sameSite);
+			static::ReconfigureCookie(
+				$response,
+				$cookie,
+				$isSecure,
+				$isHttpOnly,
+				$sameSite
+			);
 		}
 	}
 
@@ -89,7 +95,13 @@ class CookieMiddleware implements DaftRequestInterceptor, DaftResponseModifier
 		$cookieName = $cookie->getName();
 		$cookiePath = $cookie->getPath();
 		$cookieDomain = $cookie->getDomain();
-		$response->headers->removeCookie($cookieName, $cookiePath, $cookieDomain);
+
+		$response->headers->removeCookie(
+			$cookieName,
+			$cookiePath,
+			$cookieDomain
+		);
+
 		$response->headers->setCookie(new Cookie(
 			$cookieName,
 			$cookie->getValue(),
@@ -103,9 +115,14 @@ class CookieMiddleware implements DaftRequestInterceptor, DaftResponseModifier
 		));
 	}
 
-	protected static function OmNomNom(Request $request, ? Response $response) : ? Response
-	{
-		$config = Framework::ObtainFrameworkForRequest($request)->ObtainConfig();
+	protected static function OmNomNom(
+		Request $request,
+		? Response $response
+	) : ? Response {
+		$config = Framework::ObtainFrameworkForRequest(
+			$request
+		)->ObtainConfig();
+
 		if (isset($response, $config[self::class])) {
 			$config = (array) $config[self::class];
 
@@ -117,7 +134,12 @@ class CookieMiddleware implements DaftRequestInterceptor, DaftResponseModifier
 			$isSecure = (bool) ($config['secure'] ?? null);
 			$isHttpOnly = (bool) ($config['httpOnly'] ?? null);
 
-			self::PerhapsReconfigureResponseCookies($response, $isSecure, $isHttpOnly, $sameSite);
+			self::PerhapsReconfigureResponseCookies(
+				$response,
+				$isSecure,
+				$isHttpOnly,
+				$sameSite
+			);
 		}
 
 		return $response;
