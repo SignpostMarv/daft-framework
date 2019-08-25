@@ -81,7 +81,7 @@ class CookieTest extends DaftRouteAcceptsOnlyTypedArgs
 	*
 	* @return T2
 	*/
-	public static function DaftRouterHttpRouteArgsTyped(array $args, string $method = null)
+	public static function DaftRouterHttpRouteArgsTyped(array $args, string $method = null) : ? TypedArgs
 	{
 		return CookieTestArgs::__fromArray($args);
 	}
