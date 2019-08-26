@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "102743783ced3b554d709a857605013e",
+    "content-hash": "7e654e0bad5f4c9fac758ca3a96bef1a",
     "packages": [
         {
             "name": "nikic/fast-route",
@@ -302,16 +302,16 @@
         },
         {
             "name": "signpostmarv/daft-router",
-            "version": "dev-typed-object-args",
+            "version": "v4.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/daft-framework/daft-router.git",
-                "reference": "5b263085dbaaaf7af99bd78e066a1f9686159433"
+                "reference": "afdc96971e30356f0cf853dfe62208e157fe2c8e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/daft-framework/daft-router/zipball/5b263085dbaaaf7af99bd78e066a1f9686159433",
-                "reference": "5b263085dbaaaf7af99bd78e066a1f9686159433",
+                "url": "https://api.github.com/repos/daft-framework/daft-router/zipball/afdc96971e30356f0cf853dfe62208e157fe2c8e",
+                "reference": "afdc96971e30356f0cf853dfe62208e157fe2c8e",
                 "shasum": ""
             },
             "require": {
@@ -344,7 +344,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.1.x-dev"
+                    "dev-master": "4.x-dev"
                 }
             },
             "autoload": {
@@ -363,7 +363,7 @@
                 }
             ],
             "description": "Daft Router",
-            "time": "2019-08-25T11:24:22+00:00"
+            "time": "2019-08-26T16:36:46+00:00"
         },
         {
             "name": "signpostmarv/daft-typed-object",
@@ -5548,7 +5548,6 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "signpostmarv/daft-router": 20,
         "roave/security-advisories": 20
     },
     "prefer-stable": false,
