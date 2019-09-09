@@ -222,6 +222,7 @@ class ImplementationTest extends Base
 	}
 
 	/**
+	* @param class-string<Framework> $implementation
 	* @param array<string, array<int, mixed>> $postConstructionCalls
 	* @param mixed ...$implementationArgs
 	*
@@ -286,6 +287,7 @@ class ImplementationTest extends Base
 	}
 
 	/**
+	* @param class-string<Framework> $implementation
 	* @param array<string, array<int, mixed>> $postConstructionCalls
 	* @param mixed ...$implementationArgs
 	*
@@ -308,6 +310,7 @@ class ImplementationTest extends Base
 	}
 
 	/**
+	* @param class-string<Framework> $implementation
 	* @param array<string, array<int, mixed>> $postConstructionCalls
 	* @param mixed ...$implementationArgs
 	*
@@ -349,6 +352,8 @@ class ImplementationTest extends Base
 	* @dataProvider DataProviderGoodSources
 	*
 	* @depends testEverythingInitialisesFine
+	*
+	* @param class-string<Framework> $implementation
 	*/
 	public function testUnpairedFrameworksFail(string $implementation) : void
 	{
@@ -369,6 +374,7 @@ class ImplementationTest extends Base
 	}
 
 	/**
+	* @param class-string<Framework> $implementation
 	* @param array<string, array<int, mixed>> $postConstructionCalls
 	* @param mixed ...$implementationArgs
 	*
@@ -410,6 +416,7 @@ class ImplementationTest extends Base
 	}
 
 	/**
+	* @param class-string<Framework> $implementation
 	* @param array<string, array<int, mixed>> $postConstructionCalls
 	* @param mixed ...$implementationArgs
 	*
@@ -458,6 +465,8 @@ class ImplementationTest extends Base
 
 	/**
 	* @dataProvider DataProviderGoodSources
+	*
+	* @param class-string<Framework> $implementation
 	*/
 	public function testNormaliseUrlFails(string $implementation) : void
 	{
@@ -486,6 +495,7 @@ class ImplementationTest extends Base
 	}
 
 	/**
+	* @param class-string<Framework> $implementation
 	* @param array<string, mixed[]> $postConstructionCalls
 	* @param mixed ...$implementationArgs
 	*
@@ -520,6 +530,7 @@ class ImplementationTest extends Base
 	}
 
 	/**
+	* @param class-string<Framework> $implementation
 	* @param mixed ...$implementationArgs
 	*/
 	protected function ObtainFrameworkInstance(string $implementation, ...$implementationArgs) : Framework
