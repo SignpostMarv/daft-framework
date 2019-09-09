@@ -11,6 +11,7 @@ use InvalidArgumentException;
 use RuntimeException;
 use SignpostMarv\DaftFramework\HttpHandler;
 use SignpostMarv\DaftRouter\DaftSource;
+use SignpostMarv\DaftRouter\Router\Compiler;
 use SignpostMarv\DaftRouter\Tests\ImplementationTest as Base;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,6 +22,18 @@ use Symfony\Component\HttpKernel\HttpKernel;
 
 class HttpHandlerTest extends Base
 {
+	/**
+	* @return Generator<int, array{0:class-string<DaftSource>}, mixed, void>
+	*/
+	public function DataProviderGoodSources() : Generator
+	{
+		yield from [
+			[
+				fixtures\DaftSourceConfig::class,
+			],
+		];
+	}
+
 	/**
 	* @return Generator<int, array{0:class-string<HttpHandler>, 1:array, 2:string, 3:string, 4:array}, mixed, void>
 	*/
@@ -142,21 +155,6 @@ class HttpHandlerTest extends Base
 	}
 
 	/**
-	* @dataProvider DataProviderHttpHandlerHandle
-	*/
-	public function testHandlerGoodOnHttpHandler(
-		HttpHandler $instance,
-		Request $request,
-		int $expectedStatus,
-		string $expectedContent
-	) : void {
-		$response = $instance->handle($request);
-
-		static::assertSame($expectedStatus, $response->getStatusCode());
-		static::assertSame($expectedContent, $response->getContent());
-	}
-
-	/**
 	* @return Generator<int, array{0:class-string<HttpHandler>, 1:string, 2:string, 3:array, 4:array<string, mixed[]>}, mixed, void>
 	*/
 	public function DataProviderTestDroppedConfigProperty() : Generator
@@ -222,8 +220,6 @@ class HttpHandlerTest extends Base
 	}
 
 	/**
-	* @depends testHandlerGoodOnHttpHandler
-	*
 	* @dataProvider DataProviderHttpHandlerHandle
 	*/
 	public function testHandlerGoodWithHttpKernel(
