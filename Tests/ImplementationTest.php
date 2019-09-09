@@ -97,45 +97,6 @@ class ImplementationTest extends Base
 				],
 			],
 		];
-
-		if ((bool) getenv('SCRUTINIZER')) {
-			yield [
-				Framework::class,
-				[
-					'ConfigureDatabaseConnection' => [
-						'mysql:host=localhost;dbname=information_schema',
-						'root',
-						'',
-						[],
-					],
-				],
-				'https://example.com/',
-				realpath(__DIR__ . '/fixtures'),
-				[],
-			];
-
-			yield [
-				HttpHandler::class,
-				[
-					'ConfigureDatabaseConnection' => [
-						'mysql:host=localhost;dbname=information_schema',
-						'root',
-						'',
-						[],
-					],
-				],
-				'https://example.com/',
-				realpath(__DIR__ . '/fixtures'),
-				[
-					DaftSource::class => [
-						'cacheFile' => (__DIR__ . '/fixtures/http-kernel.fast-route.cache'),
-						'sources' => [
-							DaftRouterFixturesConfig::class,
-						],
-					],
-				],
-			];
-		}
 	}
 
 	/**
