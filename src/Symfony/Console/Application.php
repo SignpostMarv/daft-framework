@@ -67,7 +67,7 @@ class Application extends Base
 	}
 
 	/**
-	* @psalm-param class-string ...$sources
+	* @param class-string ...$sources
 	*/
 	public function CollectCommands(string ...$sources) : void
 	{

@@ -30,7 +30,7 @@ class ApplicationTest extends Base
 	const NUM_EXPECTED_ARGS = 6;
 
 	/**
-	* @psalm-return Generator<int, array{0:string, 1:string, 2:array<int, class-string>, 3:class-string<Framework>, 4:array}, mixed, void>
+	* @return Generator<int, array{0:string, 1:string, 2:array<int, class-string>, 3:class-string<Framework>, 4:array}, mixed, void>
 	*/
 	final public function DataProviderConsoleApplicationConfigFiltered() : Generator
 	{
@@ -48,7 +48,7 @@ class ApplicationTest extends Base
 				$args[$key] = $appendTo;
 
 				/**
-				* @psalm-var array{0:string, 1:string, 2:array<int, class-string>, 3:class-string<Framework>, 4:array}
+				* @var array{0:string, 1:string, 2:array<int, class-string>, 3:class-string<Framework>, 4:array}
 				*/
 				$args = $args;
 
@@ -58,7 +58,7 @@ class ApplicationTest extends Base
 	}
 
 	/**
-	* @psalm-return Generator<int, array{0:Framework, 1:Command}, mixed, void>
+	* @return Generator<int, array{0:Framework, 1:Command}, mixed, void>
 	*/
 	final public function DataProviderDaftConsoleCommands() : Generator
 	{
@@ -106,9 +106,7 @@ class ApplicationTest extends Base
 	}
 
 	/**
-	* @param array<int, string> $expectedCommandInstances
-	*
-	* @psalm-param array<int, class-string> $expectedCommandInstances
+	* @param array<int, class-string> $expectedCommandInstances
 	*
 	* @dataProvider DataProviderConsoleApplicationConfigFiltered
 	*/
@@ -191,9 +189,7 @@ class ApplicationTest extends Base
 	}
 
 	/**
-	* @param array<int, string> $expectedCommandInstances
-	*
-	* @psalm-param array<int, class-string> $expectedCommandInstances
+	* @param array<int, class-string> $expectedCommandInstances
 	*
 	* @dataProvider DataProviderConsoleApplicationConfigFiltered
 	*
@@ -244,7 +240,7 @@ class ApplicationTest extends Base
 	}
 
 	/**
-	* @psalm-return Generator<int, array{0:Application, 1:string}, mixed, void>
+	* @return Generator<int, array{0:Application, 1:string}, mixed, void>
 	*/
 	public function DataProviderFastRouteCacheComamnd() : Generator
 	{
@@ -394,7 +390,7 @@ class ApplicationTest extends Base
 	}
 
 	/**
-	* @psalm-return Generator<int, array{0:string, 1:string, 2:string, 3:array<int, class-string>, 4:class-string<Framework>, 5:array}, mixed, void>
+	* @return Generator<int, array{0:string, 1:string, 2:string, 3:array<int, class-string>, 4:class-string<Framework>, 5:array}, mixed, void>
 	*/
 	protected function DataProviderConsoleApplicationConfig() : Generator
 	{

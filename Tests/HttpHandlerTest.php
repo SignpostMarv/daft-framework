@@ -22,7 +22,7 @@ use Symfony\Component\HttpKernel\HttpKernel;
 class HttpHandlerTest extends Base
 {
 	/**
-	* @psalm-return Generator<int, array{0:class-string<HttpHandler>, 1:array, 2:string, 3:string, 4:array}, mixed, void>
+	* @return Generator<int, array{0:class-string<HttpHandler>, 1:array, 2:string, 3:string, 4:array}, mixed, void>
 	*/
 	public function DataProviderHttpHandlerInstances() : Generator
 	{
@@ -42,7 +42,7 @@ class HttpHandlerTest extends Base
 	}
 
 	/**
-	* @psalm-return Generator<int, array{0:HttpHandler, 1:Request, 2:int, 3:string}, mixed, void>
+	* @return Generator<int, array{0:HttpHandler, 1:Request, 2:int, 3:string}, mixed, void>
 	*/
 	public function DataProviderHttpHandlerHandle() : Generator
 	{
@@ -157,7 +157,7 @@ class HttpHandlerTest extends Base
 	}
 
 	/**
-	* @psalm-return Generator<int, array{0:class-string<HttpHandler>, 1:string, 2:string, 3:array, 4:array<string, mixed[]>}, mixed, void>
+	* @return Generator<int, array{0:class-string<HttpHandler>, 1:string, 2:string, 3:array, 4:array<string, mixed[]>}, mixed, void>
 	*/
 	public function DataProviderTestDroppedConfigProperty() : Generator
 	{
@@ -251,7 +251,7 @@ class HttpHandlerTest extends Base
 	}
 
 	/**
-	* @psalm-return array{0:string, 1:array, 2:array}
+	* @return array{0:string, 1:array, 2:array}
 	*/
 	protected function prepDataProviderVerifyHandlerGoodArgs(
 		array $config,

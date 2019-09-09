@@ -249,7 +249,7 @@ class CookieMiddlewareTest extends Base
 	}
 
 	/**
-	* @psalm-return Generator<int, array{0:class-string<HttpHandler>, 1:array, 2:string, 3:string, 4:array}, mixed, void>
+	* @return Generator<int, array{0:class-string<HttpHandler>, 1:array, 2:string, 3:string, 4:array}, mixed, void>
 	*/
 	public function DataProviderHttpHandlerInstances() : Generator
 	{
@@ -267,7 +267,7 @@ class CookieMiddlewareTest extends Base
 	}
 
 	/**
-	* @psalm-return Generator<int, array{0:string, 1:string}, mixed, void>
+	* @return Generator<int, array{0:string, 1:string}, mixed, void>
 	*/
 	public function DataProviderCookieNameValue() : Generator
 	{
@@ -277,7 +277,7 @@ class CookieMiddlewareTest extends Base
 	}
 
 	/**
-	* @psalm-return Generator<int, string, mixed, void>
+	* @return Generator<int, string, mixed, void>
 	*/
 	public function DataProviderCookieSecure() : Generator
 	{
@@ -285,7 +285,7 @@ class CookieMiddlewareTest extends Base
 	}
 
 	/**
-	* @psalm-return Generator<int, string, mixed, void>
+	* @return Generator<int, string, mixed, void>
 	*/
 	public function DataProviderCookieHttp() : Generator
 	{
@@ -293,7 +293,7 @@ class CookieMiddlewareTest extends Base
 	}
 
 	/**
-	* @psalm-return Generator<int, string, mixed, void>
+	* @return Generator<int, string, mixed, void>
 	*/
 	public function DataProviderCookieSameSite() : Generator
 	{

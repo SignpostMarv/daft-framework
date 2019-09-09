@@ -42,7 +42,7 @@ class ImplementationTest extends Base
 	}
 
 	/**
-	* @psalm-return Generator<int, array{0:class-string<Framework>, 1:array<string, array<int, mixed>>, 2:string, 3:string, 4:array}, mixed, void>
+	* @return Generator<int, array{0:class-string<Framework>, 1:array<string, array<int, mixed>>, 2:string, 3:string, 4:array}, mixed, void>
 	*/
 	public function DataProviderGoodSources() : Generator
 	{
@@ -100,7 +100,7 @@ class ImplementationTest extends Base
 	}
 
 	/**
-	* @psalm-return Generator<int, array{0:class-string<Framework>, 1:class-string<Throwable>, 2:string, 3:int|null, 4:array<string, array<int, mixed>>, 5:string, 6:string, 7:array}, mixed, void>
+	* @return Generator<int, array{0:class-string<Framework>, 1:class-string<Throwable>, 2:string, 3:int|null, 4:array<string, array<int, mixed>>, 5:string, 6:string, 7:array}, mixed, void>
 	*/
 	public function DataProviderBadSources() : Generator
 	{
@@ -198,7 +198,7 @@ class ImplementationTest extends Base
 	}
 
 	/**
-	* @psalm-return Generator<int, array{0:class-string<Framework>, 1:array<string, array<int, mixed>>, 2:string, 3:string, 4:array}, mixed, void>
+	* @return Generator<int, array{0:class-string<Framework>, 1:array<string, array<int, mixed>>, 2:string, 3:string, 4:array}, mixed, void>
 	*/
 	public function DataProviderGoodSourcesSansDatabaseConnection() : Generator
 	{
@@ -210,7 +210,7 @@ class ImplementationTest extends Base
 	}
 
 	/**
-	* @psalm-return Generator<int, array{0:class-string<Framework>, 1:array<string, array<int, mixed>>, 2:string, 3:string, 4:array}, mixed, void>
+	* @return Generator<int, array{0:class-string<Framework>, 1:array<string, array<int, mixed>>, 2:string, 3:string, 4:array}, mixed, void>
 	*/
 	public function DataProviderGoodSourcesWithDatabaseConnection() : Generator
 	{
@@ -489,7 +489,7 @@ class ImplementationTest extends Base
 	* @param array<string, mixed[]> $postConstructionCalls
 	* @param mixed ...$implementationArgs
 	*
-	* @psalm-return array{0:Framework, 1:Request, 2:Request}
+	* @return array{0:Framework, 1:Request, 2:Request}
 	*/
 	protected function PrepareReferenceDisposalTest(
 		string $implementation,

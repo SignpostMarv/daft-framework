@@ -38,9 +38,7 @@ class FastRouteCacheCommand extends Command
 		$cacheFilename .= '.cache';
 
 		/**
-		* @var string[]
-		*
-		* @psalm-var array<int, class-string<DaftSource>>
+		* @var array<int, class-string<DaftSource>>
 		*/
 		$sources = $input->getArgument('sources');
 

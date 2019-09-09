@@ -41,9 +41,7 @@ class HttpHandler extends Framework
 	private $routerCacheFile;
 
 	/**
-	* @var array<int, string>
-	*
-	* @psalm-var array<int, class-string<DaftSource>>
+	* @var array<int, class-string<DaftSource>>
 	*/
 	private $routerSources;
 
