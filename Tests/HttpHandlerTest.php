@@ -11,7 +11,6 @@ use InvalidArgumentException;
 use RuntimeException;
 use SignpostMarv\DaftFramework\HttpHandler;
 use SignpostMarv\DaftRouter\DaftSource;
-use SignpostMarv\DaftRouter\Router\Compiler;
 use SignpostMarv\DaftRouter\Tests\ImplementationTest as Base;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpFoundation\Request;

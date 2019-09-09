@@ -6,10 +6,8 @@ declare(strict_types=1);
 
 namespace SignpostMarv\DaftFramework\Tests\fixtures\Routes;
 
-use Generator;
 use SignpostMarv\DaftRouter\DaftRouteAcceptsOnlyTypedArgs;
 use SignpostMarv\DaftRouter\DaftRouterHttpRouteDefaultMethodGet;
-use SignpostMarv\DaftRouter\DaftSource;
 use SignpostMarv\DaftRouter\TypedArgs;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Request;
