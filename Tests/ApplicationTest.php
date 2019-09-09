@@ -141,7 +141,6 @@ class ApplicationTest extends Base
 		$commands = array_map('get_class', $application->all());
 
 		foreach ($expectedCommandInstances as $expectedComamnd) {
-			static::assertTrue(class_exists($expectedComamnd));
 			static::assertContains($expectedComamnd, $commands);
 		}
 
@@ -154,7 +153,6 @@ class ApplicationTest extends Base
 		$commands = array_map('get_class', $application->all());
 
 		foreach ($expectedCommandInstances as $expectedComamnd) {
-			static::assertTrue(class_exists($expectedComamnd));
 			static::assertContains($expectedComamnd, $commands);
 		}
 
