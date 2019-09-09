@@ -10,6 +10,8 @@ use Generator;
 use InvalidArgumentException;
 use RuntimeException;
 use SignpostMarv\DaftFramework\HttpHandler;
+use SignpostMarv\DaftRouter\DaftRouteAcceptsEmptyArgs;
+use SignpostMarv\DaftRouter\DaftRouteAcceptsTypedArgs;
 use SignpostMarv\DaftRouter\DaftSource;
 use SignpostMarv\DaftRouter\Tests\ImplementationTest as Base;
 use Symfony\Component\EventDispatcher\EventDispatcher;
@@ -229,6 +231,7 @@ class HttpHandlerTest extends Base
 	) : void {
 		$dispatcher = new EventDispatcher();
 		$instance->AttachToEventDispatcher($dispatcher);
+		HttpHandler::PairWithRequest($instance, $request);
 
 		$kernel = new HttpKernel(
 			$dispatcher,
@@ -243,6 +246,31 @@ class HttpHandlerTest extends Base
 
 		static::assertSame($expectedStatus, $response->getStatusCode());
 		static::assertSame($expectedContent, $response->getContent());
+	}
+
+	/**
+	* @depends testCompilerVerifyAddRouteAddsRoutes
+	* @depends testCompilerVerifyAddMiddlewareAddsMiddlewares
+	* @depends testCompilerExcludesMiddleware
+	*
+	* @dataProvider DataProviderVerifyHandlerGood
+	*
+	* @param array<int, class-string<DaftRouteAcceptsEmptyArgs>|class-string<DaftRouteAcceptsTypedArgs>> $sources
+	* @param array<string, scalar|array|object|null> $expectedHeaders
+	*/
+	public function testHandlerGood(
+		array $sources,
+		string $prefix,
+		int $expectedStatus,
+		string $expectedContent,
+		array $requestArgs,
+		array $expectedHeaders = []
+	) : void {
+		$this->markTestSkipped(
+			'see ' .
+			static::class .
+			'::testHandlerGoodWithHttpKernel()'
+		);
 	}
 
 	/**
@@ -286,5 +314,34 @@ class HttpHandlerTest extends Base
 		$config[DaftSource::class] = $daftSourceConfig;
 
 		return [$baseUrl, $config, $testArgs];
+	}
+
+	protected function DataProviderGoodHandler() : Generator
+	{
+		yield from [
+			[
+				[
+					fixtures\DaftSourceConfig::class,
+				],
+				'/',
+				302,
+				(
+					'<!DOCTYPE html>' . "\n" .
+					'<html>' . "\n" .
+					'    <head>' . "\n" .
+					'        <meta charset="UTF-8" />' . "\n" .
+					'        <meta http-equiv="refresh" content="0;url=/login" />' . "\n" .
+					'' . "\n" .
+					'        <title>Redirecting to /login</title>' . "\n" .
+					'    </head>' . "\n" .
+					'    <body>' . "\n" .
+					'        Redirecting to <a href="/login">/login</a>.' . "\n" .
+					'    </body>' . "\n" .
+					'</html>'
+				),
+				[],
+				'https://example.com/',
+			],
+		];
 	}
 }
