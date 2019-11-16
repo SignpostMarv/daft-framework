@@ -140,9 +140,6 @@ class CookieMiddlewareTest extends Base
 		static::assertInstanceOf(Cookie::class, $cookie);
 
 		if (is_string($secure) && is_string($http) && is_string($sameSite)) {
-			/**
-			* @var array<string, string|bool>
-			*/
 			$cookieConfig = $config[CookieMiddleware::class];
 
 			static::assertSame(

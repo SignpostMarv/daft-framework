@@ -68,12 +68,7 @@ class Utilities
 			throw new RuntimeException('unreachable line here');
 		}
 
-		/**
-		* @var Framework
-		*/
-		$out = new $implementation($baseUrl, $basePath, $config, ...$implementationArgs);
-
-		return $out;
+		return new $implementation($baseUrl, $basePath, $config, ...$implementationArgs);
 	}
 
 	/**

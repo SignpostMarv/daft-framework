@@ -6,3 +6,4 @@ phpunit.clover
 /infection.log
 /.phpunit.result.cache
 /phpunit.cache
+/phpunit.clover

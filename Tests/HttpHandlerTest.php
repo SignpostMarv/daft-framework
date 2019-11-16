@@ -71,9 +71,6 @@ class HttpHandlerTest extends Base
 			*/
 			$postConstructionCalls = $args[1];
 
-			/**
-			* @var string
-			*/
 			$basePath = $args[3];
 
 			/**

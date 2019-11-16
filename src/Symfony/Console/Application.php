@@ -85,9 +85,6 @@ class Application extends Base
 		$implementations = $this->GetCommandCollector()->Collect(...$sources);
 
 		foreach ($implementations as $implementation) {
-			/**
-			* @var BaseCommand
-			*/
 			$command = new $implementation($implementation::getDefaultName());
 
 			$this->add($command);

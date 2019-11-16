@@ -17,11 +17,11 @@ use Symfony\Component\HttpKernel\KernelEvents;
 
 /**
 * @template CONFIG as array{
-	SignpostMarv\DaftRouter\DaftSource: array{
-		cacheFile:string,
-		sources:array<int, string>
-	}
-}
+*	SignpostMarv\DaftRouter\DaftSource: array{
+*		cacheFile:string,
+*		sources:array<int, string>
+*	}
+* }
 *
 * @template-extends Framework<CONFIG>
 */

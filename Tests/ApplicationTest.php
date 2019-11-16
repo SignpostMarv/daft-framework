@@ -94,9 +94,6 @@ class ApplicationTest extends Base
 						return;
 					}
 
-					/**
-					* @var Command
-					*/
 					$command = new $maybeCommand($maybeCommand::getDefaultName());
 
 					yield [$framework, $command];
@@ -172,9 +169,6 @@ class ApplicationTest extends Base
 				));
 			}
 
-			/**
-			* @var BaseCommand
-			*/
 			$command = new $expectedComamnd($expectedComamnd::getDefaultName());
 
 			$this->expectException(BadMethodCallException::class);
