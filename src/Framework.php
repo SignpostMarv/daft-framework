@@ -10,6 +10,7 @@ use BadMethodCallException;
 use InvalidArgumentException;
 use ParagonIE\EasyDB\EasyDB;
 use ParagonIE\EasyDB\Factory;
+use SplObjectStorage;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -42,9 +43,9 @@ class Framework
 	private $config;
 
 	/**
-	* @var array<string, self>
+	* @var SplObjectStorage<Request, Framework>|null
 	*/
-	private static $requestpair = [];
+	private static $requestpair;
 
 	/**
 	* @param CONFIG $config
@@ -157,12 +158,12 @@ class Framework
 		self $framework,
 		Request $request
 	) : void {
-		self::$requestpair[spl_object_hash($request)] = $framework;
+		self::initRequestPair()[$request] = $framework;
 	}
 
 	public static function ObtainFrameworkForRequest(Request $request) : self
 	{
-		$framework = self::$requestpair[spl_object_hash($request)] ?? null;
+		$framework = self::initRequestPair()[$request] ?? null;
 
 		if ( ! ($framework instanceof self)) {
 			throw new InvalidArgumentException(
@@ -176,15 +177,17 @@ class Framework
 	public static function DisposeOfFrameworkReferences(
 		self ...$frameworks
 	) : void {
-		foreach (array_keys(self::$requestpair) as $hash) {
+		$requestpair = self::initRequestPair();
+
+		foreach ($requestpair as $request) {
 			if (
 				in_array(
-					self::$requestpair[$hash],
+					$requestpair[$request],
 					$frameworks,
 					self::BOOL_IN_ARRAY_STRICT
 				)
 			) {
-				unset(self::$requestpair[$hash]);
+				unset($requestpair[$request]);
 			}
 		}
 	}
@@ -192,11 +195,11 @@ class Framework
 	public static function DisposeOfRequestReferences(
 		Request ...$requests
 	) : void {
-		foreach ($requests as $request) {
-			$hash = spl_object_hash($request);
+		$requestpair = self::initRequestPair();
 
-			if (isset(self::$requestpair[$hash])) {
-				unset(self::$requestpair[$hash]);
+		foreach ($requests as $request) {
+			if (isset($requestpair[$request])) {
+				unset($requestpair[$request]);
 			}
 		}
 	}
@@ -207,5 +210,20 @@ class Framework
 	protected function ValidateConfig(array $config) : array
 	{
 		return $config;
+	}
+
+	/**
+	* @return SplObjectStorage<Request, Framework>
+	*/
+	private static function initRequestPair() : SplObjectStorage
+	{
+		if (is_null(self::$requestpair)) {
+			/**
+			* @var SplObjectStorage<Request, Framework>
+			*/
+			self::$requestpair = new SplObjectStorage();
+		}
+
+		return self::$requestpair;
 	}
 }
