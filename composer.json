@@ -42,37 +42,37 @@
 	},
 	"extra": {
 		"branch-alias": {
-			"dev-master": "3.2.x-dev"
+			"dev-master": "3.3.x-dev"
 		}
 	},
 	"conflict": {
-		"vimeo/psalm": "<3.5"
+		"vimeo/psalm": "<3.7"
 	},
 	"suggest": {
 		"vimeo/psalm": "Useful for static analysis to reduce runtime type checks etc."
 	},
 	"require": {
-		"php": "^7.3",
+		"php": "^7.4",
 		"ext-mbstring": "*",
 		"paragonie/easydb": "^2.10",
-		"signpostmarv/daft-interface-collector": "^2.0",
-		"signpostmarv/daft-router": "^4.1",
-		"symfony/console": "^4.3",
-		"symfony/event-dispatcher": "^4.3",
-		"symfony/http-foundation": "^4.3",
-		"symfony/http-kernel": "^4.3"
+		"signpostmarv/daft-interface-collector": "^2.1",
+		"signpostmarv/daft-router": "^4.3",
+		"symfony/console": "^4.4|^5.0",
+		"symfony/event-dispatcher": "^4.4|^5.0",
+		"symfony/http-foundation": "^4.4|^5.0",
+		"symfony/http-kernel": "^4.4|^5.0"
 	},
 	"require-dev": {
 		"ext-pdo_sqlite": "*",
-		"infection/infection": "^0.13.5",
+		"infection/infection": "^0.15.0",
 		"maglnet/composer-require-checker": "^2.0",
-		"php-coveralls/php-coveralls": "^2.1",
-		"phpunit/phpunit": "^8.3",
+		"php-coveralls/php-coveralls": "^2.2",
+		"phpunit/phpunit": "^8.5",
 		"povils/phpmnd": "^2.1",
-		"psalm/plugin-phpunit": "^0.7.0",
+		"psalm/plugin-phpunit": "^0.8.0",
 		"roave/security-advisories": "dev-master",
 		"sebastian/phpcpd": "^4.1",
 		"signpostmarv/php-cs-fixer-config": "^0.13.0",
-		"vimeo/psalm": "^3.6"
+		"vimeo/psalm": "^3.7"
 	}
 }

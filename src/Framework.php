@@ -22,30 +22,18 @@ class Framework
 
 	const BOOL_IN_ARRAY_STRICT = true;
 
-	/**
-	* @var string
-	*/
-	private $baseUrl;
+	private string $baseUrl;
 
-	/**
-	* @var string
-	*/
-	private $basePath;
+	private string $basePath;
 
-	/**
-	* @var EasyDB|null
-	*/
-	private $db;
+	private ? EasyDB $db = null;
 
-	/**
-	* @var array
-	*/
-	private $config;
+	private array $config;
 
 	/**
 	* @var SplObjectStorage<Request, Framework>|null
 	*/
-	private static $requestpair;
+	private static ? SplObjectStorage $requestpair = null;
 
 	/**
 	* @param CONFIG $config

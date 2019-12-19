@@ -35,15 +35,12 @@ class HttpHandler extends Framework
 		DaftSource::class .
 		' config property cacheFile does not exist under the framework base path.';
 
-	/**
-	* @var string
-	*/
-	private $routerCacheFile;
+	private string $routerCacheFile;
 
 	/**
 	* @var array<int, class-string<DaftSource>>
 	*/
-	private $routerSources;
+	private array $routerSources;
 
 	/**
 	* @param CONFIG $config

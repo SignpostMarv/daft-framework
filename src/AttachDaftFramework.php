@@ -10,10 +10,7 @@ use BadMethodCallException;
 
 trait AttachDaftFramework
 {
-	/**
-	* @var Framework|null
-	*/
-	protected $daftFrameworkInstance;
+	protected ? Framework $daftFrameworkInstance = null;
 
 	public function AttachDaftFramework(Framework $framework) : void
 	{

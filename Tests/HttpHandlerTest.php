@@ -327,7 +327,7 @@ class HttpHandlerTest extends Base
 					'<html>' . "\n" .
 					'    <head>' . "\n" .
 					'        <meta charset="UTF-8" />' . "\n" .
-					'        <meta http-equiv="refresh" content="0;url=/login" />' . "\n" .
+					'        <meta http-equiv="refresh" content="0;url=\'/login\'" />' . "\n" .
 					'' . "\n" .
 					'        <title>Redirecting to /login</title>' . "\n" .
 					'    </head>' . "\n" .

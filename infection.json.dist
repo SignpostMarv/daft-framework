@@ -77,6 +77,11 @@
 				"SignpostMarv\\DaftFramework\\Symfony\\Console\\Application::GetCommandCollector",
 				"SignpostMarv\\DaftFramework\\Symfony\\Console\\Command\\FastRouteCacheCommand::execute"
 			]
+		},
+		"UnwrapStrReplace": {
+			"ignore": [
+				"SignpostMarv\\DaftFramework\\Framework::NormaliseUrl"
+			]
 		}
 	}
 }
