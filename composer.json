@@ -42,11 +42,11 @@
 	},
 	"extra": {
 		"branch-alias": {
-			"dev-master": "3.3.x-dev"
+			"dev-master": "3.4.x-dev"
 		}
 	},
 	"conflict": {
-		"vimeo/psalm": "<3.7"
+		"vimeo/psalm": "<3.8"
 	},
 	"suggest": {
 		"vimeo/psalm": "Useful for static analysis to reduce runtime type checks etc."
@@ -56,7 +56,8 @@
 		"ext-mbstring": "*",
 		"paragonie/easydb": "^2.10",
 		"signpostmarv/daft-interface-collector": "^2.1",
-		"signpostmarv/daft-router": "^4.3",
+		"signpostmarv/daft-router": "^4.4|4.4.x-dev",
+		"signpostmarv/daft-typed-object": "^0.5|0.5.x-dev",
 		"symfony/console": "^4.4|^5.0",
 		"symfony/event-dispatcher": "^4.4|^5.0",
 		"symfony/http-foundation": "^4.4|^5.0",
@@ -72,7 +73,7 @@
 		"psalm/plugin-phpunit": "^0.8.0",
 		"roave/security-advisories": "dev-master",
 		"sebastian/phpcpd": "^4.1",
-		"signpostmarv/php-cs-fixer-config": "^0.13.0",
-		"vimeo/psalm": "^3.7"
+		"signpostmarv/php-cs-fixer-config": "^0.14.0",
+		"vimeo/psalm": "^3.8"
 	}
 }

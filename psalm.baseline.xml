@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <files
-  psalm-version="3.7.2@d9cae720c1af31db9ba27c2bc1fcf9b0dd092fb0"
+  psalm-version="3.8.2@90d6b73fd8062432030ef39b7b6694b3902daa31"
   php-version="
     php:7.4.0;
     bcmath:7.4.0;
@@ -11,14 +11,11 @@
     date:7.4.0;
     dom:20031129;
     filter:7.4.0;
-    gd:7.4.0;
     hash:7.4.0;
     iconv:7.4.0;
-    intl:7.4.0;
     json:7.4.0;
     libxml:7.4.0;
     mbstring:7.4.0;
-    mysqli:7.4.0;
     mysqlnd:mysqlnd 7.4.0;
     openssl:7.4.0;
     pcre:7.4.0;
@@ -29,7 +26,6 @@
     Reflection:7.4.0;
     session:7.4.0;
     SimpleXML:7.4.0;
-    sodium:7.4.0;
     SPL:7.4.0;
     standard:7.4.0;
     tokenizer:7.4.0;
@@ -75,9 +71,11 @@
     </UnusedFunctionCall>
   </file>
   <file src="Tests/fixtures/Routes/CookieTest.php">
-    <PossiblyUnusedMethod occurrences="1">
-      <code>DaftRouterHttpRouteArgsTyped</code>
-    </PossiblyUnusedMethod>
+    <MoreSpecificImplementedParamType occurrences="3">
+      <code>$args</code>
+      <code>$args</code>
+      <code>$args</code>
+    </MoreSpecificImplementedParamType>
   </file>
   <file src="Tests/fixtures/Routes/CookieTestArgs.php">
     <MoreSpecificImplementedParamType occurrences="1">

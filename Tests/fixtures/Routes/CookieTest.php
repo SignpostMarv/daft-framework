@@ -17,8 +17,7 @@ use Symfony\Component\HttpFoundation\Response;
 * @psalm-type T1 = array{name:string, value:string, secure:bool, http:bool, same-site:'lax'|'strict'}
 * @psalm-type T2 = CookieTestArgs
 * @psalm-type T3 = array{name:string, value:string, secure:'0'|'1', http:'0'|'1', same-site:'lax'|'strict'}
-*
-* @template-extends DaftRouteAcceptsOnlyTypedArgs<T1, T3, T2, Response, 'GET', 'GET'>
+* @psalm-type THTTP = 'GET'|'POST'|'CONNECT'|'DELETE'|'HEAD'|'OPTIONS'|'PATCH'|'PURGE'|'PUT'|'TRACE'
 */
 class CookieTest extends DaftRouteAcceptsOnlyTypedArgs
 {
@@ -29,7 +28,12 @@ class CookieTest extends DaftRouteAcceptsOnlyTypedArgs
 	*/
 	public static function DaftRouterHandleRequestWithTypedArgs(Request $request, TypedArgs $args) : Response
 	{
-		static::DaftRouterAutoMethodChecking($request->getMethod());
+		/**
+		* @var THTTP
+		*/
+		$method = $request->getMethod();
+
+		static::DaftRouterAutoMethodChecking($method);
 
 		$resp = new Response('');
 
@@ -69,8 +73,8 @@ class CookieTest extends DaftRouteAcceptsOnlyTypedArgs
 			'/cookie-test/%s/%s/%u/%u/%s',
 			$args->name,
 			$args->value,
-			$args->secure,
-			$args->http,
+			(int) $args->secure,
+			(int) $args->http,
 			$args->sameSite
 		);
 	}
