@@ -197,7 +197,7 @@ class HttpHandlerTest extends Base
 	*
 	* @dataProvider DataProviderTestDroppedConfigProperty
 	*/
-	public function testDroppedConfigProperty(
+	public function test_dropped_config_property(
 		string $implementation,
 		string $baseUrl,
 		string $basePath,
@@ -220,7 +220,7 @@ class HttpHandlerTest extends Base
 	/**
 	* @dataProvider DataProviderHttpHandlerHandle
 	*/
-	public function testHandlerGoodWithHttpKernel(
+	public function test_handler_good_with_http_kernel(
 		HttpHandler $instance,
 		Request $request,
 		int $expectedStatus,
@@ -246,16 +246,16 @@ class HttpHandlerTest extends Base
 	}
 
 	/**
-	* @depends testCompilerVerifyAddRouteAddsRoutes
-	* @depends testCompilerVerifyAddMiddlewareAddsMiddlewares
-	* @depends testCompilerExcludesMiddleware
+	* @depends test_compiler_verify_add_route_adds_routes
+	* @depends test_compiler_verify_add_middleware_adds_middlewares
+	* @depends test_compiler_excludes_middleware
 	*
 	* @dataProvider DataProviderVerifyHandlerGood
 	*
 	* @param array<int, class-string<DaftRouteAcceptsEmptyArgs>|class-string<DaftRouteAcceptsTypedArgs>> $sources
 	* @param array<string, scalar|array|object|null> $expectedHeaders
 	*/
-	public function testHandlerGood(
+	public function test_handler_good(
 		array $sources,
 		string $prefix,
 		int $expectedStatus,
