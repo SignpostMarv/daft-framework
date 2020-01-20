@@ -107,7 +107,7 @@ class ApplicationTest extends Base
 	*
 	* @dataProvider DataProviderConsoleApplicationConfigFiltered
 	*/
-	public function testApplicationSetup(
+	public function test_application_setup(
 		string $name,
 		string $version,
 		array $expectedCommandInstances,
@@ -185,9 +185,9 @@ class ApplicationTest extends Base
 	*
 	* @dataProvider DataProviderConsoleApplicationConfigFiltered
 	*
-	* @depends testApplicationSetup
+	* @depends test_application_setup
 	*/
-	public function testCommandCollectionWithoutFramework(
+	public function test_command_collection_without_framework(
 		string $name,
 		string $version,
 		array $expectedCommandInstances
@@ -205,9 +205,9 @@ class ApplicationTest extends Base
 	/**
 	* @dataProvider DataProviderDaftConsoleCommands
 	*
-	* @depends testApplicationSetup
+	* @depends test_application_setup
 	*/
-	public function testCommandFrameworkAttachment(Framework $framework, Command $command) : void
+	public function test_command_framework_attachment(Framework $framework, Command $command) : void
 	{
 		static::assertFalse($command->CheckIfUsingFrameworkInstance($framework));
 
@@ -288,7 +288,7 @@ class ApplicationTest extends Base
 	/**
 	* @dataProvider DataProviderFastRouteCacheComamnd
 	*/
-	public function testFastRouteCacheCommand(
+	public function test_fast_route_cache_command(
 		Application $application,
 		string $expectedOutput
 	) : void {
@@ -317,7 +317,7 @@ class ApplicationTest extends Base
 				],
 			],
 			array_map(
-				function (InputArgument $arg) : array {
+				static function (InputArgument $arg) : array {
 					return [
 						'name' => $arg->getName(),
 						'required' => $arg->isRequired(),
@@ -355,7 +355,7 @@ class ApplicationTest extends Base
 	/**
 	* @dataProvider DataProviderFastRouteCacheComamnd
 	*/
-	public function testExecuteCoverageCommand(Application $application) : void
+	public function test_execute_coverage_command(Application $application) : void
 	{
 		$command = $application->find('test:execute-coverage');
 

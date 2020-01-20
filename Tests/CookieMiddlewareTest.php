@@ -19,7 +19,7 @@ class CookieMiddlewareTest extends Base
 	/**
 	* @dataProvider DataProvderCookeMiddlewareTest
 	*/
-	public function testCookieMiddleware(
+	public function test_cookie_middleware(
 		string $implementation,
 		string $baseUrl,
 		string $basePath,
@@ -83,7 +83,7 @@ class CookieMiddlewareTest extends Base
 
 		$cookie = current(array_filter(
 			$response->headers->getCookies(),
-			function (Cookie $cookie) use ($cookieName) : bool {
+			static function (Cookie $cookie) use ($cookieName) : bool {
 				return $cookieName === $cookie->getName();
 			}
 		));
@@ -132,7 +132,7 @@ class CookieMiddlewareTest extends Base
 
 		$cookie = current(array_filter(
 			$response->headers->getCookies(),
-			function (Cookie $cookie) use ($cookieName) : bool {
+			static function (Cookie $cookie) use ($cookieName) : bool {
 				return $cookieName === $cookie->getName();
 			}
 		));

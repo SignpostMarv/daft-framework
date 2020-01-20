@@ -10,7 +10,7 @@ namespace SignpostMarv\DaftFramework\Tests\fixtures;
 use SignpostMarv\DaftFramework\Framework;
 use SignpostMarv\DaftFramework\Symfony\Console\Application;
 
-require_once(dirname(dirname(dirname(__DIR__))) . '/vendor/autoload.php');
+require_once(dirname(__DIR__, 3) . '/vendor/autoload.php');
 
 $framework = new Framework(
 	'http://example.com/',

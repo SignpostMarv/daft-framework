@@ -228,7 +228,7 @@ class ImplementationTest extends Base
 	*
 	* @dataProvider DataProviderGoodSources
 	*/
-	public function testEverythingInitialisesFine(
+	public function test_everything_initialises_fine(
 		string $implementation,
 		array $postConstructionCalls,
 		...$implementationArgs
@@ -236,7 +236,7 @@ class ImplementationTest extends Base
 		$instance = $this->ObtainFrameworkInstance($implementation, ...$implementationArgs);
 		$this->ConfigureFrameworkInstance($instance, $postConstructionCalls);
 
-		list($baseUrl, $basePath, $config) = $this->extractDefaultFrameworkArgs(
+		[$baseUrl, $basePath, $config] = $this->extractDefaultFrameworkArgs(
 			$implementationArgs
 		);
 
@@ -255,9 +255,9 @@ class ImplementationTest extends Base
 	*
 	* @dataProvider DataProviderBadSources
 	*
-	* @depends testEverythingInitialisesFine
+	* @depends test_everything_initialises_fine
 	*/
-	public function testThingsFail(
+	public function test_things_fail(
 		string $implementation,
 		string $expectedExceptionClass,
 		? string $expectedExceptionMessage,
@@ -293,9 +293,9 @@ class ImplementationTest extends Base
 	*
 	* @dataProvider DataProviderGoodSourcesSansDatabaseConnection
 	*
-	* @depends testEverythingInitialisesFine
+	* @depends test_everything_initialises_fine
 	*/
-	public function testGoodSourcesSansDatabaseConnection(
+	public function test_good_sources_sans_database_connection(
 		string $implementation,
 		array $postConstructionCalls,
 		...$implementationArgs
@@ -316,9 +316,9 @@ class ImplementationTest extends Base
 	*
 	* @dataProvider DataProviderGoodSourcesWithDatabaseConnection
 	*
-	* @depends testEverythingInitialisesFine
+	* @depends test_everything_initialises_fine
 	*/
-	public function testGoodSourcesWithDatabaseConnection(
+	public function test_good_sources_with_database_connection(
 		string $implementation,
 		array $postConstructionCalls,
 		...$implementationArgs
@@ -351,11 +351,11 @@ class ImplementationTest extends Base
 	/**
 	* @dataProvider DataProviderGoodSources
 	*
-	* @depends testEverythingInitialisesFine
+	* @depends test_everything_initialises_fine
 	*
 	* @param class-string<Framework> $implementation
 	*/
-	public function testUnpairedFrameworksFail(string $implementation) : void
+	public function test_unpaired_frameworks_fail(string $implementation) : void
 	{
 		if ( ! is_a($implementation, Framework::class, true)) {
 			static::assertTrue(is_a($implementation, Framework::class, true));
@@ -380,10 +380,10 @@ class ImplementationTest extends Base
 	*
 	* @dataProvider DataProviderGoodSources
 	*
-	* @depends testEverythingInitialisesFine
-	* @depends testUnpairedFrameworksFail
+	* @depends test_everything_initialises_fine
+	* @depends test_unpaired_frameworks_fail
 	*/
-	public function testDisposeOfFrameworkReferences(
+	public function test_dispose_of_framework_references(
 		string $implementation,
 		array $postConstructionCalls,
 		...$implementationArgs
@@ -397,7 +397,7 @@ class ImplementationTest extends Base
 			));
 		}
 
-		list($instance, $requestA) = $this->PrepareReferenceDisposalTest(
+		[$instance, $requestA] = $this->PrepareReferenceDisposalTest(
 			$implementation,
 			$postConstructionCalls,
 			Request::createFromGlobals(),
@@ -422,10 +422,10 @@ class ImplementationTest extends Base
 	*
 	* @dataProvider DataProviderGoodSources
 	*
-	* @depends testEverythingInitialisesFine
-	* @depends testUnpairedFrameworksFail
+	* @depends test_everything_initialises_fine
+	* @depends test_unpaired_frameworks_fail
 	*/
-	public function testDisposeOfRequestReferences(
+	public function test_dispose_of_request_references(
 		string $implementation,
 		array $postConstructionCalls,
 		...$implementationArgs
@@ -439,7 +439,7 @@ class ImplementationTest extends Base
 			));
 		}
 
-		list($instance, $requestA, $requestB) = $this->PrepareReferenceDisposalTest(
+		[$instance, $requestA, $requestB] = $this->PrepareReferenceDisposalTest(
 			$implementation,
 			$postConstructionCalls,
 			Request::createFromGlobals(),
@@ -468,7 +468,7 @@ class ImplementationTest extends Base
 	*
 	* @param class-string<Framework> $implementation
 	*/
-	public function testNormaliseUrlFails(string $implementation) : void
+	public function test_normalise_url_fails(string $implementation) : void
 	{
 		if ( ! is_a($implementation, Framework::class, true)) {
 			throw new InvalidArgumentException(sprintf(
@@ -489,7 +489,7 @@ class ImplementationTest extends Base
 
 	protected function extractDefaultFrameworkArgs(array $implementationArgs) : array
 	{
-		list($baseUrl, $basePath, $config) = $implementationArgs;
+		[$baseUrl, $basePath, $config] = $implementationArgs;
 
 		return [$baseUrl, $basePath, $config];
 	}

@@ -30,7 +30,7 @@ class Utilities
 		*/
 		$implementationArgs = $implementationArgs;
 
-		list($baseUrl, $basePath, $config) = $implementationArgs;
+		[$baseUrl, $basePath, $config] = $implementationArgs;
 		$implementationArgs = array_slice($implementationArgs, 3);
 
 		return static::ObtainFrameworkInstance(
@@ -88,7 +88,7 @@ class Utilities
 		*/
 		$implementationArgs = $implementationArgs;
 
-		list($baseUrl, $basePath, $config) = $implementationArgs;
+		[$baseUrl, $basePath, $config] = $implementationArgs;
 		$implementationArgs = array_slice($implementationArgs, 3);
 
 		return static::ObtainHttpHandlerInstance(

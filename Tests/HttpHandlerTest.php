@@ -79,7 +79,7 @@ class HttpHandlerTest extends Base
 			$config = $args[4];
 
 			foreach ($this->DataProviderVerifyHandlerGood() as $testArgs) {
-				list($baseUrl, $config, $testArgs) = $this->prepDataProviderVerifyHandlerGoodArgs(
+				[$baseUrl, $config, $testArgs] = $this->prepDataProviderVerifyHandlerGoodArgs(
 					$config,
 					$testArgs
 				);
@@ -158,10 +158,10 @@ class HttpHandlerTest extends Base
 	public function DataProviderTestDroppedConfigProperty() : Generator
 	{
 		foreach ($this->DataProviderHttpHandlerInstances() as $args) {
-			list($implementation, , , $basePath, $config) = $args;
+			[$implementation, , , $basePath, $config] = $args;
 
 			foreach ($this->DataProviderVerifyHandlerGood() as $testArgs) {
-				list($baseUrl, $config) = $this->prepDataProviderVerifyHandlerGoodArgs(
+				[$baseUrl, $config] = $this->prepDataProviderVerifyHandlerGoodArgs(
 					(array) $config,
 					$testArgs
 				);
@@ -263,7 +263,7 @@ class HttpHandlerTest extends Base
 		array $requestArgs,
 		array $expectedHeaders = []
 	) : void {
-		$this->markTestSkipped(
+		static::markTestSkipped(
 			'see ' .
 			static::class .
 			'::testHandlerGoodWithHttpKernel()'
@@ -277,9 +277,9 @@ class HttpHandlerTest extends Base
 		array $config,
 		array $testArgs
 	) : array {
-		list($sources, $prefix, , , $requestArgs) = $testArgs;
+		[$sources, $prefix, , , $requestArgs] = $testArgs;
 
-		list($uri) = (array) $requestArgs;
+		[$uri] = (array) $requestArgs;
 
 		/**
 		* @var array
