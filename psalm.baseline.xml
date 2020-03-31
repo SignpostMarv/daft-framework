@@ -47,10 +47,12 @@
     </UnresolvableInclude>
   </file>
   <file src="Tests/fixtures/Routes/CookieTest.php">
-    <MoreSpecificImplementedParamType occurrences="3">
+    <MoreSpecificImplementedParamType occurrences="5">
       <code>$args</code>
       <code>$args</code>
+      <code>$method</code>
       <code>$args</code>
+      <code>$method</code>
     </MoreSpecificImplementedParamType>
   </file>
   <file src="Tests/fixtures/Routes/CookieTestArgs.php">
