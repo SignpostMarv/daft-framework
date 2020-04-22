@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ae86ea5f08b17b3a175a71b95a66a2ef",
+    "content-hash": "905fb71d9239a67e63dbbd403ffff895",
     "packages": [
         {
             "name": "nikic/fast-route",
@@ -253,37 +253,37 @@
         },
         {
             "name": "signpostmarv/daft-interface-collector",
-            "version": "v2.3.0",
+            "version": "v2.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/daft-framework/daft-interface-collector.git",
-                "reference": "0f969b8449312c9210c257360d6e0cbabc41c20c"
+                "reference": "6d668309365513ea3489d9cec52935adcf2878a1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/daft-framework/daft-interface-collector/zipball/0f969b8449312c9210c257360d6e0cbabc41c20c",
-                "reference": "0f969b8449312c9210c257360d6e0cbabc41c20c",
+                "url": "https://api.github.com/repos/daft-framework/daft-interface-collector/zipball/6d668309365513ea3489d9cec52935adcf2878a1",
+                "reference": "6d668309365513ea3489d9cec52935adcf2878a1",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.4"
             },
             "conflict": {
-                "vimeo/psalm": "<3.10.1"
+                "vimeo/psalm": "<3.11.2"
             },
             "require-dev": {
                 "bmitch/churn-php": "^1.0",
                 "ext-mbstring": "*",
-                "infection/infection": "^0.15.0",
+                "infection/infection": "^0.16.2",
                 "maglnet/composer-require-checker": "^2.0",
                 "php-coveralls/php-coveralls": "^2.2",
                 "phpunit/phpunit": "^8.5",
-                "povils/phpmnd": "^2.1",
-                "psalm/plugin-phpunit": "^0.9.1",
+                "povils/phpmnd": "^2.2",
+                "psalm/plugin-phpunit": "^0.10.0",
                 "roave/security-advisories": "dev-master",
-                "sebastian/phpcpd": "^4.1",
-                "signpostmarv/php-cs-fixer-config": "^0.16.3",
-                "vimeo/psalm": "^3.10"
+                "sebastian/phpcpd": "^5.0",
+                "signpostmarv/php-cs-fixer-config": "^0.17.2",
+                "vimeo/psalm": "^3.11"
             },
             "type": "library",
             "autoload": {
@@ -302,20 +302,20 @@
                 }
             ],
             "description": "interface collector. daft reasons again.",
-            "time": "2020-03-31T14:09:44+00:00"
+            "time": "2020-04-22T11:20:56+00:00"
         },
         {
             "name": "signpostmarv/daft-router",
-            "version": "v4.5.0",
+            "version": "v4.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/daft-framework/daft-router.git",
-                "reference": "acb9483f10dabfac969c0326a7cb5298d3efda0f"
+                "reference": "5249e152355a6a958eb8f17b81db7e313f929cbc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/daft-framework/daft-router/zipball/acb9483f10dabfac969c0326a7cb5298d3efda0f",
-                "reference": "acb9483f10dabfac969c0326a7cb5298d3efda0f",
+                "url": "https://api.github.com/repos/daft-framework/daft-router/zipball/5249e152355a6a958eb8f17b81db7e313f929cbc",
+                "reference": "5249e152355a6a958eb8f17b81db7e313f929cbc",
                 "shasum": ""
             },
             "require": {
@@ -323,24 +323,24 @@
                 "ext-mbstring": "*",
                 "nikic/fast-route": "^1.3",
                 "php": "^7.4",
-                "signpostmarv/daft-interface-collector": "^2.2",
-                "signpostmarv/daft-typed-object": "^0.5.1",
+                "signpostmarv/daft-interface-collector": "^2.3",
+                "signpostmarv/daft-typed-object": "^0.5.5",
                 "symfony/http-foundation": "^5.0"
             },
             "conflict": {
-                "vimeo/psalm": "<3.10.1"
+                "vimeo/psalm": "<3.11.2"
             },
             "require-dev": {
-                "infection/infection": "^0.15.0",
+                "infection/infection": "^0.16.2",
                 "maglnet/composer-require-checker": "^2.0",
                 "php-coveralls/php-coveralls": "^2.2",
                 "phpunit/phpunit": "^8.5",
-                "povils/phpmnd": "^2.1",
-                "psalm/plugin-phpunit": "^0.9.1",
+                "povils/phpmnd": "^2.2",
+                "psalm/plugin-phpunit": "^0.10.0",
                 "roave/security-advisories": "dev-master",
-                "sebastian/phpcpd": "^4.1",
-                "signpostmarv/php-cs-fixer-config": "^0.16.3",
-                "vimeo/psalm": "^3.10"
+                "sebastian/phpcpd": "^5.0",
+                "signpostmarv/php-cs-fixer-config": "^0.17.2",
+                "vimeo/psalm": "^3.11"
             },
             "suggest": {
                 "vimeo/psalm": "Useful for static analysis to reduce runtime type checks etc."
@@ -367,20 +367,20 @@
                 }
             ],
             "description": "Daft Router",
-            "time": "2020-03-31T15:18:25+00:00"
+            "time": "2020-04-22T11:43:02+00:00"
         },
         {
             "name": "signpostmarv/daft-typed-object",
-            "version": "v0.5.3",
+            "version": "v0.5.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/daft-framework/Daft-Typed-Object.git",
-                "reference": "41d98d96f9f51b4a0707ffa27ace10e161acff7c"
+                "reference": "1d7ded5fd398f3cc4c2dbe1cefd544dfd0c49182"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/daft-framework/Daft-Typed-Object/zipball/41d98d96f9f51b4a0707ffa27ace10e161acff7c",
-                "reference": "41d98d96f9f51b4a0707ffa27ace10e161acff7c",
+                "url": "https://api.github.com/repos/daft-framework/Daft-Typed-Object/zipball/1d7ded5fd398f3cc4c2dbe1cefd544dfd0c49182",
+                "reference": "1d7ded5fd398f3cc4c2dbe1cefd544dfd0c49182",
                 "shasum": ""
             },
             "require": {
@@ -388,20 +388,20 @@
                 "php": "^7.4"
             },
             "conflict": {
-                "vimeo/psalm": "<3.10.1"
+                "vimeo/psalm": "<3.11.2"
             },
             "require-dev": {
                 "ext-xdebug": "*",
-                "infection/infection": "^0.15.1",
+                "infection/infection": "^0.16.2",
                 "maglnet/composer-require-checker": "^2.0",
                 "php-coveralls/php-coveralls": "^2.2",
                 "phpunit/phpunit": "^8.5",
                 "povils/phpmnd": "^2.2",
-                "psalm/plugin-phpunit": "^0.9.1",
+                "psalm/plugin-phpunit": "^0.10.0",
                 "roave/security-advisories": "dev-master",
-                "sebastian/phpcpd": "^4.1",
-                "signpostmarv/php-cs-fixer-config": "^0.16.3",
-                "vimeo/psalm": "^3.10"
+                "sebastian/phpcpd": "^5.0",
+                "signpostmarv/php-cs-fixer-config": "^0.17.2",
+                "vimeo/psalm": "^3.11"
             },
             "suggest": {
                 "vimeo/psalm": "for static analysis & templated typehinting"
@@ -428,7 +428,7 @@
                 }
             ],
             "description": "Typed Object, a simplified version of signpostmarv/daft-object",
-            "time": "2020-03-31T14:46:41+00:00"
+            "time": "2020-04-21T15:08:52+00:00"
         },
         {
             "name": "symfony/console",
