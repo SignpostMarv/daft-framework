@@ -11,8 +11,8 @@ use SignpostMarv\DaftFramework\Symfony\Console\Command\FastRouteCacheCommand;
 class ExecuteCoverageCommand extends FastRouteCacheCommand
 {
 	/**
-	* @var string
-	*/
+	 * @var string
+	 */
 	protected static $defaultName = 'test:execute-coverage';
 
 	protected static function tempnam() : string

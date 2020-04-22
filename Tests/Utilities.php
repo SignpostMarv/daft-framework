@@ -14,8 +14,8 @@ use SignpostMarv\DaftFramework\HttpHandler;
 class Utilities
 {
 	/**
-	* @param mixed ...$implementationArgs
-	*/
+	 * @param mixed ...$implementationArgs
+	 */
 	public static function ObtainFrameworkInstanceMixedArgs(
 		TestCase $testCase,
 		string $implementation,
@@ -26,8 +26,8 @@ class Utilities
 		$testCase::assertIsArray($implementationArgs[2] ?? null);
 
 		/**
-		* @var array{0:string, 1:string, 2:array}
-		*/
+		 * @var array{0:string, 1:string, 2:array}
+		 */
 		$implementationArgs = $implementationArgs;
 
 		[$baseUrl, $basePath, $config] = $implementationArgs;
@@ -44,8 +44,8 @@ class Utilities
 	}
 
 	/**
-	* @param mixed ...$implementationArgs
-	*/
+	 * @param mixed ...$implementationArgs
+	 */
 	public static function ObtainFrameworkInstance(
 		TestCase $testCase,
 		string $implementation,
@@ -72,8 +72,8 @@ class Utilities
 	}
 
 	/**
-	* @param mixed ...$implementationArgs
-	*/
+	 * @param mixed ...$implementationArgs
+	 */
 	public static function ObtainHttpHandlerInstanceMixedArgs(
 		TestCase $testCase,
 		string $implementation,
@@ -84,8 +84,8 @@ class Utilities
 		$testCase::assertIsArray($implementationArgs[2] ?? null);
 
 		/**
-		* @var array{0:string, 1:string, 2:array}
-		*/
+		 * @var array{0:string, 1:string, 2:array}
+		 */
 		$implementationArgs = $implementationArgs;
 
 		[$baseUrl, $basePath, $config] = $implementationArgs;
@@ -102,8 +102,8 @@ class Utilities
 	}
 
 	/**
-	* @param mixed ...$implementationArgs
-	*/
+	 * @param mixed ...$implementationArgs
+	 */
 	public static function ObtainHttpHandlerInstance(
 		TestCase $testCase,
 		string $implementation,
@@ -123,8 +123,8 @@ class Utilities
 		);
 
 		/**
-		* @var HttpHandler
-		*/
+		 * @var HttpHandler
+		 */
 		$instance = static::ObtainFrameworkInstanceMixedArgs(
 			$testCase,
 			$implementation,
@@ -138,8 +138,8 @@ class Utilities
 	}
 
 	/**
-	* @param array<string, mixed[]> $postConstructionCalls
-	*/
+	 * @param array<string, mixed[]> $postConstructionCalls
+	 */
 	public static function ConfigureFrameworkInstance(
 		TestCase $testCase,
 		Framework $instance,

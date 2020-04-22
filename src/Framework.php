@@ -14,8 +14,8 @@ use SplObjectStorage;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
-* @template CONFIG as array<string, scalar|array|object|null>
-*/
+ * @template CONFIG as array<string, scalar|array|object|null>
+ */
 class Framework
 {
 	const DEFAULT_BOOL_REQUIRE_FILE_EXISTS = true;
@@ -31,13 +31,13 @@ class Framework
 	private array $config;
 
 	/**
-	* @var SplObjectStorage<Request, Framework>|null
-	*/
+	 * @var SplObjectStorage<Request, Framework>|null
+	 */
 	private static ? SplObjectStorage $requestpair = null;
 
 	/**
-	* @param CONFIG $config
-	*/
+	 * @param CONFIG $config
+	 */
 	public function __construct(
 		string $baseUrl,
 		string $basePath,
@@ -62,8 +62,8 @@ class Framework
 	public static function NormaliseUrl(string $baseUrl) : string
 	{
 		/**
-		* @var array{scheme?:string, host?:string, path?:string, port?:int}
-		*/
+		 * @var array{scheme?:string, host?:string, path?:string, port?:int}
+		 */
 		$parsed = parse_url($baseUrl);
 
 		if ( ! isset($parsed['scheme'], $parsed['host'], $parsed['path'])) {
@@ -193,22 +193,22 @@ class Framework
 	}
 
 	/**
-	* @throws InvalidArgumentException if $config contains something not valid
-	*/
+	 * @throws InvalidArgumentException if $config contains something not valid
+	 */
 	protected function ValidateConfig(array $config) : array
 	{
 		return $config;
 	}
 
 	/**
-	* @return SplObjectStorage<Request, Framework>
-	*/
+	 * @return SplObjectStorage<Request, Framework>
+	 */
 	private static function initRequestPair() : SplObjectStorage
 	{
 		if (is_null(self::$requestpair)) {
 			/**
-			* @var SplObjectStorage<Request, Framework>
-			*/
+			 * @var SplObjectStorage<Request, Framework>
+			 */
 			self::$requestpair = new SplObjectStorage();
 		}
 

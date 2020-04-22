@@ -14,23 +14,23 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
-* @psalm-type T1 = array{name:string, value:string, secure:bool, http:bool, same-site:'lax'|'strict'}
-* @psalm-type T2 = CookieTestArgs
-* @psalm-type T3 = array{name:string, value:string, secure:'0'|'1', http:'0'|'1', same-site:'lax'|'strict'}
-* @psalm-type THTTP = 'GET'|'POST'|'CONNECT'|'DELETE'|'HEAD'|'OPTIONS'|'PATCH'|'PURGE'|'PUT'|'TRACE'
-*/
+ * @psalm-type T1 = array{name:string, value:string, secure:bool, http:bool, same-site:'lax'|'strict'}
+ * @psalm-type T2 = CookieTestArgs
+ * @psalm-type T3 = array{name:string, value:string, secure:'0'|'1', http:'0'|'1', same-site:'lax'|'strict'}
+ * @psalm-type THTTP = 'GET'|'POST'|'CONNECT'|'DELETE'|'HEAD'|'OPTIONS'|'PATCH'|'PURGE'|'PUT'|'TRACE'
+ */
 class CookieTest extends DaftRouteAcceptsOnlyTypedArgs
 {
 	use DaftRouterHttpRouteDefaultMethodGet;
 
 	/**
-	* @param T2 $args
-	*/
+	 * @param T2 $args
+	 */
 	public static function DaftRouterHandleRequestWithTypedArgs(Request $request, TypedArgs $args) : Response
 	{
 		/**
-		* @var THTTP
-		*/
+		 * @var THTTP
+		 */
 		$method = $request->getMethod();
 
 		static::DaftRouterAutoMethodChecking($method);
@@ -62,9 +62,9 @@ class CookieTest extends DaftRouteAcceptsOnlyTypedArgs
 	}
 
 	/**
-	* @param T2 $args
-	* @param 'GET'|null $method
-	*/
+	 * @param T2 $args
+	 * @param 'GET'|null $method
+	 */
 	public static function DaftRouterHttpRouteWithTypedArgs(
 		TypedArgs $args,
 		string $method = null
@@ -80,11 +80,11 @@ class CookieTest extends DaftRouteAcceptsOnlyTypedArgs
 	}
 
 	/**
-	* @param T3 $args
-	* @param 'GET'|null $method
-	*
-	* @return T2
-	*/
+	 * @param T3 $args
+	 * @param 'GET'|null $method
+	 *
+	 * @return T2
+	 */
 	public static function DaftRouterHttpRouteArgsTyped(array $args, string $method = null) : ? TypedArgs
 	{
 		return CookieTestArgs::__fromArray($args);

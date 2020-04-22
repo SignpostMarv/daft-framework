@@ -24,8 +24,8 @@ use Symfony\Component\HttpKernel\HttpKernel;
 class HttpHandlerTest extends Base
 {
 	/**
-	* @return Generator<int, array{0:class-string<DaftSource>}, mixed, void>
-	*/
+	 * @return Generator<int, array{0:class-string<DaftSource>}, mixed, void>
+	 */
 	public function DataProviderGoodSources() : Generator
 	{
 		yield from [
@@ -36,8 +36,8 @@ class HttpHandlerTest extends Base
 	}
 
 	/**
-	* @return Generator<int, array{0:class-string<HttpHandler>, 1:array, 2:string, 3:string, 4:array}, mixed, void>
-	*/
+	 * @return Generator<int, array{0:class-string<HttpHandler>, 1:array, 2:string, 3:string, 4:array}, mixed, void>
+	 */
 	public function DataProviderHttpHandlerInstances() : Generator
 	{
 		yield from [
@@ -56,26 +56,26 @@ class HttpHandlerTest extends Base
 	}
 
 	/**
-	* @return Generator<int, array{0:HttpHandler, 1:Request, 2:int, 3:string}, mixed, void>
-	*/
+	 * @return Generator<int, array{0:HttpHandler, 1:Request, 2:int, 3:string}, mixed, void>
+	 */
 	public function DataProviderHttpHandlerHandle() : Generator
 	{
 		foreach ($this->DataProviderHttpHandlerInstances() as $args) {
 			/**
-			* @var string
-			*/
+			 * @var string
+			 */
 			$implementation = $args[0];
 
 			/**
-			* @var array<string, mixed[]>
-			*/
+			 * @var array<string, mixed[]>
+			 */
 			$postConstructionCalls = $args[1];
 
 			$basePath = $args[3];
 
 			/**
-			* @var array<string, mixed[]>
-			*/
+			 * @var array<string, mixed[]>
+			 */
 			$config = $args[4];
 
 			foreach ($this->DataProviderVerifyHandlerGood() as $testArgs) {
@@ -97,23 +97,23 @@ class HttpHandlerTest extends Base
 				$config = (array) $config;
 
 				/**
-				* @var array
-				*/
+				 * @var array
+				 */
 				$testArgs = $testArgs;
 
 				/**
-				* @var int
-				*/
+				 * @var int
+				 */
 				$expectedStatus = $testArgs[2];
 
 				/**
-				* @var string
-				*/
+				 * @var string
+				 */
 				$expectedContent = $testArgs[3];
 
 				/**
-				* @var array
-				*/
+				 * @var array
+				 */
 				$requestArgs = $testArgs[4];
 
 				$instance = Utilities::ObtainHttpHandlerInstanceMixedArgs(
@@ -133,8 +133,8 @@ class HttpHandlerTest extends Base
 				$server = (array) ($requestArgs[5] ?? []);
 
 				/**
-				* @var string|resource|null
-				*/
+				 * @var string|resource|null
+				 */
 				$content = ($requestArgs[6] ?? null);
 
 				$request = Request::create(
@@ -153,8 +153,8 @@ class HttpHandlerTest extends Base
 	}
 
 	/**
-	* @return Generator<int, array{0:class-string<HttpHandler>, 1:string, 2:string, 3:array, 4:array<string, mixed[]>}, mixed, void>
-	*/
+	 * @return Generator<int, array{0:class-string<HttpHandler>, 1:string, 2:string, 3:array, 4:array<string, mixed[]>}, mixed, void>
+	 */
 	public function DataProviderTestDroppedConfigProperty() : Generator
 	{
 		foreach ($this->DataProviderHttpHandlerInstances() as $args) {
@@ -168,13 +168,13 @@ class HttpHandlerTest extends Base
 
 				foreach (['cacheFile', 'sources'] as $omitSubProperty) {
 					/**
-					* @var array<string, mixed>
-					*/
+					 * @var array<string, mixed>
+					 */
 					$modifiedConfig = (array) $config;
 
 					/**
-					* @var array<string, mixed>
-					*/
+					 * @var array<string, mixed>
+					 */
 					$modifiedDaftSourceConfig = $modifiedConfig[DaftSource::class];
 
 					unset($modifiedDaftSourceConfig[$omitSubProperty]);
@@ -182,8 +182,8 @@ class HttpHandlerTest extends Base
 					$modifiedConfig[DaftSource::class] = $modifiedDaftSourceConfig;
 
 					/**
-					* @var array<string, mixed[]>
-					*/
+					 * @var array<string, mixed[]>
+					 */
 					$args1 = $args[1];
 
 					yield [$implementation, $baseUrl, $basePath, $modifiedConfig, $args1];
@@ -193,10 +193,10 @@ class HttpHandlerTest extends Base
 	}
 
 	/**
-	* @param array<string, mixed[]> $args1
-	*
-	* @dataProvider DataProviderTestDroppedConfigProperty
-	*/
+	 * @param array<string, mixed[]> $args1
+	 *
+	 * @dataProvider DataProviderTestDroppedConfigProperty
+	 */
 	public function test_dropped_config_property(
 		string $implementation,
 		string $baseUrl,
@@ -218,8 +218,8 @@ class HttpHandlerTest extends Base
 	}
 
 	/**
-	* @dataProvider DataProviderHttpHandlerHandle
-	*/
+	 * @dataProvider DataProviderHttpHandlerHandle
+	 */
 	public function test_handler_good_with_http_kernel(
 		HttpHandler $instance,
 		Request $request,
@@ -246,15 +246,15 @@ class HttpHandlerTest extends Base
 	}
 
 	/**
-	* @depends test_compiler_verify_add_route_adds_routes
-	* @depends test_compiler_verify_add_middleware_adds_middlewares
-	* @depends test_compiler_excludes_middleware
-	*
-	* @dataProvider DataProviderVerifyHandlerGood
-	*
-	* @param array<int, class-string<DaftRouteAcceptsEmptyArgs>|class-string<DaftRouteAcceptsTypedArgs>> $sources
-	* @param array<string, scalar|array|object|null> $expectedHeaders
-	*/
+	 * @depends test_compiler_verify_add_route_adds_routes
+	 * @depends test_compiler_verify_add_middleware_adds_middlewares
+	 * @depends test_compiler_excludes_middleware
+	 *
+	 * @dataProvider DataProviderVerifyHandlerGood
+	 *
+	 * @param array<int, class-string<DaftRouteAcceptsEmptyArgs>|class-string<DaftRouteAcceptsTypedArgs>> $sources
+	 * @param array<string, scalar|array|object|null> $expectedHeaders
+	 */
 	public function test_handler_good(
 		array $sources,
 		string $prefix,
@@ -271,8 +271,8 @@ class HttpHandlerTest extends Base
 	}
 
 	/**
-	* @return array{0:string, 1:array, 2:array}
-	*/
+	 * @return array{0:string, 1:array, 2:array}
+	 */
 	protected function prepDataProviderVerifyHandlerGoodArgs(
 		array $config,
 		array $testArgs
@@ -282,8 +282,8 @@ class HttpHandlerTest extends Base
 		[$uri] = (array) $requestArgs;
 
 		/**
-		* @var array
-		*/
+		 * @var array
+		 */
 		$parsed = parse_url((string) $uri);
 
 		$baseUrl = (string) ($parsed['scheme'] ?? '') . '://' . (string) ($parsed['host'] ?? '');
@@ -295,10 +295,10 @@ class HttpHandlerTest extends Base
 		$baseUrl .= '/' . (string) $prefix;
 
 		/**
-		* @var array<string, string|array<int, string>>
-		* @var array<int, string> $daftSourceConfig['sources']
-		* @var string $daftSourceConfig['cacheFile']
-		*/
+		 * @var array<string, string|array<int, string>>
+		 * @var array<int, string> $daftSourceConfig['sources']
+		 * @var string $daftSourceConfig['cacheFile']
+		 */
 		$daftSourceConfig = (array) $config[DaftSource::class];
 
 		$daftSourceConfig['sources'] = array_filter((array) $sources, 'is_string');

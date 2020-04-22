@@ -19,8 +19,8 @@ class FastRouteCacheCommand extends Command
 	const INT_RETURN_FAIL = 1;
 
 	/**
-	* @var string
-	*/
+	 * @var string
+	 */
 	protected static $defaultName = 'daft-framework:router:update-cache';
 
 	public function execute(
@@ -38,8 +38,8 @@ class FastRouteCacheCommand extends Command
 		$cacheFilename .= '.cache';
 
 		/**
-		* @var array<int, class-string<DaftSource>>
-		*/
+		 * @var array<int, class-string<DaftSource>>
+		 */
 		$sources = $input->getArgument('sources');
 
 		$dispatcher_options =

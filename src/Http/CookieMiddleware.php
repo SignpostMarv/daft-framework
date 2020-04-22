@@ -20,8 +20,8 @@ class CookieMiddleware implements DaftRequestInterceptor, DaftResponseModifier
 		Response $response
 	) : Response {
 		/**
-		* @var Response
-		*/
+		 * @var Response
+		 */
 		$response = static::OmNomNom($request, $response);
 
 		return $response;
@@ -127,8 +127,8 @@ class CookieMiddleware implements DaftRequestInterceptor, DaftResponseModifier
 			$config = (array) $config[self::class];
 
 			/**
-			* @var string|null
-			*/
+			 * @var string|null
+			 */
 			$sameSite = $config['sameSite'] ?? null;
 			$sameSite = is_string($sameSite) ? $sameSite : null;
 			$isSecure = (bool) ($config['secure'] ?? null);

@@ -22,8 +22,8 @@ class ImplementationTest extends Base
 	public function tearDown() : void
 	{
 		/**
-		* @var string[]
-		*/
+		 * @var string[]
+		 */
 		$strings = array_filter(
 			[
 				realpath(__DIR__ . '/fixtures/http-kernel.fast-route.cache'),
@@ -42,8 +42,8 @@ class ImplementationTest extends Base
 	}
 
 	/**
-	* @return Generator<int, array{0:class-string<Framework>, 1:array<string, array<int, mixed>>, 2:string, 3:string, 4:array}, mixed, void>
-	*/
+	 * @return Generator<int, array{0:class-string<Framework>, 1:array<string, array<int, mixed>>, 2:string, 3:string, 4:array}, mixed, void>
+	 */
 	public function DataProviderGoodSources() : Generator
 	{
 		yield from [
@@ -100,8 +100,8 @@ class ImplementationTest extends Base
 	}
 
 	/**
-	* @return Generator<int, array{0:class-string<Framework>, 1:class-string<Throwable>, 2:string, 3:int|null, 4:array<string, array<int, mixed>>, 5:string, 6:string, 7:array}, mixed, void>
-	*/
+	 * @return Generator<int, array{0:class-string<Framework>, 1:class-string<Throwable>, 2:string, 3:int|null, 4:array<string, array<int, mixed>>, 5:string, 6:string, 7:array}, mixed, void>
+	 */
 	public function DataProviderBadSources() : Generator
 	{
 		yield from [
@@ -198,8 +198,8 @@ class ImplementationTest extends Base
 	}
 
 	/**
-	* @return Generator<int, array{0:class-string<Framework>, 1:array<string, array<int, mixed>>, 2:string, 3:string, 4:array}, mixed, void>
-	*/
+	 * @return Generator<int, array{0:class-string<Framework>, 1:array<string, array<int, mixed>>, 2:string, 3:string, 4:array}, mixed, void>
+	 */
 	public function DataProviderGoodSourcesSansDatabaseConnection() : Generator
 	{
 		foreach ($this->DataProviderGoodSources() as $args) {
@@ -210,8 +210,8 @@ class ImplementationTest extends Base
 	}
 
 	/**
-	* @return Generator<int, array{0:class-string<Framework>, 1:array<string, array<int, mixed>>, 2:string, 3:string, 4:array}, mixed, void>
-	*/
+	 * @return Generator<int, array{0:class-string<Framework>, 1:array<string, array<int, mixed>>, 2:string, 3:string, 4:array}, mixed, void>
+	 */
 	public function DataProviderGoodSourcesWithDatabaseConnection() : Generator
 	{
 		foreach ($this->DataProviderGoodSources() as $args) {
@@ -222,12 +222,12 @@ class ImplementationTest extends Base
 	}
 
 	/**
-	* @param class-string<Framework> $implementation
-	* @param array<string, array<int, mixed>> $postConstructionCalls
-	* @param mixed ...$implementationArgs
-	*
-	* @dataProvider DataProviderGoodSources
-	*/
+	 * @param class-string<Framework> $implementation
+	 * @param array<string, array<int, mixed>> $postConstructionCalls
+	 * @param mixed ...$implementationArgs
+	 *
+	 * @dataProvider DataProviderGoodSources
+	 */
 	public function test_everything_initialises_fine(
 		string $implementation,
 		array $postConstructionCalls,
@@ -248,15 +248,15 @@ class ImplementationTest extends Base
 	}
 
 	/**
-	* @param class-string<Framework> $implementation
-	* @param class-string<Throwable> $expectedExceptionClass
-	* @param array<string, array<int, mixed>> $postConstructionCalls
-	* @param mixed ...$implementationArgs
-	*
-	* @dataProvider DataProviderBadSources
-	*
-	* @depends test_everything_initialises_fine
-	*/
+	 * @param class-string<Framework> $implementation
+	 * @param class-string<Throwable> $expectedExceptionClass
+	 * @param array<string, array<int, mixed>> $postConstructionCalls
+	 * @param mixed ...$implementationArgs
+	 *
+	 * @dataProvider DataProviderBadSources
+	 *
+	 * @depends test_everything_initialises_fine
+	 */
 	public function test_things_fail(
 		string $implementation,
 		string $expectedExceptionClass,
@@ -287,14 +287,14 @@ class ImplementationTest extends Base
 	}
 
 	/**
-	* @param class-string<Framework> $implementation
-	* @param array<string, array<int, mixed>> $postConstructionCalls
-	* @param mixed ...$implementationArgs
-	*
-	* @dataProvider DataProviderGoodSourcesSansDatabaseConnection
-	*
-	* @depends test_everything_initialises_fine
-	*/
+	 * @param class-string<Framework> $implementation
+	 * @param array<string, array<int, mixed>> $postConstructionCalls
+	 * @param mixed ...$implementationArgs
+	 *
+	 * @dataProvider DataProviderGoodSourcesSansDatabaseConnection
+	 *
+	 * @depends test_everything_initialises_fine
+	 */
 	public function test_good_sources_sans_database_connection(
 		string $implementation,
 		array $postConstructionCalls,
@@ -310,14 +310,14 @@ class ImplementationTest extends Base
 	}
 
 	/**
-	* @param class-string<Framework> $implementation
-	* @param array<string, array<int, mixed>> $postConstructionCalls
-	* @param mixed ...$implementationArgs
-	*
-	* @dataProvider DataProviderGoodSourcesWithDatabaseConnection
-	*
-	* @depends test_everything_initialises_fine
-	*/
+	 * @param class-string<Framework> $implementation
+	 * @param array<string, array<int, mixed>> $postConstructionCalls
+	 * @param mixed ...$implementationArgs
+	 *
+	 * @dataProvider DataProviderGoodSourcesWithDatabaseConnection
+	 *
+	 * @depends test_everything_initialises_fine
+	 */
 	public function test_good_sources_with_database_connection(
 		string $implementation,
 		array $postConstructionCalls,
@@ -332,12 +332,12 @@ class ImplementationTest extends Base
 		$this->expectExceptionMessage('Database Connection already made!');
 
 		/**
-		* @var array<int, string|array|null>
-		* @var string $configureArgs[0]
-		* @var string|null $configureArgs[1]
-		* @var string|null $configureArgs[2]
-		* @var array $configureArgs[3]
-		*/
+		 * @var array<int, string|array|null>
+		 * @var string $configureArgs[0]
+		 * @var string|null $configureArgs[1]
+		 * @var string|null $configureArgs[2]
+		 * @var array $configureArgs[3]
+		 */
 		$configureArgs = $postConstructionCalls['ConfigureDatabaseConnection'];
 
 		$instance->ConfigureDatabaseConnection(
@@ -349,12 +349,12 @@ class ImplementationTest extends Base
 	}
 
 	/**
-	* @dataProvider DataProviderGoodSources
-	*
-	* @depends test_everything_initialises_fine
-	*
-	* @param class-string<Framework> $implementation
-	*/
+	 * @dataProvider DataProviderGoodSources
+	 *
+	 * @depends test_everything_initialises_fine
+	 *
+	 * @param class-string<Framework> $implementation
+	 */
 	public function test_unpaired_frameworks_fail(string $implementation) : void
 	{
 		if ( ! is_a($implementation, Framework::class, true)) {
@@ -374,15 +374,15 @@ class ImplementationTest extends Base
 	}
 
 	/**
-	* @param class-string<Framework> $implementation
-	* @param array<string, array<int, mixed>> $postConstructionCalls
-	* @param mixed ...$implementationArgs
-	*
-	* @dataProvider DataProviderGoodSources
-	*
-	* @depends test_everything_initialises_fine
-	* @depends test_unpaired_frameworks_fail
-	*/
+	 * @param class-string<Framework> $implementation
+	 * @param array<string, array<int, mixed>> $postConstructionCalls
+	 * @param mixed ...$implementationArgs
+	 *
+	 * @dataProvider DataProviderGoodSources
+	 *
+	 * @depends test_everything_initialises_fine
+	 * @depends test_unpaired_frameworks_fail
+	 */
 	public function test_dispose_of_framework_references(
 		string $implementation,
 		array $postConstructionCalls,
@@ -416,15 +416,15 @@ class ImplementationTest extends Base
 	}
 
 	/**
-	* @param class-string<Framework> $implementation
-	* @param array<string, array<int, mixed>> $postConstructionCalls
-	* @param mixed ...$implementationArgs
-	*
-	* @dataProvider DataProviderGoodSources
-	*
-	* @depends test_everything_initialises_fine
-	* @depends test_unpaired_frameworks_fail
-	*/
+	 * @param class-string<Framework> $implementation
+	 * @param array<string, array<int, mixed>> $postConstructionCalls
+	 * @param mixed ...$implementationArgs
+	 *
+	 * @dataProvider DataProviderGoodSources
+	 *
+	 * @depends test_everything_initialises_fine
+	 * @depends test_unpaired_frameworks_fail
+	 */
 	public function test_dispose_of_request_references(
 		string $implementation,
 		array $postConstructionCalls,
@@ -464,10 +464,10 @@ class ImplementationTest extends Base
 	}
 
 	/**
-	* @dataProvider DataProviderGoodSources
-	*
-	* @param class-string<Framework> $implementation
-	*/
+	 * @dataProvider DataProviderGoodSources
+	 *
+	 * @param class-string<Framework> $implementation
+	 */
 	public function test_normalise_url_fails(string $implementation) : void
 	{
 		if ( ! is_a($implementation, Framework::class, true)) {
@@ -495,12 +495,12 @@ class ImplementationTest extends Base
 	}
 
 	/**
-	* @param class-string<Framework> $implementation
-	* @param array<string, mixed[]> $postConstructionCalls
-	* @param mixed ...$implementationArgs
-	*
-	* @return array{0:Framework, 1:Request, 2:Request}
-	*/
+	 * @param class-string<Framework> $implementation
+	 * @param array<string, mixed[]> $postConstructionCalls
+	 * @param mixed ...$implementationArgs
+	 *
+	 * @return array{0:Framework, 1:Request, 2:Request}
+	 */
 	protected function PrepareReferenceDisposalTest(
 		string $implementation,
 		array $postConstructionCalls,
@@ -530,9 +530,9 @@ class ImplementationTest extends Base
 	}
 
 	/**
-	* @param class-string<Framework> $implementation
-	* @param mixed ...$implementationArgs
-	*/
+	 * @param class-string<Framework> $implementation
+	 * @param mixed ...$implementationArgs
+	 */
 	protected function ObtainFrameworkInstance(string $implementation, ...$implementationArgs) : Framework
 	{
 		return Utilities::ObtainFrameworkInstanceMixedArgs(
@@ -543,8 +543,8 @@ class ImplementationTest extends Base
 	}
 
 	/**
-	* @param array<string, mixed[]> $postConstructionCalls
-	*/
+	 * @param array<string, mixed[]> $postConstructionCalls
+	 */
 	protected function ConfigureFrameworkInstance(
 		Framework $instance,
 		array $postConstructionCalls

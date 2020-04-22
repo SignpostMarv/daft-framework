@@ -30,8 +30,8 @@ class ApplicationTest extends Base
 	const NUM_EXPECTED_ARGS = 6;
 
 	/**
-	* @return Generator<int, array{0:string, 1:string, 2:array<int, class-string>, 3:class-string<Framework>, 4:array}, mixed, void>
-	*/
+	 * @return Generator<int, array{0:string, 1:string, 2:array<int, class-string>, 3:class-string<Framework>, 4:array}, mixed, void>
+	 */
 	final public function DataProviderConsoleApplicationConfigFiltered() : Generator
 	{
 		foreach ($this->DataProviderConsoleApplicationConfig() as $args) {
@@ -48,8 +48,8 @@ class ApplicationTest extends Base
 				$args[$key] = $appendTo;
 
 				/**
-				* @var array{0:string, 1:string, 2:array<int, class-string>, 3:class-string<Framework>, 4:array}
-				*/
+				 * @var array{0:string, 1:string, 2:array<int, class-string>, 3:class-string<Framework>, 4:array}
+				 */
 				$args = $args;
 
 				yield $args;
@@ -58,8 +58,8 @@ class ApplicationTest extends Base
 	}
 
 	/**
-	* @return Generator<int, array{0:Framework, 1:Command}, mixed, void>
-	*/
+	 * @return Generator<int, array{0:Framework, 1:Command}, mixed, void>
+	 */
 	final public function DataProviderDaftConsoleCommands() : Generator
 	{
 		foreach ($this->DataProviderConsoleApplicationConfigFiltered() as $args) {
@@ -76,8 +76,8 @@ class ApplicationTest extends Base
 			);
 
 			/**
-			* @var scalar[]
-			*/
+			 * @var scalar[]
+			 */
 			$maybeCommandSources = ($args[2] ?? []);
 
 			foreach ($maybeCommandSources as $maybeCommand) {
@@ -103,10 +103,10 @@ class ApplicationTest extends Base
 	}
 
 	/**
-	* @param array<int, class-string> $expectedCommandInstances
-	*
-	* @dataProvider DataProviderConsoleApplicationConfigFiltered
-	*/
+	 * @param array<int, class-string> $expectedCommandInstances
+	 *
+	 * @dataProvider DataProviderConsoleApplicationConfigFiltered
+	 */
 	public function test_application_setup(
 		string $name,
 		string $version,
@@ -181,12 +181,12 @@ class ApplicationTest extends Base
 	}
 
 	/**
-	* @param array<int, class-string> $expectedCommandInstances
-	*
-	* @dataProvider DataProviderConsoleApplicationConfigFiltered
-	*
-	* @depends test_application_setup
-	*/
+	 * @param array<int, class-string> $expectedCommandInstances
+	 *
+	 * @dataProvider DataProviderConsoleApplicationConfigFiltered
+	 *
+	 * @depends test_application_setup
+	 */
 	public function test_command_collection_without_framework(
 		string $name,
 		string $version,
@@ -203,10 +203,10 @@ class ApplicationTest extends Base
 	}
 
 	/**
-	* @dataProvider DataProviderDaftConsoleCommands
-	*
-	* @depends test_application_setup
-	*/
+	 * @dataProvider DataProviderDaftConsoleCommands
+	 *
+	 * @depends test_application_setup
+	 */
 	public function test_command_framework_attachment(Framework $framework, Command $command) : void
 	{
 		static::assertFalse($command->CheckIfUsingFrameworkInstance($framework));
@@ -232,8 +232,8 @@ class ApplicationTest extends Base
 	}
 
 	/**
-	* @return Generator<int, array{0:Application, 1:string}, mixed, void>
-	*/
+	 * @return Generator<int, array{0:Application, 1:string}, mixed, void>
+	 */
 	public function DataProviderFastRouteCacheComamnd() : Generator
 	{
 		$expectedOutput = file_get_contents(
@@ -243,8 +243,8 @@ class ApplicationTest extends Base
 
 		foreach ($this->DataProviderConsoleApplicationConfigFiltered() as $i => $args) {
 			/**
-			* @var string
-			*/
+			 * @var string
+			 */
 			$frameworkImplementation = $args[3];
 
 			if ( ! is_a($frameworkImplementation, Framework::class, true)) {
@@ -259,8 +259,8 @@ class ApplicationTest extends Base
 			}
 
 			/**
-			* @var array<string, array>
-			*/
+			 * @var array<string, array>
+			 */
 			$args42 = (array) ((array) $args[4])[2];
 			$args42[DaftConsoleSource::class][] = FastRouteCacheCommand::class;
 			$args42[DaftSource::class]['sources'] = [Config::class];
@@ -286,8 +286,8 @@ class ApplicationTest extends Base
 	}
 
 	/**
-	* @dataProvider DataProviderFastRouteCacheComamnd
-	*/
+	 * @dataProvider DataProviderFastRouteCacheComamnd
+	 */
 	public function test_fast_route_cache_command(
 		Application $application,
 		string $expectedOutput
@@ -353,8 +353,8 @@ class ApplicationTest extends Base
 	}
 
 	/**
-	* @dataProvider DataProviderFastRouteCacheComamnd
-	*/
+	 * @dataProvider DataProviderFastRouteCacheComamnd
+	 */
 	public function test_execute_coverage_command(Application $application) : void
 	{
 		$command = $application->find('test:execute-coverage');
@@ -382,8 +382,8 @@ class ApplicationTest extends Base
 	}
 
 	/**
-	* @return Generator<int, array{0:string, 1:string, 2:string, 3:array<int, class-string>, 4:class-string<Framework>, 5:array}, mixed, void>
-	*/
+	 * @return Generator<int, array{0:string, 1:string, 2:string, 3:array<int, class-string>, 4:class-string<Framework>, 5:array}, mixed, void>
+	 */
 	protected function DataProviderConsoleApplicationConfig() : Generator
 	{
 		yield from [

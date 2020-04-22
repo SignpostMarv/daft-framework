@@ -9,11 +9,11 @@ namespace SignpostMarv\DaftFramework\Tests\fixtures\Routes;
 use SignpostMarv\DaftRouter\TypedArgs;
 
 /**
-* @template T as array{name:string, value:string, secure:bool, http:bool, same-site:'lax'|'strict'}
-* @template S as array{name:string, value:string, secure:'0'|'1', http:'0'|'1', same-site:'lax'|'strict'}
-*
-* @tempalte-extends TypedArgs<T, S>
-*/
+ * @template T as array{name:string, value:string, secure:bool, http:bool, same-site:'lax'|'strict'}
+ * @template S as array{name:string, value:string, secure:'0'|'1', http:'0'|'1', same-site:'lax'|'strict'}
+ *
+ * @tempalte-extends TypedArgs<T, S>
+ */
 class CookieTestArgs extends TypedArgs
 {
 	const TYPED_PROPERTIES = [
@@ -25,43 +25,43 @@ class CookieTestArgs extends TypedArgs
 	];
 
 	/**
-	* @readonly
-	*
-	* @var string
-	*/
+	 * @readonly
+	 *
+	 * @var string
+	 */
 	public $name;
 
 	/**
-	* @readonly
-	*
-	* @var string
-	*/
+	 * @readonly
+	 *
+	 * @var string
+	 */
 	public $value;
 
 	/**
-	* @readonly
-	*
-	* @var bool
-	*/
+	 * @readonly
+	 *
+	 * @var bool
+	 */
 	public $secure;
 
 	/**
-	* @readonly
-	*
-	* @var bool
-	*/
+	 * @readonly
+	 *
+	 * @var bool
+	 */
 	public $http;
 
 	/**
-	* @readonly
-	*
-	* @var 'lax'|'strict'
-	*/
+	 * @readonly
+	 *
+	 * @var 'lax'|'strict'
+	 */
 	public $sameSite;
 
 	/**
-	* @param T $args
-	*/
+	 * @param T $args
+	 */
 	public function __construct(array $args)
 	{
 		$this->name = $args['name'];
@@ -72,20 +72,20 @@ class CookieTestArgs extends TypedArgs
 	}
 
 	/**
-	* @template K as key-of<T>
-	*
-	* @param K $property
-	* @param S[K] $value
-	*
-	* @return T[K]
-	*/
+	 * @template K as key-of<T>
+	 *
+	 * @param K $property
+	 * @param S[K] $value
+	 *
+	 * @return T[K]
+	 */
 	public static function PropertyScalarOrNullToValue(
 		string $property,
 		$value
 	) {
 		/**
-		* @var string
-		*/
+		 * @var string
+		 */
 		$property = $property;
 
 		if (
@@ -93,14 +93,14 @@ class CookieTestArgs extends TypedArgs
 			'http' === $property
 		) {
 			/**
-			* @var T[K]
-			*/
+			 * @var T[K]
+			 */
 			return (bool) $value;
 		}
 
 		/**
-		* @var T[K]
-		*/
+		 * @var T[K]
+		 */
 		return parent::PropertyScalarOrNullToValue($property, $value);
 	}
 }

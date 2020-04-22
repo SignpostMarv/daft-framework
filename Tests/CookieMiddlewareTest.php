@@ -17,8 +17,8 @@ use Symfony\Component\HttpFoundation\Request;
 class CookieMiddlewareTest extends Base
 {
 	/**
-	* @dataProvider DataProvderCookeMiddlewareTest
-	*/
+	 * @dataProvider DataProvderCookeMiddlewareTest
+	 */
 	public function test_cookie_middleware(
 		string $implementation,
 		string $baseUrl,
@@ -40,8 +40,8 @@ class CookieMiddlewareTest extends Base
 		);
 
 		/**
-		* @var array<string, bool|string>
-		*/
+		 * @var array<string, bool|string>
+		 */
 		$cookieConfig = [];
 
 		if (is_string($secure) && is_string($http) && is_string($sameSite)) {
@@ -55,8 +55,8 @@ class CookieMiddlewareTest extends Base
 		$config[CookieMiddleware::class] = $cookieConfig;
 
 		/**
-		* @var array<string, string|array<int, string>>
-		*/
+		 * @var array<string, string|array<int, string>>
+		 */
 		$sourceConfig = (array) $config[DaftSource::class];
 
 		$sourceConfig['sources'] = [
@@ -109,8 +109,8 @@ class CookieMiddlewareTest extends Base
 		}
 
 		/**
-		* @var array<string, string|array<int, string>>
-		*/
+		 * @var array<string, string|array<int, string>>
+		 */
 		$sourceConfig = (array) $config[DaftSource::class];
 
 		$sourceConfig['sources'] = [fixtures\Routes\CookieTest::class, CookieMiddleware::class];
@@ -173,8 +173,8 @@ class CookieMiddlewareTest extends Base
 	}
 
 	/**
-	* @return Generator<int, array{0:class-string<HttpHandler>, 1:string, 2:string, 3:array, 4:string, 5:string, 6:string|null, 7:string|null, 8:string|null}, mixed, void>
-	*/
+	 * @return Generator<int, array{0:class-string<HttpHandler>, 1:string, 2:string, 3:array, 4:string, 5:string, 6:string|null, 7:string|null, 8:string|null}, mixed, void>
+	 */
 	public function DataProvderCookeMiddlewareTest() : Generator
 	{
 		foreach ($this->DataProviderCookieNameValue() as $cookie) {
@@ -193,8 +193,8 @@ class CookieMiddlewareTest extends Base
 				] = array_merge($handlerArgs, $cookie, [null, null, null]);
 
 				/**
-				* @var array{0:class-string<HttpHandler>, 1:string, 2:string, 3:array, 4:string, 5:string, 6:string|null, 7:string|null, 8:string|null}
-				*/
+				 * @var array{0:class-string<HttpHandler>, 1:string, 2:string, 3:array, 4:string, 5:string, 6:string|null, 7:string|null, 8:string|null}
+				 */
 				$yielding = [
 					$implementation,
 					$baseUrl,
@@ -223,8 +223,8 @@ class CookieMiddlewareTest extends Base
 							] = array_merge($handlerArgs, $cookie);
 
 							/**
-							* @var array{0:class-string<HttpHandler>, 1:string, 2:string, 3:array, 4:string, 5:string, 6:string|null, 7:string|null, 8:string|null}
-							*/
+							 * @var array{0:class-string<HttpHandler>, 1:string, 2:string, 3:array, 4:string, 5:string, 6:string|null, 7:string|null, 8:string|null}
+							 */
 							$yielding = [
 								$implementation,
 								$baseUrl,
@@ -246,8 +246,8 @@ class CookieMiddlewareTest extends Base
 	}
 
 	/**
-	* @return Generator<int, array{0:class-string<HttpHandler>, 1:array, 2:string, 3:string, 4:array}, mixed, void>
-	*/
+	 * @return Generator<int, array{0:class-string<HttpHandler>, 1:array, 2:string, 3:string, 4:array}, mixed, void>
+	 */
 	public function DataProviderHttpHandlerInstances() : Generator
 	{
 		yield from [
@@ -264,8 +264,8 @@ class CookieMiddlewareTest extends Base
 	}
 
 	/**
-	* @return Generator<int, array{0:string, 1:string}, mixed, void>
-	*/
+	 * @return Generator<int, array{0:string, 1:string}, mixed, void>
+	 */
 	public function DataProviderCookieNameValue() : Generator
 	{
 		yield from [
@@ -274,24 +274,24 @@ class CookieMiddlewareTest extends Base
 	}
 
 	/**
-	* @return Generator<int, string, mixed, void>
-	*/
+	 * @return Generator<int, string, mixed, void>
+	 */
 	public function DataProviderCookieSecure() : Generator
 	{
 		yield from ['0', '1'];
 	}
 
 	/**
-	* @return Generator<int, string, mixed, void>
-	*/
+	 * @return Generator<int, string, mixed, void>
+	 */
 	public function DataProviderCookieHttp() : Generator
 	{
 		yield from ['0', '1'];
 	}
 
 	/**
-	* @return Generator<int, string, mixed, void>
-	*/
+	 * @return Generator<int, string, mixed, void>
+	 */
 	public function DataProviderCookieSameSite() : Generator
 	{
 		yield from ['lax', 'strict'];

@@ -16,15 +16,15 @@ use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
 /**
-* @template CONFIG as array{
-*	SignpostMarv\DaftRouter\DaftSource: array{
-*		cacheFile:string,
-*		sources:array<int, string>
-*	}
-* }
-*
-* @template-extends Framework<CONFIG>
-*/
+ * @template CONFIG as array{
+ *	SignpostMarv\DaftRouter\DaftSource: array{
+ *		cacheFile:string,
+ *		sources:array<int, string>
+ *	}
+ * }
+ *
+ * @template-extends Framework<CONFIG>
+ */
 class HttpHandler extends Framework
 {
 	const ERROR_SOURCE_CONFIG =
@@ -38,13 +38,13 @@ class HttpHandler extends Framework
 	private string $routerCacheFile;
 
 	/**
-	* @var array<int, class-string<DaftSource>>
-	*/
+	 * @var array<int, class-string<DaftSource>>
+	 */
 	private array $routerSources;
 
 	/**
-	* @param CONFIG $config
-	*/
+	 * @param CONFIG $config
+	 */
 	public function __construct(
 		string $baseUrl,
 		string $basePath,
@@ -55,8 +55,8 @@ class HttpHandler extends Framework
 		$this->routerCacheFile = $config[DaftSource::class]['cacheFile'];
 
 		/**
-		* @var  array<int, class-string<DaftSource>>
-		*/
+		 * @var  array<int, class-string<DaftSource>>
+		 */
 		$sources = $config[DaftSource::class]['sources'];
 
 		$this->routerSources = $sources;
@@ -94,8 +94,8 @@ class HttpHandler extends Framework
 	protected function ValidateConfig(array $config) : array
 	{
 		/**
-		* @var array|null
-		*/
+		 * @var array|null
+		 */
 		$subConfig = $config[DaftSource::class] ?? null;
 
 		if (

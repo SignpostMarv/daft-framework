@@ -19,8 +19,8 @@ class Application extends Base
 	use AttachDaftFramework;
 
 	/**
-	* @return BaseCommand|null
-	*/
+	 * @return BaseCommand|null
+	 */
 	public function add(BaseCommand $command)
 	{
 		return $this->addStrict($command);
@@ -67,8 +67,8 @@ class Application extends Base
 	}
 
 	/**
-	* @param class-string ...$sources
-	*/
+	 * @param class-string ...$sources
+	 */
 	public function CollectCommands(string ...$sources) : void
 	{
 		$framework = $this->GetDaftFramework();
@@ -80,8 +80,8 @@ class Application extends Base
 		}
 
 		/**
-		* @var iterable<class-string<BaseCommand>>
-		*/
+		 * @var iterable<class-string<BaseCommand>>
+		 */
 		$implementations = $this->GetCommandCollector()->Collect(...$sources);
 
 		foreach ($implementations as $implementation) {
@@ -92,8 +92,8 @@ class Application extends Base
 	}
 
 	/**
-	* @return static
-	*/
+	 * @return static
+	 */
 	public static function CollectApplicationWithCommands(
 		string $name,
 		string $version,
@@ -103,8 +103,8 @@ class Application extends Base
 		$application->AttachDaftFramework($framework);
 
 		/**
-		* @var array<int, class-string>
-		*/
+		 * @var array<int, class-string>
+		 */
 		$sources = (array) (
 			$framework->ObtainConfig()[DaftConsoleSource::class] ?? []
 		);

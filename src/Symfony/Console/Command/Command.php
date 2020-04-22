@@ -17,13 +17,13 @@ abstract class Command extends Base
 	protected static function tempnam() : string
 	{
 		/**
-		* @var string
-		*/
+		 * @var string
+		 */
 		$tempnam = tempnam(sys_get_temp_dir(), static::class);
 
 		/**
-		* @var string
-		*/
+		 * @var string
+		 */
 		return realpath($tempnam);
 	}
 
