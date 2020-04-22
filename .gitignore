@@ -7,3 +7,4 @@ phpunit.clover
 /.phpunit.result.cache
 /phpunit.cache
 /phpunit.clover
+/psalm/cache/
